@@ -1,7 +1,76 @@
 import React from 'react';
+import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
+import intro from "../assets/intro/intro.mp4";
+import intro2 from "../assets/intro/intro2.mp4";
+import intro3 from "../assets/intro/intro3.mp4";
+import intro4 from "../assets/intro/intro4.mp4";
+import intro5 from "../assets/intro/intro5.mp4";
+
+import vertical_intro from "../assets/intro/vertical-intro.mp4";
+import vertical_intro2 from "../assets/intro/vertical-intro2.mp4";
+import vertical_intro3 from "../assets/intro/vertical-intro3.mp4";
+import vertical_intro4 from "../assets/intro/vertical-intro4.mp4";
+import vertical_intro5 from "../assets/intro/vertical-intro5.mp4";
+
+const videoList = [intro, intro2, intro3, intro4, intro5];
+const smallScreenvideoList = [vertical_intro, vertical_intro2, vertical_intro3, vertical_intro4, vertical_intro5];
 
 function Initialising() {
-  return <div>Initialising</div>;
+  const theme = useTheme();
+  const isSm = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const currentVideo = isSm
+    ? smallScreenvideoList[Math.floor(Math.random() * smallScreenvideoList.length)]
+    : videoList[Math.floor(Math.random() * videoList.length)];
+
+  return (
+    <Box
+      sx={{
+        height: '100dvh',
+        width: '100vw',
+        overflow: 'hidden',
+        m: 0,
+        p: 0,
+        position: 'relative', // ✅ required for overlaying text
+      }}
+    >
+      <video
+        src={currentVideo}
+        autoPlay
+        muted
+        loop
+        playsInline
+        style={{
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          display: 'block',
+        }}
+      />
+
+      <Box
+        sx={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          height: '100%',
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          zIndex: 1,
+          backdropFilter: 'brightness(0.8)'
+        }}
+      >
+        <Typography
+          variant='h4'
+          sx={{ color: 'text.primary', textAlign: 'center' }}
+        >
+          <strong><i>Welcome to Connect</i></strong><br />Getting things ready...
+        </Typography>
+      </Box>
+    </Box>
+  );
 }
 
 export default Initialising;
