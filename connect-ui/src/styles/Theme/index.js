@@ -7,12 +7,12 @@ import { shadows } from './shadows';
 import { components } from './components';
 
 const theme = createTheme({
-    typography,
-    breakpoints,
-    shadows,
-    shape,
-    palette,
-    components,
+  typography,
+  breakpoints,
+  shadows,
+  shape,
+  palette,
+  components
 });
 
 export default theme;

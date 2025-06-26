@@ -7,7 +7,7 @@ export const routes = createBrowserRouter([
     path: '/',
     element: <PublicLayout />, // this will contain <Outlet />
     children: [
-      { index: true, element: <Home /> },
+      { index: true, element: <Home /> }
       // Add other routes here
     ]
   }

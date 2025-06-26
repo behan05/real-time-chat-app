@@ -1,19 +1,24 @@
-import React from 'react';
-import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
-import intro from "../assets/intro/intro.mp4";
-import intro2 from "../assets/intro/intro2.mp4";
-import intro3 from "../assets/intro/intro3.mp4";
-import intro4 from "../assets/intro/intro4.mp4";
-import intro5 from "../assets/intro/intro5.mp4";
+import { Box, Typography, useMediaQuery, useTheme } from '@/mui/MuiComponents';
+import intro from '../assets/intro/intro.mp4';
+import intro2 from '../assets/intro/intro2.mp4';
+import intro3 from '../assets/intro/intro3.mp4';
+import intro4 from '../assets/intro/intro4.mp4';
+import intro5 from '../assets/intro/intro5.mp4';
 
-import vertical_intro from "../assets/intro/vertical-intro.mp4";
-import vertical_intro2 from "../assets/intro/vertical-intro2.mp4";
-import vertical_intro3 from "../assets/intro/vertical-intro3.mp4";
-import vertical_intro4 from "../assets/intro/vertical-intro4.mp4";
-import vertical_intro5 from "../assets/intro/vertical-intro5.mp4";
+import vertical_intro from '../assets/intro/vertical-intro.mp4';
+import vertical_intro2 from '../assets/intro/vertical-intro2.mp4';
+import vertical_intro3 from '../assets/intro/vertical-intro3.mp4';
+import vertical_intro4 from '../assets/intro/vertical-intro4.mp4';
+import vertical_intro5 from '../assets/intro/vertical-intro5.mp4';
 
 const videoList = [intro, intro2, intro3, intro4, intro5];
-const smallScreenvideoList = [vertical_intro, vertical_intro2, vertical_intro3, vertical_intro4, vertical_intro5];
+const smallScreenvideoList = [
+  vertical_intro,
+  vertical_intro2,
+  vertical_intro3,
+  vertical_intro4,
+  vertical_intro5
+];
 
 function Initialising() {
   const theme = useTheme();
@@ -31,7 +36,7 @@ function Initialising() {
         overflow: 'hidden',
         m: 0,
         p: 0,
-        position: 'relative', // ✅ required for overlaying text
+        position: 'relative'
       }}
     >
       <video
@@ -44,7 +49,7 @@ function Initialising() {
           width: '100%',
           height: '100%',
           objectFit: 'cover',
-          display: 'block',
+          display: 'block'
         }}
       />
 
@@ -62,11 +67,12 @@ function Initialising() {
           backdropFilter: 'brightness(0.8)'
         }}
       >
-        <Typography
-          variant='h4'
-          sx={{ color: 'text.primary', textAlign: 'center' }}
-        >
-          <strong><i>Welcome to Connect</i></strong><br />Getting things ready...
+        <Typography variant="h4" sx={{ color: 'text.primary', textAlign: 'center' }}>
+          <strong>
+            <i>Welcome to Connect</i>
+          </strong>
+          <br />
+          Getting things ready...
         </Typography>
       </Box>
     </Box>

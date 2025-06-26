@@ -33,35 +33,35 @@ import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'; // Error messag
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'; // Success messages
 
 export {
-    // Navigation & Layout
-    MenuIcon,
-    CloseIcon,
-    ArrowBackIcon,
+  // Navigation & Layout
+  MenuIcon,
+  CloseIcon,
+  ArrowBackIcon,
 
-    // Authentication
-    LockOpenIcon,
-    LockIcon,
-    LogoutIcon,
+  // Authentication
+  LockOpenIcon,
+  LockIcon,
+  LogoutIcon,
 
-    // Chat
-    SendIcon,
-    ChatBubbleOutlineIcon,
+  // Chat
+  SendIcon,
+  ChatBubbleOutlineIcon,
 
-    // Profile
-    PersonIcon,
+  // Profile
+  PersonIcon,
 
-    // Media
-    MicIcon,
-    MicOffIcon,
-    VideocamIcon,
-    PublicIcon,
+  // Media
+  MicIcon,
+  MicOffIcon,
+  VideocamIcon,
+  PublicIcon,
 
-    // Inputs
-    VisibilityIcon,
-    VisibilityOffIcon,
-    SearchIcon,
+  // Inputs
+  VisibilityIcon,
+  VisibilityOffIcon,
+  SearchIcon,
 
-    // Status
-    ErrorOutlineIcon,
-    CheckCircleIcon,
+  // Status
+  ErrorOutlineIcon,
+  CheckCircleIcon
 };

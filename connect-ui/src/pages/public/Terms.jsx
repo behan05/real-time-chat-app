@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 function Terms() {
-  return (
-    <div>Terms</div>
-  )
+  return <div>Terms</div>;
 }
 
 export default Terms;

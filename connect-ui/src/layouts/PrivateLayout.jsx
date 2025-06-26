@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 function PrivateLayout() {
-  return (
-    <div>PrivateLayout</div>
-  )
+  return <div>PrivateLayout</div>;
 }
 
-export default PrivateLayout
+export default PrivateLayout;
