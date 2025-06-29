@@ -24,7 +24,16 @@ function Navbar() {
   const { toggleSidebar } = useSidebar();
 
   return (
-    <AppBar position="sticky" bgcolor="inherit" elevation={0}>
+    <AppBar
+      position="sticky"
+      elevation={0}
+      sx={{
+        backgroundColor: 'rgba(255, 255, 255, 0.09)',
+        backdropFilter: 'blur(4px)',
+        WebkitBackdropFilter: 'blur(4px)',
+        boxShadow: '0 0 4px rgba(135, 90, 165, 0.1)',
+      }}
+    >
       <Toolbar
         sx={{
           display: 'flex',
@@ -34,9 +43,9 @@ function Navbar() {
           gap: 1,
           py: 2,
           flexWrap: 'wrap',
-          bgcolor: 'rgba(76, 40, 112, 0.09)',
+          bgcolor: 'rgba(255, 255, 255, 0.09)',
           backdropFilter: 'blur(4px)',
-          boxShadow: '0 0 4px rgba(71, 27, 100, 0.1)',
+          boxShadow: '0 0 4px rgba(222, 185, 247, 0.1)',
         }}
       >
         <Typography variant="h5" flexGrow={1}>
