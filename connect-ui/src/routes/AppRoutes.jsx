@@ -1,14 +1,28 @@
 import { createBrowserRouter } from 'react-router-dom';
-import PublicLayout from '@/layouts/PublicLayout'; // assuming this is your layout
-import Home from '@/pages/public/Home'; // your actual homepage
+import PublicLayout from '@/layouts/PublicLayout';
+import Home from '@/pages/public/Home';
+import About from '@/pages/public/About';
+import Features from '@/pages/public/Features';
+import Contact from '@/pages/public/Contact';
+import Login from '@/pages/public/Login';
+import Register from '@/pages/public/Signup';
+import { SidebarProvider } from '../context/SidebarContext';
 
 export const routes = createBrowserRouter([
   {
     path: '/',
-    element: <PublicLayout />, // this will contain <Outlet />
+    element: (
+      <SidebarProvider>
+        <PublicLayout />
+      </SidebarProvider>
+    ),
     children: [
-      { index: true, element: <Home /> }
-      // Add other routes here
+      { index: true, element: <Home /> },
+      { path: 'about', element: <About /> },
+      { path: 'features', element: <Features /> },
+      { path: 'contact', element: <Contact /> },
+      { path: 'login', element: <Login /> },
+      { path: 'register', element: <Register /> },
     ]
   }
 ]);

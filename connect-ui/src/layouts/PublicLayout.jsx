@@ -4,11 +4,13 @@ import Navbar from '@/components/public/Navbar';
 import video from '@/assets/videos/bgVideo.mp4';
 import Sidebar from '@/components/public/Sidebar';
 import Footer from '@/components/public/Footer';
+import { useSidebar } from '../context/SidebarContext';
 
 const Layout = () => {
 
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down('sm'));
+  const { isSidebarOpen, toggleSidebar } = useSidebar();
 
   return (
     <Box sx={{
@@ -61,13 +63,25 @@ const Layout = () => {
         gap: 2
       }}>
         {/* === Sidebar === */}
-        <Sidebar />
+        <Box sx={{ position: 'relative' }}>
+          {isSm ? (isSidebarOpen && <Sidebar />) : <Sidebar />}
+        </Box>
         {/* === Main Content === */}
-        <Outlet />
+        <Box
+          component="main"
+          sx={{
+            flexGrow: 1,
+            px: isSm ? 2 : 5,
+            py: 5,
+            width: '100%',
+          }}
+        >
+          <Outlet />
+        </Box>
       </Box>
 
       {/* === Footer === */}
-      <Footer />
+      {/* <Footer /> */}
     </Box>
   );
 };
