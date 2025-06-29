@@ -23,6 +23,7 @@ import {
   TextField, // Input fields (email, password, etc.)
   Toolbar, // AppBar content wrapper
   Typography, // Headings, paragraphs, and text
+  Tooltip, // hover hint
   useMediaQuery, // Breakpoints
   useTheme, // Mui theme access or centralized styling
 } from '@mui/material';
@@ -52,4 +53,5 @@ export {
   Typography,
   useMediaQuery,
   useTheme,
+  Tooltip,
 };

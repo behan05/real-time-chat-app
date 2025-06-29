@@ -1,5 +1,5 @@
 export const typography = {
-  fontFamily: '"Montserrat", "Open Sans"',
+  fontFamily: '"Lora", serif',
 
   h1: {
     fontWeight: 700,

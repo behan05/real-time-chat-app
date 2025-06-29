@@ -5,6 +5,12 @@ import MenuIcon from '@mui/icons-material/Menu'; // For sidebar toggle
 import CloseIcon from '@mui/icons-material/Close'; // For closing modals/menus
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'; // Back navigation
 
+// Nav list Items
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import BuildCircleOutlinedIcon from '@mui/icons-material/BuildCircleOutlined';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import ContactMailOutlinedIcon from '@mui/icons-material/ContactMailOutlined';
+
 // Authentication
 import LockOpenIcon from '@mui/icons-material/LockOpen'; // Login
 import LockIcon from '@mui/icons-material/Lock'; // Password input / security
@@ -37,6 +43,12 @@ export {
   MenuIcon,
   CloseIcon,
   ArrowBackIcon,
+
+  // Navlist
+  HomeOutlinedIcon,
+  BuildCircleOutlinedIcon,
+  InfoOutlinedIcon,
+  ContactMailOutlinedIcon,
 
   // Authentication
   LockOpenIcon,
