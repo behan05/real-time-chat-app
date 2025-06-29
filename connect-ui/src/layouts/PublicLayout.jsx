@@ -10,7 +10,7 @@ const Layout = () => {
 
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down('sm'));
-  const { isSidebarOpen, toggleSidebar } = useSidebar();
+  const { isSidebarOpen } = useSidebar();
 
   return (
     <Box sx={{
@@ -72,7 +72,7 @@ const Layout = () => {
           sx={{
             flexGrow: 1,
             px: isSm ? 2 : 5,
-            py: 5,
+            py: 2,
             width: '100%',
           }}
         >
