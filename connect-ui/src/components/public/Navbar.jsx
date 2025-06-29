@@ -9,9 +9,9 @@ import {
   IconButton,
   Tooltip,
 } from '@/MUI/MuiComponents';
-
 import { MenuIcon, LockOpenIcon, LockIcon } from '@/MUI/MuiIcons';
 import StyledButton from '../common/StyledButton';
+import { useSidebar } from '@/context/SidebarContext';
 
 const navListBtn = [
   { path: '/login', text: 'Login', icon: <LockOpenIcon /> },
@@ -21,9 +21,10 @@ const navListBtn = [
 function Navbar() {
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down('sm'));
+  const { toggleSidebar } = useSidebar();
 
   return (
-    <AppBar position="sticky" bgcolor='inherit' elevation={0}>
+    <AppBar position="sticky" bgcolor="inherit" elevation={0}>
       <Toolbar
         sx={{
           display: 'flex',
@@ -38,33 +39,30 @@ function Navbar() {
           boxShadow: '0 0 4px rgba(71, 27, 100, 0.1)',
         }}
       >
-        {/* Logo */}
-        {/* <Box
-          component="img"
-          src="/logo.svg"
-          alt="Website Logo"
-          sx={{ maxWidth: 120 }}
-        /> */}
-        <Typography variant='h5' flexGrow={1}>
+        <Typography variant="h5" flexGrow={1}>
           LOGO
         </Typography>
-        {/* Nav Links */}
+
         {isSm ? (
-          <Tooltip title='Open Menu'>
-            <IconButton>
+          <Tooltip title="Open Menu">
+            <IconButton onClick={toggleSidebar}>
               <MenuIcon />
             </IconButton>
           </Tooltip>
         ) : (
           <Box sx={{ display: 'flex', gap: 1 }}>
-            {/* CTA Buttons */}
-            {navListBtn.map((cta) => (
-              <StyledButton text={cta.text} redirectUrl={cta.path} icon={cta.icon} />
+            {navListBtn.map((cta, i) => (
+              <StyledButton
+                key={i}
+                text={cta.text}
+                redirectUrl={cta.path}
+                icon={cta.icon}
+              />
             ))}
           </Box>
         )}
       </Toolbar>
-    </AppBar >
+    </AppBar>
   );
 }
 

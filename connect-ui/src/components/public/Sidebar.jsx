@@ -32,12 +32,15 @@ const sidebarList = [
 
 const Sidebar = () => {
   const theme = useTheme();
-  const isSm = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const { isSidebarOpen, toggleSidebar } = useSidebar();
 
   return (
     <Drawer
-      variant="permanent"
+      variant={isMobile ? 'temporary' : 'permanent'}
+      open={isMobile && isSidebarOpen}
+      onClose={isMobile && toggleSidebar}
+      ModalProps={{ keepMounted: true }}
       sx={{
         width: drawerWidth,
         flexShrink: 0,
@@ -46,16 +49,13 @@ const Sidebar = () => {
           bgcolor: 'transparent',
           boxShadow: 'none',
           p: 2,
-
           position: 'fixed',
           top: '50%',
           transform: 'translateY(-50%)',
           height: 'fit-content',
-
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-
           '&::after': {
             content: '""',
             position: 'absolute',
@@ -65,17 +65,20 @@ const Sidebar = () => {
             background: `linear-gradient(to bottom, transparent 50%, ${theme.palette.warning.main} 10%, transparent 100%)`,
             backgroundSize: '100% 200%',
             animation: 'glowFlow 4s ease-in-out infinite',
-          }
+          },
         },
       }}
     >
       <List>
         {sidebarList.map((item, i) => {
-          // Hide login/register on large screens
-          if (!isSm && ['Login', 'Unlock Access'].includes(item.text)) return null;
+          if (!isMobile && ['Login', 'Unlock Access'].includes(item.text)) return null;
 
           return (
-            <ListItem key={i} disablePadding onClick={toggleSidebar}>
+            <ListItem
+              key={i}
+              disablePadding
+              onClick={isMobile ? toggleSidebar : undefined}
+            >
               <Tooltip title={item.text} placement="right">
                 <NavLink
                   to={item.path}
@@ -104,7 +107,6 @@ const Sidebar = () => {
                     </IconButton>
                   )}
                 </NavLink>
-
               </Tooltip>
             </ListItem>
           );
