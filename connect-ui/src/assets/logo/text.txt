@@ -1,4 +1,0 @@
-# Logos (light/dark variants)
-
-connect-logo-dark.png
-connect-logo-light.png

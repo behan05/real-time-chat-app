@@ -1,33 +1,47 @@
 import React from 'react';
-import { Box, Button } from '@/MUI/MuiComponents';
+import { Button, useTheme } from '@/MUI/MuiComponents';
 import { Link } from 'react-router-dom';
-import theme from '@/styles/Theme';
 
-function StyledButton(
-    { icon, className, type, text, redirectUrl, ...props }) {
+function StyledButton({
+    icon,
+    className,
+    variant = 'outlined',
+    type,
+    text,
+    redirectUrl,
+    ...props
+}) {
+    const theme = useTheme();
+
     return (
         <Button
             component={Link}
             to={redirectUrl}
             startIcon={icon}
             type={type}
-            variant="outlined"
+            variant={variant}
             sx={{
                 borderRadius: '8px',
-                px: 3,
-                py: 1,
-                color: theme.palette.text.primary,
-                border: 'none',
-                textTransform: 'none',
+                px: { xs: 2, sm: 3 },
+                py: { xs: 0.5, sm: 1 },
                 bgcolor: 'rgba(255, 255, 255, 0.09)',
                 backdropFilter: 'blur(4px)',
                 boxShadow: '0 0 4px rgba(240, 235, 243, 0.1)',
+                borderBottom: `1px dotted ${theme.palette.text.primary}`,
+                borderRadius: theme.shape.shape,
+                textTransform: 'none',
+                color: theme.palette.text.primary,
+                textDecoration: 'none',
+                transition: 'transform 0.3s ease',
+                '&:hover': {
+                    transform: 'translateY(-5px)',
+                },
             }}
             {...props}
         >
             {text}
         </Button>
-    )
+    );
 }
 
-export default StyledButton
+export default StyledButton;
