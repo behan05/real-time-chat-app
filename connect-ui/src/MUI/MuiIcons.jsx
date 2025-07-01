@@ -38,12 +38,31 @@ import SearchIcon from '@mui/icons-material/Search'; // Search bar
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'; // Error messages
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'; // Success messages
 
+// How it work
+import PsychologyOutlinedIcon from '@mui/icons-material/PsychologyOutlined';
+import BoltOutlinedIcon from '@mui/icons-material/BoltOutlined';
+import WorkspacePremiumOutlinedIcon from '@mui/icons-material/WorkspacePremiumOutlined';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+
+import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
+import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
+import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
+import SwipeRightAltOutlinedIcon from '@mui/icons-material/SwipeRightAltOutlined';
+import SecurityOutlinedIcon from '@mui/icons-material/SecurityOutlined';
+
+
 export {
   // Navigation & Layout
   MenuIcon,
   CloseIcon,
   ArrowBackIcon,
 
+  // How it work
+  PsychologyOutlinedIcon,
+  BoltOutlinedIcon,
+  WorkspacePremiumOutlinedIcon,
+  HelpOutlineIcon,
+  
   // Navlist
   HomeOutlinedIcon,
   BuildCircleOutlinedIcon,
@@ -75,5 +94,12 @@ export {
 
   // Status
   ErrorOutlineIcon,
-  CheckCircleIcon
+  CheckCircleIcon,
+
+  // how it works
+    LoginOutlinedIcon,
+    PeopleAltOutlinedIcon,
+    ChatOutlinedIcon,
+    SwipeRightAltOutlinedIcon,
+    SecurityOutlinedIcon
 };
