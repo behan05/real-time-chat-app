@@ -9,28 +9,118 @@ import {
   BoltOutlinedIcon,
   WorkspacePremiumOutlinedIcon,
   HelpOutlineIcon,
+  PersonIcon,
+  PsychologyIcon,
+  TuneIcon,
+  AccountBoxIcon,
+  InterestsIcon,
+  ChatIcon,
+  SmsIcon,
+  ShieldIcon,
+  ReportProblemIcon,
+  BrushIcon,
+  FilterAltIcon,
+  TravelExploreIcon
 } from '@/MUI/MuiIcons'
 
+const iconMap = {
+  Psychology: <PsychologyIcon sx={{ fontSize: 36, color: 'primary.main' }} />,
+  Tune: <TuneIcon sx={{ fontSize: 36, color: 'secondary.main' }} />,
+  AccountBox: <AccountBoxIcon sx={{ fontSize: 36, color: 'primary.main' }} />,
+  Interests: <InterestsIcon sx={{ fontSize: 36, color: 'secondary.main' }} />,
+  Chat: <ChatIcon sx={{ fontSize: 36, color: 'primary.main' }} />,
+  Sms: <SmsIcon sx={{ fontSize: 36, color: 'secondary.main' }} />,
+  Shield: <ShieldIcon sx={{ fontSize: 36, color: 'primary.main' }} />,
+  ReportProblem: <ReportProblemIcon sx={{ fontSize: 36, color: 'secondary.main' }} />,
+  Person: <PersonIcon sx={{ fontSize: 36, color: 'primary.main' }} />,
+  Brush: <BrushIcon sx={{ fontSize: 36, color: 'secondary.main' }} />,
+  FilterAlt: <FilterAltIcon sx={{ fontSize: 36, color: 'primary.main' }} />,
+  TravelExplore: <TravelExploreIcon sx={{ fontSize: 36, color: 'secondary.main' }} />,
+};
+
+
 import HowItWorks from '@/components/public/HowItWorks';
-import ConnectFeatures from '../../components/public/ConnectFeatures';
 
 function Home() {
-
+  const features =
+    [
+      {
+        label: '01',
+        title: 'Smart ',
+        highlightText: 'Matching',
+        description: 'Our intelligent algorithm connects you with like-minded individuals based on your interests, preferences, and location.',
+        icon1: 'Psychology',
+        title1: 'Intelligent Algorithm',
+        icon2: 'Tune',
+        title2: 'Personalized Filters',
+      },
+      {
+        label: '02',
+        title: 'Instant ',
+        highlightText: 'Connection',
+        description: 'Connect face-to-face in real-time without delays. Just click and start a conversation instantly.',
+        icon1: 'AccountBox',
+        title1: 'One-Click Start',
+        icon2: 'Interests',
+        title2: 'Shared Topics',
+      },
+      {
+        label: '03',
+        title: 'Real-Time ',
+        highlightText: 'Messaging',
+        description: 'Send and receive messages while on a video call or offline. Keep the conversation alive beyond the call.',
+        icon1: 'Chat',
+        title1: 'In-Call Chat',
+        icon2: 'Sms',
+        title2: 'Offline Messaging',
+      },
+      {
+        label: '04',
+        title: 'Privacy & ',
+        highlightText: 'Safety',
+        description: 'Your safety matters. Manage who connects with you, report issues, and enjoy end-to-end encrypted calls.',
+        icon1: 'Shield',
+        title1: 'End-to-End Encryption',
+        icon2: 'ReportProblem',
+        title2: 'Report & Block',
+      },
+      {
+        label: '05',
+        title: 'Customizable ',
+        highlightText: 'Profiles',
+        description: 'Make your profile truly yours. Add a bio, interests, and photos to express yourself and attract genuine connections.',
+        icon1: 'Person',
+        title1: 'Add Photos & Bio',
+        icon2: 'Brush',
+        title2: 'Personalize Profile',
+      },
+      {
+        label: '06',
+        title: 'Filter by ',
+        highlightText: 'Preferences',
+        description: 'Easily filter who you want to connect with by age, location, language, gender, and interests for a better experience.',
+        icon1: 'FilterAlt',
+        title1: 'Smart Filters',
+        icon2: 'TravelExplore',
+        title2: 'Global or Nearby',
+      },
+    ]
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down('sm'));
   const isMd = useMediaQuery(theme.breakpoints.down('md'));
   const isLg = useMediaQuery(theme.breakpoints.down('lg'));
 
   return (
-    <React.Fragment>
+    <React.Fragment >
       {/* ===  Hero / Slogan Section === */}
-      <Box sx={{
+      < Box sx={{
         display: 'flex',
         flexDirection: isLg ? 'column' : 'row',
         gap: 2,
         flexGrow: 1,
         minHeight: '70vh',
-      }}>
+      }
+      }>
         <Stack flex={1} justifyContent="center">
           <Typography
             variant="h3"
@@ -81,27 +171,150 @@ function Home() {
             }}
           />
         </Stack>
-      </Box>
+      </Box >
 
       {/* ===  How It Works Section === */}
-      <HowItWorks />
+      < HowItWorks />
 
       {/* ===  Connect-Features Section === */}
-      < Box >
-        <Typography
-          variant='h5'
-          fontWeight={500}
-          textTransform={'uppercase'}
-          display="flex"
-          alignItems="center"
-          gap={1}
-        >
-          <BoltOutlinedIcon fontSize='medium' />
-          Connect {' '}{<StyledText text={'Features'} />}
-        </Typography>
+      < Box
+        id="connect-features"
+        sx={{
+          px: { xs: 2, sm: 4, md: 6 },
+          py: { xs: 6, md: 10 },
+          maxWidth: '1400px',
+          mx: 'auto',
+          position: 'relative',
+        }}
+      >
+        {/* Section Heading */}
+        < Stack spacing={2} alignItems="center" textAlign="center" mb={8} >
+          <Typography
+            variant="h4"
+            fontWeight={700}
+            display="flex"
+            alignItems="center"
+            gap={1}
+            color="text.primary"
+            textTransform="uppercase"
+          >
+            <BoltOutlinedIcon fontSize="large" sx={{ color: 'error.main' }} />
+            Connect <StyledText text="Features" />
+          </Typography>
 
-        <ConnectFeatures />
+          <Typography
+            variant="body1"
+            maxWidth="800px"
+            color="text.secondary"
+            fontSize={{ xs: 14, md: 16 }}
+          >
+            Discover how we bring people together. Our platform features smart matching, personalized profiles, real-time messaging, and privacy-first controls all designed to create safe and meaningful conversations.
+          </Typography>
+        </Stack >
+
+        {/* Features Grid */}
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: isMd ? '1fr' : isLg ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
+            gap: 4,
+            mx: 'auto',
+          }}
+        >
+          {features.map((item, i) => (
+            <Box
+              key={i}
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                height: '100%',
+                width: '100%',
+                bgcolor: 'rgba(161, 178, 184, 0.09)',
+                backdropFilter: 'blur(14px)',
+                borderRadius: 3,
+                p: 3,
+                gap: 3,
+                boxShadow: '0 0 12px rgba(0,0,0,0.05)',
+                transition: '0.3s',
+                '&:hover': {
+                  transform: 'translateY(-6px)',
+                  boxShadow: '0 6px 24px rgba(0,0,0,0.15)',
+                },
+              }}
+            >
+              {/* Header */}
+              <Stack direction="row" alignItems="center" gap={2}>
+                <Box
+                  sx={{
+                    width: 40,
+                    height: 40,
+                    borderRadius: '50%',
+                    bgcolor: 'rgba(10, 86, 109, 0.09)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontWeight: 'bold',
+                  }}
+                >
+                  {item.label}
+                </Box>
+                <Typography variant="h6" fontWeight={600}>
+                  {item.title}
+                  <StyledText text={item.highlightText} />
+                </Typography>
+              </Stack>
+
+              {/* Icons & Steps */}
+              <Stack spacing={3}>
+                {/* Step 1 */}
+                <Box
+                  sx={{
+                    p: 2,
+                    borderRadius: 2,
+                    bgcolor: 'background.paper',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 2,
+                    boxShadow: 1,
+                  }}
+                >
+                  {iconMap[item.icon1]}
+                  <Typography fontWeight={500}>{item.title1}</Typography>
+                </Box>
+
+                {/* Connector */}
+                <Box display="flex" justifyContent="center">
+                  <Typography color="primary">⚡</Typography>
+                </Box>
+
+                {/* Step 2 */}
+                <Box
+                  sx={{
+                    p: 2,
+                    borderRadius: 2,
+                    bgcolor: 'background.paper',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 2,
+                    boxShadow: 1,
+                  }}
+                >
+                  {iconMap[item.icon2]}
+                  <Typography fontWeight={500}>{item.title2}</Typography>
+                </Box>
+              </Stack>
+
+              {/* Description */}
+              <Typography variant="body2" color="text.secondary" mt={2}>
+                {item.description}
+              </Typography>
+            </Box>
+          ))
+          }
+        </Box >
       </Box >
+
 
       {/* === Why Choose Us? Section === */}
       < Box >

@@ -51,7 +51,30 @@ import SwipeRightAltOutlinedIcon from '@mui/icons-material/SwipeRightAltOutlined
 import SecurityOutlinedIcon from '@mui/icons-material/SecurityOutlined';
 
 
+import PsychologyIcon from '@mui/icons-material/Psychology';
+import TuneIcon from '@mui/icons-material/Tune';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import InterestsIcon from '@mui/icons-material/Interests';
+import ChatIcon from '@mui/icons-material/Chat';
+import SmsIcon from '@mui/icons-material/Sms';
+import ShieldIcon from '@mui/icons-material/Shield';
+import ReportProblemIcon from '@mui/icons-material/ReportProblem';
+import BrushIcon from '@mui/icons-material/Brush';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import TravelExploreIcon from '@mui/icons-material/TravelExplore';
+
 export {
+  PsychologyIcon,
+  TuneIcon,
+  AccountBoxIcon,
+  InterestsIcon,
+  ChatIcon,
+  SmsIcon,
+  ShieldIcon,
+  ReportProblemIcon,
+  BrushIcon,
+  FilterAltIcon,
+  TravelExploreIcon,
   // Navigation & Layout
   MenuIcon,
   CloseIcon,
@@ -62,7 +85,7 @@ export {
   BoltOutlinedIcon,
   WorkspacePremiumOutlinedIcon,
   HelpOutlineIcon,
-  
+
   // Navlist
   HomeOutlinedIcon,
   BuildCircleOutlinedIcon,
@@ -97,9 +120,9 @@ export {
   CheckCircleIcon,
 
   // how it works
-    LoginOutlinedIcon,
-    PeopleAltOutlinedIcon,
-    ChatOutlinedIcon,
-    SwipeRightAltOutlinedIcon,
-    SecurityOutlinedIcon
+  LoginOutlinedIcon,
+  PeopleAltOutlinedIcon,
+  ChatOutlinedIcon,
+  SwipeRightAltOutlinedIcon,
+  SecurityOutlinedIcon
 };

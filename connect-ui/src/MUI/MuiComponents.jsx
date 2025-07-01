@@ -26,6 +26,7 @@ import {
   Tooltip, // hover hint
   useMediaQuery, // Breakpoints
   useTheme, // Mui theme access or centralized styling
+  Grid,
 } from '@mui/material';
 
 export {
@@ -50,6 +51,7 @@ export {
   Stack,
   TextField,
   Toolbar,
+  Grid,
   Typography,
   useMediaQuery,
   useTheme,
