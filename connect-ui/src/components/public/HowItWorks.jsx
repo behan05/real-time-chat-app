@@ -67,16 +67,28 @@ function HowItWorks() {
         <Box display='flex' flexDirection='column' my={6}>
             <Typography
                 variant='h5'
-                fontWeight={500}
-                textTransform={'uppercase'}
-                display="flex"
-                alignItems="center"
+                fontWeight={700}
+                textTransform='uppercase'
+                display='flex'
+                alignItems='center'
                 justifyContent='center'
                 gap={1}
                 gutterBottom
             >
                 <PsychologyOutlinedIcon fontSize='medium' sx={{ color: 'primary.main' }} />
-                How it {' '}{<StyledText text={'works'} />}
+                How it <StyledText text='works' />
+            </Typography>
+
+            <Typography
+                variant='body2'
+                color='text.secondary'
+                textAlign='center'
+                maxWidth={700}
+                mx='auto'
+                mb={4}
+                fontSize={{ xs: 14, md: 16 }}
+            >
+                Understand the simple steps to start connecting. From setting up your profile to jumping into real-time conversations, we make it effortless.
             </Typography>
 
             <Box sx={{

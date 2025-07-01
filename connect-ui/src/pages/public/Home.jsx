@@ -106,7 +106,6 @@ function Home() {
       },
     ]
   const theme = useTheme();
-  const isSm = useMediaQuery(theme.breakpoints.down('sm'));
   const isMd = useMediaQuery(theme.breakpoints.down('md'));
   const isLg = useMediaQuery(theme.breakpoints.down('lg'));
 
@@ -178,34 +177,36 @@ function Home() {
 
       {/* ===  Connect-Features Section === */}
       < Box
-        id="connect-features"
         sx={{
-          px: { xs: 2, sm: 4, md: 6 },
-          py: { xs: 6, md: 10 },
-          maxWidth: '1400px',
-          mx: 'auto',
           position: 'relative',
         }}
       >
         {/* Section Heading */}
-        < Stack spacing={2} alignItems="center" textAlign="center" mb={8} >
+        < Stack
+          spacing={2}
+          alignItems="center"
+          justifyContent="center"
+          mb={8}
+        >
           <Typography
-            variant="h4"
+            variant="h5"
             fontWeight={700}
             display="flex"
             alignItems="center"
             gap={1}
             color="text.primary"
             textTransform="uppercase"
+            flexWrap="wrap"
           >
             <BoltOutlinedIcon fontSize="large" sx={{ color: 'error.main' }} />
             Connect <StyledText text="Features" />
           </Typography>
 
           <Typography
-            variant="body1"
+            variant="body2"
             maxWidth="800px"
             color="text.secondary"
+            textAlign="center"
             fontSize={{ xs: 14, md: 16 }}
           >
             Discover how we bring people together. Our platform features smart matching, personalized profiles, real-time messaging, and privacy-first controls all designed to create safe and meaningful conversations.
@@ -217,7 +218,7 @@ function Home() {
           sx={{
             display: 'grid',
             gridTemplateColumns: isMd ? '1fr' : isLg ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
-            gap: 4,
+            gap: 1,
             mx: 'auto',
           }}
         >
@@ -228,12 +229,10 @@ function Home() {
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
-                height: '100%',
-                width: '100%',
-                bgcolor: 'rgba(161, 178, 184, 0.09)',
-                backdropFilter: 'blur(14px)',
-                borderRadius: 3,
-                p: 3,
+                bgcolor: 'rgba(178, 192, 197, 0.09)',
+                backdropFilter: 'blur(4px)',
+                borderRadius: 2,
+                p: 2,
                 gap: 3,
                 boxShadow: '0 0 12px rgba(0,0,0,0.05)',
                 transition: '0.3s',
@@ -272,7 +271,7 @@ function Home() {
                   sx={{
                     p: 2,
                     borderRadius: 2,
-                    bgcolor: 'background.paper',
+                    bgcolor: 'rgba(10, 86, 109, 0.09)',
                     display: 'flex',
                     alignItems: 'center',
                     gap: 2,
@@ -293,7 +292,7 @@ function Home() {
                   sx={{
                     p: 2,
                     borderRadius: 2,
-                    bgcolor: 'background.paper',
+                    bgcolor: 'rgba(10, 86, 109, 0.09)',
                     display: 'flex',
                     alignItems: 'center',
                     gap: 2,
