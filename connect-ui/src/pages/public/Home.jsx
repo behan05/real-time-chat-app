@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Stack, Typography, useTheme } from '../../MUI/MuiComponents';
+import { Box, Stack, Typography, useTheme, useMediaQuery } from '../../MUI/MuiComponents';
 import socialVideo from '../../assets/videos/socialVideo.mp4';
 import StyledButton from '../../components/common/StyledButton'
 import StyledText from '../../components/common/StyledText';
@@ -8,6 +8,8 @@ import Tagline from '../../components/public/Tagline';
 function Home() {
 
   const theme = useTheme();
+  const isSm = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMd = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
     <React.Fragment>
@@ -28,9 +30,9 @@ function Home() {
           </Typography>
 
           <Typography variant="h6" color="text.secondary" sx={{ mt: 3, maxWidth: 640 }}>
-            Connect is a modern chat platform that pairs you with random users across the globe in seconds. Whether you're looking to make new friends, share stories, learn languages, or simply pass time — it's your gateway to real-time human connection.
+            Connect is a modern chat platform that pairs you with random users across the globe in seconds. Whether you're looking to make new friends, share stories, learn languages, or simply pass time it's your gateway to real-time human connection.
           </Typography>
-          
+
           {/* === Calling tagline component === */}
           <Tagline />
 

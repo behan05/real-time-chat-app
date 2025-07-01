@@ -10,6 +10,7 @@ const Layout = () => {
 
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMd = useMediaQuery(theme.breakpoints.down('md'));
   const { isSidebarOpen } = useSidebar();
 
   return (
@@ -57,7 +58,7 @@ const Layout = () => {
       {/* === Navbar Section === */}
       <Navbar />
       <Box sx={{
-        px: isSm ? 2 : 15,
+        px: isSm ? 2 : isMd ? 3 : 15,
         py: 5,
         display: 'flex',
         gap: 2
