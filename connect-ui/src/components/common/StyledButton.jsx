@@ -21,12 +21,13 @@ function StyledButton({
             type={type}
             variant={variant}
             sx={{
-                borderRadius: '8px',
                 px: { xs: 2, sm: 3 },
                 py: { xs: 0.5, sm: 1 },
                 bgcolor: 'rgba(255, 255, 255, 0.09)',
                 backdropFilter: 'blur(4px)',
-                boxShadow: '0 0 4px rgba(240, 235, 243, 0.1)',
+                boxShadow: `0 0 4px rgba(240, 235, 243, 0.1)`,
+                border: 'none',
+                borderTop: `1px dotted ${theme.palette.text.primary}`,
                 borderBottom: `1px dotted ${theme.palette.text.primary}`,
                 borderRadius: theme.shape.shape,
                 textTransform: 'none',
