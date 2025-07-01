@@ -1,5 +1,3 @@
-// ConnectFeaturesCard.jsx
-
 import { Box, Stack, Typography, useTheme } from '@/MUI/MuiComponents';
 
 import StyledText from "@/components/common/StyledText";

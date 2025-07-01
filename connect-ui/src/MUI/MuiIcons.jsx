@@ -1,5 +1,3 @@
-// src/mui/MuiIcons.jsx
-
 // Navigation & Layout
 import MenuIcon from '@mui/icons-material/Menu'; // For sidebar toggle
 import CloseIcon from '@mui/icons-material/Close'; // For closing modals/menus

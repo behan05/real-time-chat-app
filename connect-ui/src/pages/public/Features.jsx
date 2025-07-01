@@ -1,7 +1,6 @@
-import React from 'react';
-import { Box, Typography, Stack, useTheme } from '../../MUI/MuiComponents';
-import ConnectFeatures from '../../components/public/ConnectFeatures';
-import StyledText from '../../components/common/StyledText';
+import { Box, Typography, Stack, useTheme } from '@/MUI/MuiComponents';
+import ConnectFeatures from '@/components/public/ConnectFeatures';
+import StyledText from '@/components/common/StyledText';
 
 function Features() {
   const theme = useTheme();
