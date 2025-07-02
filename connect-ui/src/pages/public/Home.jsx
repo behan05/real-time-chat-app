@@ -176,17 +176,13 @@ function Home() {
       < HowItWorks />
 
       {/* ===  Connect-Features Section === */}
-      < Box
-        sx={{
-          position: 'relative',
-        }}
-      >
+      < Box mx={'auto'} maxWidth={1200} position='relative'>
         {/* Section Heading */}
         < Stack
           spacing={2}
           alignItems="center"
           justifyContent="center"
-          mb={8}
+          my={6}
         >
           <Typography
             variant="h5"
@@ -219,6 +215,7 @@ function Home() {
             display: 'grid',
             gridTemplateColumns: isMd ? '1fr' : isLg ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
             gap: 1,
+            rowGap: 2,
             mx: 'auto',
           }}
         >
