@@ -7,7 +7,6 @@ import Tagline from '@/components/public/Tagline';
 import {
   ChatBubbleOutlineIcon,
   BoltOutlinedIcon,
-  WorkspacePremiumOutlinedIcon,
   HelpOutlineIcon,
   PersonIcon,
   PsychologyIcon,
@@ -40,6 +39,7 @@ const iconMap = {
 
 
 import HowItWorks from '@/components/public/HowItWorks';
+import WhyChooseUs from '@/components/public/WhyChooseUs';
 
 function Home() {
   const features =
@@ -229,13 +229,14 @@ function Home() {
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
-                bgcolor: 'rgba(178, 192, 197, 0.09)',
-                backdropFilter: 'blur(4px)',
+                background: 'rgba(255, 255, 255, 0.04)',
+                backdropFilter: 'blur(6px)',
                 borderRadius: 2,
                 p: 2,
                 gap: 3,
                 boxShadow: '0 0 12px rgba(0,0,0,0.05)',
                 transition: '0.3s',
+                borderBottom: `1px dotted ${theme.palette.text.secondary}`,
                 '&:hover': {
                   transform: 'translateY(-6px)',
                   boxShadow: '0 6px 24px rgba(0,0,0,0.15)',
@@ -316,25 +317,13 @@ function Home() {
 
 
       {/* === Why Choose Us? Section === */}
-      < Box >
-        <Typography
-          variant='h5'
-          fontWeight={500}
-          textTransform={'uppercase'}
-          display="flex"
-          alignItems="center"
-          gap={1}
-        >
-          <WorkspacePremiumOutlinedIcon fontSize={'medium'} />
-          Why {' '}{<StyledText text={'Choose Us?'} />}
-        </Typography>
-      </Box >
+      <WhyChooseUs />
 
       {/* === Testimonials |What Users Are Saying Section === */}
       < Box >
         <Typography
-          variant='h5'
-          fontWeight={500}
+          variant="h5"
+          fontWeight={700}
           textTransform={'uppercase'}
           display="flex"
           alignItems="center"
@@ -348,8 +337,8 @@ function Home() {
       {/* === Frequently Asked Questions FAQ Section === */}
       < Box >
         <Typography
-          variant='h5'
-          fontWeight={500}
+          variant="h5"
+          fontWeight={700}
           textTransform={'uppercase'}
           display="flex"
           alignItems="center"
