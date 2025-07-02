@@ -38,7 +38,7 @@ function WhyChooseUs() {
     ];
 
     return (
-        < Box my={5}>
+        < Box my={6}>
             <Stack my={3}>
                 <Typography
                     variant="h5"

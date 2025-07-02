@@ -64,7 +64,8 @@ function HowItWorks() {
         ),
     };
     return (
-        <Box display='flex' flexDirection='column' my={6}>
+
+        <Box display='flex' flexDirection='column' my={6} mx={'auto'} maxWidth={1200}>
             <Typography
                 variant='h5'
                 fontWeight={700}
