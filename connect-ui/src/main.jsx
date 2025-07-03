@@ -7,8 +7,9 @@ import App from './App';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <CssBaseline />
-    <ThemeProvider theme={theme} />
-    <App />
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <App />
+    </ThemeProvider>
   </StrictMode>
 );

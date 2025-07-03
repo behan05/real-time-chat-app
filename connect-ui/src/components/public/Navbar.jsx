@@ -29,10 +29,9 @@ function Navbar() {
       position="sticky"
       elevation={0}
       sx={{
-        backgroundColor: 'rgba(255, 255, 255, 0.09)',
+        backgroundColor: 'transparent',
         backdropFilter: 'blur(4px)',
         WebkitBackdropFilter: 'blur(4px)',
-        boxShadow: '0 0 4px rgba(135, 90, 165, 0.1)',
       }}
     >
       <Toolbar
@@ -42,11 +41,10 @@ function Navbar() {
           justifyContent: 'space-between',
           alignItems: 'center',
           gap: 1,
-          py: 1,
+          py:1,
           flexWrap: 'wrap',
-          bgcolor: 'rgba(255, 255, 255, 0.09)',
+          bgcolor: 'transparent',
           backdropFilter: 'blur(4px)',
-          boxShadow: '0 0 4px rgba(222, 185, 247, 0.1)',
         }}
       >
         <Stack component={Link} to={'/'}>
