@@ -42,6 +42,11 @@ import HowItWorks from '@/components/public/HowItWorks';
 import WhyChooseUs from '@/components/public/WhyChooseUs';
 
 function Home() {
+
+  React.useEffect(() => {
+    document.title = 'Connect - Random Chat Only'
+  }, []);
+
   const features =
     [
       {

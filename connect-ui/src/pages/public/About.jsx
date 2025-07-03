@@ -18,7 +18,10 @@ import { InfoOutlinedIcon } from '@/MUI/MuiIcons';
 
 function About() {
   const theme = useTheme();
-  const isMd = useMediaQuery(theme.breakpoints.down('md'));
+
+  React.useEffect(() => {
+    document.title = 'Connect - About'
+  }, []);
 
   // Partner logos with descriptions
   const brandCard = [

@@ -1,9 +1,14 @@
+import React from 'react';
 import { Box, Typography, Stack, useTheme } from '@/MUI/MuiComponents';
 import ConnectFeatures from '@/components/public/ConnectFeatures';
 import StyledText from '@/components/common/StyledText';
 
 function Features() {
   const theme = useTheme();
+
+  React.useEffect(() => {
+    document.title = 'Connect - Features'
+  }, []);
 
   return (
     <Box>
