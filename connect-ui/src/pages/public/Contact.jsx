@@ -83,8 +83,11 @@ function Contact() {
         mx: 'auto',
       }}
     >
-      <Typography variant="h5" fontWeight={600} textAlign="center" mb={4}>
+      <Typography variant="h5" fontWeight={600} textAlign="center" mb={1}>
         Get in {<StyledText text="Touch" />}
+      </Typography>
+      <Typography variant="body1" fontWeight={400} textAlign="center" mb={4}>
+        We'd love to hear from you! Please fill out the form below.
       </Typography>
 
       <Stack spacing={3}>
