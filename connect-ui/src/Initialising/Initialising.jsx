@@ -1,4 +1,4 @@
-import { Box, Typography, useMediaQuery, useTheme } from '@/mui/MuiComponents';
+import { Box, Typography, useMediaQuery, useTheme } from '@/MUI/MuiComponents';
 import intro from '../assets/intro/intro.mp4';
 import intro2 from '../assets/intro/intro2.mp4';
 import intro3 from '../assets/intro/intro3.mp4';
