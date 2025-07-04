@@ -83,7 +83,6 @@ const Layout = () => {
       <Navbar />
       <Box sx={{
         px: isSm ? 0 : isMd ? 3 : 15,
-        py: 5,
         display: 'flex',
         gap: 2
       }}>

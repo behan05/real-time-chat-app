@@ -29,7 +29,10 @@ import {
   Grid,
   Accordion,
   AccordionDetails,
-  AccordionSummary
+  AccordionSummary,
+  Checkbox,
+  FormControlLabel,
+  Link as MuiLink,
 } from '@mui/material';
 
 export {
@@ -59,8 +62,10 @@ export {
   useMediaQuery,
   useTheme,
   Tooltip,
+  MuiLink,
   Accordion,
   AccordionDetails,
-  AccordionSummary
-
+  AccordionSummary,
+  Checkbox,
+  FormControlLabel,
 };

@@ -1,11 +1,9 @@
 import React from 'react';
 import { Box, Stack, Typography, useTheme, useMediaQuery } from '@/MUI/MuiComponents';
-import socialVideo from '@/assets/videos/socialVideo.mp4';
 import StyledButton from '@/components/common/StyledButton'
 import StyledText from '@/components/common/StyledText';
 import Tagline from '@/components/public/Tagline';
 import {
-  ChatBubbleOutlineIcon,
   BoltOutlinedIcon,
   HelpOutlineIcon,
   PersonIcon,
@@ -41,6 +39,7 @@ const iconMap = {
 import HowItWorks from '@/components/public/HowItWorks';
 import WhyChooseUs from '@/components/public/WhyChooseUs';
 import FAQ from '../../components/public/FAQ';
+import ReusableVideo from '../../components/public/ReusableVideo';
 
 function Home() {
 
@@ -123,7 +122,7 @@ function Home() {
         flexDirection: isLg ? 'column' : 'row',
         gap: 2,
         flexGrow: 1,
-        py: isMd ? 2 : 10
+        py: isMd ? 2 : 15
       }
       }>
         <Stack flex={1} justifyContent="center">
@@ -155,26 +154,7 @@ function Home() {
           </Stack>
         </Stack>
 
-        <Stack flex={1} justifyContent={'center'} alignItems={'center'}>
-          <Box
-            component={'video'}
-            src={socialVideo}
-            aria-label='social video on landing page'
-            autoPlay
-            loop
-            muted
-            sx={{
-              maxWidth: '100%',
-              maxHeight: '100%',
-              bgcolor: 'transparent',
-              backdropFilter: 'blur(14px)',
-              objectFit: 'cover',
-              borderRadius: 2,
-              boxShadow: 3,
-              borderBottom: `1px dotted ${theme.palette.text.secondary}`,
-            }}
-          />
-        </Stack>
+        <ReusableVideo />
       </Box >
 
       {/* ===  How It Works Section === */}
@@ -327,7 +307,7 @@ function Home() {
       <WhyChooseUs />
 
       {/* === Testimonials | What Users Are Saying Section === */}
-      < Box >
+      {/* < Box >
         <Typography
           variant="h5"
           fontWeight={600}
@@ -339,7 +319,7 @@ function Home() {
           <ChatBubbleOutlineIcon fontSize='medium' />
           What Users Are {' '}{<StyledText text={'Saying'} />}
         </Typography>
-      </Box >
+      </Box > */}
 
       {/* === Frequently Asked Questions FAQ Section === */}
       < Box mt={6} sx={{
@@ -356,7 +336,7 @@ function Home() {
           gap={1}
           gutterBottom
         >
-          <HelpOutlineIcon fontSize='medium' sx={{color: 'success.main'}} />
+          <HelpOutlineIcon fontSize='medium' sx={{ color: 'success.main' }} />
           {<StyledText text={'FAQ'} />}
         </Typography>
         <Typography

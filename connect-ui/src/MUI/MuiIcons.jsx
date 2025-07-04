@@ -68,6 +68,13 @@ import TuneIcon from '@mui/icons-material/Tune';
 // ==================== FAQ ====================
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
+// ==================== Social Icons ====================
+import GoogleIcon from '@mui/icons-material/Google';
+import XIcon from '@mui/icons-material/X';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import AppleIcon from '@mui/icons-material/Apple';
+
+
 // ==================== Export All ====================
 export {
   // Navigation & Layout
@@ -139,4 +146,10 @@ export {
 
   // FAQ
   ExpandMoreIcon,
+
+  // Social Icon
+  GoogleIcon,
+  XIcon,
+  FacebookIcon,
+  AppleIcon,
 };
