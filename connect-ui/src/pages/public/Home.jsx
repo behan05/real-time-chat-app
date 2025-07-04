@@ -342,7 +342,7 @@ function Home() {
       </Box >
 
       {/* === Frequently Asked Questions FAQ Section === */}
-      < Box my={6} sx={{
+      < Box mt={6} sx={{
         maxWidth: 1000,
         mx: 'auto',
       }}>
@@ -357,7 +357,7 @@ function Home() {
           gutterBottom
         >
           <HelpOutlineIcon fontSize='medium' sx={{color: 'success.main'}} />
-          Frequently Asked {' '}{<StyledText text={'Questions'} />}
+          {<StyledText text={'FAQ'} />}
         </Typography>
         <Typography
           variant="body2"

@@ -112,6 +112,7 @@ function About() {
         <Box
           component="video"
           src={chattingVideo}
+          loading="lazy"
           autoPlay
           muted
           loop

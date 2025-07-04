@@ -113,7 +113,7 @@ function WhyChooseUs() {
                     ))}
                 </Box>
 
-                {/* Image */}
+                {/* Video */}
                 <Box flex={1}
                     order={isLg ? 1 : 2}
                     sx={{
@@ -136,7 +136,7 @@ function WhyChooseUs() {
                             width: '100%',
                             height: '100%',
                             maxHeight: 500,
-                            objectFit: 'cover',
+                            objectFit: 'contain',
                             borderRadius: 1,
                             borderBottom: `1px dotted ${theme.palette.text.secondary}`,
                             filter: 'brightness(0.85) saturate(120%)',

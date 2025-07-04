@@ -47,6 +47,7 @@ const Layout = () => {
       <Stack
         component={'video'}
         src={changedBgVideo}
+        loading="lazy"
         aria-label='background video'
         autoPlay
         muted
@@ -81,7 +82,7 @@ const Layout = () => {
       {/* === Navbar Section === */}
       <Navbar />
       <Box sx={{
-        px: isSm ? 2 : isMd ? 3 : 15,
+        px: isSm ? 0 : isMd ? 3 : 15,
         py: 5,
         display: 'flex',
         gap: 2
