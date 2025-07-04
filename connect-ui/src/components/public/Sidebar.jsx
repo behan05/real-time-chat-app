@@ -6,7 +6,7 @@ import {
   IconButton,
   Tooltip,
   useTheme,
-  useMediaQuery,
+  useMediaQuery
 } from '@/MUI/MuiComponents';
 import {
   HomeOutlinedIcon,
@@ -14,7 +14,7 @@ import {
   InfoOutlinedIcon,
   ContactMailOutlinedIcon,
   LockOpenIcon,
-  LockIcon,
+  LockIcon
 } from '@/MUI/MuiIcons';
 import { NavLink } from 'react-router-dom';
 import { useSidebar } from '../../context/SidebarContext';
@@ -27,7 +27,7 @@ const sidebarList = [
   { path: '/about', text: 'About', icon: <InfoOutlinedIcon /> },
   { path: '/contact', text: 'Contact', icon: <ContactMailOutlinedIcon /> },
   { path: '/login', text: 'Login', icon: <LockOpenIcon /> },
-  { path: '/register', text: 'Unlock Access', icon: <LockIcon /> },
+  { path: '/register', text: 'Unlock Access', icon: <LockIcon /> }
 ];
 
 const Sidebar = () => {
@@ -65,9 +65,9 @@ const Sidebar = () => {
             height: '100%',
             background: `linear-gradient(to bottom, transparent 50%, ${theme.palette.success.main} 10%, ${theme.palette.warning.main}, transparent 100%)`,
             backgroundSize: '100% 200%',
-            animation: 'glowFlow 4s ease-in-out infinite',
-          },
-        },
+            animation: 'glowFlow 4s ease-in-out infinite'
+          }
+        }
       }}
     >
       <List>
@@ -75,11 +75,7 @@ const Sidebar = () => {
           if (!isMobile && ['Login', 'Unlock Access'].includes(item.text)) return null;
 
           return (
-            <ListItem
-              key={i}
-              disablePadding
-              onClick={isMobile ? toggleSidebar : undefined}
-            >
+            <ListItem key={i} disablePadding onClick={isMobile ? toggleSidebar : undefined}>
               <Tooltip
                 title={item.text}
                 placement="right"
@@ -92,8 +88,8 @@ const Sidebar = () => {
                       px: 1.5,
                       py: 0.8,
                       fontSize: '0.85rem',
-                      backdropFilter: 'blur(4px)',
-                    },
+                      backdropFilter: 'blur(4px)'
+                    }
                   },
                   arrow: {
                     sx: {
@@ -108,7 +104,7 @@ const Sidebar = () => {
                     textDecoration: 'none',
                     display: 'flex',
                     justifyContent: 'center',
-                    alignItems: 'center',
+                    alignItems: 'center'
                   }}
                 >
                   {({ isActive }) => (

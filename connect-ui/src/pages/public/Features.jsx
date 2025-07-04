@@ -7,7 +7,7 @@ function Features() {
   const theme = useTheme();
 
   React.useEffect(() => {
-    document.title = 'Connect - Features'
+    document.title = 'Connect - Features';
   }, []);
 
   return (
@@ -15,10 +15,10 @@ function Features() {
       {/* Section Heading */}
       <Stack spacing={2} textAlign="center" mb={6}>
         <Typography variant="h3" fontWeight="bold">
-          Explore Our {" "} {<StyledText text="Features" />}
+          Explore Our {<StyledText text="Features" />}
         </Typography>
 
-        <Box display="flex" justifyContent="center" >
+        <Box display="flex" justifyContent="center">
           <Typography
             variant="body2"
             component="section"
@@ -28,9 +28,9 @@ function Features() {
               color: theme.palette.text.secondary
             }}
           >
-            Discover how our platform helps you connect meaningfully with others.
-            From intelligent matching to real-time messaging and profile customization,
-            we've built everything to make your experience seamless and secure.
+            Discover how our platform helps you connect meaningfully with others. From intelligent
+            matching to real-time messaging and profile customization, we've built everything to
+            make your experience seamless and secure.
           </Typography>
         </Box>
       </Stack>

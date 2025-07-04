@@ -3,8 +3,8 @@ import { breakpoints } from './breakpoints';
 import { typography } from './typography';
 import { palette } from './palette';
 import { shape } from './shape';
-import { shadows } from './shadows';
 import { components } from './components';
+import shadows from './shadows';
 
 const theme = createTheme({
   typography,

@@ -12,7 +12,7 @@ import {
   Stack,
   Checkbox,
   FormControlLabel,
-  Divider,
+  Divider
 } from '@/MUI/MuiComponents';
 import * as React from 'react';
 import {
@@ -37,39 +37,38 @@ function Login() {
   // Form state to handle user input
   const [form, setForm] = React.useState({
     username: '',
-    password: '',
+    password: ''
   });
 
   // Error state to show validation errors
   const [error, setError] = React.useState({
     username: '',
-    password: '',
+    password: ''
   });
 
   const [showPassword, setShowPassword] = React.useState(false);
 
   // Handle input change and update form state
-  const handleChange = e => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm(prev => ({
+    setForm((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: value
     }));
   };
 
   // Handle form submission
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
   };
 
   // Toggle password visibility
   const handleClickShowPassword = () => {
-    setShowPassword(prev => !prev);
+    setShowPassword((prev) => !prev);
   };
 
   // Social media login simulation
-  const handleSocialLogin = platform => {
+  const handleSocialLogin = (platform) => {
     switch (platform) {
       case 'google':
         console.log('Redirecting to Google login...');
@@ -102,7 +101,7 @@ function Login() {
         flexDirection: { xs: 'column', md: 'row' },
         flexGrow: 1,
         gap: 2,
-        py: isLg ? theme.spacing(3) : theme.spacing(10),
+        py: isLg ? theme.spacing(3) : theme.spacing(10)
       }}
     >
       {/* Left side content for larger screens */}
@@ -118,9 +117,9 @@ function Login() {
           </Typography>
 
           <Typography variant="subtitle1" color={theme.palette.text.secondary} mb={3}>
-            Connect is a real-time random chatting webapp, powered by <StyledText text={'interest-based'} />{' '}
-            matching. 100% <StyledText text={'India'} /> platform designed for genuine conversations
-            anytime, anywhere.
+            Connect is a real-time random chatting webapp, powered by{' '}
+            <StyledText text={'interest-based'} /> matching. 100% <StyledText text={'India'} />{' '}
+            platform designed for genuine conversations anytime, anywhere.
           </Typography>
 
           {/* === Reusable Video Component === */}
@@ -129,13 +128,15 @@ function Login() {
       )}
 
       {/* Right side login form */}
-      <Box sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flex: 1,
-        py: 1,
-      }}>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flex: 1,
+          py: 1
+        }}
+      >
         <Box
           component={'form'}
           onSubmit={handleSubmit}
@@ -149,7 +150,7 @@ function Login() {
             textAlign={'center'}
             color={theme.palette.text.primary}
           >
-            Hey {" "}<StyledText text={'Connects'} />!
+            Hey <StyledText text={'Connects'} />!
           </Typography>
 
           <Typography
@@ -188,9 +189,10 @@ function Login() {
             InputProps={{
               endAdornment: (
                 <IconButton position="end" onClick={handleClickShowPassword}>
-                  {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />} {/* Eye icon toggle */}
+                  {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}{' '}
+                  {/* Eye icon toggle */}
                 </IconButton>
-              ),
+              )
             }}
           />
 
@@ -217,7 +219,7 @@ function Login() {
               sx={{
                 color: theme.palette.text.secondary,
                 textDecoration: 'underline',
-                fontSize: '0.875rem',
+                fontSize: '0.875rem'
               }}
             >
               Forgot your password?
@@ -236,8 +238,8 @@ function Login() {
               py: { xs: 0.5, sm: 1 },
               background: `transparent`,
               backdropFilter: 'blur(14px)',
-              borderTopRightRadius: "6px",
-              borderBottomRightRadius: "6px",
+              borderTopRightRadius: '6px',
+              borderBottomRightRadius: '6px',
               border: `1px dotted ${theme.palette.success.main}`,
               textTransform: 'none',
               color: 'primary.contrastText',
@@ -245,8 +247,8 @@ function Login() {
               textDecoration: 'none',
               transition: 'all 0.3s ease',
               '&:hover': {
-                transform: 'translateY(-5px)',
-              },
+                transform: 'translateY(-5px)'
+              }
             }}
           >
             Login

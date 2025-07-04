@@ -12,7 +12,7 @@ import {
   Stack,
   Checkbox,
   FormControlLabel,
-  Divider,
+  Divider
 } from '@/MUI/MuiComponents';
 import * as React from 'react';
 import {
@@ -22,7 +22,7 @@ import {
   GoogleIcon,
   FacebookIcon,
   AppleIcon,
-  XIcon,
+  XIcon
 } from '@/MUI/MuiIcons';
 import { Link } from 'react-router-dom';
 
@@ -38,46 +38,45 @@ function Signup() {
     name: '',
     username: '',
     password: '',
-    confirmPassword: '',
+    confirmPassword: ''
   });
 
   const [error, setError] = React.useState({
     name: '',
     username: '',
     password: '',
-    confirmPassword: '',
+    confirmPassword: ''
   });
 
   const [showPassword, setShowPassword] = React.useState(false); // State to toggle password visibility
   const [showConfirmPassword, setShowConfirmPassword] = React.useState(false); // State to toggle confirm password visibility
 
   // Handle form field changes
-  const handleChange = e => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm(prev => ({
+    setForm((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: value
     }));
   };
 
   // Handle form submission with validation
   const handleSubmit = async (e) => {
     e.preventDefault();
-
   };
 
   // Toggle password visibility
   const handleClickShowPassword = () => {
-    setShowPassword(prev => !prev);
+    setShowPassword((prev) => !prev);
   };
 
   // Toggle confirm password visibility
   const handleClickShowConfirmPassword = () => {
-    setShowConfirmPassword(prev => !prev);
+    setShowConfirmPassword((prev) => !prev);
   };
 
   // Handle social media login (Google, Facebook, Apple, Twitter)
-  const handleSocialLogin = platform => {
+  const handleSocialLogin = (platform) => {
     switch (platform) {
       case 'google':
         console.log('Redirecting to Google signup...');
@@ -106,7 +105,7 @@ function Signup() {
         flexDirection: { xs: 'column', md: 'row' },
         flexGrow: 1,
         gap: 2,
-        py: isLg ? theme.spacing(3) : theme.spacing(10),
+        py: isLg ? theme.spacing(3) : theme.spacing(10)
       }}
     >
       {!isLg && (
@@ -121,8 +120,7 @@ function Signup() {
           </Typography>
 
           <Typography variant="subtitle1" color={theme.palette.text.secondary} mb={3}>
-            Join <StyledText text={'Connect'} /> and experience genuine, interest-based
-            connections.
+            Join <StyledText text={'Connect'} /> and experience genuine, interest-based connections.
           </Typography>
 
           {/* === Reusable Video Component === */}
@@ -135,8 +133,9 @@ function Signup() {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          flex: 1,
-        }}>
+          flex: 1
+        }}
+      >
         <Box
           component={'form'}
           onSubmit={handleSubmit}
@@ -203,7 +202,7 @@ function Signup() {
                 <IconButton position="end" onClick={handleClickShowPassword}>
                   {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
                 </IconButton>
-              ),
+              )
             }}
           />
 
@@ -223,7 +222,7 @@ function Signup() {
                 <IconButton position="end" onClick={handleClickShowConfirmPassword}>
                   {showConfirmPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
                 </IconButton>
-              ),
+              )
             }}
           />
 
@@ -256,8 +255,8 @@ function Signup() {
               py: { xs: 0.5, sm: 1 },
               background: `transparent`,
               backdropFilter: 'blur(14px)',
-              borderTopRightRadius: "6px",
-              borderBottomRightRadius: "6px",
+              borderTopRightRadius: '6px',
+              borderBottomRightRadius: '6px',
               border: `1px dotted ${theme.palette.success.main}`,
               textTransform: 'none',
               color: 'primary.contrastText',
@@ -265,8 +264,8 @@ function Signup() {
               textDecoration: 'none',
               transition: 'all 0.3s ease',
               '&:hover': {
-                transform: 'translateY(-5px)',
-              },
+                transform: 'translateY(-5px)'
+              }
             }}
           >
             Create Account

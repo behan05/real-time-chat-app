@@ -74,7 +74,6 @@ import XIcon from '@mui/icons-material/X';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import AppleIcon from '@mui/icons-material/Apple';
 
-
 // ==================== Export All ====================
 export {
   // Navigation & Layout
@@ -151,5 +150,5 @@ export {
   GoogleIcon,
   XIcon,
   FacebookIcon,
-  AppleIcon,
+  AppleIcon
 };

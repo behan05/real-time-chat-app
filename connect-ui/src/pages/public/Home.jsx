@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Stack, Typography, useTheme, useMediaQuery } from '@/MUI/MuiComponents';
-import StyledButton from '@/components/common/StyledButton'
+import StyledButton from '@/components/common/StyledButton';
 import StyledText from '@/components/common/StyledText';
 import Tagline from '@/components/public/Tagline';
 import {
@@ -18,7 +18,7 @@ import {
   BrushIcon,
   FilterAltIcon,
   TravelExploreIcon
-} from '@/MUI/MuiIcons'
+} from '@/MUI/MuiIcons';
 
 const iconMap = {
   Psychology: <PsychologyIcon sx={{ fontSize: 36, color: 'primary.main' }} />,
@@ -32,9 +32,8 @@ const iconMap = {
   Person: <PersonIcon sx={{ fontSize: 36, color: 'primary.main' }} />,
   Brush: <BrushIcon sx={{ fontSize: 36, color: 'secondary.main' }} />,
   FilterAlt: <FilterAltIcon sx={{ fontSize: 36, color: 'primary.main' }} />,
-  TravelExplore: <TravelExploreIcon sx={{ fontSize: 36, color: 'secondary.main' }} />,
+  TravelExplore: <TravelExploreIcon sx={{ fontSize: 36, color: 'secondary.main' }} />
 };
-
 
 import HowItWorks from '@/components/public/HowItWorks';
 import WhyChooseUs from '@/components/public/WhyChooseUs';
@@ -42,100 +41,108 @@ import FAQ from '../../components/public/FAQ';
 import ReusableVideo from '../../components/public/ReusableVideo';
 
 function Home() {
-
   React.useEffect(() => {
-    document.title = 'Connect - Random Chat Only'
+    document.title = 'Connect - Random Chat Only';
   }, []);
 
-  const features =
-    [
-      {
-        label: '01',
-        title: 'Smart ',
-        highlightText: 'Matching',
-        description: 'Our intelligent algorithm connects you with like-minded individuals based on your interests, preferences, and location.',
-        icon1: 'Psychology',
-        title1: 'Intelligent Algorithm',
-        icon2: 'Tune',
-        title2: 'Personalized Filters',
-      },
-      {
-        label: '02',
-        title: 'Instant ',
-        highlightText: 'Connection',
-        description: 'Connect face-to-face in real-time without delays. Just click and start a conversation instantly.',
-        icon1: 'AccountBox',
-        title1: 'One-Click Start',
-        icon2: 'Interests',
-        title2: 'Shared Topics',
-      },
-      {
-        label: '03',
-        title: 'Real-Time ',
-        highlightText: 'Messaging',
-        description: 'Send and receive messages while on a video call or offline. Keep the conversation alive beyond the call.',
-        icon1: 'Chat',
-        title1: 'In-Call Chat',
-        icon2: 'Sms',
-        title2: 'Offline Messaging',
-      },
-      {
-        label: '04',
-        title: 'Privacy & ',
-        highlightText: 'Safety',
-        description: 'Your safety matters. Manage who connects with you, report issues, and enjoy end-to-end encrypted calls.',
-        icon1: 'Shield',
-        title1: 'End-to-End Encryption',
-        icon2: 'ReportProblem',
-        title2: 'Report & Block',
-      },
-      {
-        label: '05',
-        title: 'Customizable ',
-        highlightText: 'Profiles',
-        description: 'Make your profile truly yours. Add a bio, interests, and photos to express yourself and attract genuine connections.',
-        icon1: 'Person',
-        title1: 'Add Photos & Bio',
-        icon2: 'Brush',
-        title2: 'Personalize Profile',
-      },
-      {
-        label: '06',
-        title: 'Filter by ',
-        highlightText: 'Preferences',
-        description: 'Easily filter who you want to connect with by age, location, language, gender, and interests for a better experience.',
-        icon1: 'FilterAlt',
-        title1: 'Smart Filters',
-        icon2: 'TravelExplore',
-        title2: 'Global or Nearby',
-      },
-    ]
+  const features = [
+    {
+      label: '01',
+      title: 'Smart ',
+      highlightText: 'Matching',
+      description:
+        'Our intelligent algorithm connects you with like-minded individuals based on your interests, preferences, and location.',
+      icon1: 'Psychology',
+      title1: 'Intelligent Algorithm',
+      icon2: 'Tune',
+      title2: 'Personalized Filters'
+    },
+    {
+      label: '02',
+      title: 'Instant ',
+      highlightText: 'Connection',
+      description:
+        'Connect face-to-face in real-time without delays. Just click and start a conversation instantly.',
+      icon1: 'AccountBox',
+      title1: 'One-Click Start',
+      icon2: 'Interests',
+      title2: 'Shared Topics'
+    },
+    {
+      label: '03',
+      title: 'Real-Time ',
+      highlightText: 'Messaging',
+      description:
+        'Send and receive messages while on a video call or offline. Keep the conversation alive beyond the call.',
+      icon1: 'Chat',
+      title1: 'In-Call Chat',
+      icon2: 'Sms',
+      title2: 'Offline Messaging'
+    },
+    {
+      label: '04',
+      title: 'Privacy & ',
+      highlightText: 'Safety',
+      description:
+        'Your safety matters. Manage who connects with you, report issues, and enjoy end-to-end encrypted calls.',
+      icon1: 'Shield',
+      title1: 'End-to-End Encryption',
+      icon2: 'ReportProblem',
+      title2: 'Report & Block'
+    },
+    {
+      label: '05',
+      title: 'Customizable ',
+      highlightText: 'Profiles',
+      description:
+        'Make your profile truly yours. Add a bio, interests, and photos to express yourself and attract genuine connections.',
+      icon1: 'Person',
+      title1: 'Add Photos & Bio',
+      icon2: 'Brush',
+      title2: 'Personalize Profile'
+    },
+    {
+      label: '06',
+      title: 'Filter by ',
+      highlightText: 'Preferences',
+      description:
+        'Easily filter who you want to connect with by age, location, language, gender, and interests for a better experience.',
+      icon1: 'FilterAlt',
+      title1: 'Smart Filters',
+      icon2: 'TravelExplore',
+      title2: 'Global or Nearby'
+    }
+  ];
   const theme = useTheme();
   const isMd = useMediaQuery(theme.breakpoints.down('md'));
   const isLg = useMediaQuery(theme.breakpoints.down('lg'));
 
   return (
-    <React.Fragment >
+    <React.Fragment>
       {/* ===  Hero / Slogan Section === */}
-      < Box sx={{
-        display: 'flex',
-        flexDirection: isLg ? 'column' : 'row',
-        gap: 2,
-        flexGrow: 1,
-        py: isMd ? 2 : 15
-      }
-      }>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: isLg ? 'column' : 'row',
+          gap: 2,
+          flexGrow: 1,
+          py: isMd ? 2 : 15
+        }}
+      >
         <Stack flex={1} justifyContent="center">
-          <Typography
-            variant={isMd ? 'h3' : 'h2'}
-            fontWeight={700}
-            sx={{ color: 'text.primary' }}
-          >
-            {<StyledText text={'Talk Freely.'} />}{' '} Connect Instantly.
+          <Typography variant={isMd ? 'h3' : 'h2'} fontWeight={700} sx={{ color: 'text.primary' }}>
+            {<StyledText text={'Talk Freely.'} />} Connect Instantly.
           </Typography>
 
-          <Typography variant="h6" gutterBottom color="text.secondary" sx={{ mt: 3, maxWidth: 640 }}>
-            Connect is a modern chat platform that pairs you with random users across the globe in seconds. Whether you're looking to make new friends, share stories, learn languages, or simply pass time it's your gateway to real-time human connection.
+          <Typography
+            variant="h6"
+            gutterBottom
+            color="text.secondary"
+            sx={{ mt: 3, maxWidth: 640 }}
+          >
+            Connect is a modern chat platform that pairs you with random users across the globe in
+            seconds. Whether you're looking to make new friends, share stories, learn languages, or
+            simply pass time it's your gateway to real-time human connection.
           </Typography>
 
           {/* === Calling tagline component === */}
@@ -143,31 +150,21 @@ function Home() {
 
           {/* CTA */}
           <Stack direction={'row'} gap={2} my={2}>
-            <StyledButton
-              text={'Start Connecting'}
-              redirectUrl={'/register'}
-            />
-            <StyledButton
-              text={'Learn More...'}
-              redirectUrl={'/about'}
-            />
+            <StyledButton text={'Start Connecting'} redirectUrl={'/register'} />
+            <StyledButton text={'Learn More...'} redirectUrl={'/about'} />
           </Stack>
         </Stack>
 
         <ReusableVideo />
-      </Box >
+      </Box>
 
       {/* ===  How It Works Section === */}
-      < HowItWorks />
+      <HowItWorks />
 
       {/* ===  Connect-Features Section === */}
-      < Box mx={'auto'} maxWidth={1200} position='relative'>
+      <Box mx={'auto'} maxWidth={1200} position="relative">
         {/* Section Heading */}
-        < Stack
-          alignItems="center"
-          justifyContent="center"
-          my={6}
-        >
+        <Stack alignItems="center" justifyContent="center" my={6}>
           <Typography
             variant="h5"
             fontWeight={600}
@@ -189,9 +186,11 @@ function Home() {
             textAlign="center"
             fontSize={{ xs: 14, md: 16 }}
           >
-            Discover how we bring people together. Our platform features smart matching, personalized profiles, real-time messaging, and privacy-first controls all designed to create safe and meaningful conversations.
+            Discover how we bring people together. Our platform features smart matching,
+            personalized profiles, real-time messaging, and privacy-first controls all designed to
+            create safe and meaningful conversations.
           </Typography>
-        </Stack >
+        </Stack>
 
         {/* Features Grid */}
         <Box
@@ -200,7 +199,7 @@ function Home() {
             gridTemplateColumns: isMd ? '1fr' : isLg ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
             gap: 1,
             rowGap: 2,
-            mx: 'auto',
+            mx: 'auto'
           }}
         >
           {features.map((item, i) => (
@@ -221,8 +220,8 @@ function Home() {
                 borderBottom: `1px dotted ${theme.palette.text.secondary}`,
                 '&:hover': {
                   transform: 'translateY(-6px)',
-                  boxShadow: '0 6px 24px rgba(0,0,0,0.15)',
-                },
+                  boxShadow: '0 6px 24px rgba(0,0,0,0.15)'
+                }
               }}
             >
               {/* Header */}
@@ -239,7 +238,7 @@ function Home() {
                     justifyContent: 'center',
                     fontWeight: 'bold',
                     transition: 'all 0.1s ease',
-                    "&:hover": {
+                    '&:hover': {
                       borderRight: 0
                     }
                   }}
@@ -263,7 +262,7 @@ function Home() {
                     display: 'flex',
                     alignItems: 'center',
                     gap: 2,
-                    boxShadow: 1,
+                    boxShadow: 1
                   }}
                 >
                   {iconMap[item.icon1]}
@@ -284,7 +283,7 @@ function Home() {
                     display: 'flex',
                     alignItems: 'center',
                     gap: 2,
-                    boxShadow: 1,
+                    boxShadow: 1
                   }}
                 >
                   {iconMap[item.icon2]}
@@ -297,11 +296,9 @@ function Home() {
                 {item.description}
               </Typography>
             </Box>
-          ))
-          }
-        </Box >
-      </Box >
-
+          ))}
+        </Box>
+      </Box>
 
       {/* === Why Choose Us? Section === */}
       <WhyChooseUs />
@@ -322,10 +319,13 @@ function Home() {
       </Box > */}
 
       {/* === Frequently Asked Questions FAQ Section === */}
-      < Box mt={6} sx={{
-        maxWidth: 1000,
-        mx: 'auto',
-      }}>
+      <Box
+        mt={6}
+        sx={{
+          maxWidth: 1000,
+          mx: 'auto'
+        }}
+      >
         <Typography
           variant="h5"
           fontWeight={600}
@@ -336,7 +336,7 @@ function Home() {
           gap={1}
           gutterBottom
         >
-          <HelpOutlineIcon fontSize='medium' sx={{ color: 'success.main' }} />
+          <HelpOutlineIcon fontSize="medium" sx={{ color: 'success.main' }} />
           {<StyledText text={'FAQ'} />}
         </Typography>
         <Typography
@@ -347,12 +347,13 @@ function Home() {
           fontSize={{ xs: 14, md: 16 }}
           mb={3}
         >
-          Got questions? We've answered the most common things you might wonder about from how Connect works to how we keep your experience safe and smooth.
+          Got questions? We've answered the most common things you might wonder about from how
+          Connect works to how we keep your experience safe and smooth.
         </Typography>
 
         <FAQ />
-      </Box >
-    </React.Fragment >
+      </Box>
+    </React.Fragment>
   );
 }
 

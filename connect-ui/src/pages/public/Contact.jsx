@@ -30,8 +30,8 @@ function Contact() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    setError(prev => ({ ...prev, [name]: '' }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    setError((prev) => ({ ...prev, [name]: '' }));
   };
 
   const handleSubmit = async (e) => {
@@ -54,7 +54,7 @@ function Contact() {
     try {
       setIsSubmitting(true);
       // Simulate API Call
-      await new Promise(res => setTimeout(res, 800));
+      await new Promise((res) => setTimeout(res, 800));
 
       toast.success('Message sent successfully 🎉');
 
@@ -79,7 +79,7 @@ function Contact() {
         backdropFilter: 'blur(14px)',
         backgroundColor: 'transparent',
         maxWidth: 800,
-        mx: 'auto',
+        mx: 'auto'
       }}
     >
       <Typography variant="h5" fontWeight={600} textAlign="center" mb={1}>
@@ -153,8 +153,8 @@ function Contact() {
             background: `transparent`,
             backdropFilter: 'blur(14px)',
             border: 'none',
-            borderTopRightRadius: "6px",
-            borderBottomRightRadius: "6px",
+            borderTopRightRadius: '6px',
+            borderBottomRightRadius: '6px',
             borderBottom: `1px dotted ${theme.palette.success.main}`,
             textTransform: 'none',
             color: 'primary.contrastText',
@@ -162,8 +162,8 @@ function Contact() {
             textDecoration: 'none',
             transition: 'all 0.3s ease',
             '&:hover': {
-              transform: 'translateY(-5px)',
-            },
+              transform: 'translateY(-5px)'
+            }
           }}
         >
           {isSubmitting ? 'Sending...' : 'Drop a Line'}

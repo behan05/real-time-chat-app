@@ -3,17 +3,17 @@ export const palette = {
 
   // 🌊 Primary – Luxury Electric Indigo family (modern deep blue-violet)
   primary: {
-    main: '#5A67D8',          // Modern indigo (main brand color)
-    light: '#7F9CF5',         // Soft electric blue-lavender
-    dark: '#434190',          // Rich deep indigo
-    contrastText: '#F5F5F5'   // Soft white for buttons/text
+    main: '#5A67D8', // Modern indigo (main brand color)
+    light: '#7F9CF5', // Soft electric blue-lavender
+    dark: '#434190', // Rich deep indigo
+    contrastText: '#F5F5F5' // Soft white for buttons/text
   },
 
   // 🌺 Secondary – Rose Quartz & Mauve blend (refined, emotional)
   secondary: {
-    main: '#D16BA5',          // Rose quartz pink-purple
-    light: '#F3A1C8',         // Gentle blush pink
-    dark: '#9D4480',          // Deep mauve/berry
+    main: '#D16BA5', // Rose quartz pink-purple
+    light: '#F3A1C8', // Gentle blush pink
+    dark: '#9D4480', // Deep mauve/berry
     contrastText: '#F5F5F5'
   },
 
@@ -40,7 +40,7 @@ export const palette = {
 
   // ✅ Success – Calm teal, elegant
   success: {
-    main: '#38B2AC',          // Elegant jade teal
+    main: '#38B2AC', // Elegant jade teal
     dark: '#2C7A7B',
     contrastText: '#F5F5F5'
   },

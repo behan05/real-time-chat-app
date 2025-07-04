@@ -9,7 +9,6 @@ import { useSidebar } from '../context/SidebarContext';
 import React from 'react';
 
 const Layout = () => {
-
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down('sm'));
   const isMd = useMediaQuery(theme.breakpoints.down('md'));
@@ -38,22 +37,23 @@ const Layout = () => {
   const changedBgVideo = videoChanged ? video : video2;
 
   return (
-    <Box sx={{
-      position: 'relative',
-      zIndex: 1,
-    }}>
-
+    <Box
+      sx={{
+        position: 'relative',
+        zIndex: 1
+      }}
+    >
       {/* === Background Video === */}
       <Stack
         component={'video'}
         src={changedBgVideo}
         loading="lazy"
-        aria-label='background video'
+        aria-label="background video"
         autoPlay
         muted
         loop
         playsInline
-        type='video/mp4'
+        type="video/mp4"
         style={{
           position: 'fixed',
           top: 0,
@@ -62,7 +62,7 @@ const Layout = () => {
           height: '100%',
           objectFit: 'cover',
           filter: 'brightness(0.14)',
-          zIndex: -2,
+          zIndex: -2
         }}
       />
 
@@ -75,21 +75,21 @@ const Layout = () => {
           width: '100%',
           height: '100%',
           backgroundColor: 'rgba(0, 0, 0, 0.25)',
-          zIndex: -1,
+          zIndex: -1
         }}
       />
 
       {/* === Navbar Section === */}
       <Navbar />
-      <Box sx={{
-        px: isSm ? 0 : isMd ? 3 : 15,
-        display: 'flex',
-        gap: 2
-      }}>
+      <Box
+        sx={{
+          px: isSm ? 0 : isMd ? 3 : 15,
+          display: 'flex',
+          gap: 2
+        }}
+      >
         {/* === Sidebar === */}
-        <Box sx={{ position: 'relative' }}>
-          {isSm ? (isSidebarOpen && <Sidebar />) : <Sidebar />}
-        </Box>
+        <Box sx={{ position: 'relative' }}>{isSm ? isSidebarOpen && <Sidebar /> : <Sidebar />}</Box>
         {/* === Main Content === */}
         <Box
           component="main"
@@ -97,7 +97,7 @@ const Layout = () => {
             flexGrow: 1,
             px: isSm ? 2 : 5,
             py: 2,
-            width: '100%',
+            width: '100%'
           }}
         >
           <Outlet />

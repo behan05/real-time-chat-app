@@ -14,7 +14,7 @@ function Footer() {
         py: 6,
         bgcolor: 'transparent',
         backdropFilter: 'blur(6px)',
-        borderTop: '1px solid rgba(255,255,255,0.1)',
+        borderTop: '1px solid rgba(255,255,255,0.1)'
       }}
     >
       {/* Top section */}
@@ -25,34 +25,54 @@ function Footer() {
         spacing={4}
       >
         {/* Logo and description */}
-        <Stack spacing={2} alignItems={{ xs: 'center', md: 'flex-start' }} textAlign={{ xs: 'center', md: 'left' }}>
-          <Box
-            component="img"
-            src={logo}
-            alt="Connect Logo"
-            sx={{ height: 48 }}
-          />
+        <Stack
+          spacing={2}
+          alignItems={{ xs: 'center', md: 'flex-start' }}
+          textAlign={{ xs: 'center', md: 'left' }}
+        >
+          <Box component="img" src={logo} alt="Connect Logo" sx={{ height: 48 }} />
           <Typography variant="body2" color="text.secondary" maxWidth={320}>
-            {<StyledText text={'Connect'} />} is a real-time random chat platform built for global connections, meaningful conversations, and privacy-first experiences.
+            {<StyledText text={'Connect'} />} is a real-time random chat platform built for global
+            connections, meaningful conversations, and privacy-first experiences.
           </Typography>
         </Stack>
 
         {/* Important links */}
         <Stack direction="row" spacing={6}>
           <Stack spacing={1}>
-            <Typography variant="subtitle1" fontWeight={600}>{<StyledText text={'Explore'} />}</Typography>
-            <MuiLink component={RouterLink} to="/" underline="hover" color="text.secondary">Home</MuiLink>
-            <MuiLink component={RouterLink} to="/about" underline="hover" color="text.secondary">About</MuiLink>
-            <MuiLink component={RouterLink} to="/features" underline="hover" color="text.secondary">Features</MuiLink>
-            <MuiLink component={RouterLink} to="/contact" underline="hover" color="text.secondary">Contact</MuiLink>
+            <Typography variant="subtitle1" fontWeight={600}>
+              {<StyledText text={'Explore'} />}
+            </Typography>
+            <MuiLink component={RouterLink} to="/" underline="hover" color="text.secondary">
+              Home
+            </MuiLink>
+            <MuiLink component={RouterLink} to="/about" underline="hover" color="text.secondary">
+              About
+            </MuiLink>
+            <MuiLink component={RouterLink} to="/features" underline="hover" color="text.secondary">
+              Features
+            </MuiLink>
+            <MuiLink component={RouterLink} to="/contact" underline="hover" color="text.secondary">
+              Contact
+            </MuiLink>
           </Stack>
 
           <Stack spacing={1}>
-            <Typography variant="subtitle1" fontWeight={600}>{<StyledText text={'Support'} />}</Typography>
-            <MuiLink component={RouterLink} to="/faq" underline="hover" color="text.secondary">FAQs</MuiLink>
-            <MuiLink component={RouterLink} to="/privacy" underline="hover" color="text.secondary">Privacy Policy</MuiLink>
-            <MuiLink component={RouterLink} to="/terms" underline="hover" color="text.secondary">Terms of Use</MuiLink>
-            <MuiLink component={RouterLink} to="/report" underline="hover" color="text.secondary">Report Issue</MuiLink>
+            <Typography variant="subtitle1" fontWeight={600}>
+              {<StyledText text={'Support'} />}
+            </Typography>
+            <MuiLink component={RouterLink} to="/faq" underline="hover" color="text.secondary">
+              FAQs
+            </MuiLink>
+            <MuiLink component={RouterLink} to="/privacy" underline="hover" color="text.secondary">
+              Privacy Policy
+            </MuiLink>
+            <MuiLink component={RouterLink} to="/terms" underline="hover" color="text.secondary">
+              Terms of Use
+            </MuiLink>
+            <MuiLink component={RouterLink} to="/report" underline="hover" color="text.secondary">
+              Report Issue
+            </MuiLink>
           </Stack>
         </Stack>
       </Stack>

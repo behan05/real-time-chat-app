@@ -22,7 +22,7 @@ export const routes = createBrowserRouter([
       { path: 'features', element: <Features /> },
       { path: 'contact', element: <Contact /> },
       { path: 'login', element: <Login /> },
-      { path: 'register', element: <Register /> },
+      { path: 'register', element: <Register /> }
     ]
   }
 ]);

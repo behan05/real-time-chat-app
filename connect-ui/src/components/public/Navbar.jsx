@@ -7,14 +7,14 @@ import {
   useMediaQuery,
   Stack,
   IconButton,
-  Tooltip,
+  Tooltip
 } from '@/MUI/MuiComponents';
 import {
   MenuIcon,
   LockOpenIcon,
   LockIcon,
   CheckCircleOutlineIcon,
-  SwapHorizIcon,
+  SwapHorizIcon
 } from '@/MUI/MuiIcons';
 import StyledButton from '../common/StyledButton';
 import { useSidebar } from '@/context/SidebarContext';
@@ -23,7 +23,7 @@ import BgToggle from './BgToggle';
 
 const navListBtn = [
   { path: '/login', text: 'Login', icon: <LockOpenIcon /> },
-  { path: '/register', text: 'Unlock Access', icon: <LockIcon /> },
+  { path: '/register', text: 'Unlock Access', icon: <LockIcon /> }
 ];
 
 function Navbar() {
@@ -47,7 +47,7 @@ function Navbar() {
       sx={{
         backgroundColor: 'transparent',
         backdropFilter: 'blur(4px)',
-        WebkitBackdropFilter: 'blur(4px)',
+        WebkitBackdropFilter: 'blur(4px)'
       }}
     >
       <Toolbar
@@ -60,14 +60,14 @@ function Navbar() {
           py: 1,
           flexWrap: 'wrap',
           bgcolor: 'transparent',
-          backdropFilter: 'blur(4px)',
+          backdropFilter: 'blur(4px)'
         }}
       >
         <Stack component={Link} to={'/'}>
           <Stack
             component={'img'}
             src={'/logo.png'}
-            alt='connect logo'
+            alt="connect logo"
             aria-label="Connect logo"
             maxWidth={isSm ? 79 : 80}
             boxShadow={3}
@@ -84,20 +84,13 @@ function Navbar() {
               </IconButton>
             </Tooltip>
           </Stack>
-
         ) : (
           <Box sx={{ display: 'flex', gap: 1 }}>
-
             {/* === Bg Toggle Component === */}
             <BgToggle />
 
             {navListBtn.map((cta, i) => (
-              <StyledButton
-                key={i}
-                text={cta.text}
-                redirectUrl={cta.path}
-                icon={cta.icon}
-              />
+              <StyledButton key={i} text={cta.text} redirectUrl={cta.path} icon={cta.icon} />
             ))}
           </Box>
         )}

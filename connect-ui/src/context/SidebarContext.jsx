@@ -8,22 +8,22 @@ export const useSidebar = () => useContext(SidebarContext);
 
 // 3. Provider Component
 export const SidebarProvider = ({ children }) => {
-    const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
 
-    const toggleSidebar = () => setSidebarOpen(prev => !prev);
-    const openSidebar = () => setSidebarOpen(true);
-    const closeSidebar = () => setSidebarOpen(false);
+  const toggleSidebar = () => setSidebarOpen((prev) => !prev);
+  const openSidebar = () => setSidebarOpen(true);
+  const closeSidebar = () => setSidebarOpen(false);
 
-    return (
-        <SidebarContext.Provider
-            value={{
-                isSidebarOpen,
-                toggleSidebar,
-                openSidebar,
-                closeSidebar
-            }}
-        >
-            {children}
-        </SidebarContext.Provider>
-    );
+  return (
+    <SidebarContext.Provider
+      value={{
+        isSidebarOpen,
+        toggleSidebar,
+        openSidebar,
+        closeSidebar
+      }}
+    >
+      {children}
+    </SidebarContext.Provider>
+  );
 };

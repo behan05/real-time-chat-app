@@ -32,7 +32,7 @@ import {
   AccordionSummary,
   Checkbox,
   FormControlLabel,
-  Link as MuiLink,
+  Link as MuiLink
 } from '@mui/material';
 
 export {
@@ -67,5 +67,5 @@ export {
   AccordionDetails,
   AccordionSummary,
   Checkbox,
-  FormControlLabel,
+  FormControlLabel
 };
