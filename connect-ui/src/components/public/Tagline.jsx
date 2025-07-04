@@ -22,19 +22,14 @@ const Tagline = () => {
 
     return (
         <Typography
-            variant="body1"
+            variant="h6"
             gutterBottom
             sx={{
-                mt: 2,
+                my: 2,
                 pr: 2,
                 py: 0.5,
-                borderRadius: '16px',
                 fontWeight: 500,
-                fontSize: '0.875rem',
-                bgcolor: 'rgba(255, 255, 255, 0.08)',
                 color: 'text.secondary',
-                backdropFilter: 'blur(4px)',
-                border: '1px dotted rgba(255, 255, 255, 0.15)',
                 width: 'fit-content',
                 transition: 'all 0.3s ease-in-out'
             }}

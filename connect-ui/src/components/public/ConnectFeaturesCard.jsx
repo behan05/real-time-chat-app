@@ -38,17 +38,16 @@ const iconMap = {
 const cardContainerSx = (theme) => ({
     minWidth: 300,
     maxWidth: 600,
-    bgcolor: 'rgba(161, 178, 184, 0.09)',
+    bgcolor: 'transparent',
     backdropFilter: 'blur(14px)',
-    boxShadow: `0 0 4px rgba(156, 144, 163, 0.1)`,
     display: 'flex',
     flexDirection: 'column',
     gap: 4,
-    p: theme.spacing(4),
+    p: theme.spacing(3),
     flexGrow: 1,
     position: 'relative',
     overflow: 'hidden',
-    borderRadius: 3,
+    borderRadius: 1,
 });
 
 const circleLabelSx = {
@@ -60,14 +59,13 @@ const circleLabelSx = {
 const glowBoxSx = (theme) => ({
     minWidth: 200,
     maxWidth: 250,
-    borderRadius: 5,
-    bgcolor: 'rgba(10, 86, 109, 0.09)',
+    borderRadius: 1,
     backdropFilter: 'blur(4px)',
     p: theme.spacing(3),
     display: 'flex',
     flexDirection: 'column',
     gap: 4,
-    boxShadow: '0px 0px 20px rgba(0,0,0,0.2)',
+    boxShadow: 'inset 0px 0px 20px rgba(112, 103, 103, 0.2)',
     transition: 'transform 0.3s ease',
 });
 

@@ -1,63 +1,63 @@
 export const palette = {
   mode: 'dark',
 
-  // Primary – Aqua Blue family
+  // 🌊 Primary – Luxury Electric Indigo family (modern deep blue-violet)
   primary: {
-    main: '#00B4D8', // Bright aqua blue
-    light: '#48CAE4', // Lighter aqua
-    dark: '#0077B6', // Deep sea blue
-    contrastText: '#fffce1'
+    main: '#5A67D8',          // Modern indigo (main brand color)
+    light: '#7F9CF5',         // Soft electric blue-lavender
+    dark: '#434190',          // Rich deep indigo
+    contrastText: '#F5F5F5'   // Soft white for buttons/text
   },
 
-  // Secondary – Coral Pink family
+  // 🌺 Secondary – Rose Quartz & Mauve blend (refined, emotional)
   secondary: {
-    main: '#EF476F', // Vibrant pink coral
-    light: '#FF7A94', // Light coral
-    dark: '#C9003C', // Deep magenta
-    contrastText: '#fffce1'
+    main: '#D16BA5',          // Rose quartz pink-purple
+    light: '#F3A1C8',         // Gentle blush pink
+    dark: '#9D4480',          // Deep mauve/berry
+    contrastText: '#F5F5F5'
   },
 
-  // Info – Blue variants
+  // 🧊 Info – Sky blue, clean and crisp
   info: {
-    main: '#3ABFF8', // Sky blue
+    main: '#3ABFF8',
     dark: '#0284C7',
-    contrastText: '#fffce1'
+    contrastText: '#F5F5F5'
   },
 
-  // Warning – Golden yellow (retained)
+  // 🌟 Warning – Premium warm gold
   warning: {
-    main: '#FFD166', // Soft yellow
+    main: '#FFC107',
     dark: '#C29E00',
-    contrastText: '#000000'
+    contrastText: '#1A1A1A'
   },
 
-  // Error – Rose red
+  // ❌ Error – Subtle and trustworthy red
   error: {
-    main: '#F43F5E', // Rose red
+    main: '#F43F5E',
     dark: '#B91C1C',
-    contrastText: '#fffce1'
+    contrastText: '#F5F5F5'
   },
 
-  // Success – Replaced jade green with a bluish-teal for harmony
+  // ✅ Success – Calm teal, elegant
   success: {
-    main: '#4DD0E1', // Cool cyan (harmonizes with primary)
-    dark: '#00838F',
-    contrastText: '#fffce1'
+    main: '#38B2AC',          // Elegant jade teal
+    dark: '#2C7A7B',
+    contrastText: '#F5F5F5'
   },
 
-  // Text
+  // 📝 Text – Balanced whites
   text: {
-    primary: '#FFFFFF',
-    secondary: '#B0B0B0', // Light muted gray for secondary text
-    disabled: '#7A7A7A'
+    primary: '#ECEFF1',
+    secondary: '#B0BEC5',
+    disabled: '#78909C'
   },
 
-  // Background
+  // 🧱 Background – Matte navy-based dark
   background: {
-    default: '#0A0F1F', // Muted deep navy-blue
-    paper: '#151B2F' // Raised cards look premium
+    default: '#0B0F1A',
+    paper: '#161D2C'
   },
 
-  // Divider
-  divider: 'rgba(255, 255, 255, 0.08)' // Clean, soft divider line
+  // 🧩 Divider – Very soft line
+  divider: 'rgba(255, 255, 255, 0.08)'
 };

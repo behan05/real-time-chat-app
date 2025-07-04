@@ -22,7 +22,7 @@ function Features() {
           <Typography
             variant="body2"
             component="section"
-            maxWidth="700px"
+            maxWidth="600px"
             textAlign="center"
             sx={{
               color: theme.palette.text.secondary

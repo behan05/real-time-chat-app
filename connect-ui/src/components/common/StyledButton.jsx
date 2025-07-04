@@ -22,19 +22,18 @@ function StyledButton({
             variant={variant}
             sx={{
                 px: { xs: 2, sm: 3 },
-                py: { xs: 0.5, sm: 1 },
-                bgcolor: 'rgba(255, 255, 255, 0.09)',
-                backdropFilter: 'blur(4px)',
-                boxShadow: `0 0 4px rgba(240, 235, 243, 0.1)`,
+                py: { xs: 1, sm: 1 },
+                background: 'transparent',
+                backdropFilter: 'blur(14px)',
                 border: 'none',
-                borderTop: '1px dotted',
-                borderBottom: '1px dotted',
-                borderColor: 'text.primary',
-                borderRadius: theme.shape.shape,
+                borderTopRightRadius: "6px",
+                borderBottomRightRadius: "6px",
+                borderBottom: `1px dotted ${theme.palette.success.main}`,
                 textTransform: 'none',
-                color: 'text.primary', // ✅ Best practice
+                color: 'primary.contrastText',
+                letterSpacing: 0.2,
                 textDecoration: 'none',
-                transition: 'transform 0.3s ease',
+                transition: 'all 0.3s ease',
                 '&:hover': {
                     transform: 'translateY(-5px)',
                 },

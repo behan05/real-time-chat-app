@@ -122,19 +122,19 @@ function Home() {
         flexDirection: isLg ? 'column' : 'row',
         gap: 2,
         flexGrow: 1,
-        minHeight: '70vh',
+        py: isMd ? 2 : 10
       }
       }>
         <Stack flex={1} justifyContent="center">
           <Typography
-            variant="h3"
+            variant={isMd ? 'h3' : 'h2'}
             fontWeight={700}
             sx={{ color: 'text.primary' }}
           >
             {<StyledText text={'Talk Freely.'} />}{' '} Connect Instantly.
           </Typography>
 
-          <Typography variant="h6" color="text.secondary" sx={{ mt: 3, maxWidth: 640 }}>
+          <Typography variant="h6" gutterBottom color="text.secondary" sx={{ mt: 3, maxWidth: 640 }}>
             Connect is a modern chat platform that pairs you with random users across the globe in seconds. Whether you're looking to make new friends, share stories, learn languages, or simply pass time it's your gateway to real-time human connection.
           </Typography>
 
@@ -158,7 +158,6 @@ function Home() {
           <Box
             component={'video'}
             src={socialVideo}
-            alt='social video on landing page'
             aria-label='social video on landing page'
             autoPlay
             loop
@@ -169,9 +168,9 @@ function Home() {
               bgcolor: 'transparent',
               backdropFilter: 'blur(14px)',
               objectFit: 'cover',
-              borderRadius: 12,
+              borderRadius: 2,
               boxShadow: 3,
-              borderBottom: `2px dotted ${theme.palette.warning.main}`,
+              borderBottom: `1px dotted ${theme.palette.text.secondary}`,
             }}
           />
         </Stack>
@@ -184,14 +183,13 @@ function Home() {
       < Box mx={'auto'} maxWidth={1200} position='relative'>
         {/* Section Heading */}
         < Stack
-          spacing={2}
           alignItems="center"
           justifyContent="center"
           my={6}
         >
           <Typography
             variant="h5"
-            fontWeight={700}
+            fontWeight={600}
             display="flex"
             alignItems="center"
             gap={1}
@@ -231,9 +229,10 @@ function Home() {
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
-                background: 'rgba(255, 255, 255, 0.04)',
+                background: 'transparent',
                 backdropFilter: 'blur(6px)',
-                borderRadius: 2,
+                borderRadius: 1,
+                cursor: 'pointer',
                 p: 2,
                 gap: 3,
                 boxShadow: '0 0 12px rgba(0,0,0,0.05)',
@@ -251,17 +250,22 @@ function Home() {
                   sx={{
                     width: 40,
                     height: 40,
-                    borderRadius: '50%',
-                    bgcolor: 'rgba(10, 86, 109, 0.09)',
+                    borderRadius: 1,
+                    borderRight: `4px solid ${theme.palette.text.secondary}`,
+                    bgcolor: `transparent`,
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     fontWeight: 'bold',
+                    transition: 'all 0.1s ease',
+                    "&:hover": {
+                      borderRight: 0
+                    }
                   }}
                 >
                   {item.label}
                 </Box>
-                <Typography variant="h6" fontWeight={600}>
+                <Typography variant="h6" letterSpacing={1} fontWeight={600}>
                   {item.title}
                   <StyledText text={item.highlightText} />
                 </Typography>
@@ -321,11 +325,11 @@ function Home() {
       {/* === Why Choose Us? Section === */}
       <WhyChooseUs />
 
-      {/* === Testimonials |What Users Are Saying Section === */}
+      {/* === Testimonials | What Users Are Saying Section === */}
       < Box >
         <Typography
           variant="h5"
-          fontWeight={700}
+          fontWeight={600}
           textTransform={'uppercase'}
           display="flex"
           alignItems="center"
@@ -340,7 +344,7 @@ function Home() {
       < Box >
         <Typography
           variant="h5"
-          fontWeight={700}
+          fontWeight={600}
           textTransform={'uppercase'}
           display="flex"
           alignItems="center"

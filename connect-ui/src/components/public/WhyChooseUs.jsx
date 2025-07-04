@@ -28,12 +28,12 @@ function WhyChooseUs() {
         {
             icon: <FlashOnIcon sx={{ fontSize: 30, color: theme.palette.secondary.main }} />,
             title: 'Instant Connections',
-            content: 'No waiting or room codes — jump straight into video chats instantly.',
+            content: 'No waiting or room codes jump straight into video chats instantly.',
         },
         {
             icon: <EmojiPeopleIcon sx={{ fontSize: 30, color: theme.palette.success.main }} />,
             title: 'Real People, Real Talk',
-            content: 'Meet genuine users from around the world — not bots or fake profiles.',
+            content: 'Meet genuine users from around the world not bots or fake profiles.',
         },
     ];
 
@@ -42,12 +42,13 @@ function WhyChooseUs() {
             <Stack my={3}>
                 <Typography
                     variant="h5"
-                    fontWeight={700}
+                    fontWeight={600}
                     textTransform={'uppercase'}
                     display="flex"
                     alignItems="center"
                     gap={1}
                     justifyContent='center'
+                    gutterBottom
                 >
                     <WorkspacePremiumOutlinedIcon fontSize={'medium'} sx={{ color: theme.palette.success.main }} />
                     Why {' '}{<StyledText text={'Choose Us?'} />}
@@ -89,12 +90,12 @@ function WhyChooseUs() {
                         <Stack
                             key={index}
                             p={3}
-                            borderRadius={2}
+                            borderRadius={1}
                             spacing={2}
                             boxShadow={3}
                             sx={{
-                                background: 'rgba(255, 255, 255, 0.04)',
-                                backdropFilter: 'blur(6px)',
+                                background: 'transparent',
+                                backdropFilter: 'blur(14px)',
                                 transition: 'transform 0.3s ease',
                                 borderBottom: `1px dotted ${theme.palette.text.secondary}`,
                                 cursor: 'pointer',
@@ -102,7 +103,7 @@ function WhyChooseUs() {
                             }}
                         >
                             <Box>{card.icon}</Box>
-                            <Typography variant="subtitle1" fontWeight={600} color="text.primary">
+                            <Typography variant="subtitle1" letterSpacing={1} fontWeight={600} color="text.primary">
                                 {card.title}
                             </Typography>
                             <Typography variant="body2" color="text.secondary">
@@ -117,11 +118,9 @@ function WhyChooseUs() {
                     order={isLg ? 1 : 2}
                     sx={{
                         p: isSm ? 1 : 3,
-                        backdropFilter: "blur(10px)",
-                        backgroundColor: "rgba(192, 194, 196, 0.1)",
-                        boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.1)",
-                        borderRadius: 2,
-                        borderBottom: `1px dotted ${theme.palette.text.secondary}`,
+                        backdropFilter: "blur(14px)",
+                        background: "inherit",
+                        borderRadius: 1,
                         overflow: 'hidden'
                     }}>
                     <Box
@@ -139,8 +138,8 @@ function WhyChooseUs() {
                             maxHeight: 500,
                             objectFit: 'cover',
                             borderRadius: 1,
+                            borderBottom: `1px dotted ${theme.palette.text.secondary}`,
                             filter: 'brightness(0.85) saturate(120%)',
-                            boxShadow: 3,
                             transition: `transform 0.3s`,
                             "&:hover": {
                                 transform: `scale(1.1)`

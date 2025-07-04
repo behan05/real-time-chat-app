@@ -75,10 +75,9 @@ function Contact() {
         mt: 6,
         px: { xs: 2, sm: 4, md: 6 },
         py: 4,
-        borderRadius: 2,
-        backdropFilter: 'blur(12px)',
-        backgroundColor: 'rgba(255,255,255,0.05)',
-        boxShadow: '0 8px 30px rgba(0,0,0,0.1)',
+        borderRadius: 1,
+        backdropFilter: 'blur(14px)',
+        backgroundColor: 'transparent',
         maxWidth: 800,
         mx: 'auto',
       }}
@@ -118,10 +117,10 @@ function Contact() {
 
           <TextField
             fullWidth
-            label="Phone (optional)"
+            label="Phone (Optional)"
             variant="outlined"
             name="phone"
-            placeholder="+91 896 001 5524"
+            placeholder="+91 896 901 XXXX"
             value={formData.phone}
             onChange={handleChange}
           />
@@ -144,25 +143,27 @@ function Contact() {
         <Button
           type="submit"
           variant="outlined"
-          endIcon={<SendIcon />}
+          endIcon={<SendIcon sx={{ color: 'success.main' }} />}
           size="large"
           disabled={isSubmitting}
           sx={{
             alignSelf: 'flex-end',
-            width: { xs: '100%', sm: 'fit-content' },
-            bgcolor: 'transparent',
-            letterSpacing: 1,
-            fontWeight: 600,
-            textTransform: 'none',
-            color: theme.palette.text.primary,
+            px: { xs: 2, sm: 3 },
+            py: { xs: 0.5, sm: 1 },
+            background: `transparent`,
+            backdropFilter: 'blur(14px)',
             border: 'none',
-            borderTop: `1px dotted ${theme.palette.text.secondary}`,
-            borderBottom: `1px dotted ${theme.palette.text.secondary}`,
-            transition: 'all 0.3s',
-            "&:hover": {
-              transform: 'translateY(-10px)',
-              bgcolor: 'rgba(255,255,255,0.08)',
-            }
+            borderTopRightRadius: "6px",
+            borderBottomRightRadius: "6px",
+            borderBottom: `1px dotted ${theme.palette.success.main}`,
+            textTransform: 'none',
+            color: 'primary.contrastText',
+            letterSpacing: 0.2,
+            textDecoration: 'none',
+            transition: 'all 0.3s ease',
+            '&:hover': {
+              transform: 'translateY(-5px)',
+            },
           }}
         >
           {isSubmitting ? 'Sending...' : 'Drop a Line'}

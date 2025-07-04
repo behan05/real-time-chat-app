@@ -1,7 +1,9 @@
 // ==================== Navigation & Layout ====================
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import CloseIcon from '@mui/icons-material/Close';
-import MenuIcon from '@mui/icons-material/Menu';
+import MenuIcon from '@mui/icons-material/MenuOpen';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 
 // ==================== Navigation List Items ====================
 import BuildCircleOutlinedIcon from '@mui/icons-material/BuildCircleOutlined';
@@ -69,6 +71,8 @@ export {
   ArrowBackIcon,
   CloseIcon,
   MenuIcon,
+  CheckCircleOutlineIcon,
+  SwapHorizIcon,
 
   // Navigation List Items
   BuildCircleOutlinedIcon,

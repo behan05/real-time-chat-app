@@ -83,7 +83,7 @@ function ConnectFeatures() {
                 gap={4}
                 p={theme.spacing(2)}
                 my={2}
-                sx={{ borderRadius: 3 }}
+                sx={{ borderRadius: 1 }}
             >
                 {connectFeatures.map((card, i) => (
                     <Box

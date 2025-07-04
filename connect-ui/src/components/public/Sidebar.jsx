@@ -46,8 +46,9 @@ const Sidebar = () => {
         flexShrink: 0,
         '& .MuiDrawer-paper': {
           width: drawerWidth,
-          bgcolor: 'transparent',
-          boxShadow: 'none',
+          bgcolor: 'inherit',
+          backdropFilter: isMobile ? `blur(14px)` : `blur(4px)`,
+          borderRadius: 1,
           p: 2,
           position: 'fixed',
           top: '50%',
@@ -60,9 +61,9 @@ const Sidebar = () => {
             content: '""',
             position: 'absolute',
             right: 0,
-            width: '3px',
+            width: '2px',
             height: '100%',
-            background: `linear-gradient(to bottom, transparent 50%, ${theme.palette.warning.main} 10%, transparent 100%)`,
+            background: `linear-gradient(to bottom, transparent 50%, ${theme.palette.success.main} 10%, ${theme.palette.warning.main}, transparent 100%)`,
             backgroundSize: '100% 200%',
             animation: 'glowFlow 4s ease-in-out infinite',
           },
@@ -79,7 +80,28 @@ const Sidebar = () => {
               disablePadding
               onClick={isMobile ? toggleSidebar : undefined}
             >
-              <Tooltip title={item.text} placement="right">
+              <Tooltip
+                title={item.text}
+                placement="right"
+                componentsProps={{
+                  tooltip: {
+                    sx: {
+                      bgcolor: 'transparent',
+                      boxShadow: `inset 0 0 2px ${theme.palette.secondary.dark}`,
+                      color: theme.palette.text.primary,
+                      px: 1.5,
+                      py: 0.8,
+                      fontSize: '0.85rem',
+                      backdropFilter: 'blur(4px)',
+                    },
+                  },
+                  arrow: {
+                    sx: {
+                      color: theme.palette.secondary.main
+                    }
+                  }
+                }}
+              >
                 <NavLink
                   to={item.path}
                   style={{
@@ -92,15 +114,16 @@ const Sidebar = () => {
                   {({ isActive }) => (
                     <IconButton
                       sx={{
-                        color: theme.palette.text.primary,
+                        color: isActive ? 'success.main' : theme.palette.text.secondary,
                         width: '100%',
                         justifyContent: 'center',
                         my: 1,
-                        bgcolor: isActive ? 'rgba(177, 175, 179, 0.09)' : 'none',
                         backdropFilter: isActive ? 'blur(14px)' : 'none',
-                        boxShadow: isActive ? '0 0 2px rgba(199, 195, 202, 0.6)' : 'none',
-                        transform: isActive ? 'scale(1.2)' : 'scale(1)',
+                        transform: isActive ? 'scale(1.3)' : 'scale(1)',
                         transition: 'all 0.3s ease',
+                        '&:hover': {
+                          bgcolor: 'transparent'
+                        }
                       }}
                     >
                       {item.icon}

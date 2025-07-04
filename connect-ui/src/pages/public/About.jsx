@@ -61,19 +61,19 @@ function About() {
   const imgSx = {
     width: '100%',
     maxWidth: 500,
-    borderRadius: 2,
+    borderRadius: 1,
     objectFit: 'cover',
     filter: 'brightness(90%)',
     transition: '0.3s',
     p: 0.09,
-    borderBottom: `2px dotted ${theme.palette.text.secondary}`,
+    borderBottom: `1px dotted ${theme.palette.text.secondary}`,
     '&:hover': { filter: 'saturate(120%)' },
   };
 
   return (
     <Box sx={{ px: { xs: 2, sm: 4, md: 8 } }}>
 
-      {/* ✅ SECTION: Intro Heading - Top Left */}
+      {/* SECTION: Intro Heading - Top Left */}
       <Stack>
         <Typography
           variant="h5"
@@ -93,32 +93,35 @@ function About() {
         </Typography>
       </Stack>
 
-      {/* ✅ SECTION: Video and Tagline */}
+      {/* SECTION: Video and Tagline */}
       <Box
         sx={{
           display: 'flex',
           flexDirection: { xs: 'column', md: 'column', lg: 'row' },
-          gap: { xs: 4, md: 8 },
+          flexWrap: 'wrap',
           alignItems: 'center',
-          minHeight: '70vh',
+          justifyContent: 'center',
+          gap: { xs: 4, md: 8 },
+          px: { xs: 2, sm: 4 },
+          py: { xs: 4, sm: 6 },
+          width: '100%',
+          minHeight: { xs: 'auto', md: '60vh' },
         }}
       >
         {/* Left Video */}
         <Box
-          flex={1}
           component="video"
           src={chattingVideo}
-          aria-label="about section video"
           autoPlay
           muted
           loop
+          aria-label="about section video"
           sx={{
             width: '100%',
-            height: '100%',
-            maxWidth: 600,
+            maxWidth: { xs: '100%', sm: 500, md: 600 },
             borderRadius: 2,
             objectFit: 'cover',
-            borderBottom: `2px dotted ${theme.palette.text.secondary}`,
+            borderBottom: `1px dotted ${theme.palette.text.secondary}`,
             transition: 'all 0.3s ease',
             '&:hover': {
               filter: 'brightness(120%) saturate(120%)',
@@ -127,31 +130,48 @@ function About() {
         />
 
         {/* Right Content */}
-        <Stack component="section" flex={1} justifyContent="center" spacing={1}>
+        <Stack
+          flex={1}
+          justifyContent="center"
+          spacing={2}
+          sx={{
+            width: '100%',
+            maxWidth: { xs: '100%', sm: 500 },
+            textAlign: { xs: 'center', lg: 'left' },
+          }}
+        >
           <Typography
             variant="h5"
             fontWeight={600}
             color="text.primary"
-            lineHeight={1.5}
-            letterSpacing={1}
-            gutterBottom
+            lineHeight={1.4}
+            letterSpacing={0.8}
           >
             Real <StyledText text="People" />.<br />
             Real <StyledText text="Conversations" />.<br />
             In Just <StyledText text="One Click" />.
           </Typography>
 
-          <Typography variant="subtitle1" color="text.primary" letterSpacing={1} maxWidth={600}>
+          <Typography
+            variant="subtitle1"
+            color="text.primary"
+            sx={{ letterSpacing: 0.5 }}
+          >
             <b>Connect</b> lets you instantly start random video chats with people around the world — no sign-up, no waiting, just genuine human connection.
           </Typography>
 
-          <Typography variant="subtitle2" color="text.secondary" letterSpacing={1} maxWidth={350}>
+          <Typography
+            variant="subtitle2"
+            color="text.secondary"
+            sx={{ letterSpacing: 0.5 }}
+          >
             <StyledText text="❝" /> With Connect, I made friends globally and had conversations that truly mattered. It’s fast, fun, and feels safe. <StyledText text="❝" />
           </Typography>
         </Stack>
       </Box>
 
-      {/* ✅ SECTION: Why Choose Us - Centered Text */}
+
+      {/* SECTION: Why Choose Us - Centered Text */}
       <Stack spacing={3} alignItems="center" textAlign="center" mt={6}>
         <Typography
           variant="h5"
@@ -170,7 +190,7 @@ function About() {
         </Typography>
       </Stack>
 
-      {/* ✅ SECTION: Features - Instant Matchmaking, Video, Privacy */}
+      {/* SECTION: Features - Instant Matchmaking, Video, Privacy */}
       <Box component="section" maxWidth={1100} mx="auto">
 
         {/* Feature 1: Matchmaking */}
@@ -222,7 +242,7 @@ function About() {
         </Stack>
       </Box>
 
-      {/* ✅ SECTION: Trusted by Startups */}
+      {/* SECTION: Trusted by Startups */}
       <Stack mt={6} spacing={2} textAlign="center">
         <Stack direction="row" justifyContent="center" gap={1} alignItems="center">
           <VerifiedIcon color="primary" />
@@ -240,17 +260,17 @@ function About() {
               key={i}
               p={3}
               maxWidth={300}
-              borderRadius={3}
+              borderRadius={1}
               boxShadow={2}
               sx={{
-                bgcolor: 'rgba(255,255,255,0.05)',
-                backdropFilter: 'blur(12px)',
+                bgcolor: 'inherit',
+                backdropFilter: 'blur(14px)',
                 transition: 'all 0.3s ease',
                 borderBottom: `1px dotted ${theme.palette.text.secondary}`,
                 '&:hover': { transform: 'translateY(-10px)' },
               }}
             >
-              <Box component="img" src={card.brandLogo} alt={card.brandName} width={120} mb={2} />
+              <Box component="img" src={card.brandLogo} alt={card.brandName} width={110} mb={2} />
               <Typography variant="subtitle1" fontWeight={600}>{card.brandName}</Typography>
               <Typography variant="body2" color="text.secondary">{card.content}</Typography>
             </Box>
@@ -258,7 +278,7 @@ function About() {
         </Stack>
       </Stack>
 
-      {/* ✅ SECTION: Contact Form */}
+      {/* SECTION: Contact Form */}
       <Box mt={10}>
         <Typography
           variant="h5"

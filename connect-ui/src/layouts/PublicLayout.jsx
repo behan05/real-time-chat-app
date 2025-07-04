@@ -2,9 +2,11 @@ import { Outlet } from 'react-router-dom';
 import { Box, Stack, useMediaQuery, useTheme } from '@/MUI/MuiComponents';
 import Navbar from '@/components/public/Navbar';
 import video from '@/assets/videos/bgVideo.mp4';
+import video2 from '@/assets/videos/bgVideo2.mp4';
 import Sidebar from '@/components/public/Sidebar';
 import Footer from '@/components/public/Footer';
 import { useSidebar } from '../context/SidebarContext';
+import React from 'react';
 
 const Layout = () => {
 
@@ -12,6 +14,28 @@ const Layout = () => {
   const isSm = useMediaQuery(theme.breakpoints.down('sm'));
   const isMd = useMediaQuery(theme.breakpoints.down('md'));
   const { isSidebarOpen } = useSidebar();
+
+  const [videoChanged, setVideoChanged] = React.useState(
+    localStorage.getItem('currentVideo') === 'true'
+  );
+
+  React.useEffect(() => {
+    const saved = localStorage.getItem('currentVideo');
+    setVideoChanged(saved === 'true');
+
+    const handleStorageChange = () => {
+      const updated = localStorage.getItem('currentVideo');
+      setVideoChanged(updated === 'true');
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
+
+  const changedBgVideo = videoChanged ? video : video2;
 
   return (
     <Box sx={{
@@ -22,9 +46,8 @@ const Layout = () => {
       {/* === Background Video === */}
       <Stack
         component={'video'}
-        src={video}
-        alt='background snowFall video'
-        aria-label='background snowFall video'
+        src={changedBgVideo}
+        aria-label='background video'
         autoPlay
         muted
         loop

@@ -68,7 +68,7 @@ function HowItWorks() {
         <Box display='flex' flexDirection='column' my={6} mx={'auto'} maxWidth={1200}>
             <Typography
                 variant='h5'
-                fontWeight={700}
+                fontWeight={600}
                 textTransform='uppercase'
                 display='flex'
                 alignItems='center'
@@ -103,13 +103,13 @@ function HowItWorks() {
                     <Stack
                         key={index}
                         flexBasis={350}
-                        p={1}
+                        p={3}
                         sx={{
-                            bgcolor: 'rgba(10, 86, 109, 0.09)',
-                            backdropFilter: 'blur(4px)',
-                            boxShadow: `0 0 4px rgba(240, 235, 243, 0.1)`,
-                            borderRadius: theme.shape.shape,
+                            bgcolor: 'inherit',
+                            backdropFilter: 'blur(14px)',
+                            borderRadius: theme.spacing(1),
                             borderBottom: `1px dotted ${theme.palette.text.secondary}`,
+                            cursor:'pointer',
                             transition: 'transform 0.3s',
                             '&:hover': {
                                 transform: 'translateY(-10px)'
@@ -118,8 +118,8 @@ function HowItWorks() {
                     >
                         <Stack mb={5}>{iconsMap[step.icon]}</Stack>
                         <Box>
-                            <Typography gutterBottom variant="h6" fontWeight="bold">{step.title}</Typography>
-                            <Typography variant="body2">{step.description}</Typography>
+                            <Typography gutterBottom variant="h6" fontWeight="600" letterSpacing={1}>{step.title}</Typography>
+                            <Typography variant="body2" color="text.secondary">{step.description}</Typography>
                         </Box>
                     </Stack>
                 ))}
