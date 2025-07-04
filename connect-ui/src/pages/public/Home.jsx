@@ -40,6 +40,7 @@ const iconMap = {
 
 import HowItWorks from '@/components/public/HowItWorks';
 import WhyChooseUs from '@/components/public/WhyChooseUs';
+import FAQ from '../../components/public/FAQ';
 
 function Home() {
 
@@ -341,18 +342,35 @@ function Home() {
       </Box >
 
       {/* === Frequently Asked Questions FAQ Section === */}
-      < Box >
+      < Box my={6} sx={{
+        maxWidth: 1000,
+        mx: 'auto',
+      }}>
         <Typography
           variant="h5"
           fontWeight={600}
           textTransform={'uppercase'}
           display="flex"
           alignItems="center"
+          justifyContent={'center'}
           gap={1}
+          gutterBottom
         >
-          <HelpOutlineIcon fontSize='medium' />
+          <HelpOutlineIcon fontSize='medium' sx={{color: 'success.main'}} />
           Frequently Asked {' '}{<StyledText text={'Questions'} />}
         </Typography>
+        <Typography
+          variant="body2"
+          maxWidth="800px"
+          color="text.secondary"
+          textAlign="center"
+          fontSize={{ xs: 14, md: 16 }}
+          mb={3}
+        >
+          Got questions? We've answered the most common things you might wonder about from how Connect works to how we keep your experience safe and smooth.
+        </Typography>
+
+        <FAQ />
       </Box >
     </React.Fragment >
   );

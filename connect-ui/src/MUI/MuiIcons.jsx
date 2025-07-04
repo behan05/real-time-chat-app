@@ -65,6 +65,9 @@ import ShieldIcon from '@mui/icons-material/Shield';
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 import TuneIcon from '@mui/icons-material/Tune';
 
+// ==================== FAQ ====================
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
 // ==================== Export All ====================
 export {
   // Navigation & Layout
@@ -133,4 +136,7 @@ export {
   ShieldIcon,
   TravelExploreIcon,
   TuneIcon,
+
+  // FAQ
+  ExpandMoreIcon,
 };

@@ -27,6 +27,9 @@ import {
   useMediaQuery, // Breakpoints
   useTheme, // Mui theme access or centralized styling
   Grid,
+  Accordion,
+  AccordionDetails,
+  AccordionSummary
 } from '@mui/material';
 
 export {
@@ -56,4 +59,8 @@ export {
   useMediaQuery,
   useTheme,
   Tooltip,
+  Accordion,
+  AccordionDetails,
+  AccordionSummary
+
 };
