@@ -78,6 +78,12 @@ function ChatSidebarpanelnavbar() {
             flexDirection="column"
             bgcolor="background.paper"
             p={2}
+            sx={{
+                borderRight: `1px solid`,
+                minHeight: '100vh',
+                maxHeight: '100vh',
+                overflowY: 'auto'
+            }}
         >
             {/* Header */}
             <Stack direction="row" alignItems="center" justifyContent="space-between">
