@@ -21,6 +21,10 @@ import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import ChatIcon from '@mui/icons-material/Chat';
 import SendIcon from '@mui/icons-material/Send';
 import SmsIcon from '@mui/icons-material/Sms';
+import ShuffleIcon from '@mui/icons-material/Shuffle';
+import ArchiveIcon from '@mui/icons-material/Archive';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 // ==================== Media Controls ====================
 import MicIcon from '@mui/icons-material/Mic';
@@ -99,6 +103,10 @@ export {
   ChatIcon,
   SendIcon,
   SmsIcon,
+  ShuffleIcon,
+  ArchiveIcon,
+  MoreVertIcon,
+  SettingsIcon,
 
   // Media Controls
   MicIcon,

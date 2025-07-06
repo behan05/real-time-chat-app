@@ -8,6 +8,9 @@ import Login from '@/pages/public/Login';
 import Register from '@/pages/public/Signup';
 import { SidebarProvider } from '../context/SidebarContext';
 
+// === Private Routes ===
+import ChatUI from '../pages/private/ChatUI';
+
 export const routes = createBrowserRouter([
   {
     path: '/',
@@ -24,5 +27,12 @@ export const routes = createBrowserRouter([
       { path: 'login', element: <Login /> },
       { path: 'register', element: <Register /> }
     ]
+  },
+
+  // === Protected routes Temp ===
+  {
+    path: '/connect',
+    element: <ChatUI />,
   }
+
 ]);

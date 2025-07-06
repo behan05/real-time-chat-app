@@ -32,7 +32,8 @@ import {
   AccordionSummary,
   Checkbox,
   FormControlLabel,
-  Link as MuiLink
+  Link as MuiLink,
+  Menu, MenuItem,
 } from '@mui/material';
 
 export {
@@ -44,6 +45,7 @@ export {
   CircularProgress,
   Container,
   Dialog,
+  Menu, MenuItem,
   Divider,
   Drawer,
   IconButton,
