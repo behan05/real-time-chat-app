@@ -211,7 +211,12 @@ function Login() {
           </Stack>
 
           {/* Remember me checkbox and forgot password link */}
-          <Stack direction="row" justifyContent="space-between" alignItems="center">
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            flexWrap='wrap'
+          >
             <FormControlLabel control={<Checkbox />} label="Remember me" />
             <MuiLink
               component={Link}

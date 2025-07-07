@@ -1,11 +1,23 @@
-import React from 'react'
+import React from 'react';
+import { Box } from '../../../MUI/MuiComponents';
+import ChatHeader from './ChatHeader';
 
-// The main message area (right side) where you see the conversation
-
-function ChatWindow() {
+const ChatWindow = ({ selectedUserId }) => {
   return (
-    <div>ChatWindow</div>
-  )
-}
+    <Box
+      flex={1}
+      display="flex"
+      flexDirection="column"
+      sx={{
+        maxHeight: '100vh',
+        minHeight: '100vh',
+        bgcolor: "background.paper",
+      }}
+    >
+      <ChatHeader userId={selectedUserId} />
+      {/* Add message list and input box below */}
+    </Box>
+  );
+};
 
-export default ChatWindow
+export default ChatWindow;

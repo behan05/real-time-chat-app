@@ -33,7 +33,10 @@ import {
   Checkbox,
   FormControlLabel,
   Link as MuiLink,
-  Menu, MenuItem,
+  Menu, 
+  MenuItem,
+  ListItemAvatar,
+
 } from '@mui/material';
 
 export {
@@ -42,6 +45,7 @@ export {
   Badge,
   Box,
   Button,
+  ListItemAvatar,
   CircularProgress,
   Container,
   Dialog,

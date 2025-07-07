@@ -7,8 +7,8 @@ import {
     Stack,
     Tooltip,
     Typography,
-    useTheme,
     Divider,
+    TextField,
 } from '@/MUI/MuiComponents';
 import {
     ShuffleIcon,
@@ -23,136 +23,106 @@ import {
 } from '@/MUI/MuiIcons';
 import { NavLink, useLocation } from 'react-router-dom';
 import StyledText from '@/components/common/StyledText';
-import { TextField } from '@mui/material';
 
-
-function ChatSidebarpanelnavbar() {
-    const theme = useTheme();
+const ChatSidebarPanelNavbar = () => {
     const location = useLocation();
-    const pathName = location.pathname;
-    let currentPath = '';
 
-    switch (pathName) {
-        case '/connect': currentPath = 'Connect'
-            break;
-        case '/random-chat': currentPath = 'Random Connect'
-            break;
-        case '/archive': currentPath = 'Archive'
-            break;
-        case '/chat': currentPath = 'Chat'
-            break;
-
-        default:
-            break;
-    }
-
+    const [searchValue, setSearchValue] = React.useState('');
     const [menuAnchorEl, setMenuAnchorEl] = React.useState(null);
     const isMenuOpen = Boolean(menuAnchorEl);
 
-    const [searchValue, setSearchValue] = React.useState('');
-
     const navItems = [
-        {
-            path: '/random-chat',
-            icon: <ShuffleIcon />,
-            title: 'Random Chat',
-        },
-        {
-            path: '/chat',
-            icon: <ChatIcon />,
-            title: 'Chat',
-        },
-        {
-            path: '/archive',
-            icon: <ArchiveIcon />,
-            title: 'Archived Chats',
-        },
+        { path: '/random-chat', icon: <ShuffleIcon />, label: 'Random Chat' },
+        { path: '/chat', icon: <ChatIcon />, label: 'Chat' },
+        { path: '/archive', icon: <ArchiveIcon />, label: 'Archived' },
     ];
 
-    const handleMenuOpen = (event) => setMenuAnchorEl(event.currentTarget);
-    const handleMenuClose = () => setMenuAnchorEl(null);
+    const currentSection = {
+        '/connect': 'Connect',
+        '/random-chat': 'Random Connect',
+        '/archive': 'Archive',
+        '/chat': 'Chat',
+    }[location.pathname] || 'Connect';
 
     return (
         <Box
-            display="flex"
-            flexDirection="column"
+            py={1}
             bgcolor="background.paper"
-            p={2}
             sx={{
-                borderRight: `1px solid`,
-                minHeight: '100vh',
-                maxHeight: '100vh',
-                overflowY: 'auto'
+                position: 'sticky',
+                top: 0,
+                zIndex: 999
             }}
         >
-            {/* Header */}
-            <Stack direction="row" alignItems="center" justifyContent="space-between">
-                <Typography variant="h5" fontWeight={600} letterSpacing={1}>
-                    <StyledText text={currentPath} />
-                </Typography>
+            <Box
+                px={2}
+            >
+                {/* Top Header */}
+                <Stack direction="row" justifyContent="space-between" alignItems="center">
+                    <Typography variant="h6" fontWeight={700}>
+                        <StyledText text={currentSection} />
+                    </Typography>
 
-                <Stack direction="row">
-                    {navItems.map(({ path, icon, title }) => (
-                        <Tooltip key={title} title={title} arrow>
-                            <IconButton component={NavLink} to={path}>
-                                {icon}
+                    <Stack direction="row" alignItems="center" gap={1}>
+                        {navItems.map(({ path, icon, label }) => (
+                            <Tooltip key={label} title={label} arrow>
+                                <IconButton component={NavLink} to={path}>
+                                    {icon}
+                                </IconButton>
+                            </Tooltip>
+                        ))}
+                        <Tooltip title="Menu" arrow>
+                            <IconButton onClick={(e) => setMenuAnchorEl(e.currentTarget)}>
+                                <MoreVertIcon />
                             </IconButton>
                         </Tooltip>
-                    ))}
-
-                    <Tooltip title="Menu" arrow>
-                        <IconButton onClick={handleMenuOpen}>
-                            <MoreVertIcon />
-                        </IconButton>
-                    </Tooltip>
+                    </Stack>
                 </Stack>
-            </Stack>
 
-            {/* Search...  */}
-            <Stack spacing={1} my={1}>
-                <TextField
-                    placeholder="Search people..."
-                    variant="outlined"
-                    fullWidth
-                    name="search"
-                    value={searchValue}
-                    onChange={(e) => setSearchValue(e.target.value)}
-                    size="small"
-                    InputProps={{
-                        startAdornment:
-                            <SearchIcon fontSize="small" sx={{ mr: 1 }}
-                            />
-                    }}
-                />
-            </Stack>
-            {/* Dropdown Menu */}
-            <Menu
-                anchorEl={menuAnchorEl}
-                open={isMenuOpen}
-                onClose={handleMenuClose}
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-                transformOrigin={{ vertical: 'top', horizontal: 'center' }}
-            >
-                <MenuItem onClick={handleMenuClose} component={NavLink} to={'/profile'}>
-                    <PersonIcon fontSize='small' sx={{ mr: 1 }} />
-                    Profile
-                </MenuItem>
-                <MenuItem onClick={handleMenuClose} component={NavLink} to={'/settings'}>
-                    <SettingsIcon fontSize='small' sx={{ mr: 1 }} />
-                    Settings
-                </MenuItem>
-                <MenuItem onClick={handleMenuClose} component={NavLink} to={'/support'}>
-                    <HelpOutlineIcon fontSize="small" sx={{ mr: 1 }} />
-                    Help
-                </MenuItem>
-                <Divider sx={{ my: 0.5 }} />
-                <MenuItem onClick={handleMenuClose} component={NavLink} to={'/logout'}>
-                    <LogoutIcon fontSize="small" sx={{ mr: 1 }} />
-                    Logout
-                </MenuItem>
-            </Menu>
+                {/* Search */}
+                <Box mt={1}>
+                    <TextField
+                        size="small"
+                        fullWidth
+                        placeholder="Search chats..."
+                        value={searchValue}
+                        onChange={(e) => setSearchValue(e.target.value)}
+                        InputProps={{
+                            startAdornment: <SearchIcon fontSize="small" sx={{ mr: 1 }} />,
+                        }}
+                    />
+                </Box>
+
+                {/* Dropdown Menu */}
+                <Menu
+                    anchorEl={menuAnchorEl}
+                    open={isMenuOpen}
+                    onClose={() => setMenuAnchorEl(null)}
+                    anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                    transformOrigin={{ vertical: 'top', horizontal: 'center' }}
+                >
+                    <MenuItem component={NavLink} to="profile" onClick={() => setMenuAnchorEl(null)}>
+                        <PersonIcon fontSize="small" sx={{ mr: 1 }} />
+                        Profile
+                    </MenuItem>
+                    <MenuItem component={NavLink} to="settings" onClick={() => setMenuAnchorEl(null)}>
+                        <SettingsIcon fontSize="small" sx={{ mr: 1 }} />
+                        Settings
+                    </MenuItem>
+                    <MenuItem component={NavLink} to="support" onClick={() => setMenuAnchorEl(null)}>
+                        <HelpOutlineIcon fontSize="small" sx={{ mr: 1 }} />
+                        Help
+                    </MenuItem>
+                    <Divider sx={{ my: 0.5 }} />
+                    <MenuItem component={NavLink} to="logout" onClick={() => setMenuAnchorEl(null)}>
+                        <LogoutIcon fontSize="small" sx={{ mr: 1 }} />
+                        Logout
+                    </MenuItem>
+                </Menu>
+            </Box>
+            <Divider sx={{ my: 1 }} />
         </Box>
-    )
-}
+    );
+};
 
-export default ChatSidebarpanelnavbar
+export default ChatSidebarPanelNavbar;

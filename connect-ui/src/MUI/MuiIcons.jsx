@@ -78,8 +78,23 @@ import XIcon from '@mui/icons-material/X';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import AppleIcon from '@mui/icons-material/Apple';
 
+// ==================== Settings Icons ====================
+import KeyIcon from '@mui/icons-material/Key';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import SosIcon from '@mui/icons-material/Sos';
+import InfoIcon from '@mui/icons-material/Info';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+
 // ==================== Export All ====================
 export {
+
+  // Setting Icons
+  KeyIcon,
+  NotificationsIcon,
+  SosIcon,
+  InfoIcon,
+  DeleteForeverIcon,
+
   // Navigation & Layout
   ArrowBackIcon,
   CloseIcon,
