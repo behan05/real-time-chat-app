@@ -12,15 +12,7 @@ import NavigateWithArrow from '@/components/private/NavigateWithArrow'
 
 function RequestAccountInfo() {
   return (
-    <Box component={'section'} sx={{
-      p: 2,
-      display: 'flex',
-      flexDirection: 'column',
-      bgcolor: 'background.paper',
-      borderRight: '1px solid rgba(112, 106, 106, 0.3)',
-      minHeight: '100vh',
-      maxHeight: '100vh'
-    }}>
+    <Box component={'section'}>
       <Stack mb={2}>
         <NavigateWithArrow
           redirectTo={'/connect/settings/account'}
