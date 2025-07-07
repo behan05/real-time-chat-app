@@ -28,6 +28,7 @@ import {
   useTheme, // Mui theme access or centralized styling
   Grid,
   Accordion,
+  Switch,
   AccordionDetails,
   AccordionSummary,
   Checkbox,
@@ -54,6 +55,7 @@ export {
   Drawer,
   IconButton,
   InputAdornment,
+  Switch,
   List,
   ListItem,
   ListItemButton,

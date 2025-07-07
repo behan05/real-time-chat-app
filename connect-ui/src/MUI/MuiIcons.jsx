@@ -84,6 +84,8 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import SosIcon from '@mui/icons-material/Sos';
 import InfoIcon from '@mui/icons-material/Info';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import BlockIcon from '@mui/icons-material/Block';
+import SettingsBackupRestoreIcon from '@mui/icons-material/SettingsBackupRestore';
 
 // ==================== Export All ====================
 export {
@@ -94,6 +96,8 @@ export {
   SosIcon,
   InfoIcon,
   DeleteForeverIcon,
+  BlockIcon,
+  SettingsBackupRestoreIcon,
 
   // Navigation & Layout
   ArrowBackIcon,

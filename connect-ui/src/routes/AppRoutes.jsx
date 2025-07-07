@@ -15,15 +15,24 @@ import Settings from '../pages/private/settings/Settings';
 import Profile from '../pages/private/Profile';
 import SettingsLayout from '../pages/private/settings/SettingsLayout';
 
+// === Account Settings ===
 import AccountLayout from '../pages/private/settings/account/AccountLayout';
 import Account from '../pages/private/settings/account/Account';
 import SecurityNotifications from '../pages/private/settings/account/securityNotification/SecurityNotifications';
 import RequestAccountInfo from '../pages/private/settings/account/reqAccountInfo/RequestAccountInfo';
 import AccountDelete from '../pages/private/settings/account/accountDelete/AccountDelete';
 
+// === Privacy Settings === 
+import PrivacyLayout from '../pages/private/settings/Privacy/PrivacyLayout';
+import Privacy from '../pages/private/settings/privacy/Privacy';
+
+// === Chats Settings === 
 import Chats from '../pages/private/settings/Chats';
-import Privacy from '../pages/private/settings/Privacy';
+
+// === Notification Settings === 
 import Notifications from '../pages/private/settings/Notifications';
+
+// === Help Settings === 
 import Help from '../pages/private/settings/Help';
 
 export const routes = createBrowserRouter([
@@ -59,11 +68,7 @@ export const routes = createBrowserRouter([
           { index: true, element: <Settings /> },
           { path: 'profile', element: <Profile /> },
 
-          { path: 'chats', element: <Chats /> },
-          { path: 'privacy', element: <Privacy /> },
-          { path: 'notifications', element: <Notifications /> },
-          { path: 'help', element: <Help /> },
-
+          // Account Settings
           {
             path: 'account',
             element: <AccountLayout />,
@@ -74,6 +79,19 @@ export const routes = createBrowserRouter([
               { path: 'delete', element: <AccountDelete /> },
             ]
           },
+
+          // Privacy Settings
+          {
+            path: 'privacy',
+            element: <PrivacyLayout />,
+            children: [
+              { index: true, element: <Privacy /> }
+            ]
+          },
+
+          { path: 'chats', element: <Chats /> },
+          { path: 'notifications', element: <Notifications /> },
+          { path: 'help', element: <Help /> },
         ]
       },
     ]

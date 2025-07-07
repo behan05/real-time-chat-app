@@ -13,7 +13,13 @@ import { Link } from 'react-router-dom';
 {/* Header with arrow back icon */ }
 function NavigateWithArrow({ redirectTo, text }) {
     return (
-        <Stack direction={'row'} gap={2}>
+        <Stack
+            direction={'row'}
+            gap={2}
+            sx={{
+                position: 'relative',
+            }}
+        >
             <Stack component={Link} to={redirectTo} color='text.secondary'>
                 <ArrowBackIcon />
             </Stack>

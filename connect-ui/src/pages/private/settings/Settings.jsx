@@ -44,7 +44,7 @@ function Settings() {
       path: 'privacy',
       icon: <LockIcon sx={{ mr: 1.1, color: 'text.secondary' }} />,
       title: 'Privacy',
-      subTitle: 'Blocked contacts',
+      subTitle: 'Blocked contacts, controls',
     },
     {
       path: 'chats',
