@@ -27,13 +27,16 @@ import PrivacyLayout from '../pages/private/settings/Privacy/PrivacyLayout';
 import Privacy from '../pages/private/settings/privacy/Privacy';
 
 // === Chats Settings === 
-import Chats from '../pages/private/settings/Chats';
+import ChatsLayout from '../pages/private/settings/chats/ChatsLayout';
+import Chats from '../pages/private/settings/chats/Chats';
 
 // === Notification Settings === 
-import Notifications from '../pages/private/settings/Notifications';
+import NotificationsLayout from '../pages/private/settings/notifications/NotificationsLayout';
+import Notifications from '../pages/private/settings/notifications/Notifications';
 
 // === Help Settings === 
-import Help from '../pages/private/settings/Help';
+import HelpLayout from '../pages/private/settings/help/HelpLayout';
+import Help from '../pages/private/settings/help/Help';
 
 export const routes = createBrowserRouter([
   {
@@ -89,9 +92,36 @@ export const routes = createBrowserRouter([
             ]
           },
 
-          { path: 'chats', element: <Chats /> },
-          { path: 'notifications', element: <Notifications /> },
-          { path: 'help', element: <Help /> },
+          // Chat Settings
+          {
+            path: 'chats',
+            element: <ChatsLayout />,
+            children: [
+              { index: true, element: <Chats /> },
+              {},
+            ]
+          },
+
+          // Notification settings
+          {
+            path: 'notifications',
+            element: <NotificationsLayout />,
+            children: [
+              { index: true, element: <Notifications /> },
+              {},
+            ]
+          },
+
+          // Help settings
+          {
+            path: 'help',
+            element: <HelpLayout />,
+            children: [
+              { index: true, element: <Help /> },
+              {},
+            ]
+          },
+
         ]
       },
     ]

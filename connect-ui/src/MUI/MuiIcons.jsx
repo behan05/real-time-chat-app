@@ -86,7 +86,9 @@ import InfoIcon from '@mui/icons-material/Info';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import BlockIcon from '@mui/icons-material/Block';
 import SettingsBackupRestoreIcon from '@mui/icons-material/SettingsBackupRestore';
-
+import SupportAgentIcon from '@mui/icons-material/SupportAgent';
+import GavelIcon from '@mui/icons-material/Gavel';
+import BugReportIcon from '@mui/icons-material/BugReport';
 // ==================== Export All ====================
 export {
 
@@ -98,7 +100,10 @@ export {
   DeleteForeverIcon,
   BlockIcon,
   SettingsBackupRestoreIcon,
-
+  SupportAgentIcon,
+  GavelIcon,
+  BugReportIcon,
+  
   // Navigation & Layout
   ArrowBackIcon,
   CloseIcon,

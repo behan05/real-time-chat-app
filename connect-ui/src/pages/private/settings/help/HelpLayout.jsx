@@ -1,7 +1,8 @@
+import React from 'react';
+import { Box } from '../../../../MUI/MuiComponents';
 import { Outlet } from 'react-router-dom';
-import { Box } from '@/MUI/MuiComponents';
 
-function AccountLayout() {
+function HelpLayout() {
     return (
         <Box component={'section'} sx={{
             p: 2,
@@ -18,4 +19,4 @@ function AccountLayout() {
     )
 }
 
-export default AccountLayout
+export default HelpLayout;

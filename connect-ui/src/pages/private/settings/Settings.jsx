@@ -13,7 +13,7 @@ import {
   ListItemButton,
   ListItemText,
   ListItemIcon
-} from "../../../MUI/MuiComponents";
+} from "@/MUI/MuiComponents";
 import {
   SearchIcon,
   LockIcon,
@@ -23,10 +23,9 @@ import {
   ChatIcon,
   LogoutIcon,
   ArrowBackIcon,
-} from "../../../MUI/MuiIcons";
-import StyledText from '../../../components/common/StyledText';
+} from "@/MUI/MuiIcons";
 import { Link } from 'react-router-dom';
-import NavigateWithArrow from '../../../components/private/NavigateWithArrow';
+import NavigateWithArrow from '@/components/private/NavigateWithArrow';
 
 function Settings() {
   const theme = useTheme();
@@ -154,9 +153,6 @@ function Settings() {
             </Stack>
           </ListItemButton>
         ))}
-      </List>
-
-      <List>
         <ListItemButton component={Link} to={'/logout'} sx={{
           borderRadius: 1
         }}>

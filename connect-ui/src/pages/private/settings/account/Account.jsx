@@ -1,19 +1,20 @@
 import React from 'react';
 import {
   Box,
+  Divider,
   List,
   ListItemButton,
   ListItemIcon,
   ListItemText,
   Stack
-} from '../../../../MUI/MuiComponents';
+} from '@/MUI/MuiComponents';
 
 import {
   SecurityIcon,
   InfoIcon,
   DeleteForeverIcon
-} from '../../../../MUI/MuiIcons';
-import NavigateWithArrow from '../../../../components/private/NavigateWithArrow'
+} from '@/MUI/MuiIcons';
+import NavigateWithArrow from '@/components/private/NavigateWithArrow'
 
 import { Link } from 'react-router-dom';
 
@@ -29,11 +30,6 @@ function Account() {
       icon: <InfoIcon fontSize='small' sx={{ color: 'text.secondary' }} />,
       label: 'Request account info',
       path: 'info'
-    },
-    {
-      icon: <DeleteForeverIcon fontSize='small' sx={{ color: 'text.secondary' }} />,
-      label: 'Delete my account',
-      path: 'delete'
     },
   ];
 
@@ -59,7 +55,16 @@ function Account() {
             <ListItemText primary={item.label} />
           </ListItemButton>
         ))}
+
+        <ListItemButton component={Link} to={'/delete'} sx={{
+          borderRadius: 1
+        }}>
+          <ListItemIcon>{<DeleteForeverIcon sx={{ mr: 1.1, color: 'error.main' }} />}</ListItemIcon>
+          <ListItemText primary='Delete my account' sx={{ color: 'error.main' }} />
+        </ListItemButton>
       </List>
+
+      <Divider sx={{ my: 2 }} />
     </Box>
   )
 }

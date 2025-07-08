@@ -12,7 +12,7 @@ import {
 } from '../../../MUI/MuiComponents';
 import { SettingsIcon } from '../../../MUI/MuiIcons'
 
-import ChatSidebarPanelNavbar from '@/components/private/ChatSidebarPanelNavbar';
+import ChatSidebarPanelNavbar from './ChatSidebarPanelNavbar';
 import { chatPartners } from '../mockData';
 import { Link } from 'react-router-dom';
 
