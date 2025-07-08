@@ -1,12 +1,44 @@
 {
   "name": "connect-server",
   "version": "1.0.0",
-  "description": "",
-  "license": "ISC",
-  "author": "Behan Kumar",
+  "description": "Backend API for Connect – real-time random chat app with authentication and user settings",
+  "main": "server.js",
   "type": "commonjs",
-  "main": "index.js",
+  "author": {
+    "name": "Behan Kumar",
+    "email": "behankrbth@outlook.com"
+  },
+  "license": "ISC",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  }
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/behan05/real-time-chat-app.git"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.1.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.16.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "keywords": [
+    "connect",
+    "mern",
+    "random-chat",
+    "chat-app",
+    "socket",
+    "express",
+    "mongodb",
+    "authentication",
+    "realtime",
+    "behan"
+  ]
 }
