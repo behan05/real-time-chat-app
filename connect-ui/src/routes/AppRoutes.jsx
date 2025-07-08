@@ -23,7 +23,7 @@ import RequestAccountInfo from '../pages/private/settings/account/reqAccountInfo
 import AccountDelete from '../pages/private/settings/account/accountDelete/AccountDelete';
 
 // === Privacy Settings === 
-import PrivacyLayout from '../pages/private/settings/Privacy/PrivacyLayout';
+import PrivacyLayout from '../pages/private/settings/privacy/PrivacyLayout';
 import Privacy from '../pages/private/settings/privacy/Privacy';
 
 // === Chats Settings === 
