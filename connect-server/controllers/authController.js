@@ -1,13 +1,15 @@
-// Auth Controller
-const registerController = async () => {
+const User = require('../models/User.model');
+
+// Auth Controllers
+const registerController = async (req, res) => {
+  
+}
+
+const loginController = async (req, res) => {
 
 }
 
-const loginController = async () => {
-
-}
-
-const forgetPasswordController = async () => {
+const forgetPasswordController = async (req, res) => {
 
 }
 
