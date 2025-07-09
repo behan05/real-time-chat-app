@@ -31,7 +31,7 @@ function Login() {
   const isLg = useMediaQuery(theme.breakpoints.down('lg'));
 
   React.useEffect(() => {
-    document.title = 'COnnect - Login';
+    document.title = 'Connect - Login';
   }, []);
 
   // Form state to handle user input

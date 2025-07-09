@@ -3,6 +3,10 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "author": {
+    "name": "Behan Kumar",
+    "email": "behankrbth@outlook.com"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -17,6 +21,7 @@
     "@mui/icons-material": "^7.1.2",
     "@mui/material": "^7.1.2",
     "@reduxjs/toolkit": "^2.8.2",
+    "axios": "^1.10.0",
     "dayjs": "^1.11.13",
     "gsap": "^3.13.0",
     "react": "^19.1.0",
@@ -39,5 +44,22 @@
     "globals": "^16.0.0",
     "prettier": "^3.6.0",
     "vite": "^6.3.5"
-  }
+  },
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/behan05/real-time-chat-app.git"
+  },
+  "keywords": [
+    "connect",
+    "mern",
+    "random-chat",
+    "chat-app",
+    "socket",
+    "express",
+    "mongodb",
+    "authentication",
+    "realtime",
+    "behan"
+  ]
 }

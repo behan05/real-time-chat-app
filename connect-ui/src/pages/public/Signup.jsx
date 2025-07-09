@@ -24,34 +24,45 @@ import {
   AppleIcon,
   XIcon
 } from '@/MUI/MuiIcons';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
+// Redux Action
+import { register } from '../../redux/slices/auth/authAction';
+import { useDispatch } from 'react-redux';
+
+// toast prompt
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Signup() {
   const theme = useTheme();
   const isLg = useMediaQuery(theme.breakpoints.down('lg'));
+  const dispatch = useDispatch();
+  const [buttonDisabled, setButtonDisabled] = React.useState(false);
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     document.title = 'Connect - Create an Account';
   }, []);
 
   const [form, setForm] = React.useState({
-    name: '',
-    username: '',
+    fullName: '',
+    email: '',
     password: '',
     confirmPassword: ''
   });
 
   const [error, setError] = React.useState({
-    name: '',
-    username: '',
+    fullName: '',
+    email: '',
     password: '',
     confirmPassword: ''
   });
 
-  const [showPassword, setShowPassword] = React.useState(false); // State to toggle password visibility
-  const [showConfirmPassword, setShowConfirmPassword] = React.useState(false); // State to toggle confirm password visibility
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
 
-  // Handle form field changes
+  // Handles input field changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({
@@ -60,22 +71,76 @@ function Signup() {
     }));
   };
 
-  // Handle form submission with validation
+  // Handles form submit with validation
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let isValid = true;
+    const newErrors = {
+      fullName: '',
+      email: '',
+      password: '',
+      confirmPassword: ''
+    };
+
+    // Full Name validation
+    if (!form.fullName.trim()) {
+      newErrors.fullName = 'Full name is required';
+      isValid = false;
+    }
+
+    // Email validation
+    if (!form.email.trim()) {
+      newErrors.email = 'Email or username is required';
+      isValid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+      newErrors.email = 'Enter a valid email address';
+      isValid = false;
+    }
+
+    // Password validation
+    if (!form.password) {
+      newErrors.password = 'Password is required';
+      isValid = false;
+    } else if (form.password.length < 6) {
+      newErrors.password = 'Password must be at least 6 characters';
+      isValid = false;
+    }
+
+    // Confirm password match
+    if (form.confirmPassword !== form.password) {
+      newErrors.confirmPassword = 'Passwords do not match';
+      isValid = false;
+    }
+
+    setError(newErrors);
+
+    if (!isValid) return;
+    setButtonDisabled(!buttonDisabled);
+    // Dispatch register action 
+    const response = await dispatch(register({
+      fullName: form.fullName,
+      email: form.email,
+      password: form.password,
+      confirmPassword: form.confirmPassword
+    }));
+
+    // Toaster notifications
+    if (response.success) {
+      toast.success("Account created successfully!");
+      setTimeout(() => navigate('/login'), 2000);
+    } else {
+      toast.error("Signup failed. Please try again.");
+    }
   };
 
-  // Toggle password visibility
   const handleClickShowPassword = () => {
     setShowPassword((prev) => !prev);
   };
 
-  // Toggle confirm password visibility
   const handleClickShowConfirmPassword = () => {
     setShowConfirmPassword((prev) => !prev);
   };
 
-  // Handle social media login (Google, Facebook, Apple, Twitter)
   const handleSocialLogin = (platform) => {
     switch (platform) {
       case 'google':
@@ -108,6 +173,9 @@ function Signup() {
         py: isLg ? theme.spacing(3) : theme.spacing(10)
       }}
     >
+      {/* Toast Message Container */}
+      <ToastContainer position="top-right" autoClose={2000} theme="colored" />
+
       {!isLg && (
         <Box flex={1}>
           <Typography
@@ -123,7 +191,6 @@ function Signup() {
             Join <StyledText text={'Connect'} /> and experience genuine, interest-based connections.
           </Typography>
 
-          {/* === Reusable Video Component === */}
           <ReusableVideo />
         </Box>
       )}
@@ -162,31 +229,31 @@ function Signup() {
             Sign up and start making meaningful conversations.
           </Typography>
 
-          {/* Name Input */}
+          {/* Full Name Input */}
           <TextField
             variant="outlined"
             label="Full Name"
-            name="name"
+            name="fullName" // UPDATED
             onChange={handleChange}
-            value={form.name}
+            value={form.fullName}
             fullWidth
-            error={Boolean(error.name)}
-            helperText={error.name}
+            error={Boolean(error.fullName)}
+            helperText={error.fullName}
           />
 
-          {/* Username Input */}
+          {/* Email or Username Input */}
           <TextField
             variant="outlined"
             label="Username or Email"
-            name="username"
+            name="email"
             onChange={handleChange}
-            value={form.username}
+            value={form.email}
             fullWidth
-            error={Boolean(error.username)}
-            helperText={error.username}
+            error={Boolean(error.email)}
+            helperText={error.email}
           />
 
-          {/* Password Input */}
+          {/* Password */}
           <TextField
             type={showPassword ? 'text' : 'password'}
             variant="outlined"
@@ -206,7 +273,7 @@ function Signup() {
             }}
           />
 
-          {/* Confirm Password Input */}
+          {/* Confirm Password */}
           <TextField
             type={showConfirmPassword ? 'text' : 'password'}
             variant="outlined"
@@ -240,15 +307,15 @@ function Signup() {
             </Typography>
           </Stack>
 
-          {/* Remember me */}
           <FormControlLabel control={<Checkbox />} label="Remember me" />
 
-          {/* Signup Button */}
+          {/* Submit Button */}
           <Button
             type="submit"
             variant="outlined"
             endIcon={<SendIcon sx={{ color: 'success.main' }} />}
             size="large"
+            disabled={buttonDisabled}
             sx={{
               alignSelf: 'flex-end',
               px: { xs: 2, sm: 3 },
@@ -280,7 +347,7 @@ function Signup() {
             </Typography>
           </Divider>
 
-          {/* Social signup */}
+          {/* Social Signup */}
           <Stack direction={'row'} m={'auto'} gap={2}>
             <IconButton edge="start" onClick={() => handleSocialLogin('google')}>
               <GoogleIcon />
