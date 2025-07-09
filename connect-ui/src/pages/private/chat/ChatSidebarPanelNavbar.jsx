@@ -21,11 +21,19 @@ import {
     SettingsIcon,
     SearchIcon,
 } from '@/MUI/MuiIcons';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import StyledText from '@/components/common/StyledText';
+import { useDispatch } from 'react-redux'
+import { logout } from '@/redux/slices/auth/authAction';
+
+// toast prompt
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ChatSidebarPanelNavbar = () => {
     const location = useLocation();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [searchValue, setSearchValue] = React.useState('');
     const [menuAnchorEl, setMenuAnchorEl] = React.useState(null);
@@ -44,6 +52,12 @@ const ChatSidebarPanelNavbar = () => {
         '/chat': 'Chat',
     }[location.pathname] || 'Connect';
 
+    const handleLogout = async () => {
+        dispatch(logout());
+        toast.success("You have been logged out 😔");
+        setTimeout(() => navigate('/login', { replace: true }), 1000);
+    };
+
     return (
         <Box
             py={1}
@@ -54,6 +68,12 @@ const ChatSidebarPanelNavbar = () => {
                 zIndex: 999
             }}
         >
+            {/* ToastContainer */}
+            <ToastContainer
+                position="top-center"
+                autoClose={1000}
+                theme="colored"
+            />
             <Box
                 px={2}
             >
@@ -114,7 +134,7 @@ const ChatSidebarPanelNavbar = () => {
                         Help
                     </MenuItem>
                     <Divider sx={{ my: 0.5 }} />
-                    <MenuItem component={NavLink} to="logout" onClick={() => setMenuAnchorEl(null)}>
+                    <MenuItem onClick={handleLogout}>
                         <LogoutIcon fontSize="small" sx={{ mr: 1 }} />
                         Logout
                     </MenuItem>

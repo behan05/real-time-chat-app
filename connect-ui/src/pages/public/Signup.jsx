@@ -27,7 +27,7 @@ import {
 import { Link, useNavigate } from 'react-router-dom';
 
 // Redux Action
-import { register } from '../../redux/slices/auth/authAction';
+import { register } from '@/redux/slices/auth/authAction';
 import { useDispatch } from 'react-redux';
 
 // toast prompt
@@ -116,6 +116,7 @@ function Signup() {
 
     if (!isValid) return;
     setButtonDisabled(!buttonDisabled);
+
     // Dispatch register action 
     const response = await dispatch(register({
       fullName: form.fullName,
@@ -129,7 +130,8 @@ function Signup() {
       toast.success("Account created successfully!");
       setTimeout(() => navigate('/login'), 2000);
     } else {
-      toast.error("Signup failed. Please try again.");
+      toast.error(response.message);
+      setButtonDisabled(false);
     }
   };
 
@@ -335,7 +337,7 @@ function Signup() {
               }
             }}
           >
-            Create Account
+            {buttonDisabled ? "Sending..." : "Create Account"}
           </Button>
 
           <Divider sx={{ my: 2 }}>

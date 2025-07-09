@@ -21,10 +21,21 @@ const authSlice = createSlice({
             state.error = action.payload;
             state.loading = false;
         },
-        setUser: (state, action) => { 
-            
+        setUser: (state, action) => {
+            state.user = action.payload.user;
+            state.token = action.payload.token;
+            state.isAuthenticated = true;
+            state.loading = false;
+            state.error = null;
         },
-        logout: (state, action) => { }
+
+        logout: (state) => {
+            state.user = null;
+            state.token = null;
+            state.isAuthenticated = false;
+            state.loading = false;
+            state.error = null;
+        }
     }
 });
 export const { setError, setLoading, setUser, logout } = authSlice.actions;

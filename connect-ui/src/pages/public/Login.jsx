@@ -24,25 +24,36 @@ import {
   FacebookIcon,
   AppleIcon
 } from '@/MUI/MuiIcons';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
+// Redux Action
+import { login } from '@/redux/slices/auth/authAction';
+import { useDispatch } from 'react-redux';
+
+// toast prompt
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Login() {
   const theme = useTheme();
   const isLg = useMediaQuery(theme.breakpoints.down('lg'));
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [isDisabled, setIsDisabled] = React.useState(false);
 
   React.useEffect(() => {
-    document.title = 'Connect - Login';
+    document.title = 'Connect – Login';
   }, []);
 
   // Form state to handle user input
   const [form, setForm] = React.useState({
-    username: '',
+    email: '',
     password: ''
   });
 
   // Error state to show validation errors
   const [error, setError] = React.useState({
-    username: '',
+    email: '',
     password: ''
   });
 
@@ -60,6 +71,34 @@ function Login() {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    let isValid = true;
+    let newError = {};
+
+    if (form.email.trim() === "") {
+      newError.email = "user name is required!";
+      isValid = false
+    }
+
+    if (form.password.trim() === "") {
+      newError.password = "password is required!";
+      isValid = false
+    }
+
+    setError(newError);
+    if (!isValid) return;
+
+    const response = await dispatch(login(form));
+
+    // Toaster notifications
+    if (response.success) {
+      setIsDisabled(true)
+      toast.success("Login successfully!");
+      setTimeout(() => navigate('/connect'), 2000);
+    } else {
+      toast.error(response.message);
+      setIsDisabled(false);
+    }
   };
 
   // Toggle password visibility
@@ -104,6 +143,12 @@ function Login() {
         py: isLg ? theme.spacing(3) : theme.spacing(10)
       }}
     >
+      {/* ToastContainer */}
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        theme="colored"
+      />
       {/* Left side content for larger screens */}
       {!isLg && (
         <Box flex={1}>
@@ -167,12 +212,12 @@ function Login() {
           <TextField
             variant="outlined"
             label="Username or Email"
-            name="username"
+            name="email"
             onChange={handleChange}
-            value={form.username}
+            value={form.email}
             fullWidth
-            error={Boolean(error.username)}
-            helperText={error.username}
+            error={Boolean(error.email)}
+            helperText={error.email}
           />
 
           {/* Password Input */}
@@ -237,6 +282,7 @@ function Login() {
             variant="outlined"
             endIcon={<SendIcon sx={{ color: 'success.main' }} />}
             size="large"
+            disabled={isDisabled}
             sx={{
               alignSelf: 'flex-end',
               px: { xs: 2, sm: 3 },
@@ -256,7 +302,8 @@ function Login() {
               }
             }}
           >
-            Login
+            {isDisabled ? "Sending..." : "Login"}
+
           </Button>
 
           {/* Divider with 'or' text */}
