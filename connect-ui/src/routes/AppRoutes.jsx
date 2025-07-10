@@ -8,10 +8,10 @@ import Login from '@/pages/public/Login';
 import Register from '@/pages/public/Signup';
 import FAQs from '@/pages/public/FAQs';
 import { SidebarProvider } from '@/context/SidebarContext';
-
-// === Common Use components === 
 import PrivacyPolicyPage from '@/components/common/PrivacyPolicyPage';
 import TermsOfUsePage from '@/components/common/TermsOfUsePage';
+
+// === Common Use components === 
 import PageNotFound from '@/components/common/PageNotFound';
 
 // === Private Routes ===
@@ -45,6 +45,9 @@ import Notifications from '@/pages/private/settings/notifications/Notifications'
 import HelpLayout from '@/pages/private/settings/help/HelpLayout';
 import Help from '@/pages/private/settings/help/Help';
 import HelpFAQs from '../pages/private/settings/help/HelpFAQs';
+import HelpContact from '../pages/private/settings/help/HelpContact';
+import HelpPrivacyPolicy from '../pages/private/settings/help/HelpPrivacyPolicy';
+import HelpReport from '../pages/private/settings/help/HelpReport';
 
 
 export const routes = createBrowserRouter([
@@ -131,7 +134,9 @@ export const routes = createBrowserRouter([
                 children: [
                   { index: true, element: <Help /> },
                   { path: 'faqs-help', element: <HelpFAQs /> },
-                  { path: 'privacy-policy', element: <PrivacyPolicyPage /> },
+                  { path: 'contact-help', element: <HelpContact /> },
+                  { path: 'privacy-policy', element: <HelpPrivacyPolicy /> },
+                  { path: 'report-problem', element: <HelpReport /> },
                 ]
               },
             ]

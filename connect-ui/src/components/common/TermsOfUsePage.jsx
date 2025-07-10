@@ -17,13 +17,13 @@ function Section({ title, children }) {
 
 function TermsOfUsePage() {
   useEffect(() => {
-    document.title = '📃 Connect - Terms of Use';
+    document.title = 'Connect - Terms of Use';
   }, []);
 
   return (
-    <Container maxWidth="md" sx={{ py: 6 }}>
+    <Container maxWidth="md" sx={{ pb: 6 }}>
       {/* Page Title */}
-      <Box textAlign="center" mb={4}>
+      <Box textAlign="start" mb={4}>
         <Typography variant="h3" fontWeight={600} gutterBottom>
           <StyledText text="Terms" /> of Use
         </Typography>

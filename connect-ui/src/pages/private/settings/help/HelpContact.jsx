@@ -1,0 +1,239 @@
+import * as React from 'react';
+import {
+  Box,
+  Button,
+  Stack,
+  TextField,
+  Typography,
+  useTheme,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  FormHelperText
+} from '../../../../MUI/MuiComponents';
+
+import { SendIcon } from '@/MUI/MuiIcons';
+import NavigateWithArrow from '@/components/private/NavigateWithArrow';
+import StyledText from '@/components/common/StyledText';
+
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+function HelpContact() {
+  const theme = useTheme();
+
+  const [isDisabled, setIsDisabled] = React.useState(false);
+
+  const [formData, setFormData] = React.useState({
+    fullName: '',
+    email: '',
+    category: '',
+    subject: '',
+    message: ''
+  });
+
+  const [error, setError] = React.useState({});
+
+  React.useEffect(() => {
+    document.title = 'Connect - Contact Support';
+  }, []);
+
+  const handleChange = React.useCallback((e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  }, []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const newError = {};
+    let isValid = true;
+
+    if (!formData.fullName.trim()) {
+      newError.fullName = 'Name is required.';
+      isValid = false;
+    }
+
+    if (!formData.email.trim()) {
+      newError.email = 'Email is required.';
+      isValid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
+      newError.email = 'Enter a valid email address.';
+      isValid = false;
+    }
+
+    if (!formData.category.trim()) {
+      newError.category = 'Please select a category.';
+      isValid = false;
+    }
+
+    if (!formData.subject.trim()) {
+      newError.subject = 'Subject is required.';
+      isValid = false;
+    }
+
+    if (!formData.message.trim()) {
+      newError.message = 'Message is required.';
+      isValid = false;
+    }
+
+    setError(newError);
+
+    if (!isValid) return;
+
+    // Submit logic here integrat API.
+    setIsDisabled(true);
+    toast.success('Your message has been sent successfully!');
+
+    setFormData({
+      fullName: '',
+      email: '',
+      category: '',
+      subject: '',
+      message: ''
+    });
+
+    setError({});
+    setIsDisabled(false);
+  };
+
+  return (
+    <Box flexDirection="column">
+      <ToastContainer position="top-right" autoClose={2000} theme="colored" />
+
+      <Stack mb={2}>
+        <NavigateWithArrow redirectTo="/connect/settings/help" text="Contact Support" />
+      </Stack>
+
+      <Box
+        component="form"
+        onSubmit={handleSubmit}
+        sx={{
+          mt: 6,
+          py: 4,
+          px: 1,
+          borderRadius: 1,
+          maxWidth: 800,
+          mx: 'auto',
+          backdropFilter: 'blur(14px)',
+          backgroundColor: 'transparent',
+          boxShadow: `inset 1px 1px 0.2rem ${theme.palette.text.secondary}`
+        }}
+      >
+        {/* === Heading === */}
+        <Stack direction="column">
+          <Typography variant="h5" fontWeight={600} textAlign="start" mb={1} color="text.primary">
+            Need <StyledText text="Assistance?" />
+          </Typography>
+
+          <Typography variant="body2" fontWeight={400} textAlign="start" mb={4} color="text.secondary">
+            We're here to help. If you're facing issues or have questions, please fill out the form below and our support team will get back to you shortly.
+          </Typography>
+        </Stack>
+
+        {/* === Form Fields === */}
+        <Stack gap={1}>
+          <TextField
+            label="Full Name"
+            name="fullName"
+            placeholder="Behan Kumar"
+            fullWidth
+            autoComplete="on"
+            value={formData.fullName}
+            onChange={handleChange}
+            error={Boolean(error.fullName)}
+            helperText={error.fullName}
+          />
+
+          <TextField
+            label="Email Address"
+            name="email"
+            placeholder="connect@support.com"
+            fullWidth
+            autoComplete="on"
+            value={formData.email}
+            onChange={handleChange}
+            error={Boolean(error.email)}
+            helperText={error.email}
+          />
+
+          <FormControl ful error={Boolean(error.category)}>
+            <InputLabel id="category-label">Category</InputLabel>
+            <Select
+              labelId="category-label"
+              id="category"
+              name="category"
+              value={formData.category}
+              label="Category"
+              onChange={handleChange}
+            >
+              <MenuItem value="general">General Question</MenuItem>
+              <MenuItem value="account">Account Issue</MenuItem>
+              <MenuItem value="feedback">Feedback</MenuItem>
+              <MenuItem value="other">Other</MenuItem>
+            </Select>
+            {error.category && <FormHelperText>{error.category}</FormHelperText>}
+          </FormControl>
+
+          <TextField
+            label="Subject"
+            name="subject"
+            placeholder="Unable to find FAQ for my issue"
+            fullWidth
+            autoComplete="on"
+            value={formData.subject}
+            onChange={handleChange}
+            error={Boolean(error.subject)}
+            helperText={error.subject}
+          />
+
+          <TextField
+            label="Message"
+            name="message"
+            placeholder="Please describe your issue or question in detail..."
+            fullWidth
+            multiline
+            minRows={8}
+            autoComplete="on"
+            value={formData.message}
+            onChange={handleChange}
+            error={Boolean(error.message)}
+            helperText={error.message}
+          />
+
+          <Button
+            type="submit"
+            variant="outlined"
+            disabled={isDisabled}
+            endIcon={<SendIcon />}
+            sx={{
+              mt: 2,
+              px: { xs: 2, sm: 3 },
+              py: { xs: 1, sm: 1 },
+              maxWidth: 'fit-content',
+              alignSelf: 'center',
+              border: 'none',
+              borderTopRightRadius: '6px',
+              borderBottomRightRadius: '6px',
+              borderBottom: `1px dotted ${theme.palette.success.main}`,
+              backdropFilter: 'blur(14px)',
+              backgroundColor: 'transparent',
+              color: 'primary.contrastText',
+              textTransform: 'none',
+              letterSpacing: 2,
+              transition: 'all 0.3s ease',
+              '&:hover': {
+                transform: 'translateY(-5px)'
+              }
+            }}
+          >
+            {isDisabled ? 'Sending Request...' : 'Request'}
+          </Button>
+        </Stack>
+      </Box>
+    </Box>
+  );
+}
+
+export default HelpContact;

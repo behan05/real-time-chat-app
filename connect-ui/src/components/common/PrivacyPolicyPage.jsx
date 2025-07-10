@@ -18,13 +18,13 @@ function Section({ title, children }) {
 
 function PrivacyPolicyPage() {
   useEffect(() => {
-    document.title = '📜 Connect - Privacy Policy';
+    document.title = 'Connect - Privacy Policy';
   }, []);
 
   return (
-    <Container maxWidth="md" sx={{ py: 6 }}>
+    <Container maxWidth="md" sx={{ pb: 6 }}>
       {/* Page Title */}
-      <Box textAlign="center" mb={4}>
+      <Box textAlign="start" mb={4}>
         <Typography variant="h3" fontWeight={600} gutterBottom>
           <StyledText text="Privacy" /> Policy
         </Typography>

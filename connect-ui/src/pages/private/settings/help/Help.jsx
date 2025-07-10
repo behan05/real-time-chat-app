@@ -30,7 +30,7 @@ function Help() {
         {
             icon: <SupportAgentIcon fontSize="small" sx={{ color: 'text.secondary' }} />,
             label: 'Contact Support',
-            path: 'contact',
+            path: 'contact-help',
         },
         {
             icon: <GavelIcon fontSize="small" sx={{ color: 'text.secondary' }} />,
@@ -40,7 +40,7 @@ function Help() {
         {
             icon: <BugReportIcon fontSize="small" sx={{ color: 'text.secondary' }} />,
             label: 'Report a Problem',
-            path: 'report',
+            path: 'report-problem',
         },
     ];
 
