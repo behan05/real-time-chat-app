@@ -7,15 +7,15 @@ import {
     ListItemIcon,
     ListItemText,
     Stack
-} from '../../../../MUI/MuiComponents';
+} from '@/MUI/MuiComponents';
 
 import {
     HelpOutlineIcon,
     SupportAgentIcon,
     GavelIcon,
     BugReportIcon,
-} from '../../../../MUI/MuiIcons';
-import NavigateWithArrow from '../../../../components/private/NavigateWithArrow'
+} from '@/MUI/MuiIcons';
+import NavigateWithArrow from '@/components/private/NavigateWithArrow'
 
 import { Link } from 'react-router-dom';
 

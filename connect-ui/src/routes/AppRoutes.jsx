@@ -48,6 +48,7 @@ import HelpFAQs from '../pages/private/settings/help/HelpFAQs';
 import HelpContact from '../pages/private/settings/help/HelpContact';
 import HelpPrivacyPolicy from '../pages/private/settings/help/HelpPrivacyPolicy';
 import HelpReport from '../pages/private/settings/help/HelpReport';
+import ReportBug from '../components/common/ReportBug';
 
 
 export const routes = createBrowserRouter([
@@ -68,6 +69,7 @@ export const routes = createBrowserRouter([
       { path: 'login', element: <Login /> },
       { path: 'register', element: <Register /> },
       { path: 'faq', element: <FAQs /> },
+      { path: 'report', element: <ReportBug /> },
       { path: 'privacy-policy', element: <PrivacyPolicyPage /> },
       { path: 'terms-of-use', element: <TermsOfUsePage /> },
       { path: '*', element: <PageNotFound redirectTo={'/'} /> },

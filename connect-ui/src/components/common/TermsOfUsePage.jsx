@@ -24,7 +24,7 @@ function TermsOfUsePage() {
     <Container maxWidth="md" sx={{ pb: 6 }}>
       {/* Page Title */}
       <Box textAlign="start" mb={4}>
-        <Typography variant="h3" fontWeight={600} gutterBottom>
+        <Typography variant="h4" fontWeight={600} gutterBottom>
           <StyledText text="Terms" /> of Use
         </Typography>
         <Typography variant="subtitle1" color="text.secondary">

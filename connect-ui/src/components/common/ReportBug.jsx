@@ -1,9 +1,283 @@
-import React from 'react'
+import * as React from 'react';
+import {
+  Box,
+  Button,
+  Stack,
+  TextField,
+  Typography,
+  useTheme,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  FormHelperText
+} from '../../MUI/MuiComponents';
+import { SendIcon } from '../../MUI/MuiIcons';
+import StyledText from '../common/StyledText';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function ReportBug() {
+  React.useEffect(() => {
+    document.title = 'Connect - Report Bug';
+
+    // Prefill device info
+    const platform = navigator.platform;
+    const userAgent = navigator.userAgent;
+    setFormData((prev) => ({
+      ...prev,
+      deviceInfo: `${platform}, ${userAgent}`
+    }));
+  }, []);
+
+  const theme = useTheme();
+
+  const [isDisabled, setIsDisabled] = React.useState(false);
+  const [formData, setFormData] = React.useState({
+    issueType: '',
+    title: '',
+    description: '',
+    expectedBehavior: '',
+    actualBehavior: '',
+    deviceInfo: '',
+    screenshot: null,
+    email: ''
+  });
+
+  const [error, setError] = React.useState({
+    issueType: '',
+    title: '',
+    description: '',
+    email: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file && !file.type.startsWith('image/')) {
+      toast.error('Only image files are allowed for screenshots.');
+      return;
+    }
+    setFormData((prev) => ({ ...prev, screenshot: file || null }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    let isValid = true;
+    let newErrors = {};
+
+    if (formData.issueType.trim() === '') {
+      newErrors.issueType = 'Please select an issue type.';
+      isValid = false;
+    }
+    if (formData.title.trim() === '') {
+      newErrors.title = 'Issue title is required.';
+      isValid = false;
+    }
+    if (formData.description.trim() === '') {
+      newErrors.description = 'Please provide a detailed description.';
+      isValid = false;
+    }
+    if (formData.email.trim() === '') {
+      newErrors.email = 'Email address is required.';
+      isValid = false;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
+      newErrors.email = 'Please enter a valid email address.';
+      isValid = false;
+    }
+
+    setError(newErrors);
+    if (!isValid) return;
+
+    setIsDisabled(true);
+    toast.success('Your problem has been reported successfully!');
+
+    setFormData({
+      issueType: '',
+      title: '',
+      description: '',
+      expectedBehavior: '',
+      actualBehavior: '',
+      deviceInfo: '',
+      screenshot: null,
+      email: ''
+    });
+    setError({});
+    setIsDisabled(false);
+  };
+
   return (
-    <div>ReportBug</div>
-  )
+    <Box flexDirection="column">
+      <ToastContainer position="top-right" autoClose={2000} theme="colored" />
+
+      <Box
+        component="form"
+        onSubmit={handleSubmit}
+        minWidth={300}
+        sx={{
+          mt: 6,
+          py: 4,
+          px: 1,
+          borderRadius: 1,
+          maxWidth: 800,
+          mx: 'auto',
+          backdropFilter: 'blur(14px)',
+          backgroundColor: 'transparent',
+          boxShadow: `inset 1px 1px 0.2rem ${theme.palette.text.secondary}`
+        }}
+      >
+        <Stack direction={'column'}>
+          <Typography variant="h4" fontWeight={600} textAlign="start" mb={1}>
+            Report a <StyledText text="Problem" />
+          </Typography>
+
+          <Typography
+            variant="body2"
+            fontWeight={400}
+            gutterBottom
+            textAlign="start"
+            mb={4}
+            color="text.secondary"
+          >
+            Encountered a bug or issue? Help us improve Connect by reporting it below. The more details you provide, the faster we can fix it.
+          </Typography>
+        </Stack>
+
+        <Stack direction={'column'} gap={1}>
+          <FormControl fullWidth error={Boolean(error.issueType)}>
+            <InputLabel id="issueType-label">Issue Type</InputLabel>
+            <Select
+              labelId="issueType-label"
+              id="issueType"
+              name="issueType"
+              value={formData.issueType}
+              label="Issue Type"
+              onChange={handleChange}
+            >
+              <MenuItem value="bug">Bug</MenuItem>
+              <MenuItem value="crash">Crash</MenuItem>
+              <MenuItem value="ui-problem">UI Problem</MenuItem>
+              <MenuItem value="performance">Performance</MenuItem>
+              <MenuItem value="chat-error">Chat Error</MenuItem>
+              <MenuItem value="matching-problem">Matching Problem</MenuItem>
+              <MenuItem value="other">Other</MenuItem>
+            </Select>
+            {error.issueType && <FormHelperText>{error.issueType}</FormHelperText>}
+          </FormControl>
+
+          <TextField
+            label="Bug Title"
+            placeholder="e.g., Chat freezes after sending image"
+            name="title"
+            value={formData.title}
+            onChange={handleChange}
+            error={Boolean(error.title)}
+            helperText={error.title}
+            fullWidth
+          />
+
+          <TextField
+            label="Description"
+            placeholder="e.g., The chat screen freezes when I send an image over mobile data."
+            name="description"
+            value={formData.description}
+            multiline
+            minRows={10}
+            onChange={handleChange}
+            error={Boolean(error.description)}
+            helperText={error.description}
+            fullWidth
+          />
+
+          <TextField
+            label="Expected Behavior (Optional)"
+            placeholder="e.g., The message should appear instantly after hitting send."
+            name="expectedBehavior"
+            value={formData.expectedBehavior}
+            multiline
+            minRows={4}
+            onChange={handleChange}
+            fullWidth
+          />
+
+          <TextField
+            label="Actual Behavior (Optional)"
+            placeholder="e.g., The message stays stuck on 'Sending...' and never delivers."
+            name="actualBehavior"
+            value={formData.actualBehavior}
+            multiline
+            minRows={6}
+            onChange={handleChange}
+            fullWidth
+          />
+
+          <TextField
+            label="Device Info (Optional)"
+            placeholder="e.g., Android 13, Chrome 114, Samsung Galaxy S21"
+            name="deviceInfo"
+            value={formData.deviceInfo}
+            onChange={handleChange}
+            fullWidth
+          />
+
+          <TextField
+            label="Email"
+            placeholder="connect@support.com"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            error={Boolean(error.email)}
+            helperText={error.email}
+            fullWidth
+          />
+
+          <Button
+            variant="outlined"
+            component="label"
+            fullWidth
+            sx={{ color: 'text.secondary' }}
+          >
+            Upload screenshot (Optional)
+            <input type="file" hidden onChange={handleFileChange} />
+          </Button>
+
+          <Button
+            type="submit"
+            variant="outlined"
+            disabled={isDisabled}
+            endIcon={<SendIcon />}
+            sx={{
+              mt: 2,
+              px: { xs: 2, sm: 3 },
+              py: { xs: 1, sm: 1 },
+              maxWidth: 'fit-content',
+              alignSelf: 'center',
+              border: 'none',
+              borderTopRightRadius: '6px',
+              borderBottomRightRadius: '6px',
+              borderBottom: `1px dotted ${theme.palette.success.main}`,
+              backdropFilter: 'blur(14px)',
+              backgroundColor: 'transparent',
+              color: 'primary.contrastText',
+              textTransform: 'none',
+              letterSpacing: 2,
+              transition: 'all 0.3s ease',
+              '&:hover': {
+                transform: 'translateY(-5px)'
+              }
+            }}
+          >
+            {isDisabled ? 'Sending...' : 'Report Issue'}
+          </Button>
+        </Stack>
+      </Box>
+    </Box>
+  );
 }
 
-export default ReportBug
+export default ReportBug;

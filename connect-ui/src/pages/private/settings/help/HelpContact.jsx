@@ -11,7 +11,7 @@ import {
   Select,
   MenuItem,
   FormHelperText
-} from '../../../../MUI/MuiComponents';
+} from '@/MUI/MuiComponents';
 
 import { SendIcon } from '@/MUI/MuiIcons';
 import NavigateWithArrow from '@/components/private/NavigateWithArrow';
@@ -109,6 +109,7 @@ function HelpContact() {
       <Box
         component="form"
         onSubmit={handleSubmit}
+        minWidth={300}
         sx={{
           mt: 6,
           py: 4,
@@ -158,7 +159,7 @@ function HelpContact() {
             helperText={error.email}
           />
 
-          <FormControl ful error={Boolean(error.category)}>
+          <FormControl fullWidth error={Boolean(error.category)}>
             <InputLabel id="category-label">Category</InputLabel>
             <Select
               labelId="category-label"
