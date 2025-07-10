@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, TextField, Button, Typography, Stack, useTheme } from '@/MUI/MuiComponents';
-import { SendIcon } from '../../MUI/MuiIcons';
+import { SendIcon } from '@/MUI/MuiIcons';
 import StyledText from '@/components/common/StyledText';
 import { toast, ToastContainer } from 'react-toastify';
 

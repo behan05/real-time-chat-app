@@ -6,40 +6,47 @@ import Features from '@/pages/public/Features';
 import Contact from '@/pages/public/Contact';
 import Login from '@/pages/public/Login';
 import Register from '@/pages/public/Signup';
-import { SidebarProvider } from '../context/SidebarContext';
+import FAQs from '@/pages/public/FAQs';
+import PrivacyPolicyPage from '@/components/common/PrivacyPolicyPage';
+import TermsOfUsePage from '@/components/common/TermsOfUsePage';
+import PageNotFound from '@/components/common/PageNotFound';
+import { SidebarProvider } from '@/context/SidebarContext';
 
 // === Private Routes ===
-import PrivateRoute from '../middleware/PrivateRoute';
-import ChatUI from '../pages/private/chat/ChatUI';
-import ChatSidebar from '../pages/private/chat/ChatSidebar';
-import Settings from '../pages/private/settings/Settings';
-import Profile from '../pages/private/Profile';
-import SettingsLayout from '../pages/private/settings/SettingsLayout';
+import PrivateRoute from '@/middleware/PrivateRoute';
+import ChatUI from '@/pages/private/chat/ChatUI';
+import ChatSidebar from '@/pages/private/chat/ChatSidebar';
+import Settings from '@/pages/private/settings/Settings';
+import Profile from '@/pages/private/Profile';
+import SettingsLayout from '@/pages/private/settings/SettingsLayout';
 
 // === Account Settings ===
-import AccountLayout from '../pages/private/settings/account/AccountLayout';
-import Account from '../pages/private/settings/account/Account';
-import SecurityNotifications from '../pages/private/settings/account/securityNotification/SecurityNotifications';
-import RequestAccountInfo from '../pages/private/settings/account/reqAccountInfo/RequestAccountInfo';
-import AccountDelete from '../pages/private/settings/account/accountDelete/AccountDelete';
+import AccountLayout from '@/pages/private/settings/account/AccountLayout';
+import Account from '@/pages/private/settings/account/Account';
+import SecurityNotifications from '@/pages/private/settings/account/securityNotification/SecurityNotifications';
+import RequestAccountInfo from '@/pages/private/settings/account/reqAccountInfo/RequestAccountInfo';
+import AccountDelete from '@/pages/private/settings/account/accountDelete/AccountDelete';
 
 // === Privacy Settings === 
-import PrivacyLayout from '../pages/private/settings/privacy/PrivacyLayout';
-import Privacy from '../pages/private/settings/privacy/Privacy';
+import PrivacyLayout from '@/pages/private/settings/privacy/PrivacyLayout';
+import Privacy from '@/pages/private/settings/privacy/Privacy';
 
 // === Chats Settings === 
-import ChatsLayout from '../pages/private/settings/chats/ChatsLayout';
-import Chats from '../pages/private/settings/chats/Chats';
+import ChatsLayout from '@/pages/private/settings/chats/ChatsLayout';
+import Chats from '@/pages/private/settings/chats/Chats';
 
 // === Notification Settings === 
-import NotificationsLayout from '../pages/private/settings/notifications/NotificationsLayout';
-import Notifications from '../pages/private/settings/notifications/Notifications';
+import NotificationsLayout from '@/pages/private/settings/notifications/NotificationsLayout';
+import Notifications from '@/pages/private/settings/notifications/Notifications';
 
 // === Help Settings === 
-import HelpLayout from '../pages/private/settings/help/HelpLayout';
-import Help from '../pages/private/settings/help/Help';
+import HelpLayout from '@/pages/private/settings/help/HelpLayout';
+import Help from '@/pages/private/settings/help/Help';
+
 
 export const routes = createBrowserRouter([
+
+  // === Public routes ===
   {
     path: '/',
     element: (
@@ -53,7 +60,11 @@ export const routes = createBrowserRouter([
       { path: 'features', element: <Features /> },
       { path: 'contact', element: <Contact /> },
       { path: 'login', element: <Login /> },
-      { path: 'register', element: <Register /> }
+      { path: 'register', element: <Register /> },
+      { path: 'faq', element: <FAQs /> },
+      { path: 'privacy-policy', element: <PrivacyPolicyPage /> },
+      { path: 'terms-of-use', element: <TermsOfUsePage /> },
+      { path: '*', element: <PageNotFound /> },
     ]
   },
 
@@ -121,7 +132,8 @@ export const routes = createBrowserRouter([
             ]
           },
         ]
-      }
+      },
+      { path: '*', element: <PageNotFound /> }
     ]
   }
 

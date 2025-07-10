@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Stack, useTheme, useMediaQuery } from '../../MUI/MuiComponents';
+import { Box, Typography, Stack, useTheme } from '@/MUI/MuiComponents';
 import VerifiedIcon from '@mui/icons-material/Verified';
 
 // Assets

@@ -37,8 +37,8 @@ const iconMap = {
 
 import HowItWorks from '@/components/public/HowItWorks';
 import WhyChooseUs from '@/components/public/WhyChooseUs';
-import FAQ from '../../components/public/FAQ';
-import ReusableVideo from '../../components/public/ReusableVideo';
+import FAQ from '@/components/public/FAQ';
+import ReusableVideo from '@/components/public/ReusableVideo';
 
 function Home() {
   React.useEffect(() => {
