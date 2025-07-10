@@ -9,6 +9,7 @@ import Register from '@/pages/public/Signup';
 import { SidebarProvider } from '../context/SidebarContext';
 
 // === Private Routes ===
+import PrivateRoute from '../middleware/PrivateRoute';
 import ChatUI from '../pages/private/chat/ChatUI';
 import ChatSidebar from '../pages/private/chat/ChatSidebar';
 import Settings from '../pages/private/settings/Settings';
@@ -56,74 +57,71 @@ export const routes = createBrowserRouter([
     ]
   },
 
-  // === Protected routes Temp ===
+  // === Protected routes ===
   {
     path: '/connect',
-    element: <ChatUI />,
+    element: <PrivateRoute />,
     children: [
-      { index: true, element: <ChatSidebar /> },
-      { path: 'profile', element: <Profile /> },
-
       {
-        path: 'settings',
-        element: <SettingsLayout />,
+        // index: true,
+        element: <ChatUI />,
         children: [
-          { index: true, element: <Settings /> },
+          { index: true, element: <ChatSidebar /> },
           { path: 'profile', element: <Profile /> },
 
-          // Account Settings
           {
-            path: 'account',
-            element: <AccountLayout />,
+            path: 'settings',
+            element: <SettingsLayout />,
             children: [
-              { index: true, element: <Account /> },
-              { path: 'security', element: <SecurityNotifications /> },
-              { path: 'info', element: <RequestAccountInfo /> },
-              { path: 'delete', element: <AccountDelete /> },
+              { index: true, element: <Settings /> },
+              { path: 'profile', element: <Profile /> },
+
+              {
+                path: 'account',
+                element: <AccountLayout />,
+                children: [
+                  { index: true, element: <Account /> },
+                  { path: 'security', element: <SecurityNotifications /> },
+                  { path: 'info', element: <RequestAccountInfo /> },
+                  { path: 'delete', element: <AccountDelete /> },
+                ]
+              },
+
+              {
+                path: 'privacy',
+                element: <PrivacyLayout />,
+                children: [
+                  { index: true, element: <Privacy /> }
+                ]
+              },
+
+              {
+                path: 'chats',
+                element: <ChatsLayout />,
+                children: [
+                  { index: true, element: <Chats /> }
+                ]
+              },
+
+              {
+                path: 'notifications',
+                element: <NotificationsLayout />,
+                children: [
+                  { index: true, element: <Notifications /> }
+                ]
+              },
+
+              {
+                path: 'help',
+                element: <HelpLayout />,
+                children: [
+                  { index: true, element: <Help /> }
+                ]
+              },
             ]
           },
-
-          // Privacy Settings
-          {
-            path: 'privacy',
-            element: <PrivacyLayout />,
-            children: [
-              { index: true, element: <Privacy /> }
-            ]
-          },
-
-          // Chat Settings
-          {
-            path: 'chats',
-            element: <ChatsLayout />,
-            children: [
-              { index: true, element: <Chats /> },
-              {},
-            ]
-          },
-
-          // Notification settings
-          {
-            path: 'notifications',
-            element: <NotificationsLayout />,
-            children: [
-              { index: true, element: <Notifications /> },
-              {},
-            ]
-          },
-
-          // Help settings
-          {
-            path: 'help',
-            element: <HelpLayout />,
-            children: [
-              { index: true, element: <Help /> },
-              {},
-            ]
-          },
-
         ]
-      },
+      }
     ]
   }
 
