@@ -3,7 +3,7 @@ import { Box, Typography, Button, Container, useTheme } from '@/MUI/MuiComponent
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 
-const PageNotFound = () => {
+const PageNotFound = ({ redirectTo }) => {
   const theme = useTheme();
 
   useEffect(() => {
@@ -59,7 +59,7 @@ const PageNotFound = () => {
           Sorry, we couldn't find the page you're looking for. Maybe the URL is incorrect, or the
           page has been moved.
         </Typography>
-        <Link to="/" style={{ textDecoration: 'none' }}>
+        <Link to={redirectTo} style={{ textDecoration: 'none' }}>
           <Button
             variant="outlined"
             color="primary"

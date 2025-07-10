@@ -64,7 +64,7 @@ export const routes = createBrowserRouter([
       { path: 'faq', element: <FAQs /> },
       { path: 'privacy-policy', element: <PrivacyPolicyPage /> },
       { path: 'terms-of-use', element: <TermsOfUsePage /> },
-      { path: '*', element: <PageNotFound /> },
+      { path: '*', element: <PageNotFound redirectTo={'/'} /> },
     ]
   },
 
@@ -133,7 +133,7 @@ export const routes = createBrowserRouter([
           },
         ]
       },
-      { path: '*', element: <PageNotFound /> }
+      { path: '*', element: <PageNotFound redirectTo={'connect'} /> }
     ]
   }
 
