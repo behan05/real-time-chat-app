@@ -123,12 +123,12 @@ function HelpContact() {
         }}
       >
         {/* === Heading === */}
-        <Stack direction="column">
-          <Typography variant="h5" fontWeight={600} textAlign="start" mb={1} color="text.primary">
+        <Stack direction="column" textAlign='center'>
+          <Typography variant="h5" fontWeight={600} mb={1} color="text.primary">
             Need <StyledText text="Assistance?" />
           </Typography>
 
-          <Typography variant="body2" fontWeight={400} textAlign="start" mb={4} color="text.secondary">
+          <Typography variant="body2" fontWeight={400} mb={4} color="text.secondary">
             We're here to help. If you're facing issues or have questions, please fill out the form below and our support team will get back to you shortly.
           </Typography>
         </Stack>

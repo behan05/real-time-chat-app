@@ -131,8 +131,8 @@ function ReportBug() {
           boxShadow: `inset 1px 1px 0.2rem ${theme.palette.text.secondary}`
         }}
       >
-        <Stack direction={'column'}>
-          <Typography variant="h4" fontWeight={600} textAlign="start" mb={1}>
+        <Stack direction={'column'} textAlign='center'>
+          <Typography variant="h4" fontWeight={600} mb={1}>
             Report a <StyledText text="Problem" />
           </Typography>
 
@@ -140,7 +140,6 @@ function ReportBug() {
             variant="body2"
             fontWeight={400}
             gutterBottom
-            textAlign="start"
             mb={4}
             color="text.secondary"
           >
@@ -240,7 +239,7 @@ function ReportBug() {
             variant="outlined"
             component="label"
             fullWidth
-            sx={{ color: 'text.secondary' }}
+            color='text.secondary'
           >
             Upload screenshot (Optional)
             <input type="file" hidden onChange={handleFileChange} />
