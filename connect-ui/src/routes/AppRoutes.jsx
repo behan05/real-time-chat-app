@@ -7,10 +7,12 @@ import Contact from '@/pages/public/Contact';
 import Login from '@/pages/public/Login';
 import Register from '@/pages/public/Signup';
 import FAQs from '@/pages/public/FAQs';
+import { SidebarProvider } from '@/context/SidebarContext';
+
+// === Common Use components === 
 import PrivacyPolicyPage from '@/components/common/PrivacyPolicyPage';
 import TermsOfUsePage from '@/components/common/TermsOfUsePage';
 import PageNotFound from '@/components/common/PageNotFound';
-import { SidebarProvider } from '@/context/SidebarContext';
 
 // === Private Routes ===
 import PrivateRoute from '@/middleware/PrivateRoute';
@@ -42,6 +44,7 @@ import Notifications from '@/pages/private/settings/notifications/Notifications'
 // === Help Settings === 
 import HelpLayout from '@/pages/private/settings/help/HelpLayout';
 import Help from '@/pages/private/settings/help/Help';
+import HelpFAQs from '../pages/private/settings/help/HelpFAQs';
 
 
 export const routes = createBrowserRouter([
@@ -126,14 +129,15 @@ export const routes = createBrowserRouter([
                 path: 'help',
                 element: <HelpLayout />,
                 children: [
-                  { index: true, element: <Help /> }
+                  { index: true, element: <Help /> },
+                  { path: 'faqs-help', element: <HelpFAQs /> },
+                  { path: 'privacy-policy', element: <PrivacyPolicyPage /> },
                 ]
               },
             ]
           },
         ]
       },
-      { path: '*', element: <PageNotFound redirectTo={'connect'} /> }
     ]
   }
 

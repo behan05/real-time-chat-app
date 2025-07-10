@@ -25,7 +25,7 @@ function Help() {
         {
             icon: <HelpOutlineIcon fontSize="small" sx={{ color: 'text.secondary' }} />,
             label: 'FAQs (Frequently Asked Questions)',
-            path: 'faqs',
+            path: 'faqs-help',
         },
         {
             icon: <SupportAgentIcon fontSize="small" sx={{ color: 'text.secondary' }} />,
@@ -35,7 +35,7 @@ function Help() {
         {
             icon: <GavelIcon fontSize="small" sx={{ color: 'text.secondary' }} />,
             label: 'Terms & Policies',
-            path: 'policies',
+            path: 'privacy-policy',
         },
         {
             icon: <BugReportIcon fontSize="small" sx={{ color: 'text.secondary' }} />,
@@ -48,7 +48,7 @@ function Help() {
         <Box component={'section'}>
             {/* Header with arrow back icon */}
             <Stack mb={2}>
-                <NavigateWithArrow redirectTo={'/connect/settings'} text={'Account'} />
+                <NavigateWithArrow redirectTo={'/connect/settings'} text={'Help'} />
             </Stack>
 
             <List>
