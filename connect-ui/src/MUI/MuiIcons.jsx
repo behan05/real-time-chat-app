@@ -89,6 +89,12 @@ import SettingsBackupRestoreIcon from '@mui/icons-material/SettingsBackupRestore
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import GavelIcon from '@mui/icons-material/Gavel';
 import BugReportIcon from '@mui/icons-material/BugReport';
+
+import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive'
+import MessageIcon from '@mui/icons-material/Message'
+import ReportIcon from '@mui/icons-material/Report'
+import PersonAddIcon from '@mui/icons-material/PersonAdd'
+
 // ==================== Export All ====================
 export {
 
@@ -103,7 +109,11 @@ export {
   SupportAgentIcon,
   GavelIcon,
   BugReportIcon,
-  
+  NotificationsActiveIcon,
+  MessageIcon,
+  ReportIcon,
+  PersonAddIcon,
+
   // Navigation & Layout
   ArrowBackIcon,
   CloseIcon,

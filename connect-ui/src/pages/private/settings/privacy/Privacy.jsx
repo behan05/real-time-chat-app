@@ -3,8 +3,10 @@ import {
   Box,
   Stack,
   Switch,
+  Typography,
+  Divider,
   FormControlLabel,
-  Divider
+  useTheme
 } from '@/MUI/MuiComponents';
 import {
   VisibilityIcon,
@@ -14,9 +16,11 @@ import {
   SettingsBackupRestoreIcon,
 } from '@/MUI/MuiIcons';
 import NavigateWithArrow from '@/components/private/NavigateWithArrow';
-import SectionHeader from './SectionHeader';
+import StyledText from '@/components/common/StyledText';
 
 function Privacy() {
+  const theme = useTheme();
+
   const [privacySettings, setPrivacySettings] = React.useState({
     showProfilePic: true,
     showLocation: true,
@@ -27,116 +31,165 @@ function Privacy() {
     allowExportData: false,
   });
 
-  const handleToggle = (key) => (event) => {
+  const handleToggle = (key) => (e) => {
     setPrivacySettings((prev) => ({
       ...prev,
-      [key]: event.target.checked,
+      [key]: e.target.checked,
     }));
   };
 
-  const renderSwitch = (label, settingKey) => (
-    <FormControlLabel
-      control={
-        <Switch
-          checked={privacySettings[settingKey]}
-          onChange={handleToggle(settingKey)}
-          color="primary"
-        />
-      }
-      label={label}
-    />
+  const Section = ({ icon, title, description, children }) => (
+    <Box>
+      <Stack direction="row" alignItems="center" gap={1} mb={1}>
+        {icon}
+        <Typography variant="h6" fontWeight={600}>
+          {title}
+        </Typography>
+      </Stack>
+      <Typography variant="body2" color="text.secondary" mb={2}>
+        {description}
+      </Typography>
+      <Stack spacing={1}>{children}</Stack>
+    </Box>
   );
 
   return (
     <Box>
+      {/* Navigation Back */}
       <Stack mb={2}>
-        <NavigateWithArrow redirectTo={'/connect/settings'} text={'Privacy'} />
+        <NavigateWithArrow redirectTo="/connect/settings" text="Privacy Settings" />
       </Stack>
 
       <Box
-        component="form"
-        mt={5}
+        mt={4}
         display="flex"
         flexDirection="column"
-        gap={5}
+        gap={4}
+        minWidth={300}
+        maxWidth={800}
+        mx="auto"
+        px={2}
+        py={3}
+        borderRadius={1}
+        sx={{
+          backdropFilter: 'blur(14px)',
+          backgroundColor: 'background.paper',
+          boxShadow: `inset 1px 1px 0.2rem ${theme.palette.divider}`,
+        }}
       >
-
-        {/* Profile Visibility */}
-        <Box>
-          <SectionHeader
-            icon={<VisibilityIcon />}
-            title="Profile visibility"
-            desciption={`
-              Control whether your profile picture or location is visible during a chat.
-              `}
+        {/* === Sections === */}
+        <Section
+          icon={<VisibilityIcon fontSize="small" sx={{ color: 'info.main' }} />}
+          title="Profile Visibility"
+          description="Control whether your profile picture or location is visible during a chat."
+        >
+          <FormControlLabel
+            control={
+              <Switch
+                checked={privacySettings.showProfilePic}
+                onChange={handleToggle('showProfilePic')}
+                color="primary"
+              />
+            }
+            label="Show my profile picture"
           />
+          <FormControlLabel
+            control={
+              <Switch
+                checked={privacySettings.showLocation}
+                onChange={handleToggle('showLocation')}
+                color="primary"
+              />
+            }
+            label="Show my location to others"
+          />
+        </Section>
 
-          <Stack gap={1} mt={1}>
-            {renderSwitch('Show my profile picture', 'showProfilePic')}
-            {renderSwitch('Show my location to others', 'showLocation')}
-          </Stack>
-        </Box>
         <Divider />
 
-        {/* Matching Preferences */}
-        <Box>
-          <SectionHeader
-            icon={<TuneIcon />}
-            title="Matching preferences"
-            desciption={`
-              Decide who you get matched with, like verified users only.
-              `}
+        <Section
+          icon={<TuneIcon fontSize="small" sx={{ color: 'primary.main' }} />}
+          title="Matching Preferences"
+          description="Choose who you're matched with during random chats."
+        >
+          <FormControlLabel
+            control={
+              <Switch
+                checked={privacySettings.matchVerifiedOnly}
+                onChange={handleToggle('matchVerifiedOnly')}
+                color="primary"
+              />
+            }
+            label="Match with verified users only"
           />
-          <Stack gap={1} mt={1}>
-            {renderSwitch('Match with verified users only', 'matchVerifiedOnly')}
-          </Stack>
-        </Box>
+        </Section>
+
         <Divider />
 
-        {/* Chat Interaction */}
-        <Box>
-          <SectionHeader
-            icon={<ChatIcon />}
-            title="Chat interaction"
-            desciption={`
-            Manage chat behavior, like allowing reconnects or auto-deleting sessions.
-            `}
+        <Section
+          icon={<ChatIcon fontSize="small" sx={{ color: 'success.main' }} />}
+          title="Chat Preferences"
+          description="Decide how chats behave like rechat and auto-deletion."
+        >
+          <FormControlLabel
+            control={
+              <Switch
+                checked={privacySettings.allowRechat}
+                onChange={handleToggle('allowRechat')}
+                color="primary"
+              />
+            }
+            label="Allow user to reconnect after chat"
           />
-          <Stack gap={1} mt={1}>
-            {renderSwitch('Allow user to reconnect after chat', 'allowRechat')}
-            {renderSwitch('Auto delete chats after session', 'autoDeleteChats')}
-          </Stack>
-        </Box>
+          <FormControlLabel
+            control={
+              <Switch
+                checked={privacySettings.autoDeleteChats}
+                onChange={handleToggle('autoDeleteChats')}
+                color="primary"
+              />
+            }
+            label="Auto delete chats after session"
+          />
+        </Section>
+
         <Divider />
 
-        {/* Safety & Blocking */}
-        <Box>
-          <SectionHeader
-            icon={<BlockIcon />}
-            title="Safety & blocking"
-            desciption={`
-            Improve safety by blocking NSFW (Not Safe For Work) content and filtering out inappropriate users. These options help you maintain a safe and respectful chat environment.
-            `}
+        <Section
+          icon={<BlockIcon fontSize="small" sx={{ color: 'error.main' }} />}
+          title="Safety & NSFW"
+          description="Improve your safety by blocking inappropriate matches."
+        >
+          <FormControlLabel
+            control={
+              <Switch
+                checked={privacySettings.blockNSFW}
+                onChange={handleToggle('blockNSFW')}
+                color="primary"
+              />
+            }
+            label="Block NSFW matches"
           />
-          <Stack gap={1} mt={1}>
-            {renderSwitch('Block NSFW matches', 'blockNSFW')}
-          </Stack>
-        </Box>
+        </Section>
+
         <Divider />
 
-        {/* Data Control */}
-        <Box>
-          <SectionHeader
-            icon={<SettingsBackupRestoreIcon />}
-            title="Data control"
-            desciption={`
-            Decide what happens to your chat data. Choose whether to allow exporting your chat logs or keep everything private with data export turned off.
-            `}
+        <Section
+          icon={<SettingsBackupRestoreIcon fontSize="small" sx={{ color: 'warning.main' }} />}
+          title="Data & Logs"
+          description="Choose if your chat data can be exported or saved."
+        >
+          <FormControlLabel
+            control={
+              <Switch
+                checked={privacySettings.allowExportData}
+                onChange={handleToggle('allowExportData')}
+                color="primary"
+              />
+            }
+            label="Allow export of my data"
           />
-          <Stack gap={1} mt={1}>
-            {renderSwitch('Allow export of my data', 'allowExportData')}
-          </Stack>
-        </Box>
+        </Section>
       </Box>
     </Box>
   );

@@ -23,26 +23,27 @@ function Help() {
 
     const helpItems = [
         {
-            icon: <HelpOutlineIcon fontSize="small" sx={{ color: 'text.secondary' }} />,
+            icon: <HelpOutlineIcon fontSize="medium" sx={{ color: 'info.main' }} />,
             label: 'FAQs (Frequently Asked Questions)',
             path: 'faqs-help',
         },
         {
-            icon: <SupportAgentIcon fontSize="small" sx={{ color: 'text.secondary' }} />,
+            icon: <SupportAgentIcon fontSize="medium" sx={{ color: 'success.main' }} />,
             label: 'Contact Support',
             path: 'contact-help',
         },
         {
-            icon: <GavelIcon fontSize="small" sx={{ color: 'text.secondary' }} />,
+            icon: <GavelIcon fontSize="medium" sx={{ color: 'warning.main' }} />,
             label: 'Terms & Policies',
             path: 'privacy-policy',
         },
         {
-            icon: <BugReportIcon fontSize="small" sx={{ color: 'text.secondary' }} />,
+            icon: <BugReportIcon fontSize="medium" sx={{ color: 'error.main' }} />,
             label: 'Report a Problem',
             path: 'report-problem',
         },
     ];
+
 
     return (
         <Box component={'section'}>
@@ -58,7 +59,14 @@ function Help() {
                         disableGutters
                         component={Link}
                         to={item.path}
-                        sx={{ p: 2, borderRadius: 1 }}
+                        sx={{
+                            borderRadius: 1,
+                            p: 2,
+                            transition: 'all 0.3s ease',
+                            "&:hover": {
+                                transform: 'translateY(-5px)',
+                            }
+                        }}
                     >
                         <ListItemIcon>
                             {item.icon}
@@ -67,7 +75,7 @@ function Help() {
                     </ListItemButton>
                 ))}
             </List>
-            <Divider sx={{my: 3}}/>
+            <Divider sx={{ my: 3 }} />
         </Box>
     )
 }

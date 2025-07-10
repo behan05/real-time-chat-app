@@ -6,7 +6,8 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Stack
+  Stack,
+  useTheme
 } from '@/MUI/MuiComponents';
 
 import {
@@ -19,17 +20,17 @@ import NavigateWithArrow from '@/components/private/NavigateWithArrow'
 import { Link } from 'react-router-dom';
 
 function Account() {
-
+  const theme = useTheme()
   const accountItems = [
     {
-      icon: <SecurityIcon fontSize='small' sx={{ color: 'text.secondary' }} />,
+      icon: <SecurityIcon fontSize="small" sx={{ color: 'warning.main' }} />,
       label: 'Security notifications',
-      path: 'security'
+      path: 'security',
     },
     {
-      icon: <InfoIcon fontSize='small' sx={{ color: 'text.secondary' }} />,
+      icon: <InfoIcon fontSize="small" sx={{ color: 'info.main' }} />,
       label: 'Request account info',
-      path: 'info'
+      path: 'info',
     },
   ];
 
@@ -40,14 +41,21 @@ function Account() {
         <NavigateWithArrow redirectTo={'/connect/settings'} text={'Account'} />
       </Stack>
 
-      <List>
+      <List sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
         {accountItems.map((item, i) => (
           <ListItemButton
             key={i}
             disableGutters
             component={Link}
             to={item.path}
-            sx={{ p: 2, borderRadius: 1 }}
+            sx={{
+              p: 2,
+              borderRadius: 1,
+              transition: 'all 0.3s ease',
+              "&:hover": {
+                transform: 'translateY(-5px)',
+              }
+            }}
           >
             <ListItemIcon>
               {item.icon}
@@ -56,9 +64,17 @@ function Account() {
           </ListItemButton>
         ))}
 
-        <ListItemButton component={Link} to={'/delete'} sx={{
-          borderRadius: 1
-        }}>
+        <ListItemButton
+          component={Link}
+          to={'/delete'}
+          sx={{
+            borderRadius: 1,
+            p: 2,
+            transition: 'all 0.3s ease',
+            "&:hover": {
+              transform: 'translateY(-5px)',
+            }
+          }}>
           <ListItemIcon>{<DeleteForeverIcon sx={{ mr: 1.1, color: 'error.main' }} />}</ListItemIcon>
           <ListItemText primary='Delete my account' sx={{ color: 'error.main' }} />
         </ListItemButton>

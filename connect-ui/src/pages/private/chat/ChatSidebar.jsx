@@ -66,17 +66,22 @@ const ChatSidebar = ({ onUserSelect }) => {
           ml: '90%'
         }}
       >
-        <Tooltip title="Settings" >
+        <Tooltip title="Settings">
           <IconButton
             component={Link}
             to="settings"
             sx={{
-              boxShadow: 3
+              boxShadow: 3,
+              '&:hover .rotate-icon': {
+                transform: 'rotate(230deg)',
+                transition: 'transform 0.4s ease-in-out',
+              }
             }}
           >
-            <SettingsIcon />
+            <SettingsIcon className="rotate-icon" />
           </IconButton>
         </Tooltip>
+
       </Box>
     </Box>
   );

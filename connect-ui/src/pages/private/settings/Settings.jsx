@@ -5,7 +5,6 @@ import {
   Typography,
   TextField,
   useTheme,
-  useMediaQuery,
   Avatar,
   Divider,
   Tooltip,
@@ -22,49 +21,46 @@ import {
   SosIcon,
   ChatIcon,
   LogoutIcon,
-  ArrowBackIcon,
 } from "@/MUI/MuiIcons";
 import { Link } from 'react-router-dom';
 import NavigateWithArrow from '@/components/private/NavigateWithArrow';
 
 function Settings() {
-  const theme = useTheme();
-  const ismd = useMediaQuery(theme.breakpoints.down('md'));
   const [searchValue, setSearchValue] = React.useState('');
 
   const settingItems = [
     {
       path: 'account',
-      icon: <KeyIcon sx={{ mr: 1.1, color: 'text.secondary' }} />,
+      icon: <KeyIcon sx={{ mr: 1.1, color: 'warning.main' }} />,
       title: 'Account',
       subTitle: 'Security notification, account info',
     },
     {
       path: 'privacy',
-      icon: <LockIcon sx={{ mr: 1.1, color: 'text.secondary' }} />,
+      icon: <LockIcon sx={{ mr: 1.1, color: 'info.main' }} />,
       title: 'Privacy',
       subTitle: 'Blocked contacts, controls',
     },
     {
       path: 'chats',
-      icon: <ChatIcon sx={{ mr: 1.1, color: 'text.secondary' }} />,
+      icon: <ChatIcon sx={{ mr: 1.1, color: 'success.main' }} />,
       title: 'Chats',
       subTitle: 'Theme, wallpaper, chat settings',
     },
     {
       path: 'notifications',
-      icon: <NotificationsIcon sx={{ mr: 1.1, color: 'text.secondary' }} />,
+      icon: <NotificationsIcon sx={{ mr: 1.1, color: 'primary.main' }} />,
       title: 'Notifications',
-      subTitle: 'message notifications',
+      subTitle: 'Message notifications',
     },
     {
       path: 'help',
-      icon: <SosIcon sx={{ mr: 1.1, color: 'text.secondary' }} />,
+      icon: <SosIcon sx={{ mr: 1.1, color: 'error.main' }} />,
       title: 'Help',
       subTitle: 'Help center, contact us, privacy policy',
     },
-
   ];
+
 
   return (
     <Box component={'dev'} sx={{
@@ -143,7 +139,11 @@ function Settings() {
             component={Link}
             to={item.path}
             sx={{
-              borderRadius: 1
+              borderRadius: 1,
+              transition: 'all 0.3s ease',
+              "&:hover": {
+                transform: 'translateY(-5px)',
+              }
             }}
           >
             <ListItemIcon>{item.icon}</ListItemIcon>
@@ -153,9 +153,17 @@ function Settings() {
             </Stack>
           </ListItemButton>
         ))}
-        <ListItemButton component={Link} to={'/logout'} sx={{
-          borderRadius: 1
-        }}>
+        <ListItemButton
+          component={Link}
+          to={'/logout'}
+          sx={{
+            borderRadius: 1,
+            p: 2,
+            transition: 'all 0.3s ease',
+            "&:hover": {
+              transform: 'translateY(-5px)',
+            }
+          }}>
           <ListItemIcon>{<LogoutIcon sx={{ mr: 1.1, color: 'error.main' }} />}</ListItemIcon>
           <ListItemText primary='Logout' sx={{ color: 'error.main' }} />
         </ListItemButton>

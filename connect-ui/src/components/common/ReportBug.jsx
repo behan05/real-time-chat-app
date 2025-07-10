@@ -11,8 +11,8 @@ import {
   Select,
   MenuItem,
   FormHelperText
-} from '../../MUI/MuiComponents';
-import { SendIcon } from '../../MUI/MuiIcons';
+} from '@/MUI/MuiComponents';
+import { SendIcon } from '@/MUI/MuiIcons';
 import StyledText from '../common/StyledText';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

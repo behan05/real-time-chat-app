@@ -41,7 +41,7 @@ const ChatSidebarPanelNavbar = () => {
 
     const navItems = [
         { path: '/random-chat', icon: <ShuffleIcon />, label: 'Random Chat' },
-        { path: '/chat', icon: <ChatIcon />, label: 'Chat' },
+        // { path: '/chat', icon: <ChatIcon />, label: 'Chat' },
         { path: '/archive', icon: <ArchiveIcon />, label: 'Archived' },
     ];
 
@@ -49,7 +49,6 @@ const ChatSidebarPanelNavbar = () => {
         '/connect': 'Connect',
         '/random-chat': 'Random Connect',
         '/archive': 'Archive',
-        '/chat': 'Chat',
     }[location.pathname] || 'Connect';
 
     const handleLogout = async () => {
