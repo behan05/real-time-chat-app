@@ -23,6 +23,7 @@ const ChatSidebar = ({ onUserSelect }) => {
       display="flex"
       flexDirection="column"
       bgcolor="background.paper"
+      minWidth={300}
       px={2}
       sx={{
         minHeight: '100vh',
