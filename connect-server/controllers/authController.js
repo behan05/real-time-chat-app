@@ -14,6 +14,13 @@ const registerController = async (req, res) => {
       authProvider = 'local'
     } = req.body;
 
+    // check user existence
+    const existingUser = await User.findOne({ email });
+
+    if (existingUser) {
+      return res.status(409).json({ error: 'user alreay exist! please use another email.' });
+    }
+
     if (authProvider === 'local') {
       if (!password || !confirmPassword) {
         return res.status(400).json({ error: 'Password and confirm password are required for local signup' })
@@ -53,54 +60,52 @@ const registerController = async (req, res) => {
 
 const loginController = async (req, res) => {
   try {
-    const { email, password, authProvider } = req.body;
+    const { email, password, authProvider = 'local' } = req.body;
 
+    if (!email || !password) {
+      return res.status(400).json({ error: 'Email and password are required.' });
+    }
+
+    const user = await User.findOne({ email });
+
+    // User not found
+    if (!user) {
+      return res.status(404).json({ error: 'User not found.' });
+    }
+
+    // Auth provider mismatch
+    if (user.authProvider !== authProvider) {
+      return res.status(400).json({
+        error: `Please login with ${user.authProvider}.`
+      });
+    }
+
+    // Password comparison (only for local users)
     if (authProvider === 'local') {
-      if (!email || !password) {
-        return res.status(404).json(
-          { error: 'username and password does not matched.' }
-        )
-      };
-
-      // Match user
-      const user = await User.findOne({ email: email });
-
-      if (!user) {
-        return res.status(404).json({ error: 'User not found' })
-      };
-
-      if (user.authProvider !== 'local') {
-        return res.status(400).json(
-          { error: `Please login with ${user.authProvider}` }
-        );
-      };
-
-      //  Compare password using bcrypt
       const isMatch = await bcrypt.compare(password, user.password);
-
       if (!isMatch) {
-        return res.status(401).json({ error: 'Invalid credentials' });
+        return res.status(401).json({ error: 'Invalid credentials.' });
       }
+    }
 
-      const token = generateToken(user._id);
-      res.status(200).json({
-        msg: 'Login successful!',
-        user: {
-          id: user._id,
-          fullName: user.fullName,
-          email: user.email,
-          token
-        }
-      })
-    }
-    else {
-      return res.status(400).json({ error: 'Unsupported auth provider' });
-    }
+    // Generate token (JWT or your logic)
+    const token = generateToken(user._id);
+
+    return res.status(200).json({
+      msg: 'Login successful!',
+      user: {
+        id: user._id,
+        fullName: user.fullName,
+        email: user.email,
+      },
+      token,
+    });
+
   } catch (error) {
-    console.log(error.message);
+    console.error('Login error:', error.message);
     return res.status(500).json({ error: 'Server error' });
   }
-}
+};
 
 const forgetPasswordController = async (req, res) => {
   try {

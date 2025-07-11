@@ -9,7 +9,7 @@ const connectDB = require('./config/db');
 const authRoutes = require('./routers/authRoutes');
 
 // server PORT
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 8001;
 
 // Connect Database
 connectDB();
