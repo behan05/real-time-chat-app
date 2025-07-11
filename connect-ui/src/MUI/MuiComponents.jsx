@@ -8,7 +8,6 @@ import {
   Button, // Action buttons
   CircularProgress, // Loading spinners
   Container, // Centered page content wrapper
-  Dialog, // Modal dialogs
   Divider, // Section separators
   Drawer, // Sidebar / navigation drawer
   IconButton, // Icon-only button (e.g., toggle, close)
@@ -41,11 +40,21 @@ import {
   InputLabel,
   Select,
   FormHelperText,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
 } from '@mui/material';
 
 export {
   AppBar,
   Avatar,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
   Badge,
   FormHelperText,
   Box,
@@ -56,7 +65,6 @@ export {
   ListItemAvatar,
   CircularProgress,
   Container,
-  Dialog,
   Menu, MenuItem,
   Divider,
   Drawer,

@@ -96,7 +96,7 @@ import ReportIcon from '@mui/icons-material/Report'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
 import LockResetIcon from '@mui/icons-material/LockReset';
 import DownloadIcon from '@mui/icons-material/Download';
-
+import DeleteIcon from '@mui/icons-material/Delete';
 // ==================== Export All ====================
 export {
   // Setting Icons
@@ -116,6 +116,7 @@ export {
   ReportIcon,
   PersonAddIcon,
   DownloadIcon,
+  DeleteIcon,
 
   // Navigation & Layout
   ArrowBackIcon,
