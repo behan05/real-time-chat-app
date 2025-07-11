@@ -1,5 +1,5 @@
 
-exports.reportProblem = async () => { };
+exports.bugReport = async () => { };
 exports.contactHelp = async () => { };
 exports.changeCredentials = async () => { };
 exports.requestInfo = async () => { };

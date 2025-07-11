@@ -3,7 +3,7 @@ const Routers = require('express').Router();
 const settingsController = require('../controllers/settingsController');
 
 // Bug Reports & Help
-Routers.post('/report-problem', settingsController.reportProblem);
+Routers.post('/report-problem', settingsController.bugReport);
 Routers.post('/contact-help', settingsController.contactHelp);
 
 // Account Management
