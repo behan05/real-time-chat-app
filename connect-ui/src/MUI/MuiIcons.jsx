@@ -95,10 +95,10 @@ import MessageIcon from '@mui/icons-material/Message'
 import ReportIcon from '@mui/icons-material/Report'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
 import LockResetIcon from '@mui/icons-material/LockReset';
+import DownloadIcon from '@mui/icons-material/Download';
 
 // ==================== Export All ====================
 export {
-
   // Setting Icons
   KeyIcon,
   NotificationsIcon,
@@ -115,6 +115,7 @@ export {
   MessageIcon,
   ReportIcon,
   PersonAddIcon,
+  DownloadIcon,
 
   // Navigation & Layout
   ArrowBackIcon,

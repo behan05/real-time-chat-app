@@ -7,7 +7,7 @@ import {
   TextField,
   InputAdornment,
   IconButton,
-} from '../../../../../MUI/MuiComponents';
+} from '@/MUI/MuiComponents';
 
 import {
   SendIcon,
