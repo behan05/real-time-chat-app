@@ -119,6 +119,15 @@ const ChatSidebarPanelNavbar = () => {
                     onClose={() => setMenuAnchorEl(null)}
                     anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                     transformOrigin={{ vertical: 'top', horizontal: 'center' }}
+                    PaperProps={{
+                        sx: {
+                            backgroundColor: 'background.paper',
+                            boxShadow: 3,
+                            minWidth: 180,
+                            px: 1,
+                            py: 0.5,
+                        }
+                    }}
                 >
                     <MenuItem component={NavLink} to="profile" onClick={() => setMenuAnchorEl(null)}>
                         <PersonIcon fontSize="small" sx={{ mr: 1 }} />

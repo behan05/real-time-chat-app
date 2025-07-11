@@ -16,7 +16,7 @@ import {
 import { SendIcon } from '@/MUI/MuiIcons';
 import NavigateWithArrow from '@/components/private/NavigateWithArrow';
 import StyledText from '@/components/common/StyledText';
-
+import StyledActionButton from '@/components/common/StyledActionButton';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -203,34 +203,13 @@ function HelpContact() {
             helperText={error.message}
           />
 
-          <Button
-            type="submit"
-            variant="outlined"
+          <StyledActionButton
+            type='submit'
             disabled={isDisabled}
-            endIcon={<SendIcon />}
-            sx={{
-              mt: 2,
-              px: { xs: 2, sm: 3 },
-              py: { xs: 1, sm: 1 },
-              maxWidth: 'fit-content',
-              alignSelf: 'center',
-              border: 'none',
-              borderTopRightRadius: '6px',
-              borderBottomRightRadius: '6px',
-              borderBottom: `1px dotted ${theme.palette.success.main}`,
-              backdropFilter: 'blur(14px)',
-              backgroundColor: 'transparent',
-              color: 'primary.contrastText',
-              textTransform: 'none',
-              letterSpacing: 2,
-              transition: 'all 0.3s ease',
-              '&:hover': {
-                transform: 'translateY(-5px)'
-              }
-            }}
+            endIcon={<SendIcon sx={{ color: 'success.main' }} />}
           >
             {isDisabled ? 'Sending Request...' : 'Request'}
-          </Button>
+          </StyledActionButton>
         </Stack>
       </Box>
     </Box>

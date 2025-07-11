@@ -16,6 +16,7 @@ import { SendIcon } from '@/MUI/MuiIcons';
 import StyledText from '../common/StyledText';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import StyledActionButton from '../common/StyledActionButton';
 
 function ReportBug() {
   React.useEffect(() => {
@@ -245,34 +246,13 @@ function ReportBug() {
             <input type="file" hidden onChange={handleFileChange} />
           </Button>
 
-          <Button
-            type="submit"
-            variant="outlined"
+          <StyledActionButton
+            type='submit'
             disabled={isDisabled}
-            endIcon={<SendIcon />}
-            sx={{
-              mt: 2,
-              px: { xs: 2, sm: 3 },
-              py: { xs: 1, sm: 1 },
-              maxWidth: 'fit-content',
-              alignSelf: 'center',
-              border: 'none',
-              borderTopRightRadius: '6px',
-              borderBottomRightRadius: '6px',
-              borderBottom: `1px dotted ${theme.palette.success.main}`,
-              backdropFilter: 'blur(14px)',
-              backgroundColor: 'transparent',
-              color: 'primary.contrastText',
-              textTransform: 'none',
-              letterSpacing: 2,
-              transition: 'all 0.3s ease',
-              '&:hover': {
-                transform: 'translateY(-5px)'
-              }
-            }}
+            endIcon={<SendIcon sx={{ color: 'success.main' }} />}
           >
             {isDisabled ? 'Sending...' : 'Report Issue'}
-          </Button>
+          </StyledActionButton>
         </Stack>
       </Box>
     </Box>

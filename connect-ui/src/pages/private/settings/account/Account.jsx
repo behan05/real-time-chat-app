@@ -7,11 +7,10 @@ import {
   ListItemIcon,
   ListItemText,
   Stack,
-  useTheme
 } from '@/MUI/MuiComponents';
 
 import {
-  SecurityIcon,
+  LockResetIcon,
   InfoIcon,
   DeleteForeverIcon
 } from '@/MUI/MuiIcons';
@@ -20,15 +19,14 @@ import NavigateWithArrow from '@/components/private/NavigateWithArrow'
 import { Link } from 'react-router-dom';
 
 function Account() {
-  const theme = useTheme()
   const accountItems = [
     {
-      icon: <SecurityIcon fontSize="small" sx={{ color: 'warning.main' }} />,
-      label: 'Security notifications',
-      path: 'security',
+      icon: <LockResetIcon fontSize="medium" sx={{ color: 'warning.main' }} />,
+      label: 'Change Email / Password',
+      path: 'change-credentials',
     },
     {
-      icon: <InfoIcon fontSize="small" sx={{ color: 'info.main' }} />,
+      icon: <InfoIcon fontSize="medium" sx={{ color: 'info.main' }} />,
       label: 'Request account info',
       path: 'info',
     },
@@ -66,7 +64,7 @@ function Account() {
 
         <ListItemButton
           component={Link}
-          to={'/delete'}
+          to={'delete'}
           sx={{
             borderRadius: 1,
             p: 2,

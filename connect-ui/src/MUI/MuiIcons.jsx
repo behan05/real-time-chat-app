@@ -94,6 +94,7 @@ import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive'
 import MessageIcon from '@mui/icons-material/Message'
 import ReportIcon from '@mui/icons-material/Report'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
+import LockResetIcon from '@mui/icons-material/LockReset';
 
 // ==================== Export All ====================
 export {
@@ -103,6 +104,7 @@ export {
   NotificationsIcon,
   SosIcon,
   InfoIcon,
+  LockResetIcon,
   DeleteForeverIcon,
   BlockIcon,
   SettingsBackupRestoreIcon,

@@ -25,9 +25,9 @@ import SettingsLayout from '@/pages/private/settings/SettingsLayout';
 // === Account Settings ===
 import AccountLayout from '@/pages/private/settings/account/AccountLayout';
 import Account from '@/pages/private/settings/account/Account';
-import SecurityNotifications from '@/pages/private/settings/account/securityNotification/SecurityNotifications';
 import RequestAccountInfo from '@/pages/private/settings/account/reqAccountInfo/RequestAccountInfo';
 import AccountDelete from '@/pages/private/settings/account/accountDelete/AccountDelete';
+import ChangeCredentials from '../pages/private/settings/account/changeCredentials/ChangeCredentials';
 
 // === Privacy Settings === 
 import PrivacyLayout from '@/pages/private/settings/privacy/PrivacyLayout';
@@ -49,7 +49,6 @@ import HelpContact from '../pages/private/settings/help/HelpContact';
 import HelpPrivacyPolicy from '../pages/private/settings/help/HelpPrivacyPolicy';
 import HelpReport from '../pages/private/settings/help/HelpReport';
 import ReportBug from '../components/common/ReportBug';
-
 
 export const routes = createBrowserRouter([
 
@@ -95,17 +94,19 @@ export const routes = createBrowserRouter([
               { index: true, element: <Settings /> },
               { path: 'profile', element: <Profile /> },
 
+              // account
               {
                 path: 'account',
                 element: <AccountLayout />,
                 children: [
                   { index: true, element: <Account /> },
-                  { path: 'security', element: <SecurityNotifications /> },
+                  { path: 'change-credentials', element: <ChangeCredentials /> },
                   { path: 'info', element: <RequestAccountInfo /> },
                   { path: 'delete', element: <AccountDelete /> },
                 ]
               },
 
+              // privacy
               {
                 path: 'privacy',
                 element: <PrivacyLayout />,
@@ -114,6 +115,7 @@ export const routes = createBrowserRouter([
                 ]
               },
 
+              // chats
               {
                 path: 'chats',
                 element: <ChatsLayout />,
@@ -122,6 +124,7 @@ export const routes = createBrowserRouter([
                 ]
               },
 
+              // notifications
               {
                 path: 'notifications',
                 element: <NotificationsLayout />,
@@ -130,6 +133,7 @@ export const routes = createBrowserRouter([
                 ]
               },
 
+              // help
               {
                 path: 'help',
                 element: <HelpLayout />,
