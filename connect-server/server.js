@@ -3,24 +3,26 @@ const app = express();
 const cors = require('cors');
 require('dotenv').config();
 
+// DB Connection
 const connectDB = require('./config/db');
 
-// Routers
+// Route Imports
 const authRoutes = require('./routers/authRoutes');
+const settingsRoutes = require('./routers/settingsRoutes');
 
-// server PORT
+// PORT
 const PORT = process.env.PORT || 8001;
 
 // Connect Database
 connectDB();
 
-// Allowing frontend request
+// Middlewares
 app.use(cors());
+app.use(express.json()); // Parses incoming JSON
 
-// parse json data into pure javascript object
-app.use(express.json());
-
-app.use('/api/users', authRoutes);
+// Routes
+app.use('/api/users', authRoutes); // For auth
+app.use('/api/settings', settingsRoutes); // For settings
 
 // App listner
 app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
