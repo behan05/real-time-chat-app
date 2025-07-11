@@ -70,14 +70,15 @@ function Settings() {
       bgcolor: 'background.paper',
       borderRight: '1px solid rgba(112, 106, 106, 0.3)',
       minHeight: '100vh',
-      maxHeight: '100vh'
+      maxHeight: '100vh',
+      minWidth: 300
     }}>
       {/* Header with arrow back icon */}
       <Stack mb={2}>
         <NavigateWithArrow redirectTo={'/connect'} text={'Settings'} />
       </Stack>
       {/* Search keywords */}
-      <Box component={'sections'} mt={1}>
+      <Box component={'section'} mt={1}>
         <TextField
           size="small"
           fullWidth

@@ -28,7 +28,7 @@ function Account() {
     {
       icon: <InfoIcon fontSize="medium" sx={{ color: 'info.main' }} />,
       label: 'Request account info',
-      path: 'info',
+      path: 'request-info',
     },
   ];
 
@@ -64,7 +64,7 @@ function Account() {
 
         <ListItemButton
           component={Link}
-          to={'delete'}
+          to={'delete-account'}
           sx={{
             borderRadius: 1,
             p: 2,

@@ -101,8 +101,8 @@ export const routes = createBrowserRouter([
                 children: [
                   { index: true, element: <Account /> },
                   { path: 'change-credentials', element: <ChangeCredentials /> },
-                  { path: 'info', element: <RequestAccountInfo /> },
-                  { path: 'delete', element: <AccountDelete /> },
+                  { path: 'request-info', element: <RequestAccountInfo /> },
+                  { path: 'delete-account', element: <AccountDelete /> },
                 ]
               },
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack, Typography } from '@mui/material';
+import { Stack, Typography } from '@/MUI/MuiComponents';
 
 const SectionHeader = ({ icon, title, desciption }) => (
   <Stack direction="column" spacing={1}>
