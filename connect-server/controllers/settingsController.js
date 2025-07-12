@@ -3,6 +3,7 @@ const BugReport = require('../models/ReportProblem.model');
 const PrivacySettings = require('../models/PrivacySettings.model');
 const User = require('../models/User.model');
 const bcrypt = require('bcryptjs');
+const zlib = require('zlib');
 
 // Handle contact/help requests submitted by users
 exports.contactHelp = async (req, res) => {
@@ -174,7 +175,40 @@ exports.changeCredentials = async (req, res) => {
 };
 
 // Provide user with access to their saved account information
-exports.requestInfo = async (req, res) => { };
+exports.requestInfo = async (req, res) => {
+
+    const user = await User.findById(req.user.id);
+
+    if (!user) {
+        res.setHeader("Content-Type", "application/json");
+        res.status(404).json({
+            error: 'User not found.'
+        })
+        return;
+    }
+    try {
+        const userData = {
+            fullName: user.fullName,
+            email: user.email,
+            createdAt: user.createdAt,
+            signupThrough: user.authProvider,
+            // when profile page compeletd then i will add more...
+        }
+        const buffer = Buffer.from(JSON.stringify(userData), 'utf-8');
+        const compressed = zlib.gzipSync(buffer);
+
+        res.setHeader('Content-Type', 'application/gzip');
+        res.setHeader('Content-Disposition', `attachment; filename=${user.fullName}-your-info.json.gz`);
+        res.status(200).send(compressed);
+
+    } catch (error) {
+        res.setHeader("Content-Type", "application/json");
+        res.status(500).json({
+            error: 'An error occurred while processing your request.'
+        });
+        return;
+    }
+};
 
 // Delete a user's account and associated data
 exports.deleteAccount = async (req, res) => { };
