@@ -314,4 +314,23 @@ exports.updatePrivacy = async (req, res) => {
 };
 
 // Get user's current privacy settings
-exports.getPrivacy = async (req, res) => { };
+exports.getPrivacy = async (req, res) => {
+    try {
+        const privacySettings = await PrivacySettings.findOne({ user: req.user.id });
+
+        if (!privacySettings) {
+            res.setHeader('Content-Type', 'application/json');
+            return res.status(404).json({
+                error: 'Privacy settings not found.'
+            });
+        }
+
+        res.setHeader('Content-Type', 'application/json');
+        res.status(200).json({ privacySettings });
+    } catch (error) {
+        res.setHeader('Content-Type', 'application/json');
+        res.status(500).json({
+            error: 'An error occurred while retrieving your privacy settings.'
+        });
+    }
+};
