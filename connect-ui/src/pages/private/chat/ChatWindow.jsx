@@ -5,7 +5,7 @@ import {
   Typography,
   IconButton,
   useTheme,
-  useMediaQuery,
+  useMediaQuery
 } from '../../../MUI/MuiComponents';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ChatHeader from './ChatHeader';
@@ -22,7 +22,7 @@ const ChatWindow = ({ selectedUserId, onBack }) => {
       sx={{
         maxHeight: '100vh',
         minHeight: '100vh',
-        bgcolor: 'background.paper',
+        bgcolor: 'background.paper'
       }}
     >
       {/* Optional Back Button only for small screens */}
@@ -31,7 +31,9 @@ const ChatWindow = ({ selectedUserId, onBack }) => {
           <IconButton onClick={onBack}>
             <ArrowBackIcon />
           </IconButton>
-          <Typography variant="h6" ml={1}>Chat</Typography>
+          <Typography variant="h6" ml={1}>
+            Chat
+          </Typography>
         </Stack>
       )}
 
@@ -44,4 +46,3 @@ const ChatWindow = ({ selectedUserId, onBack }) => {
 };
 
 export default ChatWindow;
-

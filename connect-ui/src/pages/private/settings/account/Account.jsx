@@ -6,15 +6,11 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Stack,
+  Stack
 } from '@/MUI/MuiComponents';
 
-import {
-  LockResetIcon,
-  InfoIcon,
-  DeleteForeverIcon
-} from '@/MUI/MuiIcons';
-import NavigateWithArrow from '@/components/private/NavigateWithArrow'
+import { LockResetIcon, InfoIcon, DeleteForeverIcon } from '@/MUI/MuiIcons';
+import NavigateWithArrow from '@/components/private/NavigateWithArrow';
 
 import { Link } from 'react-router-dom';
 
@@ -23,13 +19,13 @@ function Account() {
     {
       icon: <LockResetIcon fontSize="medium" sx={{ color: 'warning.main' }} />,
       label: 'Change Email / Password',
-      path: 'change-credentials',
+      path: 'change-credentials'
     },
     {
       icon: <InfoIcon fontSize="medium" sx={{ color: 'info.main' }} />,
       label: 'Request account info',
-      path: 'request-info',
-    },
+      path: 'request-info'
+    }
   ];
 
   return (
@@ -50,14 +46,12 @@ function Account() {
               p: 2,
               borderRadius: 1,
               transition: 'all 0.3s ease',
-              "&:hover": {
-                transform: 'translateY(-5px)',
+              '&:hover': {
+                transform: 'translateY(-5px)'
               }
             }}
           >
-            <ListItemIcon>
-              {item.icon}
-            </ListItemIcon>
+            <ListItemIcon>{item.icon}</ListItemIcon>
             <ListItemText primary={item.label} />
           </ListItemButton>
         ))}
@@ -69,18 +63,19 @@ function Account() {
             borderRadius: 1,
             p: 2,
             transition: 'all 0.3s ease',
-            "&:hover": {
-              transform: 'translateY(-5px)',
+            '&:hover': {
+              transform: 'translateY(-5px)'
             }
-          }}>
+          }}
+        >
           <ListItemIcon>{<DeleteForeverIcon sx={{ mr: 1.1, color: 'error.main' }} />}</ListItemIcon>
-          <ListItemText primary='Delete my account' sx={{ color: 'error.main' }} />
+          <ListItemText primary="Delete my account" sx={{ color: 'error.main' }} />
         </ListItemButton>
       </List>
 
       <Divider sx={{ my: 2 }} />
     </Box>
-  )
+  );
 }
 
 export default Account;

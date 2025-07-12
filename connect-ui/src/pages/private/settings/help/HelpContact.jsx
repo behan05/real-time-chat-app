@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   Box,
-  Button,
   Stack,
   TextField,
   Typography,
@@ -19,6 +18,8 @@ import StyledText from '@/components/common/StyledText';
 import StyledActionButton from '@/components/common/StyledActionButton';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { SETTINGS_API } from '@/api/config';
+import axios from 'axios';
 
 function HelpContact() {
   const theme = useTheme();
@@ -44,7 +45,7 @@ function HelpContact() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const newError = {};
@@ -81,10 +82,14 @@ function HelpContact() {
     setError(newError);
 
     if (!isValid) return;
-
-    // Submit logic here integrat API.
     setIsDisabled(true);
-    toast.success('Your message has been sent successfully!');
+
+    try {
+      const response = await axios.post(`${SETTINGS_API}/contact-support`, formData);
+      toast.success(response.data.message);
+    } catch (error) {
+      toast.error(error.response?.data?.error || 'Something went wrong.');
+    }
 
     setFormData({
       fullName: '',
@@ -123,13 +128,14 @@ function HelpContact() {
         }}
       >
         {/* === Heading === */}
-        <Stack direction="column" textAlign='center'>
+        <Stack direction="column" textAlign="center">
           <Typography variant="h5" fontWeight={600} mb={1} color="text.primary">
             Need <StyledText text="Assistance?" />
           </Typography>
 
           <Typography variant="body2" fontWeight={400} mb={4} color="text.secondary">
-            We're here to help. If you're facing issues or have questions, please fill out the form below and our support team will get back to you shortly.
+            We're here to help. If you're facing issues or have questions, please fill out the form
+            below and our support team will get back to you shortly.
           </Typography>
         </Stack>
 
@@ -204,7 +210,7 @@ function HelpContact() {
           />
 
           <StyledActionButton
-            type='submit'
+            type="submit"
             disabled={isDisabled}
             endIcon={<SendIcon sx={{ color: 'success.main' }} />}
           >

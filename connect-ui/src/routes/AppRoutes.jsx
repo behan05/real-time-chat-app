@@ -11,7 +11,7 @@ import { SidebarProvider } from '@/context/SidebarContext';
 import PrivacyPolicyPage from '@/components/common/PrivacyPolicyPage';
 import TermsOfUsePage from '@/components/common/TermsOfUsePage';
 
-// === Common Use components === 
+// === Common Use components ===
 import PageNotFound from '@/components/common/PageNotFound';
 
 // === Private Routes ===
@@ -29,19 +29,19 @@ import RequestAccountInfo from '@/pages/private/settings/account/reqAccountInfo/
 import AccountDelete from '@/pages/private/settings/account/accountDelete/AccountDelete';
 import ChangeCredentials from '../pages/private/settings/account/changeCredentials/ChangeCredentials';
 
-// === Privacy Settings === 
+// === Privacy Settings ===
 import PrivacyLayout from '@/pages/private/settings/privacy/PrivacyLayout';
 import Privacy from '@/pages/private/settings/privacy/Privacy';
 
-// === Chats Settings === 
+// === Chats Settings ===
 import ChatsLayout from '@/pages/private/settings/chats/ChatsLayout';
 import Chats from '@/pages/private/settings/chats/Chats';
 
-// === Notification Settings === 
+// === Notification Settings ===
 import NotificationsLayout from '@/pages/private/settings/notifications/NotificationsLayout';
 import Notifications from '@/pages/private/settings/notifications/Notifications';
 
-// === Help Settings === 
+// === Help Settings ===
 import HelpLayout from '@/pages/private/settings/help/HelpLayout';
 import Help from '@/pages/private/settings/help/Help';
 import HelpFAQs from '../pages/private/settings/help/HelpFAQs';
@@ -51,7 +51,6 @@ import HelpReport from '../pages/private/settings/help/HelpReport';
 import ReportBug from '../components/common/ReportBug';
 
 export const routes = createBrowserRouter([
-
   // === Public routes ===
   {
     path: '/',
@@ -71,7 +70,7 @@ export const routes = createBrowserRouter([
       { path: 'report', element: <ReportBug /> },
       { path: 'privacy-policy', element: <PrivacyPolicyPage /> },
       { path: 'terms-of-use', element: <TermsOfUsePage /> },
-      { path: '*', element: <PageNotFound redirectTo={'/'} /> },
+      { path: '*', element: <PageNotFound redirectTo={'/'} /> }
     ]
   },
 
@@ -102,7 +101,7 @@ export const routes = createBrowserRouter([
                   { index: true, element: <Account /> },
                   { path: 'change-credentials', element: <ChangeCredentials /> },
                   { path: 'request-info', element: <RequestAccountInfo /> },
-                  { path: 'delete-account', element: <AccountDelete /> },
+                  { path: 'delete-account', element: <AccountDelete /> }
                 ]
               },
 
@@ -110,27 +109,21 @@ export const routes = createBrowserRouter([
               {
                 path: 'privacy',
                 element: <PrivacyLayout />,
-                children: [
-                  { index: true, element: <Privacy /> }
-                ]
+                children: [{ index: true, element: <Privacy /> }]
               },
 
               // chats
               {
                 path: 'chats',
                 element: <ChatsLayout />,
-                children: [
-                  { index: true, element: <Chats /> }
-                ]
+                children: [{ index: true, element: <Chats /> }]
               },
 
               // notifications
               {
                 path: 'notifications',
                 element: <NotificationsLayout />,
-                children: [
-                  { index: true, element: <Notifications /> }
-                ]
+                children: [{ index: true, element: <Notifications /> }]
               },
 
               // help
@@ -142,14 +135,13 @@ export const routes = createBrowserRouter([
                   { path: 'faqs-help', element: <HelpFAQs /> },
                   { path: 'contact-help', element: <HelpContact /> },
                   { path: 'privacy-policy', element: <HelpPrivacyPolicy /> },
-                  { path: 'report-problem', element: <HelpReport /> },
+                  { path: 'report-problem', element: <HelpReport /> }
                 ]
-              },
+              }
             ]
-          },
+          }
         ]
-      },
+      }
     ]
   }
-
 ]);

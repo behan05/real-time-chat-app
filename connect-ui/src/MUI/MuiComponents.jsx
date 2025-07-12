@@ -44,7 +44,7 @@ import {
   DialogTitle,
   DialogContent,
   DialogContentText,
-  DialogActions,
+  DialogActions
 } from '@mui/material';
 
 export {
@@ -65,7 +65,8 @@ export {
   ListItemAvatar,
   CircularProgress,
   Container,
-  Menu, MenuItem,
+  Menu,
+  MenuItem,
   Divider,
   Drawer,
   IconButton,

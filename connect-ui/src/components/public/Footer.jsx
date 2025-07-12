@@ -64,10 +64,20 @@ function Footer() {
             <MuiLink component={RouterLink} to="faq" underline="hover" color="text.secondary">
               FAQs
             </MuiLink>
-            <MuiLink component={RouterLink} to="privacy-policy" underline="hover" color="text.secondary">
+            <MuiLink
+              component={RouterLink}
+              to="privacy-policy"
+              underline="hover"
+              color="text.secondary"
+            >
               Privacy Policy
             </MuiLink>
-            <MuiLink component={RouterLink} to="terms-of-use" underline="hover" color="text.secondary">
+            <MuiLink
+              component={RouterLink}
+              to="terms-of-use"
+              underline="hover"
+              color="text.secondary"
+            >
               Terms of Use
             </MuiLink>
             <MuiLink component={RouterLink} to="report" underline="hover" color="text.secondary">

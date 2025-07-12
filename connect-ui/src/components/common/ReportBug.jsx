@@ -17,6 +17,8 @@ import StyledText from '../common/StyledText';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import StyledActionButton from '../common/StyledActionButton';
+import { SETTINGS_API } from '@/api/config';
+import axios from 'axios';
 
 function ReportBug() {
   React.useEffect(() => {
@@ -66,7 +68,7 @@ function ReportBug() {
     setFormData((prev) => ({ ...prev, screenshot: file || null }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     let isValid = true;
@@ -96,7 +98,13 @@ function ReportBug() {
     if (!isValid) return;
 
     setIsDisabled(true);
-    toast.success('Your problem has been reported successfully!');
+
+    try {
+      const response = await axios.post(`${SETTINGS_API}/report-problem`, formData);
+      toast.success(response.data.message);
+    } catch (error) {
+      toast.error(error.response?.data?.error || 'Something went wrong.');
+    }
 
     setFormData({
       issueType: '',
@@ -132,19 +140,14 @@ function ReportBug() {
           boxShadow: `inset 1px 1px 0.2rem ${theme.palette.text.secondary}`
         }}
       >
-        <Stack direction={'column'} textAlign='center'>
+        <Stack direction={'column'} textAlign="center">
           <Typography variant="h4" fontWeight={600} mb={1}>
             Report a <StyledText text="Problem" />
           </Typography>
 
-          <Typography
-            variant="body2"
-            fontWeight={400}
-            gutterBottom
-            mb={4}
-            color="text.secondary"
-          >
-            Encountered a bug or issue? Help us improve Connect by reporting it below. The more details you provide, the faster we can fix it.
+          <Typography variant="body2" fontWeight={400} gutterBottom mb={4} color="text.secondary">
+            Encountered a bug or issue? Help us improve Connect by reporting it below. The more
+            details you provide, the faster we can fix it.
           </Typography>
         </Stack>
 
@@ -236,18 +239,13 @@ function ReportBug() {
             fullWidth
           />
 
-          <Button
-            variant="outlined"
-            component="label"
-            fullWidth
-            color='text.secondary'
-          >
+          <Button variant="outlined" component="label" fullWidth color="text.secondary">
             Upload screenshot (Optional)
             <input type="file" hidden onChange={handleFileChange} />
           </Button>
 
           <StyledActionButton
-            type='submit'
+            type="submit"
             disabled={isDisabled}
             endIcon={<SendIcon sx={{ color: 'success.main' }} />}
           >

@@ -8,7 +8,9 @@ const SectionHeader = ({ icon, title, desciption }) => (
       <Typography variant="h6">{title}</Typography>
     </Stack>
 
-    <Typography variant='body2' gutterBottom color='text.secondary'>{desciption}</Typography>
+    <Typography variant="body2" gutterBottom color="text.secondary">
+      {desciption}
+    </Typography>
   </Stack>
 );
 

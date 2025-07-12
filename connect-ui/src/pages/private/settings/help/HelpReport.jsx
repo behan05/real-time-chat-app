@@ -1,29 +1,24 @@
-import React from 'react'
-import {
-    Box,
-    Stack,
-} from '@/MUI/MuiComponents'
-import NavigateWithArrow from '@/components/private/NavigateWithArrow'
+import React from 'react';
+import { Box, Stack } from '@/MUI/MuiComponents';
+import NavigateWithArrow from '@/components/private/NavigateWithArrow';
 import ReportBug from '@/components/common/ReportBug';
 
-
 function HelpReport() {
+  React.useEffect(() => {
+    document.title = 'Connect - Report Problem';
+  }, []);
 
-    React.useEffect(() => {
-        document.title = 'Connect - Report Problem';
-    }, []);
+  return (
+    <Box>
+      {/* Header with arrow back icon */}
+      <Stack mb={2}>
+        <NavigateWithArrow redirectTo={'/connect/settings/help'} text={'Report Problem'} />
+      </Stack>
 
-    return (
-        <Box>
-            {/* Header with arrow back icon */}
-            <Stack mb={2}>
-                <NavigateWithArrow redirectTo={'/connect/settings/help'} text={'Report Problem'} />
-            </Stack>
-
-            {/* === Calling Report Bug Component from commom component === */}
-            <ReportBug />
-        </Box>
-    )
+      {/* === Calling Report Bug Component from commom component === */}
+      <ReportBug />
+    </Box>
+  );
 }
 
-export default HelpReport
+export default HelpReport;

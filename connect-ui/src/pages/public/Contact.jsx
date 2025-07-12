@@ -60,7 +60,7 @@ function Contact() {
 
       // Clear form
       setFormData({ name: '', email: '', phone: '', message: '' });
-    } catch (err) {
+    } catch (error) {
       toast.error('Something went wrong. Please try again.');
     } finally {
       setIsSubmitting(false);
@@ -82,6 +82,9 @@ function Contact() {
         mx: 'auto'
       }}
     >
+      {/* ToastContainer added locally */}
+      <ToastContainer position="top-right" autoClose={3000} theme="dark" />
+
       <Typography variant="h5" fontWeight={600} textAlign="center" mb={1}>
         Get in {<StyledText text="Touch" />}
       </Typography>
@@ -169,9 +172,6 @@ function Contact() {
           {isSubmitting ? 'Sending...' : 'Drop a Line'}
         </Button>
       </Stack>
-
-      {/* ToastContainer added locally */}
-      <ToastContainer position="top-right" autoClose={3000} theme="dark" />
     </Box>
   );
 }

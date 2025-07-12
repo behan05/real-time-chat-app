@@ -34,12 +34,14 @@ function TermsOfUsePage() {
 
       {/* Intro */}
       <Typography paragraph>
-        By accessing or using Connect, you agree to abide by these Terms of Use. If you do not agree with any part, please do not use our platform.
+        By accessing or using Connect, you agree to abide by these Terms of Use. If you do not agree
+        with any part, please do not use our platform.
       </Typography>
 
       {/* Sections */}
       <Section title="1. Eligibility">
-        You must be at least 18 years old to use Connect. By using the service, you represent that you meet this requirement.
+        You must be at least 18 years old to use Connect. By using the service, you represent that
+        you meet this requirement.
       </Section>
 
       <Section title="2. User Conduct">
@@ -51,23 +53,28 @@ function TermsOfUsePage() {
       </Section>
 
       <Section title="3. Account Responsibility">
-        You are responsible for maintaining the confidentiality of your account. Any activity under your account is your responsibility.
+        You are responsible for maintaining the confidentiality of your account. Any activity under
+        your account is your responsibility.
       </Section>
 
       <Section title="4. Prohibited Activities">
         <ul style={{ paddingLeft: '1.2rem' }}>
           <li>Automated usage, bots, or scraping is not allowed.</li>
           <li>Hacking or exploiting vulnerabilities is strictly forbidden.</li>
-          <li>Commercial use or advertisement through the platform without permission is not allowed.</li>
+          <li>
+            Commercial use or advertisement through the platform without permission is not allowed.
+          </li>
         </ul>
       </Section>
 
       <Section title="5. Content Ownership">
-        You retain rights to the content you create. However, by posting on Connect, you grant us a limited license to use it for functionality and moderation.
+        You retain rights to the content you create. However, by posting on Connect, you grant us a
+        limited license to use it for functionality and moderation.
       </Section>
 
       <Section title="6. Termination">
-        We reserve the right to suspend or terminate accounts that violate these terms without prior notice.
+        We reserve the right to suspend or terminate accounts that violate these terms without prior
+        notice.
       </Section>
 
       <Section title="7. Disclaimers">

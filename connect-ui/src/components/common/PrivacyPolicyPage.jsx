@@ -35,15 +35,22 @@ function PrivacyPolicyPage() {
 
       {/* Intro */}
       <Typography paragraph>
-        This Privacy Policy outlines how Connect handles your data. By using our platform, you agree to the practices described below.
+        This Privacy Policy outlines how Connect handles your data. By using our platform, you agree
+        to the practices described below.
       </Typography>
 
       {/* Sections */}
       <Section title="1. What We Collect">
         <ul style={{ paddingLeft: '1.2rem' }}>
-          <li><strong>Account Info:</strong> Name, email, password, and profile details.</li>
-          <li><strong>Usage Info:</strong> Device, IP, location, and activity logs.</li>
-          <li><strong>Communication:</strong> Support requests and limited chat logs (if flagged).</li>
+          <li>
+            <strong>Account Info:</strong> Name, email, password, and profile details.
+          </li>
+          <li>
+            <strong>Usage Info:</strong> Device, IP, location, and activity logs.
+          </li>
+          <li>
+            <strong>Communication:</strong> Support requests and limited chat logs (if flagged).
+          </li>
         </ul>
       </Section>
 
@@ -56,23 +63,28 @@ function PrivacyPolicyPage() {
       </Section>
 
       <Section title="3. Third-Party Sharing">
-        We never sell your data. We only share limited information with trusted partners (e.g., analytics, legal compliance) when absolutely necessary.
+        We never sell your data. We only share limited information with trusted partners (e.g.,
+        analytics, legal compliance) when absolutely necessary.
       </Section>
 
       <Section title="4. Your Rights">
-        You have full control over your data. You may request to view, update, or delete your information by contacting our support team.
+        You have full control over your data. You may request to view, update, or delete your
+        information by contacting our support team.
       </Section>
 
       <Section title="5. Security">
-        We use encryption, secure storage, and account protections. While no system is 100% immune, we strive to keep your data safe.
+        We use encryption, secure storage, and account protections. While no system is 100% immune,
+        we strive to keep your data safe.
       </Section>
 
       <Section title="6. Policy Updates">
-        This policy may change as Connect evolves. Significant changes will be communicated via app banners or emails.
+        This policy may change as Connect evolves. Significant changes will be communicated via app
+        banners or emails.
       </Section>
 
       <Section title="7. Contact Us">
-        If you have any questions or concerns, feel free to contact us at <StyledText text="support@connectapp.com" />.
+        If you have any questions or concerns, feel free to contact us at{' '}
+        <StyledText text="support@connectapp.com" />.
       </Section>
 
       <Divider sx={{ my: 4 }} />

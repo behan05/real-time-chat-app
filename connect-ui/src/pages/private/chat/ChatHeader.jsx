@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  Box,
-  Avatar,
-  Typography,
-  Stack,
-  Divider,
-} from '../../../MUI/MuiComponents';
+import { Box, Avatar, Typography, Stack, Divider } from '../../../MUI/MuiComponents';
 import { chatPartners } from '../mockData';
 
 function ChatHeader({ userId }) {

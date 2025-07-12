@@ -1,11 +1,9 @@
-import React from 'react'
+import React from 'react';
 
 // Input box to type and send new messages
 
 function ChatMessageInput() {
-  return (
-    <div>ChatMessageInput</div>
-  )
+  return <div>ChatMessageInput</div>;
 }
 
-export default ChatMessageInput
+export default ChatMessageInput;

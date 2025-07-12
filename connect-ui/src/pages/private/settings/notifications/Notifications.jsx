@@ -14,7 +14,7 @@ import {
   MessageIcon,
   ReportIcon,
   PersonAddIcon,
-  BlockIcon,
+  BlockIcon
 } from '@/MUI/MuiIcons';
 
 import NavigateWithArrow from '@/components/private/NavigateWithArrow';
@@ -27,7 +27,7 @@ function Notifications() {
     newMessage: true,
     warningAlerts: true,
     friendRequest: false,
-    blockNotification: false,
+    blockNotification: false
   });
 
   const Section = ({ icon, title, description, children }) => (
@@ -66,29 +66,24 @@ function Notifications() {
         sx={{
           backdropFilter: 'blur(14px)',
           backgroundColor: 'background.paper',
-          boxShadow: `inset 1px 1px 0.2rem ${theme.palette.divider}`,
+          boxShadow: `inset 1px 1px 0.2rem ${theme.palette.divider}`
         }}
       >
         {/* New Match Notification */}
 
-
         {/* Message Notification */}
-
 
         <Divider />
 
         {/* Warning Alerts */}
 
-
         <Divider />
 
         {/* Friend Request / Invite */}
 
-
         <Divider />
 
         {/* Block / Safety Related */}
-
       </Box>
     </Box>
   );

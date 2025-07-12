@@ -6,17 +6,15 @@ import {
   useTheme,
   TextField,
   InputAdornment,
-  IconButton,
+  IconButton
 } from '@/MUI/MuiComponents';
 
-import {
-  SendIcon,
-  VisibilityIcon,
-  VisibilityOffIcon,
-} from '@/MUI/MuiIcons';
+import { SendIcon, VisibilityIcon, VisibilityOffIcon } from '@/MUI/MuiIcons';
 import NavigateWithArrow from '@/components/private/NavigateWithArrow';
 import StyledText from '@/components/common/StyledText';
 import StyledActionButton from '@/components/common/StyledActionButton';
+import { SETTINGS_API } from '@/api/config';
+import axios from 'axios';
 
 // toast prompt
 import { toast, ToastContainer } from 'react-toastify';
@@ -34,7 +32,7 @@ function ChangeCredentials() {
     currentPassword: '',
     newEmail: '',
     newPassword: '',
-    confirmPassword: '',
+    confirmPassword: ''
   });
 
   const [newErrors, setNewErrors] = React.useState({});
@@ -43,11 +41,11 @@ function ChangeCredentials() {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: value
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let isValid = true;
 
@@ -70,15 +68,15 @@ function ChangeCredentials() {
 
     // Validate newPassword & confirmPassword
     if (formData.newPassword.trim() === '') {
-      updatedErrors.newPassword = "New password is required";
+      updatedErrors.newPassword = 'New password is required';
       isValid = false;
     }
     if (formData.confirmPassword.trim() === '') {
-      updatedErrors.confirmPassword = "confirm password is required";
+      updatedErrors.confirmPassword = 'confirm password is required';
       isValid = false;
     }
     if (formData.newPassword.trim() !== formData.confirmPassword.trim()) {
-      updatedErrors.confirmPassword = "Password do not match";
+      updatedErrors.confirmPassword = 'Password do not match';
       isValid = false;
     }
 
@@ -88,22 +86,37 @@ function ChangeCredentials() {
 
     setIsDisabled(true);
 
-    setTimeout(() => {
-      toast.success('Your credentials have been updated');
+    try {
+      const token = localStorage.getItem('token');
 
-      // Clear form only after success
+      const response = await axios.post(`${SETTINGS_API}/change-credentials`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      setTimeout(() => {
+        toast.success(response.data.message);
+        setFormData({
+          currentPassword: '',
+          newEmail: '',
+          newPassword: '',
+          confirmPassword: ''
+        });
+        setNewErrors({});
+        setIsDisabled(false);
+      }, 1000);
+    } catch (error) {
+      toast.error(error.response?.data?.error || 'Something went wrong.');
       setFormData({
         currentPassword: '',
         newEmail: '',
         newPassword: '',
-        confirmPassword: '',
+        confirmPassword: ''
       });
-
-      setNewErrors({});
       setIsDisabled(false);
-    }, 1000);
+    }
   };
-
 
   return (
     <Box component={'section'}>
@@ -132,7 +145,7 @@ function ChangeCredentials() {
           mx: 'auto',
           backdropFilter: 'blur(14px)',
           backgroundColor: 'transparent',
-          boxShadow: `inset 1px 1px 0.2rem ${theme.palette.text.secondary}`,
+          boxShadow: `inset 1px 1px 0.2rem ${theme.palette.text.secondary}`
         }}
       >
         <Stack direction="column" textAlign="center">
@@ -140,14 +153,9 @@ function ChangeCredentials() {
             Manage <StyledText text="Credentials" />
           </Typography>
 
-          <Typography
-            variant="body2"
-            fontWeight={400}
-            color="text.secondary"
-            mb={4}
-          >
-            Keep your account secure by updating your email address or password.
-            Make sure to use a strong password to protect your account.
+          <Typography variant="body2" fontWeight={400} color="text.secondary" mb={4}>
+            Keep your account secure by updating your email address or password. Make sure to use a
+            strong password to protect your account.
           </Typography>
         </Stack>
 
@@ -168,7 +176,7 @@ function ChangeCredentials() {
                     {showCurrentPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
                   </IconButton>
                 </InputAdornment>
-              ),
+              )
             }}
           />
 
@@ -198,7 +206,7 @@ function ChangeCredentials() {
                     {showNewPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
                   </IconButton>
                 </InputAdornment>
-              ),
+              )
             }}
           />
 
@@ -218,17 +226,16 @@ function ChangeCredentials() {
                     {showConfirmPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
                   </IconButton>
                 </InputAdornment>
-              ),
+              )
             }}
           />
-
 
           <StyledActionButton
             type="submit"
             endIcon={<SendIcon sx={{ color: 'success.main' }} />}
             disabled={isDisabled}
           >
-            {isDisabled ? "Updating..." : "Update Credentials"}
+            {isDisabled ? 'Updating...' : 'Update Credentials'}
           </StyledActionButton>
         </Stack>
       </Box>

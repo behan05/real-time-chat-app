@@ -117,17 +117,19 @@ function Signup() {
     if (!isValid) return;
     setButtonDisabled(!buttonDisabled);
 
-    // Dispatch register action 
-    const response = await dispatch(register({
-      fullName: form.fullName,
-      email: form.email,
-      password: form.password,
-      confirmPassword: form.confirmPassword
-    }));
+    // Dispatch register action
+    const response = await dispatch(
+      register({
+        fullName: form.fullName,
+        email: form.email,
+        password: form.password,
+        confirmPassword: form.confirmPassword
+      })
+    );
 
     // Toaster notifications
     if (response.success) {
-      toast.success("Account created successfully!");
+      toast.success('Account created successfully!');
       setTimeout(() => navigate('/login'), 2000);
     } else {
       toast.error(response.message);
@@ -337,7 +339,7 @@ function Signup() {
               }
             }}
           >
-            {buttonDisabled ? "Sending..." : "Create Account"}
+            {buttonDisabled ? 'Sending...' : 'Create Account'}
           </Button>
 
           <Divider sx={{ my: 2 }}>

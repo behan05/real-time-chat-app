@@ -90,10 +90,10 @@ import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import GavelIcon from '@mui/icons-material/Gavel';
 import BugReportIcon from '@mui/icons-material/BugReport';
 
-import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive'
-import MessageIcon from '@mui/icons-material/Message'
-import ReportIcon from '@mui/icons-material/Report'
-import PersonAddIcon from '@mui/icons-material/PersonAdd'
+import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
+import MessageIcon from '@mui/icons-material/Message';
+import ReportIcon from '@mui/icons-material/Report';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import LockResetIcon from '@mui/icons-material/LockReset';
 import DownloadIcon from '@mui/icons-material/Download';
 import DeleteIcon from '@mui/icons-material/Delete';

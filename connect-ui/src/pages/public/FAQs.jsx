@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Typography, } from '@/MUI/MuiComponents';
+import { Box, Typography } from '@/MUI/MuiComponents';
 import StyledText from '@/components/common/StyledText';
 import FAQ from '@/components/public/FAQ';
 

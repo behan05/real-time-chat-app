@@ -75,14 +75,14 @@ function Login() {
     let isValid = true;
     let newError = {};
 
-    if (form.email.trim() === "") {
-      newError.email = "user name is required!";
-      isValid = false
+    if (form.email.trim() === '') {
+      newError.email = 'user name is required!';
+      isValid = false;
     }
 
-    if (form.password.trim() === "") {
-      newError.password = "password is required!";
-      isValid = false
+    if (form.password.trim() === '') {
+      newError.password = 'password is required!';
+      isValid = false;
     }
 
     setError(newError);
@@ -92,8 +92,8 @@ function Login() {
 
     // Toaster notifications
     if (response.success) {
-      setIsDisabled(true)
-      toast.success("Login successfully!");
+      setIsDisabled(true);
+      toast.success('Login successfully!');
       setTimeout(() => navigate('/connect'), 2000);
     } else {
       toast.error(response.message);
@@ -144,11 +144,7 @@ function Login() {
       }}
     >
       {/* ToastContainer */}
-      <ToastContainer
-        position="top-right"
-        autoClose={2000}
-        theme="colored"
-      />
+      <ToastContainer position="top-right" autoClose={2000} theme="colored" />
       {/* Left side content for larger screens */}
       {!isLg && (
         <Box flex={1}>
@@ -256,12 +252,7 @@ function Login() {
           </Stack>
 
           {/* Remember me checkbox and forgot password link */}
-          <Stack
-            direction="row"
-            justifyContent="space-between"
-            alignItems="center"
-            flexWrap='wrap'
-          >
+          <Stack direction="row" justifyContent="space-between" alignItems="center" flexWrap="wrap">
             <FormControlLabel control={<Checkbox />} label="Remember me" />
             <MuiLink
               component={Link}
@@ -302,8 +293,7 @@ function Login() {
               }
             }}
           >
-            {isDisabled ? "Sending..." : "Login"}
-
+            {isDisabled ? 'Sending...' : 'Login'}
           </Button>
 
           {/* Divider with 'or' text */}

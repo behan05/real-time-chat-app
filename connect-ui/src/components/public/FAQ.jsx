@@ -61,7 +61,6 @@ const faqs = [
   }
 ];
 
-
 function FAQ() {
   const [expanded, setExpanded] = React.useState(null);
 

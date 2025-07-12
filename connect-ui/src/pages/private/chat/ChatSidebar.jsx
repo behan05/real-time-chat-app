@@ -10,7 +10,7 @@ import {
   IconButton,
   Tooltip
 } from '../../../MUI/MuiComponents';
-import { SettingsIcon } from '../../../MUI/MuiIcons'
+import { SettingsIcon } from '../../../MUI/MuiIcons';
 
 import ChatSidebarPanelNavbar from './ChatSidebarPanelNavbar';
 import { chatPartners } from '../mockData';
@@ -29,7 +29,7 @@ const ChatSidebar = ({ onUserSelect }) => {
         minHeight: '100vh',
         maxHeight: '100vh',
         overflowY: 'auto',
-        borderRight: '1px solid rgba(112, 106, 106, 0.3)',
+        borderRight: '1px solid rgba(112, 106, 106, 0.3)'
       }}
     >
       <ChatSidebarPanelNavbar />
@@ -75,14 +75,13 @@ const ChatSidebar = ({ onUserSelect }) => {
               boxShadow: 3,
               '&:hover .rotate-icon': {
                 transform: 'rotate(230deg)',
-                transition: 'transform 0.4s ease-in-out',
+                transition: 'transform 0.4s ease-in-out'
               }
             }}
           >
             <SettingsIcon className="rotate-icon" />
           </IconButton>
         </Tooltip>
-
       </Box>
     </Box>
   );

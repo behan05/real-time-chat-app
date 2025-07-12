@@ -1,10 +1,8 @@
-import React from 'react'
-import Profile from '../Profile'
+import React from 'react';
+import Profile from '../Profile';
 
 function ProfileSettings() {
-    return (
-        <Profile />
-    )
+  return <Profile />;
 }
 
-export default ProfileSettings
+export default ProfileSettings;

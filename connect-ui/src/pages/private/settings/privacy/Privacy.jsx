@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Box,
   Stack,
@@ -13,10 +13,13 @@ import {
   TuneIcon,
   BlockIcon,
   ChatIcon,
-  SettingsBackupRestoreIcon,
+  SettingsBackupRestoreIcon
 } from '@/MUI/MuiIcons';
 import NavigateWithArrow from '@/components/private/NavigateWithArrow';
-import StyledText from '@/components/common/StyledText';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { SETTINGS_API } from '@/api/config';
+import axios from 'axios';
 
 function Privacy() {
   const theme = useTheme();
@@ -28,14 +31,50 @@ function Privacy() {
     allowRechat: true,
     blockNSFW: true,
     autoDeleteChats: false,
-    allowExportData: false,
+    allowExportData: false
   });
 
-  const handleToggle = (key) => (e) => {
-    setPrivacySettings((prev) => ({
-      ...prev,
-      [key]: e.target.checked,
-    }));
+  useEffect(() => {
+    const fetchPrivacySettings = async (endpoint) => {
+      try {
+        const token = localStorage.getItem('token');
+        const response = await axios.get(endpoint, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+
+        setPrivacySettings(response.data.privacySettings);
+      } catch (error) {
+        console.log(`Failed to fetch privacy settings: ${error?.response?.data?.error || error}`);
+      }
+    };
+
+    fetchPrivacySettings(`${SETTINGS_API}/privacy`);
+  }, []);
+
+  const handleToggle = (key) => async (e) => {
+    const updatedValue = e.target.checked;
+
+    const updatedSettings = {
+      ...privacySettings,
+      [key]: updatedValue
+    };
+
+    setPrivacySettings(updatedSettings);
+
+    try {
+      const token = localStorage.getItem('token');
+
+      const response = await axios.patch(`${SETTINGS_API}/privacy`, updatedSettings, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      toast.info(response.data.message);
+    } catch (error) {
+      console.log(error?.response?.data?.error || error);
+    }
   };
 
   const Section = ({ icon, title, description, children }) => (
@@ -55,6 +94,8 @@ function Privacy() {
 
   return (
     <Box>
+      <ToastContainer position="top-right" autoClose={1000} theme="colored" />
+
       {/* Navigation Back */}
       <Stack mb={2}>
         <NavigateWithArrow redirectTo="/connect/settings" text="Privacy Settings" />
@@ -74,7 +115,7 @@ function Privacy() {
         sx={{
           backdropFilter: 'blur(14px)',
           backgroundColor: 'background.paper',
-          boxShadow: `inset 1px 1px 0.2rem ${theme.palette.divider}`,
+          boxShadow: `inset 1px 1px 0.2rem ${theme.palette.divider}`
         }}
       >
         {/* === Sections === */}

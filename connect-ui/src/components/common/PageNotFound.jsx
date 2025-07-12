@@ -74,8 +74,8 @@ const PageNotFound = ({ redirectTo }) => {
               color: 'text.secondary',
               letterSpacing: 2,
               '&:hover': {
-                boxShadow: 'inset 0 6px 12px',
-              },
+                boxShadow: 'inset 0 6px 12px'
+              }
             }}
           >
             Go Back Home

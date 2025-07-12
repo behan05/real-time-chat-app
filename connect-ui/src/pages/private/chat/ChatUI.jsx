@@ -18,10 +18,7 @@ function ChatUI() {
       {/* Sidebar or ChatWindow based on screen size */}
       {isTabletOrBelow ? (
         selectedUserId ? (
-          <ChatWindow
-            selectedUserId={selectedUserId}
-            onBack={handleBackToSidebar}
-          />
+          <ChatWindow selectedUserId={selectedUserId} onBack={handleBackToSidebar} />
         ) : (
           <Stack flex={1}>
             <Outlet context={{ setSelectedUserId }} />
@@ -42,5 +39,3 @@ function ChatUI() {
 }
 
 export default ChatUI;
-
-

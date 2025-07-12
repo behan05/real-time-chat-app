@@ -12,7 +12,7 @@ import {
   ListItemButton,
   ListItemText,
   ListItemIcon
-} from "@/MUI/MuiComponents";
+} from '@/MUI/MuiComponents';
 import {
   SearchIcon,
   LockIcon,
@@ -20,59 +20,63 @@ import {
   NotificationsIcon,
   SosIcon,
   ChatIcon,
-  LogoutIcon,
-} from "@/MUI/MuiIcons";
+  LogoutIcon
+} from '@/MUI/MuiIcons';
 import { Link } from 'react-router-dom';
 import NavigateWithArrow from '@/components/private/NavigateWithArrow';
+import { logout } from '@/redux/slices/auth/authAction';
+import { useDispatch } from 'react-redux';
 
 function Settings() {
   const [searchValue, setSearchValue] = React.useState('');
-
+  const dispatch = useDispatch();
   const settingItems = [
     {
       path: 'account',
       icon: <KeyIcon sx={{ mr: 1.1, color: 'warning.main' }} />,
       title: 'Account',
-      subTitle: 'Security notification, account info',
+      subTitle: 'Security notification, account info'
     },
     {
       path: 'privacy',
       icon: <LockIcon sx={{ mr: 1.1, color: 'info.main' }} />,
       title: 'Privacy',
-      subTitle: 'Blocked contacts, controls',
+      subTitle: 'Blocked contacts, controls'
     },
     {
       path: 'chats',
       icon: <ChatIcon sx={{ mr: 1.1, color: 'success.main' }} />,
       title: 'Chats',
-      subTitle: 'Theme, wallpaper, chat settings',
+      subTitle: 'Theme, wallpaper, chat settings'
     },
     {
       path: 'notifications',
       icon: <NotificationsIcon sx={{ mr: 1.1, color: 'primary.main' }} />,
       title: 'Notifications',
-      subTitle: 'Message notifications',
+      subTitle: 'Message notifications'
     },
     {
       path: 'help',
       icon: <SosIcon sx={{ mr: 1.1, color: 'error.main' }} />,
       title: 'Help',
-      subTitle: 'Help center, contact us, privacy policy',
-    },
+      subTitle: 'Help center, contact us, privacy policy'
+    }
   ];
 
-
   return (
-    <Box component={'dev'} sx={{
-      p: 2,
-      display: 'flex',
-      flexDirection: 'column',
-      bgcolor: 'background.paper',
-      borderRight: '1px solid rgba(112, 106, 106, 0.3)',
-      minHeight: '100vh',
-      maxHeight: '100vh',
-      minWidth: 300
-    }}>
+    <Box
+      component={'dev'}
+      sx={{
+        p: 2,
+        display: 'flex',
+        flexDirection: 'column',
+        bgcolor: 'background.paper',
+        borderRight: '1px solid rgba(112, 106, 106, 0.3)',
+        minHeight: '100vh',
+        maxHeight: '100vh',
+        minWidth: 300
+      }}
+    >
       {/* Header with arrow back icon */}
       <Stack mb={2}>
         <NavigateWithArrow redirectTo={'/connect'} text={'Settings'} />
@@ -86,44 +90,30 @@ function Settings() {
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
           InputProps={{
-            startAdornment: <SearchIcon fontSize="small" sx={{ mr: 1 }} />,
+            startAdornment: <SearchIcon fontSize="small" sx={{ mr: 1 }} />
           }}
         />
       </Box>
 
       {/* Profile avatar */}
-      <Stack
-        component={Link}
-        to={'profile'}
-        my={4}
-        flexDirection={'row'}
-        gap={2}
-      >
+      <Stack component={Link} to={'profile'} my={4} flexDirection={'row'} gap={2}>
         <Tooltip title="Profile">
           <Avatar
-            src=''
-            alt='user profile image'
-            aria-level='user profile image'
+            src=""
+            alt="user profile image"
+            aria-level="user profile image"
             sx={{
               width: 60,
-              height: 60,
+              height: 60
             }}
           />
         </Tooltip>
 
         <Stack>
-          <Typography
-            variant='body1'
-            letterSpacing={1}
-            color={'text.primary'}
-          >
+          <Typography variant="body1" letterSpacing={1} color={'text.primary'}>
             User name
           </Typography>
-          <Typography
-            variant='body2'
-            letterSpacing={1}
-            color={'text.secondary'}
-          >
+          <Typography variant="body2" letterSpacing={1} color={'text.secondary'}>
             About user
           </Typography>
         </Stack>
@@ -142,8 +132,8 @@ function Settings() {
             sx={{
               borderRadius: 1,
               transition: 'all 0.3s ease',
-              "&:hover": {
-                transform: 'translateY(-5px)',
+              '&:hover': {
+                transform: 'translateY(-5px)'
               }
             }}
           >
@@ -155,24 +145,24 @@ function Settings() {
           </ListItemButton>
         ))}
         <ListItemButton
-          component={Link}
-          to={'/logout'}
+          onClick={() => dispatch(logout())}
           sx={{
             borderRadius: 1,
             p: 2,
             transition: 'all 0.3s ease',
-            "&:hover": {
-              transform: 'translateY(-5px)',
+            '&:hover': {
+              transform: 'translateY(-5px)'
             }
-          }}>
+          }}
+        >
           <ListItemIcon>{<LogoutIcon sx={{ mr: 1.1, color: 'error.main' }} />}</ListItemIcon>
-          <ListItemText primary='Logout' sx={{ color: 'error.main' }} />
+          <ListItemText primary="Logout" sx={{ color: 'error.main' }} />
         </ListItemButton>
       </List>
 
       <Divider sx={{ mt: 4 }} />
     </Box>
-  )
+  );
 }
 
 export default Settings;
