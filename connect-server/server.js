@@ -17,7 +17,11 @@ const PORT = process.env.PORT || 8001;
 connectDB();
 
 // Middlewares
-app.use(cors());
+app.use(cors({
+    origin: ['https://connect-link-three.vercel.app'],
+    credentials: true
+}));
+
 app.use(express.json()); // Parses incoming JSON
 
 // Routes
