@@ -242,9 +242,76 @@ exports.deleteAccount = async (req, res) => {
     }
 };
 
-
 // Update user's privacy preferences (toggle-based settings)
-exports.updatePrivacy = async (req, res) => { };
+exports.updatePrivacy = async (req, res) => {
+
+    const { showProfilePic,
+        showLocation,
+        matchVerifiedOnly,
+        allowRechat,
+        blockNSFW,
+        autoDeleteChats,
+        allowExportData } = req.body;
+
+    if (
+        typeof showProfilePic !== 'boolean'
+        || typeof showLocation !== 'boolean'
+        || typeof matchVerifiedOnly !== 'boolean'
+        || typeof allowRechat !== 'boolean'
+        || typeof blockNSFW !== 'boolean'
+        || typeof autoDeleteChats !== 'boolean'
+        || typeof allowExportData !== 'boolean'
+    ) {
+        res.setHeader('Content-Type', 'application/json');
+        res.status(400).json({
+            error: 'Invalid privacy settings format.'
+        });
+        return;
+    }
+    try {
+
+        // Find the current user's settings using their ID (from the JWT token)
+        const privacySetting = await PrivacySettings.findOne({ user: req.user.id });
+
+        // If no settings found, return error
+        if (!privacySetting) {
+            res.setHeader('Content-Type', 'application/json');
+            res.status(404).json({
+                error: 'Privacy settings not found.'
+            });
+            return;
+        }
+
+        // Update privacy settings
+        const updates = {
+            showProfilePic,
+            showLocation,
+            matchVerifiedOnly,
+            allowRechat,
+            blockNSFW,
+            autoDeleteChats,
+            allowExportData
+        }
+        privacySetting.set({ ...updates });
+
+        // Save updated settings to MongoDB
+        await privacySetting.save();
+
+        // Send success response
+        res.setHeader('Content-Type', 'application/json');
+        res.status(200).json({
+            message: 'Privacy settings updated successfully.'
+        });
+
+    } catch (error) {
+        res.setHeader("Content-Type", "application/json");
+        res.status(500).json({
+            error: 'An error occurred while processing your request.'
+        });
+        return;
+    }
+
+};
 
 // Get user's current privacy settings
 exports.getPrivacy = async (req, res) => { };
