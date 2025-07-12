@@ -196,9 +196,10 @@ exports.requestInfo = async (req, res) => {
         }
         const buffer = Buffer.from(JSON.stringify(userData), 'utf-8');
         const compressed = zlib.gzipSync(buffer);
-
+        
+        const userName = user.fullName.trim().replace(/\s+/g, '_');
         res.setHeader('Content-Type', 'application/gzip');
-        res.setHeader('Content-Disposition', `attachment; filename=${user.fullName}-your-info.json.gz`);
+        res.setHeader('Content-Disposition', `attachment; filename=${userName}-your-info.json.gz`);
         res.status(200).send(compressed);
 
     } catch (error) {
