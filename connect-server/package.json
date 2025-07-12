@@ -1,7 +1,7 @@
 {
   "name": "connect-server",
   "version": "1.0.0",
-  "description": "Backend API for Connect – real-time random chat app with authentication and user settings",
+  "description": "Backend API for Connect - real-time random chat app with authentication and user settings",
   "main": "server.js",
   "type": "commonjs",
   "author": {
@@ -13,6 +13,12 @@
     "test": "jest",
     "dev": "nodemon server.js",
     "start": "node server.js"
+  },
+
+  "homepage": "https://connect-link-three.vercel.app",
+
+  "engines": {
+    "node": ">=18.x"
   },
   "repository": {
     "type": "git",
