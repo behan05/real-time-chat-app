@@ -21,7 +21,7 @@ app.use(cors());
 app.use(express.json()); // Parses incoming JSON
 
 // Routes
-app.use('/api/users', authRoutes); // For auth
+app.use('/api/auth', authRoutes); // For auth
 app.use('/api/settings', settingsRoutes); // For settings
 
 // App listner

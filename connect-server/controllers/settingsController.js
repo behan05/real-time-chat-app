@@ -197,9 +197,8 @@ exports.requestInfo = async (req, res) => {
         const buffer = Buffer.from(JSON.stringify(userData), 'utf-8');
         const compressed = zlib.gzipSync(buffer);
 
-        const userName = user.fullName.trim().replace(/\s+/g, '_');
         res.setHeader('Content-Type', 'application/gzip');
-        res.setHeader('Content-Disposition', `attachment; filename=${userName}-your-info.json.gz`);
+        res.setHeader('Content-Disposition', `attachment; filename=your-info.json.gz`);
         res.status(200).send(compressed);
 
     } catch (error) {
@@ -244,45 +243,51 @@ exports.deleteAccount = async (req, res) => {
 
 // Update user's privacy preferences (toggle-based settings)
 exports.updatePrivacy = async (req, res) => {
-
-    const { showProfilePic,
+    const {
+        showProfilePic,
         showLocation,
         matchVerifiedOnly,
         allowRechat,
         blockNSFW,
         autoDeleteChats,
-        allowExportData } = req.body;
+        allowExportData
+    } = req.body;
 
+    // Validate all fields are boolean
     if (
-        typeof showProfilePic !== 'boolean'
-        || typeof showLocation !== 'boolean'
-        || typeof matchVerifiedOnly !== 'boolean'
-        || typeof allowRechat !== 'boolean'
-        || typeof blockNSFW !== 'boolean'
-        || typeof autoDeleteChats !== 'boolean'
-        || typeof allowExportData !== 'boolean'
+        typeof showProfilePic !== 'boolean' ||
+        typeof showLocation !== 'boolean' ||
+        typeof matchVerifiedOnly !== 'boolean' ||
+        typeof allowRechat !== 'boolean' ||
+        typeof blockNSFW !== 'boolean' ||
+        typeof autoDeleteChats !== 'boolean' ||
+        typeof allowExportData !== 'boolean'
     ) {
-        res.setHeader('Content-Type', 'application/json');
-        res.status(400).json({
-            error: 'Invalid privacy settings format.'
-        });
-        return;
+        return res.status(400).json({ error: 'Invalid privacy settings format.' });
     }
-    try {
 
-        // Find the current user's settings using their ID (from the JWT token)
+    try {
+        // Try to find existing settings
         const privacySetting = await PrivacySettings.findOne({ user: req.user.id });
 
-        // If no settings found, return error
+        // Auto-create settings if not found
         if (!privacySetting) {
-            res.setHeader('Content-Type', 'application/json');
-            res.status(404).json({
-                error: 'Privacy settings not found.'
+            const newSettings = new PrivacySettings({
+                user: req.user.id,
+                showProfilePic,
+                showLocation,
+                matchVerifiedOnly,
+                allowRechat,
+                blockNSFW,
+                autoDeleteChats,
+                allowExportData
             });
-            return;
+
+            await newSettings.save();
+            return res.status(201).json({ message: 'Privacy settings created and saved.' });
         }
 
-        // Update privacy settings
+        // Update existing settings
         const updates = {
             showProfilePic,
             showLocation,
@@ -291,27 +296,20 @@ exports.updatePrivacy = async (req, res) => {
             blockNSFW,
             autoDeleteChats,
             allowExportData
-        }
-        privacySetting.set({ ...updates });
+        };
 
-        // Save updated settings to MongoDB
+        privacySetting.set(updates);
         await privacySetting.save();
 
-        // Send success response
-        res.setHeader('Content-Type', 'application/json');
-        res.status(200).json({
-            message: 'Privacy settings updated successfully.'
-        });
-
+        return res.status(200).json({ message: 'Privacy settings updated successfully.' });
     } catch (error) {
-        res.setHeader("Content-Type", "application/json");
-        res.status(500).json({
+        console.error("Error updating privacy settings:", error);
+        return res.status(500).json({
             error: 'An error occurred while processing your request.'
         });
-        return;
     }
-
 };
+
 
 // Get user's current privacy settings
 exports.getPrivacy = async (req, res) => {
