@@ -196,7 +196,7 @@ exports.requestInfo = async (req, res) => {
         }
         const buffer = Buffer.from(JSON.stringify(userData), 'utf-8');
         const compressed = zlib.gzipSync(buffer);
-        
+
         const userName = user.fullName.trim().replace(/\s+/g, '_');
         res.setHeader('Content-Type', 'application/gzip');
         res.setHeader('Content-Disposition', `attachment; filename=${userName}-your-info.json.gz`);
@@ -212,7 +212,36 @@ exports.requestInfo = async (req, res) => {
 };
 
 // Delete a user's account and associated data
-exports.deleteAccount = async (req, res) => { };
+exports.deleteAccount = async (req, res) => {
+    const user = await User.findById(req.user.id);
+    if (!user) {
+        res.setHeader("Content-Type", "application/json");
+        res.status(404).json({
+            error: 'User not found.'
+        });
+        return;
+    }
+
+    try {
+        // Delete user and associated data
+        await User.findByIdAndDelete(user._id);
+        res.setHeader('Content-Type', 'application/json');
+        res.status(200).json({
+            message: 'Your account has been deleted successfully.'
+        });
+        return;
+
+        // Optionally, we can also delete associated data like bug reports, contact requests, profiles, preferences, etc.
+
+    } catch (error) {
+        res.setHeader("Content-Type", "application/json");
+        res.status(500).json({
+            error: 'An error occurred while processing your request.'
+        });
+        return;
+    }
+};
+
 
 // Update user's privacy preferences (toggle-based settings)
 exports.updatePrivacy = async (req, res) => { };
