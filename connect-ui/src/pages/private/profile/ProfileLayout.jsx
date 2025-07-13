@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { Box } from '@/MUI/MuiComponents';
 
-function SettingLayout() {
+function ProfileLayout() {
   return (
     <Box
       component={'section'}
@@ -21,4 +21,5 @@ function SettingLayout() {
   );
 }
 
-export default SettingLayout;
+
+export default ProfileLayout;

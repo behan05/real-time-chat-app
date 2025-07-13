@@ -98,11 +98,16 @@ import LockResetIcon from '@mui/icons-material/LockReset';
 import DownloadIcon from '@mui/icons-material/Download';
 import DeleteIcon from '@mui/icons-material/Delete';
 import UploadIcon from '@mui/icons-material/Upload';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import EditIcon from '@mui/icons-material/Edit';
+
 // ==================== Export All ====================
 export {
   // Setting Icons
   KeyIcon,
+  EditIcon,
   NotificationsIcon,
+  FavoriteBorderIcon,
   SosIcon,
   InfoIcon,
   LockResetIcon,

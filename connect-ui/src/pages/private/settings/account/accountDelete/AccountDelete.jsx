@@ -16,6 +16,7 @@ import { DeleteIcon } from '@/MUI/MuiIcons';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import NavigateWithArrow from '@/components/private/NavigateWithArrow';
+import BlurWrapper from '@/components/common/BlurWrapper';
 
 import { SETTINGS_API } from '@/api/config';
 import axios from 'axios';
@@ -58,18 +59,7 @@ function AccountDelete() {
         <NavigateWithArrow redirectTo={'/connect/settings/account'} text={'Delete Account'} />
       </Stack>
 
-      <Box
-        sx={{
-          maxWidth: 800,
-          mx: 'auto',
-          py: 4,
-          px: 2,
-          backdropFilter: 'blur(14px)',
-          borderRadius: 1,
-          backgroundColor: 'transparent',
-          boxShadow: `inset 1px 1px 0.2rem ${theme.palette.text.secondary}`
-        }}
-      >
+     <BlurWrapper>
         <Typography textAlign="center" variant="h5" fontWeight={600} mb={1}>
           Delete <span style={{ color: theme.palette.error.main }}>Account</span>
         </Typography>
@@ -90,7 +80,7 @@ function AccountDelete() {
             {isDeleting ? 'Deleting...' : 'Delete My Account'}
           </Button>
         </Stack>
-      </Box>
+      </BlurWrapper>
 
       {/* Confirmation Dialog */}
       <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>

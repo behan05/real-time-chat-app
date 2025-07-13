@@ -16,6 +16,7 @@ import { SendIcon } from '@/MUI/MuiIcons';
 import NavigateWithArrow from '@/components/private/NavigateWithArrow';
 import StyledText from '@/components/common/StyledText';
 import StyledActionButton from '@/components/common/StyledActionButton';
+import BlurWrapper from '@/components/common/BlurWrapper';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { SETTINGS_API } from '@/api/config';
@@ -111,22 +112,7 @@ function HelpContact() {
         <NavigateWithArrow redirectTo="/connect/settings/help" text="Contact Support" />
       </Stack>
 
-      <Box
-        component="form"
-        onSubmit={handleSubmit}
-        minWidth={300}
-        sx={{
-          mt: 6,
-          py: 4,
-          px: 1,
-          borderRadius: 1,
-          maxWidth: 800,
-          mx: 'auto',
-          backdropFilter: 'blur(14px)',
-          backgroundColor: 'transparent',
-          boxShadow: `inset 1px 1px 0.2rem ${theme.palette.divider}`
-        }}
-      >
+      <BlurWrapper component="form" onSubmit={handleSubmit}>
         {/* === Heading === */}
         <Stack direction="column" textAlign="center">
           <Typography variant="h5" fontWeight={600} mb={1} color="text.primary">
@@ -217,7 +203,7 @@ function HelpContact() {
             {isDisabled ? 'Sending Request...' : 'Request'}
           </StyledActionButton>
         </Stack>
-      </Box>
+      </BlurWrapper>
     </Box>
   );
 }

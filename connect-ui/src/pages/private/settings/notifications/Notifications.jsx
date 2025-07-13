@@ -16,7 +16,8 @@ import {
   PersonAddIcon,
   BlockIcon,
 } from '@/MUI/MuiIcons';
-
+        
+import BlurWrapper from '@/components/common/BlurWrapper';
 import NavigateWithArrow from '@/components/private/NavigateWithArrow';
 
 function Notifications() {
@@ -56,23 +57,7 @@ function Notifications() {
         <NavigateWithArrow redirectTo="/connect/settings" text="Notifications" />
       </Stack>
 
-      <Box
-        mt={4}
-        display="flex"
-        flexDirection="column"
-        gap={4}
-        maxWidth={800}
-        minWidth={300}
-        mx="auto"
-        px={2}
-        py={3}
-        borderRadius={2}
-        sx={{
-          backdropFilter: 'blur(14px)',
-          backgroundColor: 'background.paper',
-          boxShadow: `inset 1px 1px 0.2rem ${theme.palette.divider}`
-        }}
-      >
+      <BlurWrapper>
         {/* New Match Notification */}
         <Section
           icon={<NotificationsActiveIcon sx={{ color: theme.palette.success.main }} />}
@@ -165,7 +150,7 @@ function Notifications() {
             label="Enable block notifications"
           />
         </Section>
-      </Box>
+      </BlurWrapper>
     </Box>
   );
 }

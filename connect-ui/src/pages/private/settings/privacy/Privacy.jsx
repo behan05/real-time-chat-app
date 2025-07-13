@@ -16,6 +16,7 @@ import {
   SettingsBackupRestoreIcon
 } from '@/MUI/MuiIcons';
 import NavigateWithArrow from '@/components/private/NavigateWithArrow';
+import BlurWrapper from '@/components/common/BlurWrapper';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { SETTINGS_API } from '@/api/config';
@@ -101,23 +102,7 @@ function Privacy() {
         <NavigateWithArrow redirectTo="/connect/settings" text="Privacy Settings" />
       </Stack>
 
-      <Box
-        mt={4}
-        display="flex"
-        flexDirection="column"
-        gap={4}
-        minWidth={300}
-        maxWidth={800}
-        mx="auto"
-        px={2}
-        py={3}
-        borderRadius={1}
-        sx={{
-          backdropFilter: 'blur(14px)',
-          backgroundColor: 'background.paper',
-          boxShadow: `inset 1px 1px 0.2rem ${theme.palette.divider}`
-        }}
-      >
+      <BlurWrapper>
         {/* === Sections === */}
         <Section
           icon={<VisibilityIcon fontSize="small" sx={{ color: 'info.main' }} />}
@@ -231,7 +216,7 @@ function Privacy() {
             label="Allow export of my data"
           />
         </Section>
-      </Box>
+      </BlurWrapper>
     </Box>
   );
 }

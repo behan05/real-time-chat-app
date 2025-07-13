@@ -5,6 +5,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import NavigateWithArrow from '@/components/private/NavigateWithArrow';
 import StyledText from '@/components/common/StyledText';
+import BlurWrapper from '@/components/common/BlurWrapper';
 import { SETTINGS_API } from '@/api/config';
 import axios from 'axios';
 
@@ -56,20 +57,9 @@ function RequestAccountInfo() {
       </Stack>
 
       {/* Form Box */}
-      <Box
+      <BlurWrapper
         component={'form'}
         onSubmit={handleRequest}
-        minWidth={300}
-        sx={{
-          py: 4,
-          px: 1,
-          borderRadius: 1,
-          maxWidth: 800,
-          mx: 'auto',
-          backdropFilter: 'blur(14px)',
-          backgroundColor: 'transparent',
-          boxShadow: `inset 1px 1px 0.2rem ${theme.palette.text.secondary}`
-        }}
       >
         <Stack spacing={3} alignItems="center">
           <Typography textAlign="center" variant="h5" fontWeight={600}>
@@ -102,7 +92,7 @@ function RequestAccountInfo() {
             {requested ? 'Requested' : isLoading ? 'Requesting...' : 'Request Info'}
           </Button>
         </Stack>
-      </Box>
+      </BlurWrapper>
     </Box>
   );
 }
