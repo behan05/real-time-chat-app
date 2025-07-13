@@ -18,7 +18,7 @@ connectDB();
 
 // Middlewares
 app.use(cors({
-    origin: ['https://connect-link-three.vercel.app'],
+    origin: ['https://connect-link-three.vercel.app', 'http://localhost:5173'],
     credentials: true
 }));
 
