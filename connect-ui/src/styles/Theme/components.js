@@ -1,18 +1,25 @@
 export const components = {
   MuiTooltip: {
-    styleOverrides: {
-      Tooltip: {
-        backgroundColor: '#222', // custom background
-        color: '#fff', // custom text color
-        fontSize: '0.875rem', // adjust font size
-        borderRadius: 8,
-        padding: '8px 12px',
-        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)'
-      }
-    },
     defaultProps: {
-      arrow: true, // enable arrow by default
-      placement: 'top' // default position
+      arrow: true,
+      placement: 'top',
+    },
+    styleOverrides: {
+      tooltip: {
+        backgroundColor: 'transparent', // darker and cleaner than #222
+        color: '#f5f5f5', // soft white for better contrast
+        fontSize: '0.85rem', // subtle and readable
+        borderRadius: 6, // slightly tighter than 8
+        padding: '6px 12px',
+        boxShadow: 'inset 0 4px 12px rgba(0, 0, 0, 0.3)', // smoother elevation
+        backdropFilter: 'blur(6px)', // adds modern glass effect
+        WebkitBackdropFilter: 'blur(6px)', // Safari support
+        maxWidth: 220, // avoid overly wide tooltips
+        transition: 'all 0.2s ease-in-out', // subtle animation
+      },
+      arrow: {
+        color: '#051222ff',
+      }
     }
   },
 

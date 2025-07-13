@@ -12,7 +12,7 @@ import {
   MenuItem,
   FormHelperText
 } from '@/MUI/MuiComponents';
-import { SendIcon } from '@/MUI/MuiIcons';
+import { SendIcon, UploadIcon } from '@/MUI/MuiIcons';
 import StyledText from '../common/StyledText';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -137,7 +137,7 @@ function ReportBug() {
           mx: 'auto',
           backdropFilter: 'blur(14px)',
           backgroundColor: 'transparent',
-          boxShadow: `inset 1px 1px 0.2rem ${theme.palette.text.secondary}`
+          boxShadow: `inset 1px 1px 0.2rem ${theme.palette.divider}`
         }}
       >
         <Stack direction={'column'} textAlign="center">
@@ -239,10 +239,30 @@ function ReportBug() {
             fullWidth
           />
 
-          <Button variant="outlined" component="label" fullWidth color="text.secondary">
+          <Button
+            variant="outlined"
+            component="label"
+            fullWidth
+            startIcon={<UploadIcon />} // optional icon
+            sx={{
+              color: 'text.primary',
+              borderColor: 'divider',
+              textTransform: 'none',
+              justifyContent: 'flex-start',
+              px: 2,
+              py: 1.5,
+              borderRadius: 2,
+              fontWeight: 500,
+              '&:hover': {
+                borderColor: 'primary.main',
+                backgroundColor: 'action.hover',
+              },
+            }}
+          >
             Upload screenshot (Optional)
             <input type="file" hidden onChange={handleFileChange} />
           </Button>
+
 
           <StyledActionButton
             type="submit"

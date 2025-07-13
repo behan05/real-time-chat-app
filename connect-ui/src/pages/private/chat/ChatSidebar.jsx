@@ -59,12 +59,12 @@ const ChatSidebar = ({ onUserSelect }) => {
         sx={{
           p: 1.5,
           position: 'sticky',
-          bottom: 20,
+          bottom: 50,
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
           maxWidth: 'fit-content',
-          ml: '90%'
+          ml: '82%'
         }}
       >
         <Tooltip title="Settings">

@@ -97,6 +97,7 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import LockResetIcon from '@mui/icons-material/LockReset';
 import DownloadIcon from '@mui/icons-material/Download';
 import DeleteIcon from '@mui/icons-material/Delete';
+import UploadIcon from '@mui/icons-material/Upload';
 // ==================== Export All ====================
 export {
   // Setting Icons
@@ -111,6 +112,7 @@ export {
   SupportAgentIcon,
   GavelIcon,
   BugReportIcon,
+  UploadIcon,
   NotificationsActiveIcon,
   MessageIcon,
   ReportIcon,

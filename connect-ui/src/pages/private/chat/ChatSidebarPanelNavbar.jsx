@@ -8,25 +8,23 @@ import {
   Tooltip,
   Typography,
   Divider,
-  TextField
+  TextField,
+  useTheme,
 } from '@/MUI/MuiComponents';
 import {
   ShuffleIcon,
-  ChatIcon,
   ArchiveIcon,
   PersonIcon,
   MoreVertIcon,
   LogoutIcon,
   HelpOutlineIcon,
   SettingsIcon,
-  SearchIcon
+  SearchIcon,
 } from '@/MUI/MuiIcons';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import StyledText from '@/components/common/StyledText';
 import { useDispatch } from 'react-redux';
 import { logout } from '@/redux/slices/auth/authAction';
-
-// toast prompt
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -34,22 +32,30 @@ const ChatSidebarPanelNavbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const theme = useTheme();
 
   const [searchValue, setSearchValue] = React.useState('');
   const [menuAnchorEl, setMenuAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(menuAnchorEl);
 
   const navItems = [
-    { path: '/random-chat', icon: <ShuffleIcon />, label: 'Random Chat' },
-    // { path: '/chat', icon: <ChatIcon />, label: 'Chat' },
-    { path: '/archive', icon: <ArchiveIcon />, label: 'Archived' }
+    {
+      path: '/random-chat',
+      icon: <ShuffleIcon sx={{ color: theme.palette.success.main }} />,
+      label: 'Random Chat',
+    },
+    {
+      path: '/archive',
+      icon: <ArchiveIcon sx={{ color: theme.palette.grey[600] }} />,
+      label: 'Archived',
+    },
   ];
 
   const currentSection =
     {
       '/connect': 'Connect',
       '/random-chat': 'Random Connect',
-      '/archive': 'Archive'
+      '/archive': 'Archive',
     }[location.pathname] || 'Connect';
 
   const handleLogout = async () => {
@@ -65,84 +71,130 @@ const ChatSidebarPanelNavbar = () => {
       sx={{
         position: 'sticky',
         top: 0,
-        zIndex: 999
+        zIndex: 999,
       }}
     >
-      {/* ToastContainer */}
       <ToastContainer position="top-center" autoClose={1000} theme="colored" />
-      <Box px={2}>
-        {/* Top Header */}
-        <Stack direction="row" justifyContent="space-between" alignItems="center">
-          <Typography variant="h6" fontWeight={700}>
-            <StyledText text={currentSection} />
-          </Typography>
 
-          <Stack direction="row" alignItems="center" gap={1}>
-            {navItems.map(({ path, icon, label }) => (
-              <Tooltip key={label} title={label} arrow>
-                <IconButton component={NavLink} to={path}>
-                  {icon}
-                </IconButton>
-              </Tooltip>
-            ))}
-            <Tooltip title="Menu" arrow>
-              <IconButton onClick={(e) => setMenuAnchorEl(e.currentTarget)}>
-                <MoreVertIcon />
+      {/* Header */}
+      <Stack direction="row" justifyContent="space-between" alignItems="center">
+        <Typography variant="h6" fontWeight={700}>
+          <StyledText text={currentSection} />
+        </Typography>
+
+        {/* Action Icons */}
+        <Stack direction="row" alignItems="center" gap={1}>
+          {navItems.map(({ path, icon, label }) => (
+            <Tooltip key={label} title={label} arrow>
+              <IconButton component={NavLink} to={path}>
+                {icon}
               </IconButton>
             </Tooltip>
-          </Stack>
+          ))}
+          <Tooltip title="Menu" arrow>
+            <IconButton onClick={(e) => setMenuAnchorEl(e.currentTarget)}>
+              <MoreVertIcon />
+            </IconButton>
+          </Tooltip>
         </Stack>
+      </Stack>
 
-        {/* Search */}
-        <Box mt={1}>
-          <TextField
-            size="small"
-            fullWidth
-            placeholder="Search chats..."
-            value={searchValue}
-            onChange={(e) => setSearchValue(e.target.value)}
-            InputProps={{
-              startAdornment: <SearchIcon fontSize="small" sx={{ mr: 1 }} />
+      {/* Search Bar */}
+      <Box mt={1}>
+        <TextField
+          size="small"
+          fullWidth
+          placeholder="Search chats..."
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
+          InputProps={{
+            startAdornment: <SearchIcon fontSize="small" sx={{ mr: 1 }} />,
+          }}
+        />
+      </Box>
+
+      {/* Dropdown Menu */}
+      <Menu
+        anchorEl={menuAnchorEl}
+        open={isMenuOpen}
+        onClose={() => setMenuAnchorEl(null)}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        transformOrigin={{ vertical: 'top', horizontal: 'center' }}
+        PaperProps={{
+          sx: {
+            backgroundColor: theme.palette.background.paper,
+            boxShadow: theme.shadows[6],
+            borderRight: `1px dotted ${theme.palette.success.main}`,
+            borderLeft: `1px dotted ${theme.palette.success.main}`,
+            borderRadius: 1,
+            minWidth: 200,
+            px: 1,
+            py: 0.75,
+            overflow: 'hidden',
+          },
+        }}
+      >
+        {/* Menu Items */}
+        {[
+          {
+            label: 'Profile',
+            to: 'profile',
+            icon: <PersonIcon fontSize="small" sx={{ mr: 1, color: theme.palette.info.main }} />,
+          },
+          {
+            label: 'Settings',
+            to: 'settings',
+            icon: <SettingsIcon fontSize="small" sx={{ mr: 1, color: theme.palette.primary.main }} />,
+          },
+          {
+            label: 'Help',
+            to: 'settings/help',
+            icon: <HelpOutlineIcon fontSize="small" sx={{ mr: 1, color: theme.palette.warning.main }} />,
+          },
+        ].map(({ label, to, icon }) => (
+          <MenuItem
+            key={label}
+            component={NavLink}
+            to={to}
+            onClick={() => setMenuAnchorEl(null)}
+            sx={{
+              borderRadius: 1,
+              px: 1.5,
+              py: 1,
+              mb: 0.5,
+              transition: 'all 0.2s',
+              '&:hover': {
+                transform: `translateY(-5px)`,
+                borderBottom: `1px dotted ${theme.palette.success.main}`
+              },
             }}
-          />
-        </Box>
+          >
+            {icon}
+            {label}
+          </MenuItem>
+        ))}
 
-        {/* Dropdown Menu */}
-        <Menu
-          anchorEl={menuAnchorEl}
-          open={isMenuOpen}
-          onClose={() => setMenuAnchorEl(null)}
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-          transformOrigin={{ vertical: 'top', horizontal: 'center' }}
-          PaperProps={{
-            sx: {
-              backgroundColor: 'background.paper',
-              boxShadow: 3,
-              minWidth: 180,
-              px: 1,
-              py: 0.5
-            }
+        <Divider sx={{ my: 0.5 }} />
+
+        {/* Logout Item */}
+        <MenuItem
+          onClick={handleLogout}
+          sx={{
+            borderRadius: 1,
+            px: 1.5,
+            py: 1,
+            transition: 'all 0.2s',
+            '&:hover': {
+              transform: `translateY(-5px)`,
+              borderBottom: `1px dotted ${theme.palette.success.main}`
+            },
           }}
         >
-          <MenuItem component={NavLink} to="profile" onClick={() => setMenuAnchorEl(null)}>
-            <PersonIcon fontSize="small" sx={{ mr: 1 }} />
-            Profile
-          </MenuItem>
-          <MenuItem component={NavLink} to="settings" onClick={() => setMenuAnchorEl(null)}>
-            <SettingsIcon fontSize="small" sx={{ mr: 1 }} />
-            Settings
-          </MenuItem>
-          <MenuItem component={NavLink} to="support" onClick={() => setMenuAnchorEl(null)}>
-            <HelpOutlineIcon fontSize="small" sx={{ mr: 1 }} />
-            Help
-          </MenuItem>
-          <Divider sx={{ my: 0.5 }} />
-          <MenuItem onClick={handleLogout}>
-            <LogoutIcon fontSize="small" sx={{ mr: 1 }} />
-            Logout
-          </MenuItem>
-        </Menu>
-      </Box>
+          <LogoutIcon fontSize="small" sx={{ mr: 1, color: theme.palette.error.main }} />
+          Logout
+        </MenuItem>
+      </Menu>
+
       <Divider sx={{ my: 1 }} />
     </Box>
   );

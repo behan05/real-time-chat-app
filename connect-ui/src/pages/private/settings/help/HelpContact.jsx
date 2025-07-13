@@ -124,7 +124,7 @@ function HelpContact() {
           mx: 'auto',
           backdropFilter: 'blur(14px)',
           backgroundColor: 'transparent',
-          boxShadow: `inset 1px 1px 0.2rem ${theme.palette.text.secondary}`
+          boxShadow: `inset 1px 1px 0.2rem ${theme.palette.divider}`
         }}
       >
         {/* === Heading === */}
