@@ -28,5 +28,11 @@ app.use(express.json()); // Parses incoming JSON
 app.use('/api/auth', authRoutes); // For auth
 app.use('/api/settings', settingsRoutes); // For settings
 
+app.get('/', (req, res) => {
+    res.status(200).json({
+        message: "Hey Server is running on render."
+    });
+})
+
 // App listner
 app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
