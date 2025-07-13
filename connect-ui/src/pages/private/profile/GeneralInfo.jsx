@@ -7,9 +7,9 @@ import {
   Tooltip,
   Typography,
   useTheme,
-} from '../../../MUI/MuiComponents';
+} from '@/MUI/MuiComponents';
 
-import { SendIcon, EditIcon } from '../../../MUI/MuiIcons';
+import { SendIcon, EditIcon } from '@/MUI/MuiIcons';
 import NavigateWithArrow from '@/components/private/NavigateWithArrow';
 import BlurWrapper from '@/components/common/BlurWrapper';
 import StyledText from '@/components/common/StyledText';

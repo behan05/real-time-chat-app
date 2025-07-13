@@ -1,39 +1,41 @@
-/*
-Motivates users to finish their profile and understand usage.
-
-Profile Completion Progress Bar
-
-Last Seen / Account Created (optional)
-
-Verification Status (optional – if you allow phone/email/photo verification)
-*/
-
-import React from 'react';
+import * as React from 'react';
 import {
     Box,
-    Divider,
-    List,
-    ListItemButton,
-    ListItemIcon,
-    ListItemText,
     Stack,
-    useTheme
-} from '../../../MUI/MuiComponents';
+    Typography
+} from '@/MUI/MuiComponents';
 
-import { } from '../../../MUI/MuiIcons';
+import { } from '@/MUI/MuiIcons';
 import NavigateWithArrow from '@/components/private/NavigateWithArrow';
+import BlurWrapper from '@/components/common/BlurWrapper';
+import StyledText from '@/components/common/StyledText';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function CompletionAndActivity() {
-    const theme = useTheme();
+
     return (
         <Box component={'section'}>
+            <ToastContainer position="top-right" autoClose={1000} theme="colored" />
+
             {/* Header with arrow back icon */}
             <Stack mb={2}>
                 <NavigateWithArrow redirectTo={'/connect/profile'} text={'Completion And Activity'} />
             </Stack>
 
+            <BlurWrapper>
+                {/* Heading & TagLine */}
+                <Stack>
+                    <Typography textAlign="center" variant="h5" fontWeight={600} gutterBottom>
+                        Coming {' '}<StyledText text={'Soon...'} />{' '}🚀
+                    </Typography>
 
-            {/* <Divider sx={{ my: 2 }} /> */}
+                    <Typography variant="body2" textAlign="center" color="text.secondary">
+                        This section will help you track your profile progress and activity in future updates.
+                    </Typography>
+                </Stack>
+            </BlurWrapper>
+
         </Box>
     )
 }
