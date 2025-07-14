@@ -4,6 +4,13 @@ const User = require('../models/User.model');
 exports.getMyProfileController = async (req, res) => {
     // Extract logged-in user ID from auth middleware
     const userId = req.user.id;
+    // If no user ID is found, send 401 Unauthorized response
+    if (!userId) {
+        return res.status(401).json({
+            success: false,
+            error: 'Unauthorized'
+        });
+    }
 
     try {
         // Look for a profile document associated with this user
@@ -36,6 +43,17 @@ exports.getMyProfileController = async (req, res) => {
 };
 
 exports.updateGeneralInfoController = async (req, res) => {
+
+    // get user id from request object
+    const userId = req.user.id;
+    // if no user id is found, send 401 Unauthorized response
+    if (!userId) {
+        return res.status(401).json({
+            success: false,
+            error: 'Unauthorized'
+        });
+    }
+
     const {
         fullName,
         age,
@@ -48,13 +66,11 @@ exports.updateGeneralInfoController = async (req, res) => {
     // if no image is uploaded, it will be undefined
     const profileImage = req.file?.path;
 
-    // get user id from request object
-    const userId = req.user.id;
 
     // validate required fields
     if (
         !fullName?.trim()
-        || !age?.trim()
+        || typeof age !== 'number'
         || !gender?.trim()
         || !pronouns?.trim()
         || !shortBio?.trim()
@@ -112,14 +128,14 @@ exports.updateGeneralInfoController = async (req, res) => {
         };
 
         // Find the profile by user ID and update it.
-        await Profile.findOneAndUpdate({ user: userId }, updateProfile,
+        const profile = await Profile.findOneAndUpdate({ user: userId }, updateProfile,
             { new: true, upsert: true });
 
         res.setHeader('Content-Type', 'application/json');
         res.status(200).json({
             success: true,
             message: 'Profile updated successfully.',
-            profile: updateProfile
+            profile: profile
         })
 
     } catch (error) {
@@ -135,6 +151,14 @@ exports.updateGeneralInfoController = async (req, res) => {
 
 exports.updateMatchingPreferencesController = async (req, res) => {
     const userId = req.user.id;
+    // If no user ID is found, send 401 Unauthorized response
+    if (!userId) {
+        return res.status(401).json({
+            success: false,
+            error: 'Unauthorized'
+        });
+    }
+    // Destructure the required fields from the request body
     const {
         lookingFor,
         preferredLanguage,
@@ -197,7 +221,7 @@ exports.updateMatchingPreferencesController = async (req, res) => {
             }
         }
 
-        await Profile.findOneAndUpdate(
+        const profile = await Profile.findOneAndUpdate(
             { user: userId },
             updatePreferences,
             { new: true, upsert: true }
@@ -207,7 +231,8 @@ exports.updateMatchingPreferencesController = async (req, res) => {
             .status(200)
             .json({
                 success: true,
-                message: 'Matching preferences updated successfully.'
+                message: 'Matching preferences updated successfully.',
+                profile: profile
             });
 
     } catch (error) {
@@ -224,6 +249,13 @@ exports.updateMatchingPreferencesController = async (req, res) => {
 
 exports.updateTagsAndInterestsController = async (req, res) => {
     const userId = req.user.id;
+    // If no user ID is found, send 401 Unauthorized response
+    if (!userId) {
+        return res.status(401).json({
+            success: false,
+            error: 'Unauthorized'
+        });
+    }
 
     const {
         strictInterestMatch, personality, interests, chatStyles
@@ -252,7 +284,7 @@ exports.updateTagsAndInterestsController = async (req, res) => {
             chatStyles
         }
 
-        await Profile.findOneAndUpdate(
+        const profile = await Profile.findOneAndUpdate(
             { user: userId },
             updateTagsAndInterests,
             { new: true, upsert: true }
@@ -262,7 +294,8 @@ exports.updateTagsAndInterestsController = async (req, res) => {
             .status(200)
             .json({
                 success: true,
-                message: 'Tags and interests updated successfully.'
+                message: 'Tags and interests updated successfully.',
+                profile: profile
             });
 
     } catch (error) {
