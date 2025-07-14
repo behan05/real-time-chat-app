@@ -222,4 +222,56 @@ exports.updateMatchingPreferencesController = async (req, res) => {
 
 };
 
-exports.updateTagsAndInterestsController = async (req, res) => { };
+exports.updateTagsAndInterestsController = async (req, res) => {
+    const userId = req.user.id;
+
+    const {
+        strictInterestMatch, personality, interests, chatStyles
+    } = req.body;
+
+    if (typeof strictInterestMatch !== 'boolean'
+        || !personality?.trim()
+        || !Array.isArray(interests)
+        || !Array.isArray(chatStyles)
+    ) {
+        res.setHeader('Content-Type', 'application/json')
+            .status(400)
+            .json({
+                success: false,
+                error: 'All fields are required.'
+            });
+        return;
+    }
+
+    try {
+        const updateTagsAndInterests = {
+            strictInterestMatch,
+            personality,
+            interests,
+            chatStyles
+        }
+
+        await Profile.findOneAndUpdate(
+            { user: userId },
+            updateTagsAndInterests,
+            { new: true, upsert: true }
+        )
+
+        res.setHeader('Content-Type', 'application/json')
+            .status(200)
+            .json({
+                success: true,
+                message: 'Tags and interests updated successfully.'
+            });
+
+    } catch (error) {
+        res.setHeader('Content-Type', 'application/json')
+            .status(500)
+            .json({
+                success: false,
+                error: 'An error occurred while updating tags and interests.'
+            });
+        return;
+    }
+
+};
