@@ -1,46 +1,367 @@
-import React from 'react';
+import * as React from 'react';
 import {
   Box,
   Divider,
-  List,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Stack
-} from '../../../MUI/MuiComponents';
+  FormControl,
+  FormHelperText,
+  InputLabel,
+  MenuItem,
+  Select,
+  Stack,
+  Typography,
+  Slider,
+  Switch,
+  FormLabel,
+  FormControlLabel,
 
-import { } from '../../../MUI/MuiIcons';
+} from '@/MUI/MuiComponents';
+import { SendIcon } from '@/MUI/MuiIcons'
 import NavigateWithArrow from '@/components/private/NavigateWithArrow';
+import BlurWrapper from '@/components/common/BlurWrapper';
+import StyledText from '@/components/common/StyledText';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import StyledActionButton from '@/components/common/StyledActionButton';
+import { Country, State, City } from 'country-state-city';
 
-
-/* 
-Used by your algorithm to pair users.
-
-Looking For (e.g., Male, Female, Other)
-
-Preferred Age Range (Slider or min/max fields)
-
-Preferred Language(s) (Multiselect)
-
-Location
-
-Current city (optional or based on IP)
-
-Match nearby / global toggle (e.g., if user wants to find only people nearby or anyone worldwide)
-
-*/
 function MatchingPreferences() {
+  const [preferredAgeRange, setPreferredAgeRange] = React.useState([18, 30]);
+  const [stateOptions, setStateOptions] = React.useState([]);
+  const [stateCity, setStateCity] = React.useState([]);
+  const [isDisabled, setIsDisabled] = React.useState(false);
+
+  const [formData, setFormData] = React.useState({
+    lookingFor: '',
+    preferredLanguage: '',
+    preferredAgeRange: { min: '', max: '' },
+    country: '',
+    state: '',
+    city: '',
+    matchScope: '',
+  });
+
+  const [error, setError] = React.useState({
+    lookingFor: '',
+    preferredLanguage: '',
+    country: '',
+    state: '',
+    city: '',
+  });
+
+  const preferredLanguages = [
+    { value: 'english', label: 'English' },
+    { value: 'hindi', label: 'Hindi' },
+    { value: 'spanish', label: 'Spanish' },
+    { value: 'french', label: 'French' },
+    { value: 'german', label: 'German' },
+    { value: 'chinese', label: 'Chinese (Mandarin)' },
+    { value: 'japanese', label: 'Japanese' },
+    { value: 'russian', label: 'Russian' },
+    { value: 'arabic', label: 'Arabic' },
+    { value: 'portuguese', label: 'Portuguese' },
+    { value: 'bengali', label: 'Bengali' },
+    { value: 'punjabi', label: 'Punjabi' },
+    { value: 'telugu', label: 'Telugu' },
+    { value: 'tamil', label: 'Tamil' },
+    { value: 'marathi', label: 'Marathi' },
+    { value: 'korean', label: 'Korean' },
+    { value: 'turkish', label: 'Turkish' },
+    { value: 'italian', label: 'Italian' },
+    { value: 'vietnamese', label: 'Vietnamese' },
+    { value: 'urdu', label: 'Urdu' }
+  ];
+
+  const countryOptions = Country.getAllCountries();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    if (name === 'country') {
+      const states = State.getStatesOfCountry(value);
+      setStateOptions(states);
+
+      setFormData((prev) => ({
+        ...prev,
+        country: value,
+        state: '',
+        city: '',
+      }));
+
+    } else if (name === 'state') {
+      const city = City.getCitiesOfState(formData.country, value)
+      setStateCity(city);
+
+      setFormData((prev) => ({
+        ...prev,
+        state: value,
+        city: '',
+      }))
+
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
+  };
+
+  const handleMatchScopeChange = (e) => {
+    const { checked } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      matchScope: checked ? 'global' : 'nearby'
+    }))
+  };
+
+  const handleAgeRangeChange = (e, newRange) => {
+    setPreferredAgeRange(newRange);
+    setFormData((prev) => ({
+      ...prev, preferredAgeRange: {
+        min: newRange[0],
+        max: newRange[1]
+      }
+    }))
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    let hasError = false
+    const newErrors = {}
+
+    if (!formData.lookingFor.trim()) {
+      hasError = true;
+      newErrors.lookingFor = 'Please select who you are looking for.';
+    }
+
+    if (!formData.preferredLanguage.trim()) {
+      hasError = true;
+      newErrors.preferredLanguage = 'Preferred language is required.';
+    }
+
+    if (!formData.country.trim()) {
+      hasError = true;
+      newErrors.country = 'Please select your country.';
+    }
+
+    if (!formData.state.trim()) {
+      hasError = true;
+      newErrors.state = 'Please select your state.';
+    }
+
+    if (!formData.city.trim()) {
+      hasError = true;
+      newErrors.city = 'Please select your city.';
+    }
+
+    if (!formData.matchScope.trim()) {
+      hasError = true;
+      newErrors.matchScope = 'Please select match scope (Nearby or Global).';
+    }
+
+    if (hasError) {
+      setError(newErrors);
+      return;
+    }
+    setIsDisabled(true);
+
+    // Integrate API here.
+    toast.success('Preferences saved!');
+    setFormData({
+      lookingFor: '',
+      preferredLanguage: '',
+      preferredAgeRange: { min: '', max: '' },
+      country: '',
+      state: '',
+      city: '',
+      matchScope: '',
+    });
+    setError({});
+    setIsDisabled(false);
+  };
+
   return (
     <Box component={'section'}>
+      <ToastContainer position="top-right" autoClose={1000} theme="colored" />
+
       {/* Header with arrow back icon */}
       <Stack mb={2}>
         <NavigateWithArrow redirectTo={'/connect/profile'} text={'Matching Preferences'} />
       </Stack>
 
+      <BlurWrapper component="form" onSubmit={handleSubmit}>
+        {/* Heading & TagLine */}
+        <Stack>
+          <Typography textAlign="center" variant="h5" fontWeight={600} gutterBottom>
+            Matching <StyledText text={'Preferences'} />
+          </Typography>
+          <Typography variant="body2" textAlign="center" color="text.secondary">
+            Our advanced indigenous matching algorithm tailors your experience based on your preferences, ensuring more accurate and meaningful connections.
+          </Typography>
+        </Stack>
 
-      {/* <Divider sx={{ my: 2 }} /> */}
+        <Stack direction={'column'} gap={2} mt={2}>
+
+          {/* Looking For */}
+          <FormControl fullWidth error={Boolean(error.lookingFor)}>
+            <InputLabel id={'lookingFor-label'}>Looking For</InputLabel>
+            <Select
+              labelId="lookingFor-label"
+              id="lookingFor"
+              name="lookingFor"
+              value={formData.lookingFor}
+              label="Looking For"
+              onChange={handleChange}
+            >
+              <MenuItem value="male">Male</MenuItem>
+              <MenuItem value="female">Female</MenuItem>
+              <MenuItem value="other">Other</MenuItem>
+            </Select>
+            {error.lookingFor && <FormHelperText>{error.lookingFor}</FormHelperText>}
+          </FormControl>
+
+          {/* Preferred Language */}
+          <FormControl fullWidth error={Boolean(error.preferredLanguage)}>
+            <InputLabel id="preferredLanguage-label">Preferred Language</InputLabel>
+            <Select
+              labelId="preferredLanguage-label"
+              id="preferredLanguage"
+              name="preferredLanguage"
+              value={formData.preferredLanguage}
+              label="Preferred Language"
+              onChange={handleChange}
+            >
+              {preferredLanguages.map((lang) => (
+                <MenuItem key={lang.value} value={lang.value}>
+                  {lang.label}
+                </MenuItem>
+              ))}
+            </Select>
+            {error.preferredLanguage && <FormHelperText>{error.preferredLanguage}</FormHelperText>}
+          </FormControl>
+
+          <Divider sx={{ my: 2 }} />
+
+          {/* Preferred Age Range */}
+          <Stack>
+            <Typography gutterBottom>Preferred Age Range</Typography>
+            <Slider
+              value={preferredAgeRange}
+              valueLabelDisplay="auto"
+              onChange={handleAgeRangeChange}
+              min={18}
+              max={95}
+              step={1}
+              marks={[
+                { value: 18, label: '18' },
+                { value: 30, label: '30' },
+                { value: 40, label: '40' },
+                { value: 50, label: '50' },
+                { value: 60, label: '60' },
+                { value: 70, label: '70' },
+                { value: 80, label: '80' },
+                { value: 95, label: '95' },
+              ]}
+            />
+            <Typography variant="body2" mt={2} color="text.secondary">
+              Selected range: {preferredAgeRange[0]} - {preferredAgeRange[1]}
+            </Typography>
+          </Stack>
+
+          <Divider sx={{ my: 2 }} />
+
+          {/* Country */}
+          <FormControl fullWidth error={Boolean(error.country)}>
+            <InputLabel id="country-label">Country</InputLabel>
+            <Select
+              labelId="country-label"
+              id="country"
+              name="country"
+              value={formData.country}
+              label="Country"
+              onChange={handleChange}
+            >
+              {countryOptions.map((country) => (
+                <MenuItem key={country.isoCode} value={country.isoCode}>
+                  {country.name}
+                </MenuItem>
+              ))}
+            </Select>
+            {error.country && <FormHelperText>{error.country}</FormHelperText>}
+          </FormControl>
+
+          {/* State */}
+          <FormControl fullWidth error={Boolean(error.state)} disabled={!formData.country}>
+            <InputLabel id="state-label">State</InputLabel>
+            <Select
+              labelId="state-label"
+              id="state"
+              name="state"
+              value={formData.state}
+              label="State"
+              onChange={handleChange}
+            >
+              {stateOptions.map((state) => (
+                <MenuItem key={state.isoCode} value={state.isoCode}>
+                  {state.name}
+                </MenuItem>
+              ))}
+            </Select>
+            {error.state && <FormHelperText>{error.state}</FormHelperText>}
+          </FormControl>
+
+          {/* City */}
+          <FormControl fullWidth error={Boolean(error.city)} disabled={!formData.state}>
+            <InputLabel id="city-label">City</InputLabel>
+            <Select
+              labelId="city-label"
+              id="city"
+              name="city"
+              value={formData.city}
+              label="City"
+              onChange={handleChange}
+            >
+              {stateCity.map((city) => (
+                <MenuItem key={city.name} value={city.name}>
+                  {city.name}
+                </MenuItem>
+              ))}
+            </Select>
+            {error.city && <FormHelperText>{error.city}</FormHelperText>}
+          </FormControl>
+
+          <Divider sx={{ my: 2 }} />
+
+          {/* Toggle Preference */}
+          <FormControl>
+            <FormLabel color='text.primary'>Match Scope</FormLabel>
+
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              gutterBottom
+            >
+              Choose whether to find matches nearby or globally.
+            </Typography>
+
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={formData.matchScope === 'global'}
+                  onChange={handleMatchScopeChange}
+                />
+              }
+              label={formData.matchScope === 'global' ? 'Global Match' : 'Nearby Match'}
+            />
+          </FormControl>
+          <StyledActionButton
+            type='submit'
+            endIcon={<SendIcon />}
+            disabled={isDisabled}
+          >
+            {isDisabled ? 'Updating...' : 'Update Preferences'}
+          </StyledActionButton>
+        </Stack>
+      </BlurWrapper>
     </Box>
-  )
+  );
 }
 
 export default MatchingPreferences;
