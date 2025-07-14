@@ -12,7 +12,7 @@ import {
   Checkbox,
   Switch,
   Chip,
-} from '../../../MUI/MuiComponents';
+} from '@/MUI/MuiComponents';
 import { SendIcon } from '@/MUI/MuiIcons';
 
 import NavigateWithArrow from '@/components/private/NavigateWithArrow';
