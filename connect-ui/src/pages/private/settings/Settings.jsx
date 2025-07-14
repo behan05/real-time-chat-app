@@ -84,7 +84,13 @@ function Settings() {
       </Box>
 
       {/* Profile avatar */}
-      <Stack component={Link} to={'profile'} my={4} flexDirection={'row'} gap={2}>
+      <Stack
+        component={Link}
+        to={'/connect/profile'}
+        my={4}
+        flexDirection={'row'}
+        gap={2}
+      >
         <Tooltip title="Profile">
           <Avatar
             src=""

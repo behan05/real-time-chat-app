@@ -9,6 +9,7 @@ const connectDB = require('./config/db');
 // Route Imports
 const authRoutes = require('./routers/authRoutes');
 const settingsRoutes = require('./routers/settingsRoutes');
+const profileRoutes = require('./routers/profileRoutes');
 
 // PORT
 const PORT = process.env.PORT || 8001;
@@ -27,6 +28,7 @@ app.use(express.json()); // Parses incoming JSON
 // Routes
 app.use('/api/auth', authRoutes); // For auth
 app.use('/api/settings', settingsRoutes); // For settings
+app.use('/api/profile', profileRoutes); //  for profile
 
 app.get('/', (req, res) => {
     res.status(200).json({
