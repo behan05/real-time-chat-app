@@ -229,7 +229,8 @@ exports.updateTagsAndInterestsController = async (req, res) => {
         strictInterestMatch, personality, interests, chatStyles
     } = req.body;
 
-    if (typeof strictInterestMatch !== 'boolean'
+    if (
+        typeof strictInterestMatch !== 'boolean'
         || !personality?.trim()
         || !Array.isArray(interests)
         || !Array.isArray(chatStyles)
