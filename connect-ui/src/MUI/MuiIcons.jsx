@@ -100,12 +100,13 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import UploadIcon from '@mui/icons-material/Upload';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import EditIcon from '@mui/icons-material/Edit';
-
+import AddIcon from '@mui/icons-material/Add';
 // ==================== Export All ====================
 export {
   // Setting Icons
   KeyIcon,
   EditIcon,
+  AddIcon,
   NotificationsIcon,
   FavoriteBorderIcon,
   SosIcon,

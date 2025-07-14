@@ -48,11 +48,13 @@ import {
   DialogContentText,
   DialogActions,
   FormLabel,
+  Chip,
 } from '@mui/material';
 
 export {
   AppBar,
   Avatar,
+  Chip,
   Dialog,
   Slider,
   DialogTitle,
