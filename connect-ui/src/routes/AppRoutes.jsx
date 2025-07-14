@@ -50,11 +50,11 @@ import HelpReport from '@/pages/private/settings/help/HelpReport';
 import ReportBug from '@/components/common/ReportBug';
 
 // === Profile ===
-import ProfileLayout from '@/pages/private/Profile/ProfileLayout';
+import ProfileLayout from '@/pages/private/profile/ProfileLayout';
 import Profile from '@/pages/private/Profile/profile';
-import CompletionAndActivity from '@/pages/private/Profile/CompletionAndActivity';
-import GeneralInfo from '@/pages/private/Profile/GeneralInfo';
-import MatchingPreferences from '@/pages/private/Profile/MatchingPreferences';
+import CompletionAndActivity from '@/pages/private/profile/CompletionAndActivity';
+import GeneralInfo from '@/pages/private/profile/GeneralInfo';
+import MatchingPreferences from '@/pages/private/profile/MatchingPreferences';
 import TagsAndInterests from '@/pages/private/profile/TagsAndInterests';
 
 
