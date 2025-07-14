@@ -35,7 +35,6 @@ exports.getMyProfileController = async (req, res) => {
     }
 };
 
-
 exports.updateGeneralInfoController = async (req, res) => {
     const {
         fullName,
@@ -63,6 +62,7 @@ exports.updateGeneralInfoController = async (req, res) => {
         return res.setHeader('Content-Type', 'application/json')
             .status(400)
             .json({
+                success: false,
                 error: 'All fields are required.'
             });
     }
@@ -72,6 +72,7 @@ exports.updateGeneralInfoController = async (req, res) => {
         return res.setHeader('Content-type', 'application/json')
             .status(400)
             .json({
+                success: false,
                 error: 'Age must be a number.'
             })
     };
@@ -81,6 +82,7 @@ exports.updateGeneralInfoController = async (req, res) => {
         return res.setHeader('Content-type', 'application/json')
             .status(400)
             .json({
+                success: false,
                 error: 'Age must be between 18 and 95.'
             })
     }
@@ -90,6 +92,7 @@ exports.updateGeneralInfoController = async (req, res) => {
         return res.setHeader('Content-type', 'application/json')
             .status(400)
             .json({
+                success: false,
                 error: 'Bio should be under 300 characters.'
             })
     }
@@ -114,6 +117,7 @@ exports.updateGeneralInfoController = async (req, res) => {
 
         res.setHeader('Content-Type', 'application/json');
         res.status(200).json({
+            success: true,
             message: 'Profile updated successfully.',
             profile: updateProfile
         })
@@ -122,12 +126,100 @@ exports.updateGeneralInfoController = async (req, res) => {
         // if there is an error while updating the profile
         res.setHeader('Content-Type', 'application/json');
         res.status(500).json({
+            success: false,
             error: 'An error occurred while updating the profile.'
         });
         return;
     }
 };
 
-exports.updateMatchingPreferencesController = async (req, res) => { };
+exports.updateMatchingPreferencesController = async (req, res) => {
+    const userId = req.user.id;
+    const {
+        lookingFor,
+        preferredLanguage,
+        country,
+        state,
+        city,
+        matchScope,
+        preferredAgeRange = {}
+    } = req.body;
+
+    const { min, max } = preferredAgeRange;
+
+    if (!lookingFor?.trim()
+        || !preferredLanguage?.trim()
+        || !country?.trim()
+        || !state?.trim()
+        || !city?.trim()
+        || !matchScope?.trim()
+    ) {
+        res.setHeader('Content-Type', 'application/json')
+            .status(400)
+            .json({
+                success: false,
+                error: 'All fields are required.'
+            });
+        return;
+    };
+
+    if (isNaN(min) || isNaN(max)) {
+        res.setHeader('Content-Type', 'application/json')
+            .status(400)
+            .json({
+                success: false,
+                error: 'Age range must be a number.'
+            });
+        return;
+    }
+
+    if (min < 18 || max > 95 || min >= max) {
+        res.setHeader('Content-Type', 'application/json')
+            .status(400)
+            .json({
+                success: false,
+                error: 'Invalid age range.'
+            });
+        return;
+    }
+
+    try {
+        const updatePreferences = {
+            lookingFor,
+            preferredLanguage,
+            country,
+            state,
+            city,
+            matchScope,
+            preferredAgeRange: {
+                min: parseInt(min),
+                max: parseInt(max)
+            }
+        }
+
+        await Profile.findOneAndUpdate(
+            { user: userId },
+            updatePreferences,
+            { new: true, upsert: true }
+        )
+
+        res.setHeader('Content-Type', 'application/json')
+            .status(200)
+            .json({
+                success: true,
+                message: 'Matching preferences updated successfully.'
+            });
+
+    } catch (error) {
+        res.setHeader('Content-Type', 'application/json')
+            .status(500)
+            .json({
+                success: false,
+                error: 'An error occurred while updating matching preferences.'
+            });
+        return;
+    }
+
+};
 
 exports.updateTagsAndInterestsController = async (req, res) => { };
