@@ -51,7 +51,7 @@ import ReportBug from '@/components/common/ReportBug';
 
 // === Profile ===
 import ProfileLayout from '@/pages/private/profile/ProfileLayout';
-import Profile from '@/pages/private/Profile/profile';
+import Profile from '@/pages/private/profile/profile';
 import CompletionAndActivity from '@/pages/private/profile/CompletionAndActivity';
 import GeneralInfo from '@/pages/private/profile/GeneralInfo';
 import MatchingPreferences from '@/pages/private/profile/MatchingPreferences';
