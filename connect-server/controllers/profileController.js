@@ -2,8 +2,39 @@ const Profile = require('../models/Profile.model');
 const User = require('../models/User.model');
 
 exports.getMyProfileController = async (req, res) => {
-    
- };
+    // Extract logged-in user ID from auth middleware
+    const userId = req.user.id;
+
+    try {
+        // Look for a profile document associated with this user
+        const userProfile = await Profile.findOne({ user: userId }).lean();
+
+        // If no profile found, send 404 response
+        if (!userProfile) {
+            res.setHeader('Content-Type', 'application/json');
+            return res.status(404).json({
+                success: false,
+                error: 'Profile does not exist.'
+            });
+        }
+
+        // If profile exists, send it back in response
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(200).json({
+            success: true,
+            profile: userProfile
+        });
+
+    } catch (error) {
+        // If any server/database error occurs
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(500).json({
+            success: false,
+            error: 'An error occurred while retrieving profile.'
+        });
+    }
+};
+
 
 exports.updateGeneralInfoController = async (req, res) => {
     const {
