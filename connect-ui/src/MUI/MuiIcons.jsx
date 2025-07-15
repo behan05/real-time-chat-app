@@ -101,12 +101,19 @@ import UploadIcon from '@mui/icons-material/Upload';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
+import QueryStatsIcon from '@mui/icons-material/QueryStats';
+
 // ==================== Export All ====================
 export {
   // Setting Icons
   KeyIcon,
   EditIcon,
+  PersonOutlineIcon,
   AddIcon,
+  LocalOfferIcon,
+  QueryStatsIcon,
   NotificationsIcon,
   FavoriteBorderIcon,
   SosIcon,

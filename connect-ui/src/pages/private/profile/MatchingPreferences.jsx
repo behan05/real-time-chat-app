@@ -13,9 +13,9 @@ import {
   Switch,
   FormLabel,
   FormControlLabel,
-
 } from '@/MUI/MuiComponents';
-import { SendIcon } from '@/MUI/MuiIcons'
+
+import { SendIcon } from '@/MUI/MuiIcons';
 import NavigateWithArrow from '@/components/private/NavigateWithArrow';
 import BlurWrapper from '@/components/common/BlurWrapper';
 import StyledText from '@/components/common/StyledText';
@@ -23,12 +23,18 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import StyledActionButton from '@/components/common/StyledActionButton';
 import { Country, State, City } from 'country-state-city';
+import { updateMatchingPreferences } from '@/redux/slices/profile/profileAction';
+import { useDispatch, useSelector } from 'react-redux';
 
 function MatchingPreferences() {
+  // Local state declarations
   const [preferredAgeRange, setPreferredAgeRange] = React.useState([18, 30]);
   const [stateOptions, setStateOptions] = React.useState([]);
   const [stateCity, setStateCity] = React.useState([]);
   const [isDisabled, setIsDisabled] = React.useState(false);
+
+  const dispatch = useDispatch();
+  const { profileData, loading } = useSelector((state) => state.profile);
 
   const [formData, setFormData] = React.useState({
     lookingFor: '',
@@ -48,6 +54,44 @@ function MatchingPreferences() {
     city: '',
   });
 
+  // Load profile data and populate form on mount
+  React.useEffect(() => {
+    if (profileData) {
+      const selectedCountry = profileData?.country || '';
+      const selectedState = profileData?.state || '';
+      const selectedCity = profileData?.city || '';
+
+      // Preload states and cities based on existing profile data
+      const states = selectedCountry ? State.getStatesOfCountry(selectedCountry) : [];
+      setStateOptions(states);
+
+      const cities = (selectedCountry && selectedState)
+        ? City.getCitiesOfState(selectedCountry, selectedState)
+        : [];
+      setStateCity(cities);
+
+      // Set all form fields
+      setFormData({
+        lookingFor: profileData?.lookingFor || '',
+        preferredLanguage: profileData?.preferredLanguage || '',
+        preferredAgeRange: {
+          min: profileData?.preferredAgeRange?.min || 18,
+          max: profileData?.preferredAgeRange?.max || 30,
+        },
+        country: selectedCountry,
+        state: selectedState,
+        city: selectedCity,
+        matchScope: profileData?.matchScope || '',
+      });
+
+      setPreferredAgeRange([
+        profileData?.preferredAgeRange?.min || 18,
+        profileData?.preferredAgeRange?.max || 30
+      ]);
+    }
+  }, [profileData]);
+
+  // Language options
   const preferredLanguages = [
     { value: 'english', label: 'English' },
     { value: 'hindi', label: 'Hindi' },
@@ -71,87 +115,83 @@ function MatchingPreferences() {
     { value: 'urdu', label: 'Urdu' }
   ];
 
+  // All countries
   const countryOptions = Country.getAllCountries();
 
+  // Handle form field changes
   const handleChange = (e) => {
     const { name, value } = e.target;
 
+    // Update states and reset dependent fields
     if (name === 'country') {
       const states = State.getStatesOfCountry(value);
       setStateOptions(states);
-
+      setStateCity([]);
       setFormData((prev) => ({
         ...prev,
         country: value,
         state: '',
         city: '',
       }));
-
     } else if (name === 'state') {
-      const city = City.getCitiesOfState(formData.country, value)
-      setStateCity(city);
-
+      const cities = City.getCitiesOfState(formData.country, value);
+      setStateCity(cities);
       setFormData((prev) => ({
         ...prev,
         state: value,
         city: '',
-      }))
-
+      }));
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
     }
   };
 
+  // Toggle for global/nearby match
   const handleMatchScopeChange = (e) => {
     const { checked } = e.target;
     setFormData((prev) => ({
       ...prev,
-      matchScope: checked ? 'global' : 'nearby'
-    }))
+      matchScope: checked ? 'global' : 'nearby',
+    }));
   };
 
+  // Handle age slider
   const handleAgeRangeChange = (e, newRange) => {
     setPreferredAgeRange(newRange);
     setFormData((prev) => ({
-      ...prev, preferredAgeRange: {
-        min: newRange[0],
-        max: newRange[1]
-      }
-    }))
+      ...prev,
+      preferredAgeRange: { min: newRange[0], max: newRange[1] },
+    }));
   };
 
-  const handleSubmit = (e) => {
+  // Submit handler with validation
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    let hasError = false;
+    const newErrors = {};
 
-    let hasError = false
-    const newErrors = {}
-
-    if (!formData.lookingFor.trim()) {
+    // Basic validations
+    if (!formData.lookingFor?.trim()) {
       hasError = true;
       newErrors.lookingFor = 'Please select who you are looking for.';
     }
-
-    if (!formData.preferredLanguage.trim()) {
+    if (!formData.preferredLanguage?.trim()) {
       hasError = true;
       newErrors.preferredLanguage = 'Preferred language is required.';
     }
-
-    if (!formData.country.trim()) {
+    if (!formData.country?.trim()) {
       hasError = true;
       newErrors.country = 'Please select your country.';
     }
-
-    if (!formData.state.trim()) {
+    if (!formData.state?.trim()) {
       hasError = true;
       newErrors.state = 'Please select your state.';
     }
-
-    if (!formData.city.trim()) {
+    if (!formData.city?.trim()) {
       hasError = true;
       newErrors.city = 'Please select your city.';
     }
-
-    if (!formData.matchScope.trim()) {
+    if (!formData.matchScope?.trim()) {
       hasError = true;
       newErrors.matchScope = 'Please select match scope (Nearby or Global).';
     }
@@ -160,53 +200,55 @@ function MatchingPreferences() {
       setError(newErrors);
       return;
     }
+
     setIsDisabled(true);
 
-    // Integrate API here.
-    toast.success('Preferences saved!');
-    setFormData({
-      lookingFor: '',
-      preferredLanguage: '',
-      preferredAgeRange: { min: '', max: '' },
-      country: '',
-      state: '',
-      city: '',
-      matchScope: '',
-    });
-    setError({});
-    setIsDisabled(false);
+    try {
+      const response = await dispatch(updateMatchingPreferences(formData));
+      if (response.success) {
+        toast.success(response.message || 'Preferences updated successfully!');
+        setError({});
+      } else {
+        toast.error(response?.error || 'Something went wrong.');
+      }
+    } catch (error) {
+      toast.error('An error occurred while updating preferences.');
+    } finally {
+      setIsDisabled(false);
+    }
   };
 
   return (
     <Box component={'section'}>
       <ToastContainer position="top-right" autoClose={1000} theme="colored" />
 
-      {/* Header with arrow back icon */}
+      {/* Header */}
       <Stack mb={2}>
         <NavigateWithArrow redirectTo={'/connect/profile'} text={'Matching Preferences'} />
       </Stack>
 
+      {/* Form Wrapper */}
       <BlurWrapper component="form" onSubmit={handleSubmit}>
-        {/* Heading & TagLine */}
+        {/* Title */}
         <Stack>
           <Typography textAlign="center" variant="h5" fontWeight={600} gutterBottom>
             Matching <StyledText text={'Preferences'} />
           </Typography>
           <Typography variant="body2" textAlign="center" color="text.secondary">
-            Our advanced indigenous matching algorithm tailors your experience based on your preferences, ensuring more accurate and meaningful connections.
+            Our algorithm personalizes your experience based on these preferences.
           </Typography>
         </Stack>
 
+        {/* Form Fields */}
         <Stack direction={'column'} gap={2} mt={2}>
-
           {/* Looking For */}
-          <FormControl fullWidth error={Boolean(error.lookingFor)}>
-            <InputLabel id={'lookingFor-label'}>Looking For</InputLabel>
+          <FormControl fullWidth error={!!error.lookingFor}>
+            <InputLabel id="lookingFor-label">Looking For</InputLabel>
             <Select
               labelId="lookingFor-label"
               id="lookingFor"
               name="lookingFor"
-              value={formData.lookingFor}
+              value={formData.lookingFor || ''}
               label="Looking For"
               onChange={handleChange}
             >
@@ -217,14 +259,14 @@ function MatchingPreferences() {
             {error.lookingFor && <FormHelperText>{error.lookingFor}</FormHelperText>}
           </FormControl>
 
-          {/* Preferred Language */}
-          <FormControl fullWidth error={Boolean(error.preferredLanguage)}>
+          {/* Language */}
+          <FormControl fullWidth error={!!error.preferredLanguage}>
             <InputLabel id="preferredLanguage-label">Preferred Language</InputLabel>
             <Select
               labelId="preferredLanguage-label"
               id="preferredLanguage"
               name="preferredLanguage"
-              value={formData.preferredLanguage}
+              value={formData.preferredLanguage || ''}
               label="Preferred Language"
               onChange={handleChange}
             >
@@ -239,7 +281,7 @@ function MatchingPreferences() {
 
           <Divider sx={{ my: 2 }} />
 
-          {/* Preferred Age Range */}
+          {/* Age Range */}
           <Stack>
             <Typography gutterBottom>Preferred Age Range</Typography>
             <Slider
@@ -268,13 +310,13 @@ function MatchingPreferences() {
           <Divider sx={{ my: 2 }} />
 
           {/* Country */}
-          <FormControl fullWidth error={Boolean(error.country)}>
+          <FormControl fullWidth error={!!error.country}>
             <InputLabel id="country-label">Country</InputLabel>
             <Select
               labelId="country-label"
               id="country"
               name="country"
-              value={formData.country}
+              value={formData.country || ''}
               label="Country"
               onChange={handleChange}
             >
@@ -288,13 +330,13 @@ function MatchingPreferences() {
           </FormControl>
 
           {/* State */}
-          <FormControl fullWidth error={Boolean(error.state)} disabled={!formData.country}>
+          <FormControl fullWidth error={!!error.state} disabled={!formData.country}>
             <InputLabel id="state-label">State</InputLabel>
             <Select
               labelId="state-label"
               id="state"
               name="state"
-              value={formData.state}
+              value={formData.state || ''}
               label="State"
               onChange={handleChange}
             >
@@ -308,13 +350,13 @@ function MatchingPreferences() {
           </FormControl>
 
           {/* City */}
-          <FormControl fullWidth error={Boolean(error.city)} disabled={!formData.state}>
+          <FormControl fullWidth error={!!error.city} disabled={!formData.state}>
             <InputLabel id="city-label">City</InputLabel>
             <Select
               labelId="city-label"
               id="city"
               name="city"
-              value={formData.city}
+              value={formData.city || ''}
               label="City"
               onChange={handleChange}
             >
@@ -329,18 +371,12 @@ function MatchingPreferences() {
 
           <Divider sx={{ my: 2 }} />
 
-          {/* Toggle Preference */}
+          {/* Match Scope Toggle */}
           <FormControl>
-            <FormLabel color='text.primary'>Match Scope</FormLabel>
-
-            <Typography
-              variant="body2"
-              color="text.secondary"
-              gutterBottom
-            >
+            <FormLabel>Match Scope</FormLabel>
+            <Typography variant="body2" color="text.secondary">
               Choose whether to find matches nearby or globally.
             </Typography>
-
             <FormControlLabel
               control={
                 <Switch
@@ -351,11 +387,9 @@ function MatchingPreferences() {
               label={formData.matchScope === 'global' ? 'Global Match' : 'Nearby Match'}
             />
           </FormControl>
-          <StyledActionButton
-            type='submit'
-            endIcon={<SendIcon />}
-            disabled={isDisabled}
-          >
+
+          {/* Submit Button */}
+          <StyledActionButton type="submit" endIcon={<SendIcon />} disabled={isDisabled}>
             {isDisabled ? 'Updating...' : 'Update Preferences'}
           </StyledActionButton>
         </Stack>

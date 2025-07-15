@@ -17,11 +17,17 @@ import StyledActionButton from '@/components/common/StyledActionButton';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import { updateGeneralInfo } from '@/redux/slices/profile/profileAction';
+import { useDispatch, useSelector } from 'react-redux';
+
 function GeneralInfo() {
   const theme = useTheme();
+  const dispatch = useDispatch();
+  const { profileData, loading } = useSelector((state) => state.profile);
 
   const [isDisabled, setIsDisabled] = React.useState(false);
   const [isHover, setIsHover] = React.useState(false);
+  const [previewUrl, setPreviewUrl] = React.useState(null);
 
   const [formData, setFormData] = React.useState({
     fullName: '',
@@ -41,6 +47,19 @@ function GeneralInfo() {
     profileImage: ''
   });
 
+  // Pre-fill data when profileData is loaded
+  React.useEffect(() => {
+    if (profileData) {
+      setFormData({
+        fullName: profileData.fullName || '',
+        age: profileData.age || '',
+        gender: profileData.gender || '',
+        pronouns: profileData.pronouns || '',
+        profileImage: profileData.profileImage || null,
+        shortBio: profileData.shortBio || '',
+      });
+    }
+  }, [profileData]);
 
   const inputField = [
     {
@@ -94,35 +113,29 @@ function GeneralInfo() {
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-
     if (!file) return;
 
-    // 1. Validate file type (only images)
     const validTypes = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
     if (!validTypes.includes(file.type)) {
-      return setError((prev) => ({
+      return setError(prev => ({
         ...prev,
         profileImage: 'Only JPG, PNG, or WEBP formats are allowed.',
       }));
     }
 
-    // 2. Validate file size (e.g. max 2MB)
-    const maxSize = 2 * 1024 * 1024; // 2MB
+    const maxSize = 2 * 1024 * 1024;
     if (file.size > maxSize) {
-      return setError((prev) => ({
+      return setError(prev => ({
         ...prev,
         profileImage: 'File size must be less than 2MB.',
       }));
     }
 
-    // 3. Clear previous error and read file
-    setError((prev) => ({ ...prev, profileImage: '' }));
+    setError(prev => ({ ...prev, profileImage: '' }));
+    setFormData(prev => ({ ...prev, profileImage: file }));
 
-    const reader = new FileReader();
-    reader.onload = () => {
-      setFormData((prev) => ({ ...prev, profileImage: reader.result }));
-    };
-    reader.readAsDataURL(file);
+    const preview = URL.createObjectURL(file); // ✅
+    setPreviewUrl(preview);
   };
 
   const handleChange = (e) => {
@@ -130,7 +143,7 @@ function GeneralInfo() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     let hasError = false;
@@ -161,33 +174,41 @@ function GeneralInfo() {
       hasError = true;
     }
 
-    setError(newErrors);
+    if (formData.shortBio.trim().length > 300) {
+      newErrors.shortBio = 'Bio should be under 300 characters.';
+      hasError = true;
+    }
 
+    setError(newErrors);
     if (hasError) return;
+
+    const payload = new FormData();
+    payload.append('fullName', formData.fullName);
+    payload.append('age', formData.age);
+    payload.append('gender', formData.gender);
+    payload.append('pronouns', formData.pronouns);
+    payload.append('shortBio', formData.shortBio);
+
+    if (formData.profileImage instanceof File) {
+      payload.append('profileImage', formData.profileImage); // not base64
+    }
 
     setIsDisabled(true);
 
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      const response = await dispatch(updateGeneralInfo(payload));
+      toast.success(response.message || 'Profile updated successfully!');
       setIsDisabled(false);
-      toast.success("Profile updated successfully! 🎉");
-    }, 1000);
-
-    setFormData({
-      fullName: '',
-      age: '',
-      gender: '',
-      pronouns: '',
-      profileImage: null,
-      shortBio: ''
-    })
+    } catch (error) {
+      toast.error(response.error || 'Failed to update profile.');
+      setIsDisabled(false);
+    }
   };
 
   return (
     <Box component={'section'}>
       <ToastContainer position="top-right" autoClose={1000} theme="colored" />
 
-      {/* Header with arrow back icon */}
       <Stack mb={2}>
         <NavigateWithArrow redirectTo={'/connect/profile'} text={'General Info'} />
       </Stack>
@@ -197,7 +218,6 @@ function GeneralInfo() {
           <Typography textAlign="center" variant="h5" fontWeight={600} gutterBottom>
             General <StyledText text={'Information'} />
           </Typography>
-
           <Typography variant="body2" textAlign="center" color="text.secondary">
             Fill your personal details to help others know you better.
           </Typography>
@@ -220,7 +240,7 @@ function GeneralInfo() {
                   onChange={handleImageChange}
                 />
                 <Avatar
-                  src={formData.profileImage}
+                  src={previewUrl || formData.profileImage}
                   alt="profile image"
                   aria-label="profile image"
                   sx={{
@@ -264,42 +284,19 @@ function GeneralInfo() {
           </Box>
         </Tooltip>
 
-        {/* Input Field */}
+        {/* Input Fields */}
         <Stack gap={1.5}>
           {inputField.map((input, index) => (
             <Stack key={index}>
-              {input.name === 'shortBio' ? (
-                <TextField
-                  label={input.label}
-                  name={input.name}
-                  value={input.value}
-                  placeholder={input.placeholder}
-                  multiline={input.multiline}
-                  rows={input.rows}
-                  error={input.error}
-                  helperText={input.helperText}
-                  onChange={handleChange}
-                />
-              ) : (
-                <TextField
-                  key={index}
-                  label={input.label}
-                  name={input.name}
-                  value={input.value}
-                  placeholder={input.placeholder}
-                  fullWidth={input.fullWidth}
-                  error={input.error}
-                  helperText={input.helperText}
-                  onChange={handleChange}
-                />
-              )}
-
+              <TextField
+                {...input}
+                onChange={handleChange}
+              />
             </Stack>
-
           ))}
         </Stack>
 
-        {/* Summit Button */}
+        {/* Submit Button */}
         <StyledActionButton
           endIcon={<SendIcon />}
           type='submit'
@@ -308,9 +305,8 @@ function GeneralInfo() {
           {isDisabled ? 'Saving...' : 'Save Changes'}
         </StyledActionButton>
       </BlurWrapper>
-
     </Box>
-  )
+  );
 }
 
-export default GeneralInfo
+export default GeneralInfo;

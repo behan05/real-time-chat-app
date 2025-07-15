@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Box,
   Divider,
@@ -7,20 +7,28 @@ import {
   ListItemIcon,
   ListItemText,
   Stack
-} from '../../../MUI/MuiComponents';
+} from '@/MUI/MuiComponents';
 
-import { } from '../../../MUI/MuiIcons';
+import {
+  PersonOutlineIcon,
+  FavoriteBorderIcon,
+  LocalOfferIcon,
+  QueryStatsIcon
+} from '@/MUI/MuiIcons';
 import NavigateWithArrow from '@/components/private/NavigateWithArrow';
 
 import { Link } from 'react-router-dom';
 
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline';         // General Info
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';       // Matching Preferences
-import LocalOfferIcon from '@mui/icons-material/LocalOffer';               // Tags & Interests
-import QueryStatsIcon from '@mui/icons-material/QueryStats';               // Completion & Activity
-
+import { getProfile } from '@/redux/slices/profile/profileAction';
+import { useDispatch } from 'react-redux';
 
 function Profile() {
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    dispatch(getProfile());
+  }, []);
+
   const ProfileItems = [
     {
       icon: <PersonOutlineIcon sx={{ color: 'info.main' }} />,
