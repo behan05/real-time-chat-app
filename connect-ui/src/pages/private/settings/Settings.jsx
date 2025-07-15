@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Box,
   Stack,
   Typography,
   TextField,
-  useTheme,
   Avatar,
   Divider,
   Tooltip,
@@ -22,14 +21,22 @@ import {
   ChatIcon,
   LogoutIcon
 } from '@/MUI/MuiIcons';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import NavigateWithArrow from '@/components/private/NavigateWithArrow';
 import { logout } from '@/redux/slices/auth/authAction';
-import { useDispatch } from 'react-redux';
+import { getProfile } from '@/redux/slices/profile/profileAction';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Settings() {
   const [searchValue, setSearchValue] = React.useState('');
   const dispatch = useDispatch();
+  const { profileData } = useSelector((state) => state.profile);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(getProfile());
+  }, [dispatch]);
+
   const settingItems = [
     {
       path: 'account',
@@ -62,6 +69,11 @@ function Settings() {
       subTitle: 'Help center, contact us, privacy policy'
     }
   ];
+
+  const handleLogout = async () => {
+    await dispatch(logout());
+    navigate('/login');
+  };
 
   return (
     <Box component={'section'}>
@@ -105,10 +117,10 @@ function Settings() {
 
         <Stack>
           <Typography variant="body1" letterSpacing={1} color={'text.primary'}>
-            User name
+            {profileData?.fullName || 'User Name'}
           </Typography>
           <Typography variant="body2" letterSpacing={1} color={'text.secondary'}>
-            About user
+            {profileData?.shortBio || 'Short Bio'}
           </Typography>
         </Stack>
       </Stack>
@@ -139,7 +151,7 @@ function Settings() {
           </ListItemButton>
         ))}
         <ListItemButton
-          onClick={() => dispatch(logout())}
+          onClick={handleLogout}
           sx={{
             borderRadius: 1,
             p: 2,
@@ -149,7 +161,9 @@ function Settings() {
             }
           }}
         >
-          <ListItemIcon>{<LogoutIcon sx={{ mr: 1.1, color: 'error.main' }} />}</ListItemIcon>
+          <ListItemIcon>
+            <LogoutIcon sx={{ mr: 1.1, color: 'error.main' }} />
+          </ListItemIcon>
           <ListItemText primary="Logout" sx={{ color: 'error.main' }} />
         </ListItemButton>
       </List>
