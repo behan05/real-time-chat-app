@@ -19,4 +19,9 @@ Routers.get('/privacy-settings', authMiddleware, settingsController.getPrivacy);
 // Notification Settings
 Routers.patch('/notification-settings', authMiddleware, settingsController.updateNotificationSettings);
 Routers.get('/notification-settings', authMiddleware, settingsController.getNotificationSettings);
+
+// Chat Settings
+Routers.patch('/chat-settings', authMiddleware, settingsController.updateChatSettings);
+Routers.get('/chat-settings', authMiddleware, settingsController.getChatSettings);
+
 module.exports = Routers;

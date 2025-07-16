@@ -243,6 +243,12 @@ exports.deleteAccount = async (req, res) => {
 
 // Update user's privacy preferences (toggle-based settings)
 exports.updatePrivacy = async (req, res) => {
+    const userId = req.user.id;
+    if (!userId) {
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(401).json({ error: 'User ID is required.' });
+    };
+
     const {
         showProfilePic,
         showLocation,
@@ -268,12 +274,12 @@ exports.updatePrivacy = async (req, res) => {
 
     try {
         // Try to find existing settings
-        const privacySetting = await Settings.findOne({ user: req.user.id });
+        const privacySetting = await Settings.findOne({ user: userId });
 
         // Auto-create settings if not found
         if (!privacySetting) {
             const newSettings = new Settings({
-                user: req.user.id,
+                user: userId,
                 showProfilePic,
                 showLocation,
                 matchVerifiedOnly,
@@ -318,8 +324,15 @@ exports.updatePrivacy = async (req, res) => {
 
 // Get user's current privacy settings
 exports.getPrivacy = async (req, res) => {
+
+    const userId = req.user.id;
+    if (!userId) {
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(401).json({ error: 'User ID is required.' });
+    }
+
     try {
-        const privacySettings = await Settings.findOne({ user: req.user.id });
+        const privacySettings = await Settings.findOne({ user: userId });
 
         if (!privacySettings) {
             res.setHeader('Content-Type', 'application/json');
@@ -343,6 +356,13 @@ exports.getPrivacy = async (req, res) => {
 
 // Update user's notification settings
 exports.updateNotificationSettings = async (req, res) => {
+
+    const userId = req.user.id;
+    if (!userId) {
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(401).json({ error: 'User ID is required.' });
+    };
+
     const {
         newMatch,
         newMessage,
@@ -364,12 +384,12 @@ exports.updateNotificationSettings = async (req, res) => {
 
     try {
         // Try to find existing settings
-        let notificationSetting = await Settings.findOne({ user: req.user.id });
+        let notificationSetting = await Settings.findOne({ user: userId });
 
         // Auto-create settings if not found
         if (!notificationSetting) {
             notificationSetting = new Settings({
-                user: req.user.id,
+                user: userId,
                 newMatch,
                 newMessage,
                 warningAlerts,
@@ -410,25 +430,146 @@ exports.updateNotificationSettings = async (req, res) => {
 
 // Get user's current notification settings
 exports.getNotificationSettings = async (req, res) => {
+
+    const userId = req.user.id;
+    if (!userId) {
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(401).json({ error: 'User ID is required.' });
+    }
+
     try {
-        const notificationSettings = await Settings.findOne({ user: req.user.id });
+        const notificationSettings = await Settings.findOne({ user: userId });
 
         if (!notificationSettings) {
-            res.setHeader('Content-Type', 'application/json');
-            return res.status(404).json({
-                error: 'Notification settings not found.'
-            });
+            res.setHeader('Content-Type', 'application/json')
+                .status(404)
+                .json({
+                    error: 'Notification settings not found.'
+                });
+            return;
         }
 
-        res.setHeader('Content-Type', 'application/json');
-        res.status(200).json({
-            notificationSettings,
-            message: 'Notification settings retrieved successfully.'
-        });
+        res.setHeader('Content-Type', 'application/json')
+            .status(200)
+            .json({
+                notificationSettings,
+                message: 'Notification settings retrieved successfully.'
+            });
+        return;
     } catch (error) {
-        res.setHeader('Content-Type', 'application/json');
-        res.status(500).json({
-            error: 'An error occurred while retrieving your notification settings.'
-        });
+        res.setHeader('Content-Type', 'application/json')
+            .status(500)
+            .json({
+                error: 'An error occurred while retrieving your notification settings.'
+            });
+        return;
     }
 };
+
+// get user's chat settings
+exports.getChatSettings = async (req, res) => {
+    const userId = req.user.id;
+
+    if (!userId) {
+        res.setHeader('Content-Type', 'application/json');
+        return res.status(401).json({ error: 'User ID is required.' });
+    }
+
+    try {
+        const chatSettings = await Settings.findOne({ user: userId });
+        if (!chatSettings) {
+            res.setHeader('Content-Type', 'application/json')
+                .status(404)
+                .json({
+                    error: 'Chat settings not found for this user.'
+                });
+            return;
+        } else {
+            res.setHeader('Content-Type', 'application/json')
+                .status(200)
+                .json({
+                    chatSettings: chatSettings,
+                    message: 'Chat settings retrieved successfully.'
+                });
+            return;
+        }
+    } catch (error) {
+        res.setHeader('Content-Type', 'application/json')
+            .status(500)
+            .json({
+                error: 'An error occurred while retrieving chat settings.'
+            });
+        return;
+    }
+};
+
+// update user's chat settings
+exports.updateChatSettings = async (req, res) => {
+    const userId = req.user.id;
+
+    if (!userId) {
+        return res.status(401).json({ error: 'User ID is required.' });
+    }
+
+    const {
+        messageSound,
+        showTypingStatus,
+        showOnlineStatus,
+        enterToSend,
+        chatTheme,
+        chatFontSize
+    } = req.body;
+
+    // Validate fields
+    const isValid =
+        typeof messageSound === 'boolean' &&
+        typeof showTypingStatus === 'boolean' &&
+        typeof showOnlineStatus === 'boolean' &&
+        typeof enterToSend === 'boolean' &&
+        ['light', 'dark'].includes(chatTheme) &&
+        ['small', 'medium', 'large'].includes(chatFontSize);
+
+    if (!isValid) {
+        res.setHeader('Content-Type', 'application/json')
+            .status(400)
+            .json({
+                error: 'Invalid chat settings format. Please ensure all fields are correctly formatted.'
+            });
+        return;
+    }
+
+    try {
+        // Update or create settings
+        await Settings.findOneAndUpdate(
+            { user: userId },
+            {
+                messageSound,
+                showTypingStatus,
+                showOnlineStatus,
+                enterToSend,
+                chatTheme,
+                chatFontSize
+            },
+            { new: true, upsert: true }
+        );
+
+        // Return the entire updated settings document for Redux sync
+        const updatedSettings = await Settings.findOne({ user: userId });
+
+        res.setHeader('Content-Type', 'application/json')
+            .status(200)
+            .json({
+                message: 'Chat settings updated successfully.',
+                chatSettings: updatedSettings
+            });
+        return;
+    } catch (error) {
+        setHeader('Content-Type', 'application/json')
+            .status(500)
+            .json({
+                error: 'An error occurred while updating chat settings.'
+            });
+        return;
+    }
+};
+

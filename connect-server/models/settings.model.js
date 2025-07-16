@@ -31,7 +31,6 @@ const settingsSchema = new mongoose.Schema({
     },
 
     // for user privacy settings
-
     showProfilePic: {
         type: Boolean,
         default: true,
@@ -60,6 +59,34 @@ const settingsSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+
+    // for user chat settings
+    messageSound: {
+        type: Boolean,
+        default: true
+    },
+    showTypingStatus: {
+        type: Boolean,
+        default: true
+    },
+    showOnlineStatus: {
+        type: Boolean,
+        default: true
+    },
+    chatTheme: {
+        type: String,
+        enum: ['light', 'dark'],
+        default: 'dark'
+    },
+    chatFontSize: {
+        type: String,
+        enum: ['small', 'medium', 'large'],
+        default: 'medium'
+    },
+    enterToSend: {
+        type: Boolean,
+        default: true
+    }
 }, { timestamps: true });
 
 module.exports = mongoose.model('Settings', settingsSchema);
