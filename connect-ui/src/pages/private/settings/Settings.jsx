@@ -25,9 +25,9 @@ import {
 } from '@/MUI/MuiIcons';
 import { Link, useNavigate } from 'react-router-dom';
 import NavigateWithArrow from '@/components/private/NavigateWithArrow';
+import StyledText from '@/components/common/StyledText';
 import { logout } from '@/redux/slices/auth/authAction';
 import { getProfile } from '@/redux/slices/profile/profileAction';
-import { getSettingsPrivacy, getSettingsNotification } from '@/redux/slices/settings/settingsAction';
 import { useDispatch, useSelector } from 'react-redux';
 
 function Settings() {
@@ -43,8 +43,6 @@ function Settings() {
   // This will ensure that the profile and settings data are available when the component renders
   useEffect(() => {
     dispatch(getProfile());
-    dispatch(getSettingsPrivacy());
-    dispatch(getSettingsNotification());
   }, [dispatch]);
 
   const settingItems = [
@@ -85,8 +83,10 @@ function Settings() {
     navigate('/login');
   };
 
+  const userFullName = (profileData?.fullName || 'User Name').split(' ')
+
   return (
-    <Box component={'section'} sx={{ minWidth: 300 }}>
+    <Box component={'section'} sx={{ minWidth: '300px' }}>
       {/* Header with arrow back icon */}
       <Stack mb={2}>
         <NavigateWithArrow redirectTo={'/connect'} text={'Settings'} />
@@ -113,24 +113,26 @@ function Settings() {
         flexDirection={isSm ? 'column' : 'row'}
         gap={2}
       >
-        <Tooltip title="Profile">
-          <Avatar
-            src=""
-            alt="user profile image"
-            aria-level="user profile image"
-            sx={{
-              width: 100,
-              height: 100
-            }}
-          />
-        </Tooltip>
+        <Stack background={'red'} alignItems={'center'} justifyContent={'center'}>
+          <Tooltip title="Profile">
+            <Avatar
+              src=""
+              alt="user profile image"
+              aria-level="user profile image"
+              sx={{
+                width: 100,
+                height: 100,
+              }}
+            />
+          </Tooltip>
+        </Stack>
 
         <Stack>
-          <Typography variant="body1" letterSpacing={1} color={'text.primary'}>
-            {profileData?.fullName || 'User Name'}
+          <Typography variant="body1" letterSpacing={1} gutterBottom color={'text.primary'}>
+            {userFullName[0]}{' '} {<StyledText text={userFullName?.[1]} />}{' '}({profileData?.age})
           </Typography>
-          <Typography variant="body2" letterSpacing={1} color={'text.secondary'}>
-            {profileData?.shortBio || 'Short Bio'}
+          <Typography variant="body2" color={'text.secondary'}>
+            {profileData?.shortBio || 'Empty Bio (Please add bio.)'}
           </Typography>
         </Stack>
       </Stack>
