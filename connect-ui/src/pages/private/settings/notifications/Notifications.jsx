@@ -60,12 +60,12 @@ function Notifications() {
       const updated = { ...notifSettings, [key]: !notifSettings[key] };
       setNotifSettings(updated);
 
-      const result = await dispatch(updateSettingsNotification(updated));
+      const response = await dispatch(updateSettingsNotification(updated));
 
-      if (result?.success) {
-        toast.success(result.message || 'Notification settings updated');
+      if (response?.success) {
+        toast.success(response.message || 'Notification settings updated');
       } else {
-        toast.error(result.error || 'Failed to update settings');
+        toast.error(response.error || 'Failed to update settings');
       }
     },
     [notifSettings, dispatch]
