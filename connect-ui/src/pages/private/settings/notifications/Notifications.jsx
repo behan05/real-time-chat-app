@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import {
   Box,
   Stack,
@@ -16,24 +16,60 @@ import {
   PersonAddIcon,
   BlockIcon,
 } from '@/MUI/MuiIcons';
-        
+
 import BlurWrapper from '@/components/common/BlurWrapper';
 import NavigateWithArrow from '@/components/private/NavigateWithArrow';
+import { useSelector, useDispatch } from 'react-redux';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import {
+  getSettingsNotification,
+  updateSettingsNotification,
+} from '@/redux/slices/settings/settingsAction';
 
 function Notifications() {
   const theme = useTheme();
+  const dispatch = useDispatch();
+  const { settingsData } = useSelector((state) => state.settings);
+  const notificationSettings = settingsData?.notificationSettings;
 
-  const [notifSettings, setNotifSettings] = React.useState({
-    newMatch: true,
-    newMessage: true,
-    warningAlerts: true,
+  const [notifSettings, setNotifSettings] = useState({
+    newMatch: false,
+    newMessage: false,
+    warningAlerts: false,
     friendRequest: false,
     blockNotification: false,
   });
 
-  const handleToggle = (key) => {
-    setNotifSettings((prev) => ({ ...prev, [key]: !prev[key] }));
-  };
+  // 1. Fetch settings from backend on mount
+  useEffect(() => {
+    dispatch(getSettingsNotification());
+  }, [dispatch]);
+
+  // 2. When Redux store updates, sync to local state
+  useEffect(() => {
+    if (notificationSettings) {
+      setNotifSettings(notificationSettings);
+    }
+  }, [notificationSettings]);
+
+  // 3. Toggle handler
+  const handleToggle = useCallback(
+    async (key) => {
+      const updated = { ...notifSettings, [key]: !notifSettings[key] };
+      setNotifSettings(updated);
+
+      const result = await dispatch(updateSettingsNotification(updated));
+
+      if (result?.success) {
+        toast.success(result.message || 'Notification settings updated');
+      } else {
+        toast.error(result.error || 'Failed to update settings');
+      }
+    },
+    [notifSettings, dispatch]
+  );
 
   const Section = ({ icon, title, description, children }) => (
     <Box>
@@ -52,13 +88,13 @@ function Notifications() {
 
   return (
     <Box>
-      {/* Back Navigation */}
+      <ToastContainer position="top-right" autoClose={1000} theme="colored" />
+
       <Stack mb={2}>
         <NavigateWithArrow redirectTo="/connect/settings" text="Notifications" />
       </Stack>
 
       <BlurWrapper>
-        {/* New Match Notification */}
         <Section
           icon={<NotificationsActiveIcon sx={{ color: theme.palette.success.main }} />}
           title="New Match"
@@ -77,7 +113,6 @@ function Notifications() {
 
         <Divider />
 
-        {/* Message Notification */}
         <Section
           icon={<MessageIcon sx={{ color: theme.palette.info.main }} />}
           title="New Message"
@@ -96,7 +131,6 @@ function Notifications() {
 
         <Divider />
 
-        {/* Warning Alerts */}
         <Section
           icon={<ReportIcon sx={{ color: theme.palette.warning.main }} />}
           title="Warning & Alerts"
@@ -115,7 +149,6 @@ function Notifications() {
 
         <Divider />
 
-        {/* Friend Request */}
         <Section
           icon={<PersonAddIcon sx={{ color: theme.palette.primary.main }} />}
           title="Friend Requests"
@@ -134,7 +167,6 @@ function Notifications() {
 
         <Divider />
 
-        {/* Block Notifications */}
         <Section
           icon={<BlockIcon sx={{ color: theme.palette.error.main }} />}
           title="Block Activity"

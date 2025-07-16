@@ -10,7 +10,9 @@ import {
   List,
   ListItemButton,
   ListItemText,
-  ListItemIcon
+  ListItemIcon,
+  useMediaQuery,
+  useTheme
 } from '@/MUI/MuiComponents';
 import {
   SearchIcon,
@@ -25,6 +27,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import NavigateWithArrow from '@/components/private/NavigateWithArrow';
 import { logout } from '@/redux/slices/auth/authAction';
 import { getProfile } from '@/redux/slices/profile/profileAction';
+import { getSettingsPrivacy, getSettingsNotification } from '@/redux/slices/settings/settingsAction';
 import { useDispatch, useSelector } from 'react-redux';
 
 function Settings() {
@@ -33,8 +36,15 @@ function Settings() {
   const { profileData } = useSelector((state) => state.profile);
   const navigate = useNavigate();
 
+  const theme = useTheme();
+  const isSm = useMediaQuery(theme.breakpoints.down('sm'));
+
+  // Fetch profile and settings data on component mount
+  // This will ensure that the profile and settings data are available when the component renders
   useEffect(() => {
     dispatch(getProfile());
+    dispatch(getSettingsPrivacy());
+    dispatch(getSettingsNotification());
   }, [dispatch]);
 
   const settingItems = [
@@ -76,7 +86,7 @@ function Settings() {
   };
 
   return (
-    <Box component={'section'}>
+    <Box component={'section'} sx={{ minWidth: 300 }}>
       {/* Header with arrow back icon */}
       <Stack mb={2}>
         <NavigateWithArrow redirectTo={'/connect'} text={'Settings'} />
@@ -100,7 +110,7 @@ function Settings() {
         component={Link}
         to={'/connect/profile'}
         my={4}
-        flexDirection={'row'}
+        flexDirection={isSm ? 'column' : 'row'}
         gap={2}
       >
         <Tooltip title="Profile">
@@ -109,8 +119,8 @@ function Settings() {
             alt="user profile image"
             aria-level="user profile image"
             sx={{
-              width: 60,
-              height: 60
+              width: 100,
+              height: 100
             }}
           />
         </Tooltip>

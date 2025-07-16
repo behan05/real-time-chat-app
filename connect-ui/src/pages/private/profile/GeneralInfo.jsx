@@ -174,8 +174,8 @@ function GeneralInfo() {
       hasError = true;
     }
 
-    if (formData.shortBio.trim().length > 300) {
-      newErrors.shortBio = 'Bio should be under 300 characters.';
+    if (formData.shortBio.trim().length > 200) {
+      newErrors.shortBio = 'Bio should be under 200 characters.';
       hasError = true;
     }
 

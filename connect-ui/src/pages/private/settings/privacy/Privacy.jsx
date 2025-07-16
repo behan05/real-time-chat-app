@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Box,
   Stack,
@@ -6,7 +6,6 @@ import {
   Typography,
   Divider,
   FormControlLabel,
-  useTheme
 } from '@/MUI/MuiComponents';
 import {
   VisibilityIcon,
@@ -19,13 +18,15 @@ import NavigateWithArrow from '@/components/private/NavigateWithArrow';
 import BlurWrapper from '@/components/common/BlurWrapper';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { SETTINGS_API } from '@/api/config';
-import axios from 'axios';
+
+import { updateSettingsPrivacy, getSettingsPrivacy } from '@/redux/slices/settings/settingsAction';
+import { useSelector, useDispatch } from 'react-redux';
 
 function Privacy() {
-  const theme = useTheme();
+  const dispatch = useDispatch();
+  const { settingsData } = useSelector((state) => state.settings);
 
-  const [privacySettings, setPrivacySettings] = React.useState({
+  const defaultSettings = {
     showProfilePic: true,
     showLocation: true,
     matchVerifiedOnly: false,
@@ -33,49 +34,46 @@ function Privacy() {
     blockNSFW: true,
     autoDeleteChats: false,
     allowExportData: false
-  });
+  };
 
+  const [formData, setFormData] = useState(defaultSettings);
+
+  // Fetch initial settings data
   useEffect(() => {
-    const fetchPrivacySettings = async (endpoint) => {
-      try {
-        const token = localStorage.getItem('token');
-        const response = await axios.get(endpoint, {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
-
-        setPrivacySettings(response.data.privacySettings);
-      } catch (error) {
-        console.log(`Failed to fetch privacy settings: ${error?.response?.data?.error || error}`);
-      }
-    };
-
-    fetchPrivacySettings(`${SETTINGS_API}/privacy`);
+    dispatch(getSettingsPrivacy());
   }, []);
+
+  // Sync Redux state -> Local form state
+  useEffect(() => {
+    if (settingsData?.privacySettings) {
+      setFormData(prev => ({
+        ...prev,
+        ...settingsData.privacySettings
+      }));
+    }
+  }, [settingsData]);
 
   const handleToggle = (key) => async (e) => {
     const updatedValue = e.target.checked;
-
-    const updatedSettings = {
-      ...privacySettings,
+    const updatedFormData = {
+      ...formData,
       [key]: updatedValue
     };
 
-    setPrivacySettings(updatedSettings);
+    setFormData(updatedFormData);
 
     try {
-      const token = localStorage.getItem('token');
+      const response = await dispatch(updateSettingsPrivacy(updatedFormData));
 
-      const response = await axios.patch(`${SETTINGS_API}/privacy`, updatedSettings, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-      toast.info(response.data.message);
+      if (response?.success) {
+        toast.success(response.message || 'Privacy settings updated');
+      } else {
+        toast.error(response?.error || response?.message || 'Failed to update settings');
+      }
     } catch (error) {
-      console.log(error?.response?.data?.error || error);
+      toast.error(error?.message || 'Something went wrong');
     }
+
   };
 
   const Section = ({ icon, title, description, children }) => (
@@ -112,7 +110,7 @@ function Privacy() {
           <FormControlLabel
             control={
               <Switch
-                checked={privacySettings.showProfilePic}
+                checked={formData.showProfilePic}
                 onChange={handleToggle('showProfilePic')}
                 color="primary"
               />
@@ -122,7 +120,7 @@ function Privacy() {
           <FormControlLabel
             control={
               <Switch
-                checked={privacySettings.showLocation}
+                checked={formData.showLocation}
                 onChange={handleToggle('showLocation')}
                 color="primary"
               />
@@ -141,7 +139,7 @@ function Privacy() {
           <FormControlLabel
             control={
               <Switch
-                checked={privacySettings.matchVerifiedOnly}
+                checked={formData.matchVerifiedOnly}
                 onChange={handleToggle('matchVerifiedOnly')}
                 color="primary"
               />
@@ -160,7 +158,7 @@ function Privacy() {
           <FormControlLabel
             control={
               <Switch
-                checked={privacySettings.allowRechat}
+                checked={formData.allowRechat}
                 onChange={handleToggle('allowRechat')}
                 color="primary"
               />
@@ -170,7 +168,7 @@ function Privacy() {
           <FormControlLabel
             control={
               <Switch
-                checked={privacySettings.autoDeleteChats}
+                checked={formData.autoDeleteChats}
                 onChange={handleToggle('autoDeleteChats')}
                 color="primary"
               />
@@ -189,7 +187,7 @@ function Privacy() {
           <FormControlLabel
             control={
               <Switch
-                checked={privacySettings.blockNSFW}
+                checked={formData.blockNSFW}
                 onChange={handleToggle('blockNSFW')}
                 color="primary"
               />
@@ -208,7 +206,7 @@ function Privacy() {
           <FormControlLabel
             control={
               <Switch
-                checked={privacySettings.allowExportData}
+                checked={formData.allowExportData}
                 onChange={handleToggle('allowExportData')}
                 color="primary"
               />

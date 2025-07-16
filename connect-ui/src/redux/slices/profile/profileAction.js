@@ -3,7 +3,9 @@ import axios from 'axios';
 import { setLoading, setError, setProfileData } from './profileSlice';
 import { getAuthHeaders } from '@/utils/authHeaders';
 
-// Get Profile
+// Fetches the user's profile data from the server
+// This function retrieves the current profile data for the user
+// and updates the Redux store with the fetched profile data
 export function getProfile() {
     return async (dispatch) => {
         const headers = getAuthHeaders();
@@ -36,7 +38,9 @@ export function getProfile() {
     };
 }
 
-// Update General Info
+// Updates the user's general profile information on the server
+// This function sends the updated profile data to the server
+// and updates the Redux store with the new profile data
 export function updateGeneralInfo(formData) {
     return async (dispatch) => {
         const headers = getAuthHeaders();
@@ -49,7 +53,7 @@ export function updateGeneralInfo(formData) {
         dispatch(setLoading());
 
         try {
-            const response = await axios.post(`${PROFILE_API}/general-info`, formData, { headers });
+            const response = await axios.patch(`${PROFILE_API}/general-info`, formData, { headers });
 
             if (response.status === 200) {
                 dispatch(setProfileData(response.data.profile));
@@ -66,7 +70,9 @@ export function updateGeneralInfo(formData) {
     };
 }
 
-// Update Matching Preferences
+// Updates the user's matching preferences on the server
+// This function sends the updated matching preferences to the server
+// and updates the Redux store with the new preferences
 export function updateMatchingPreferences(formData) {
     return async (dispatch) => {
         const headers = getAuthHeaders();
@@ -78,7 +84,7 @@ export function updateMatchingPreferences(formData) {
         dispatch(setLoading());
 
         try {
-            const response = await axios.post(`${PROFILE_API}/matching-preferences`, formData, {
+            const response = await axios.patch(`${PROFILE_API}/matching-preferences`, formData, {
                 headers,
             });
 
@@ -99,7 +105,9 @@ export function updateMatchingPreferences(formData) {
     };
 }
 
-// Update Tags and Interests
+// Updates the user's tags and interests on the server
+// This function sends the updated tags and interests to the server
+// and updates the Redux store with the new tags and interests
 export function updateTagsAndInterests(formData) {
     return async (dispatch) => {
         const headers = getAuthHeaders();
@@ -111,7 +119,7 @@ export function updateTagsAndInterests(formData) {
         dispatch(setLoading());
 
         try {
-            const response = await axios.post(`${PROFILE_API}/tags-and-interests`, formData, {
+            const response = await axios.patch(`${PROFILE_API}/tags-and-interests`, formData, {
                 headers,
             });
 

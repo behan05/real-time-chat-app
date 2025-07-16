@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export const initialState = {
-    profileData: null,
+const initialState = {
+    settingsData: null,
     loading: false,
     error: null,
-};
+}
 
-const profileSlice = createSlice({
-    name: 'profile',
+const settingsSlice = createSlice({
+    name: 'settings',
     initialState,
     reducers: {
         setLoading: (state) => {
@@ -20,13 +20,13 @@ const profileSlice = createSlice({
             state.loading = false;
         },
 
-        setProfileData: (state, action) => {
-            state.profileData = action.payload;
-            state.error = null;
+        setSetting: (state, action) => {
             state.loading = false;
+            state.error = null;
+            state.settingsData = action.payload;
         }
     }
 });
 
-export const { setLoading, setError, setProfileData } = profileSlice.actions;
-export default profileSlice.reducer;
+export const { setLoading, setError, setSetting } = settingsSlice.actions;
+export default settingsSlice.reducer;

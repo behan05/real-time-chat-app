@@ -90,7 +90,7 @@ function ChangeCredentials() {
     try {
       const token = localStorage.getItem('token');
 
-      const response = await axios.post(`${SETTINGS_API}/change-credentials`, formData, {
+      const response = await axios.patch(`${SETTINGS_API}/change-credentials`, formData, {
         headers: {
           Authorization: `Bearer ${token}`
         }
