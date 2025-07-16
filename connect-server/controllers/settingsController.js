@@ -4,6 +4,7 @@ const Settings = require('../models/settings.model');
 const User = require('../models/User.model');
 const bcrypt = require('bcryptjs');
 const zlib = require('zlib');
+const Profile = require('../models/Profile.model');
 
 // Handle contact/help requests submitted by users
 exports.contactHelp = async (req, res) => {
@@ -178,8 +179,9 @@ exports.changeCredentials = async (req, res) => {
 exports.requestInfo = async (req, res) => {
 
     const user = await User.findById(req.user.id);
+    const userProfile = await Profile.findOne({ user: req.user.id });
 
-    if (!user) {
+    if (!user || !userProfile) {
         res.setHeader("Content-Type", "application/json");
         res.status(404).json({
             error: 'User not found.'
@@ -192,7 +194,26 @@ exports.requestInfo = async (req, res) => {
             email: user.email,
             createdAt: user.createdAt,
             signupThrough: user.authProvider,
-            // when profile page compeletd then i will add more...
+            profile: {
+                fullName: userProfile.fullName,
+                age: userProfile.age,
+                pronouns: userProfile.pronouns,
+                gender: userProfile.gender,
+                shortBio: userProfile.shortBio,
+                profileImage: userProfile.profileImage,
+                lookingFor: userProfile.lookingFor,
+                preferredLanguage: userProfile.preferredLanguage,
+                country: userProfile.country,
+                state: userProfile.state,
+                city: userProfile.city,
+                preferredAgeRange: userProfile.preferredAgeRange,
+                matchScope: userProfile.matchScope,
+                strictInterestMatch: userProfile.strictInterestMatch,
+                interests: userProfile.interests,
+                personality: userProfile.personality,
+                chatStyles: userProfile.chatStyles
+                // when profile page completed then i will add more...
+            }
         }
         const buffer = Buffer.from(JSON.stringify(userData), 'utf-8');
         const compressed = zlib.gzipSync(buffer);
