@@ -11,7 +11,8 @@ const profileSchema = new mongoose.Schema({
     fullName: String,
     age: Number,
     pronouns: String,
-    bio: String,
+    gender: String,
+    shortBio: String,
     profileImage: String,
 
     lookingFor: String,

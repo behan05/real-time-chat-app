@@ -8,8 +8,8 @@ const upload = require('../middlewares/multerMiddleware');
 router.get('/my-profile', authMiddleware, profileController.getMyProfileController);
 
 // POST sections
-router.post('/general-info', authMiddleware, upload.single('profileImage'), profileController.updateGeneralInfoController);
-router.post('/matching-preferences', authMiddleware, profileController.updateMatchingPreferencesController);
-router.post('/tags-and-interests', authMiddleware, profileController.updateTagsAndInterestsController);
+router.patch('/general-info', authMiddleware, upload.single('profileImage'), profileController.updateGeneralInfoController);
+router.patch('/matching-preferences', authMiddleware, profileController.updateMatchingPreferencesController);
+router.patch('/tags-and-interests', authMiddleware, profileController.updateTagsAndInterestsController);
 
 module.exports = router;

@@ -12,7 +12,7 @@ const settingsRoutes = require('./routers/settingsRoutes');
 const profileRoutes = require('./routers/profileRoutes');
 
 // PORT
-const PORT = process.env.PORT || 8001;
+const PORT = process.env.PORT || 8000;
 
 // Connect Database
 connectDB();
@@ -23,7 +23,9 @@ app.use(cors({
     credentials: true
 }));
 
-app.use(express.json()); // Parses incoming JSON
+// Increased body size limit
+app.use(express.json({ limit: '5mb' }));
+app.use(express.urlencoded({ limit: '5mb', extended: true }));
 
 // Routes
 app.use('/api/auth', authRoutes); // For auth

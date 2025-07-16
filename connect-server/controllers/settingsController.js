@@ -1,6 +1,6 @@
 const ContactHelp = require('../models/ContactHelp.model');
 const BugReport = require('../models/ReportProblem.model');
-const PrivacySettings = require('../models/PrivacySettings.model');
+const Settings = require('../models/settings.model');
 const User = require('../models/User.model');
 const bcrypt = require('bcryptjs');
 const zlib = require('zlib');
@@ -268,11 +268,11 @@ exports.updatePrivacy = async (req, res) => {
 
     try {
         // Try to find existing settings
-        const privacySetting = await PrivacySettings.findOne({ user: req.user.id });
+        const privacySetting = await Settings.findOne({ user: req.user.id });
 
         // Auto-create settings if not found
         if (!privacySetting) {
-            const newSettings = new PrivacySettings({
+            const newSettings = new Settings({
                 user: req.user.id,
                 showProfilePic,
                 showLocation,
@@ -284,7 +284,10 @@ exports.updatePrivacy = async (req, res) => {
             });
 
             await newSettings.save();
-            return res.status(201).json({ message: 'Privacy settings created and saved.' });
+            return res.status(201).json({
+                message: 'Privacy settings created and saved.',
+                privacySettings: newSettings
+            });
         }
 
         // Update existing settings
@@ -301,7 +304,10 @@ exports.updatePrivacy = async (req, res) => {
         privacySetting.set(updates);
         await privacySetting.save();
 
-        return res.status(200).json({ message: 'Privacy settings updated successfully.' });
+        return res.status(200).json({
+            message: 'Privacy settings updated successfully.',
+            privacySettings: privacySetting
+        });
     } catch (error) {
         console.error("Error updating privacy settings:", error);
         return res.status(500).json({
@@ -310,11 +316,10 @@ exports.updatePrivacy = async (req, res) => {
     }
 };
 
-
 // Get user's current privacy settings
 exports.getPrivacy = async (req, res) => {
     try {
-        const privacySettings = await PrivacySettings.findOne({ user: req.user.id });
+        const privacySettings = await Settings.findOne({ user: req.user.id });
 
         if (!privacySettings) {
             res.setHeader('Content-Type', 'application/json');
@@ -324,11 +329,106 @@ exports.getPrivacy = async (req, res) => {
         }
 
         res.setHeader('Content-Type', 'application/json');
-        res.status(200).json({ privacySettings });
+        res.status(200).json({
+            privacySettings,
+            message: 'Privacy settings retrieved successfully.'
+        });
     } catch (error) {
         res.setHeader('Content-Type', 'application/json');
         res.status(500).json({
             error: 'An error occurred while retrieving your privacy settings.'
+        });
+    }
+};
+
+// Update user's notification settings
+exports.updateNotificationSettings = async (req, res) => {
+    const {
+        newMatch,
+        newMessage,
+        warningAlerts,
+        friendRequest,
+        blockNotification
+    } = req.body;
+
+    // Validate all fields are boolean
+    if (
+        typeof newMatch !== 'boolean' ||
+        typeof newMessage !== 'boolean' ||
+        typeof warningAlerts !== 'boolean' ||
+        typeof friendRequest !== 'boolean' ||
+        typeof blockNotification !== 'boolean'
+    ) {
+        return res.status(400).json({ error: 'Invalid notification settings format.' });
+    }
+
+    try {
+        // Try to find existing settings
+        let notificationSetting = await Settings.findOne({ user: req.user.id });
+
+        // Auto-create settings if not found
+        if (!notificationSetting) {
+            notificationSetting = new Settings({
+                user: req.user.id,
+                newMatch,
+                newMessage,
+                warningAlerts,
+                friendRequest,
+                blockNotification
+            });
+
+            await notificationSetting.save();
+            return res.status(201).json({
+                message: 'Notification settings created and saved.',
+                notificationSettings: notificationSetting
+            });
+        }
+
+        // Update existing settings
+        const updates = {
+            newMatch,
+            newMessage,
+            warningAlerts,
+            friendRequest,
+            blockNotification
+        };
+
+        notificationSetting.set(updates);
+        await notificationSetting.save();
+
+        return res.status(200).json({
+            message: 'Notification settings updated successfully.',
+            notificationSettings: notificationSetting
+        });
+    } catch (error) {
+        console.error("Error updating notification settings:", error);
+        return res.status(500).json({
+            error: 'An error occurred while processing your request.'
+        });
+    }
+};
+
+// Get user's current notification settings
+exports.getNotificationSettings = async (req, res) => {
+    try {
+        const notificationSettings = await Settings.findOne({ user: req.user.id });
+
+        if (!notificationSettings) {
+            res.setHeader('Content-Type', 'application/json');
+            return res.status(404).json({
+                error: 'Notification settings not found.'
+            });
+        }
+
+        res.setHeader('Content-Type', 'application/json');
+        res.status(200).json({
+            notificationSettings,
+            message: 'Notification settings retrieved successfully.'
+        });
+    } catch (error) {
+        res.setHeader('Content-Type', 'application/json');
+        res.status(500).json({
+            error: 'An error occurred while retrieving your notification settings.'
         });
     }
 };

@@ -2,9 +2,8 @@ const Profile = require('../models/Profile.model');
 const User = require('../models/User.model');
 
 exports.getMyProfileController = async (req, res) => {
-    // Extract logged-in user ID from auth middleware
     const userId = req.user.id;
-    // If no user ID is found, send 401 Unauthorized response
+
     if (!userId) {
         return res.status(401).json({
             success: false,
@@ -13,28 +12,45 @@ exports.getMyProfileController = async (req, res) => {
     }
 
     try {
-        // Look for a profile document associated with this user
-        const userProfile = await Profile.findOne({ user: userId }).lean();
+        // Try to find the profile
+        let userProfile = await Profile.findOne({ user: userId }).lean();
 
-        // If no profile found, send 404 response
+        // If not found, create a default one
         if (!userProfile) {
-            res.setHeader('Content-Type', 'application/json');
-            return res.status(404).json({
-                success: false,
-                error: 'Profile does not exist.'
+            const user = await User.findById(userId).lean();
+
+            // Create basic default profile
+            const newProfile = await Profile.create({
+                user: userId,
+                fullName: user?.fullName || '',
+                age: 18,
+                gender: '',
+                pronouns: '',
+                shortBio: '',
+                profileImage: '',
+                lookingFor: '',
+                preferredLanguage: '',
+                country: '',
+                state: '',
+                city: '',
+                matchScope: '',
+                preferredAgeRange: { min: 18, max: 30 },
+                personality: '',
+                interests: [],
+                chatStyles: [],
+                strictInterestMatch: false,
             });
+
+            userProfile = newProfile.toObject();
         }
 
-        // If profile exists, send it back in response
-        res.setHeader('Content-Type', 'application/json');
         return res.status(200).json({
             success: true,
             profile: userProfile
         });
 
     } catch (error) {
-        // If any server/database error occurs
-        res.setHeader('Content-Type', 'application/json');
+        console.error('Error in getMyProfileController:', error);
         return res.status(500).json({
             success: false,
             error: 'An error occurred while retrieving profile.'
@@ -70,7 +86,6 @@ exports.updateGeneralInfoController = async (req, res) => {
     // validate required fields
     if (
         !fullName?.trim()
-        || typeof age !== 'number'
         || !gender?.trim()
         || !pronouns?.trim()
         || !shortBio?.trim()
@@ -104,12 +119,12 @@ exports.updateGeneralInfoController = async (req, res) => {
     }
 
     // validate short bio
-    if (shortBio.length > 300) {
+    if (shortBio.length > 200) {
         return res.setHeader('Content-type', 'application/json')
             .status(400)
             .json({
                 success: false,
-                error: 'Bio should be under 300 characters.'
+                error: 'Bio should be under 200 characters.'
             })
     }
 
@@ -248,6 +263,7 @@ exports.updateMatchingPreferencesController = async (req, res) => {
 };
 
 exports.updateTagsAndInterestsController = async (req, res) => {
+
     const userId = req.user.id;
     // If no user ID is found, send 401 Unauthorized response
     if (!userId) {
@@ -257,9 +273,6 @@ exports.updateTagsAndInterestsController = async (req, res) => {
         });
     }
 
-    const {
-        strictInterestMatch, personality, interests, chatStyles
-    } = req.body;
 
     if (
         typeof strictInterestMatch !== 'boolean'

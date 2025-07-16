@@ -1,12 +1,37 @@
 const mongoose = require('mongoose');
 
-const privacySettingsSchema = new mongoose.Schema({
+const settingsSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true,
-        unique: true,
+        unique: true
     },
+
+    // for user notification settings.
+    newMatch: {
+        type: Boolean,
+        default: true
+    },
+    newMessage: {
+        type: Boolean,
+        default: true
+    },
+    warningAlerts: {
+        type: Boolean,
+        default: true
+    },
+    friendRequest: {
+        type: Boolean,
+        default: false
+    },
+    blockNotification: {
+        type: Boolean,
+        default: false
+    },
+
+    // for user privacy settings
+
     showProfilePic: {
         type: Boolean,
         default: true,
@@ -37,4 +62,4 @@ const privacySettingsSchema = new mongoose.Schema({
     },
 }, { timestamps: true });
 
-module.exports = mongoose.model('PrivacySettings', privacySettingsSchema);
+module.exports = mongoose.model('Settings', settingsSchema);
