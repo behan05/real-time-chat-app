@@ -33,7 +33,7 @@ export function getProfile() {
                     error?.response?.data?.error || 'An error occurred while fetching profile data.'
                 )
             );
-            return { success: false , error: error?.response?.data?.error || 'An error occurred while fetching profile data.' };
+            return { success: false, error: error?.response?.data?.error || 'An error occurred while fetching profile data.' };
         }
     };
 }
@@ -51,9 +51,14 @@ export function updateGeneralInfo(formData) {
         }
 
         dispatch(setLoading());
-
+        const token = localStorage.getItem('token');
         try {
-            const response = await axios.patch(`${PROFILE_API}/general-info`, formData, { headers });
+            const response = await axios.patch(`${PROFILE_API}/general-info`, formData, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                }
+
+            });
 
             if (response.status === 200) {
                 dispatch(setProfileData(response.data.profile));
@@ -65,7 +70,7 @@ export function updateGeneralInfo(formData) {
                     error?.response?.data?.error || 'An error occurred while updating general info.'
                 )
             );
-            return { success: false, error: error?.response?.data?.error || 'An error occurred while updating general info.'};
+            return { success: false, error: error?.response?.data?.error || 'An error occurred while updating general info.' };
         }
     };
 }
@@ -92,7 +97,7 @@ export function updateMatchingPreferences(formData) {
                 dispatch(setProfileData(response.data.profile));
                 return { success: true, message: response.data.message || "Matching preferences updated successfully!" };
             }
-            
+
         } catch (error) {
             dispatch(
                 setError(

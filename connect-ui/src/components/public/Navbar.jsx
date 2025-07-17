@@ -31,15 +31,6 @@ function Navbar() {
   const isSm = useMediaQuery(theme.breakpoints.down('sm'));
   const { toggleSidebar } = useSidebar();
 
-  // const [videoChanged, setVideoChanged] = React.useState(false);
-
-  // const handleChangeVideo = () => {
-  //   const next = !videoChanged;
-  //   setVideoChanged(next);
-  //   localStorage.setItem('currentVideo', next.toString());
-  //   window.dispatchEvent(new Event('storage')); // force other components to re-read
-  // };
-
   return (
     <AppBar
       position="sticky"

@@ -20,7 +20,7 @@ const BlurWrapper = ({ children, component = 'div', onSubmit, sx = {}, ...rest }
             borderRadius={1}
             sx={{
                 backdropFilter: 'blur(14px)',
-                backgroundColor: 'background.paper',
+                backgroundColor: 'inherit',
                 boxShadow: `inset 1px 1px 0.2rem ${theme.palette.divider}`,
                 ...sx
             }}
