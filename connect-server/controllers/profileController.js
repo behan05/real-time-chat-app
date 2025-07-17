@@ -78,11 +78,6 @@ exports.updateGeneralInfoController = async (req, res) => {
         shortBio
     } = req.body;
 
-    // get profile image from request file which is uploaded using multer
-    // if no image is uploaded, it will be undefined
-    const profileImage = req.file?.path;
-
-
     // validate required fields
     if (
         !fullName?.trim()
@@ -138,8 +133,8 @@ exports.updateGeneralInfoController = async (req, res) => {
             pronouns,
             shortBio,
         }
-        if (profileImage) {
-            updateProfile.profileImage = profileImage;
+        if (req.file && req.file.path) {
+            updateProfile.profileImage = req.file.path;
         };
 
         // Find the profile by user ID and update it.
