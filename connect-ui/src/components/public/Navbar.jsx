@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   AppBar,
   Box,
@@ -13,8 +12,6 @@ import {
   MenuIcon,
   LockOpenIcon,
   LockIcon,
-  CheckCircleOutlineIcon,
-  SwapHorizIcon
 } from '@/MUI/MuiIcons';
 import StyledButton from '../common/StyledButton';
 import { useSidebar } from '@/context/SidebarContext';
@@ -77,6 +74,7 @@ function Navbar() {
           </Stack>
         ) : (
           <Box sx={{ display: 'flex', gap: 1 }}>
+            
             {/* === Bg Toggle Component === */}
             <BgToggle />
 

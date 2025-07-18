@@ -34,7 +34,7 @@ function MatchingPreferences() {
   const [isDisabled, setIsDisabled] = React.useState(false);
 
   const dispatch = useDispatch();
-  const { profileData, loading } = useSelector((state) => state.profile);
+  const { profileData } = useSelector((state) => state.profile);
 
   const [formData, setFormData] = React.useState({
     lookingFor: '',
@@ -43,7 +43,7 @@ function MatchingPreferences() {
     country: '',
     state: '',
     city: '',
-    matchScope: '',
+    matchScope: 'nearby',
   });
 
   const [error, setError] = React.useState({
@@ -190,10 +190,6 @@ function MatchingPreferences() {
     if (!formData.city?.trim()) {
       hasError = true;
       newErrors.city = 'Please select your city.';
-    }
-    if (!formData.matchScope?.trim()) {
-      hasError = true;
-      newErrors.matchScope = 'Please select match scope (Nearby or Global).';
     }
 
     if (hasError) {

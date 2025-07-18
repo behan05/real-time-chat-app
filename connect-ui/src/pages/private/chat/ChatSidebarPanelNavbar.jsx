@@ -10,12 +10,12 @@ import {
   Divider,
   TextField,
   useTheme,
+  Avatar,
 } from '@/MUI/MuiComponents';
 import {
   ShuffleIcon,
   FavoriteBorderIcon,
   PersonIcon,
-  MoreVertIcon,
   LogoutIcon,
   HelpOutlineIcon,
   SettingsIcon,
@@ -24,7 +24,7 @@ import {
 } from '@/MUI/MuiIcons';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import StyledText from '@/components/common/StyledText';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '@/redux/slices/auth/authAction';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -33,6 +33,7 @@ const ChatSidebarPanelNavbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { profileData } = useSelector(state => state.profile);
   const theme = useTheme();
 
   const [searchValue, setSearchValue] = React.useState('');
@@ -99,7 +100,11 @@ const ChatSidebarPanelNavbar = () => {
           ))}
           <Tooltip title="Menu" arrow>
             <IconButton onClick={(e) => setMenuAnchorEl(e.currentTarget)}>
-              <MoreVertIcon />
+              <Avatar
+                src={profileData?.profileImage}
+                alt='user profile with dropdown menu'
+                sx={{ width: 40, height: 40, p: 0 }}
+              />
             </IconButton>
           </Tooltip>
         </Stack>

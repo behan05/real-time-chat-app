@@ -53,7 +53,8 @@ exports.getMyProfileController = async (req, res) => {
         console.error('Error in getMyProfileController:', error);
         return res.status(500).json({
             success: false,
-            error: 'An error occurred while retrieving profile.'
+            error: 'An error occurred while retrieving profile.',
+            details: error.message
         });
     }
 };
@@ -153,7 +154,8 @@ exports.updateGeneralInfoController = async (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.status(500).json({
             success: false,
-            error: 'An error occurred while updating the profile.'
+            error: 'An error occurred while updating the profile.',
+            details: error.message
         });
         return;
     }
@@ -250,7 +252,8 @@ exports.updateMatchingPreferencesController = async (req, res) => {
             .status(500)
             .json({
                 success: false,
-                error: 'An error occurred while updating matching preferences.'
+                error: 'An error occurred while updating matching preferences.',
+                details: error.message
             });
         return;
     }
@@ -260,6 +263,7 @@ exports.updateMatchingPreferencesController = async (req, res) => {
 exports.updateTagsAndInterestsController = async (req, res) => {
 
     const userId = req.user.id;
+
     // If no user ID is found, send 401 Unauthorized response
     if (!userId) {
         return res.status(401).json({
@@ -268,42 +272,39 @@ exports.updateTagsAndInterestsController = async (req, res) => {
         });
     }
 
-
+    const { interests, personality, chatStyles, strictInterestMatch } = req.body;
     if (
-        typeof strictInterestMatch !== 'boolean'
-        || !personality?.trim()
-        || !Array.isArray(interests)
-        || !Array.isArray(chatStyles)
+        !Array.isArray(interests) || !Array.isArray(chatStyles)
+        || !personality
+        || typeof strictInterestMatch !== 'boolean'
     ) {
         res.setHeader('Content-Type', 'application/json')
             .status(400)
             .json({
                 success: false,
-                error: 'All fields are required.'
+                error: 'All field are required.'
             });
         return;
-    }
+    };
 
     try {
-        const updateTagsAndInterests = {
-            strictInterestMatch,
-            personality,
-            interests,
-            chatStyles
-        }
-
-        const profile = await Profile.findOneAndUpdate(
+        const updateTagAndInterestController = await Profile.findOneAndUpdate(
             { user: userId },
-            updateTagsAndInterests,
+            {
+                interests,
+                personality,
+                chatStyles,
+                strictInterestMatch
+            },
             { new: true, upsert: true }
         )
-
+        await updateTagAndInterestController.save();
         res.setHeader('Content-Type', 'application/json')
             .status(200)
             .json({
                 success: true,
-                message: 'Tags and interests updated successfully.',
-                profile: profile
+                message: 'tags and interests updated successfully.',
+                profile: updateTagAndInterestController
             });
 
     } catch (error) {
@@ -311,7 +312,8 @@ exports.updateTagsAndInterestsController = async (req, res) => {
             .status(500)
             .json({
                 success: false,
-                error: 'An error occurred while updating tags and interests.'
+                error: error.message || 'An error occurred while updating tags and interests.',
+                details: error.message
             });
         return;
     }
