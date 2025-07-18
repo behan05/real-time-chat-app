@@ -29,6 +29,7 @@ A full-stack real-time chat application with user authentication, private messag
 - Socket.IO
 - JWT for authentication
 - bcrypt for password hashing
+- WebRTC
 
 ---
 
@@ -63,7 +64,7 @@ real-time-chat-app/
 ### 1. Clone the Repo
 
 ```bash
-git clone https://github.com/your-username/real-time-chat-app.git
+git clone https://github.com/behan05/real-time-chat-app.git
 cd real-time-chat-app
 ```
 
@@ -85,6 +86,7 @@ npm run dev
 
 ## 🔒 Environment Variables
 ```
+Create a `.env` file with the following:
 PORT=5000
 MONGO_URI=your_mongo_db_uri
 JWT_SECRET=your_jwt_secret
@@ -92,22 +94,32 @@ JWT_SECRET=your_jwt_secret
 
 ## 🌟 Acknowledgements
 - Socket.IO Docs
-- MUI / Tailwind CSS
+- Material UI (for consistent design components)
 - MongoDB & Mongoose
 - JWT Authentication
 
-## 📄 License
-MIT License
-© 2025 Behan Kumar
-Contact: behankrbth@outlook.com
-
+## 🚀 Deployment
+Frontend deployed on: [Vercel](https://connect-link-three.vercel.app)  
+Backend hosted on: Render
 ---
+
+
+## 👨‍💻 About the Project
+This is a passion project built to explore real-time technologies with full-stack development. It supports real-time communication, private messaging, and modern UX features — perfect for learning, collaboration, or extending into a social platform.
+
 
 Let me know if:
 - You used Tailwind or MUI — I’ll mention specifically.
 - You included video/audio calling — I’ll expand the features.
 - You want a PDF version — I can generate it too.
+---
 
 
+## 📬 Contact
+For queries or contributions: [behankrbth@outlook.com](mailto:behankrbth@outlook.com)
 
+## 📄 License
+This project is licensed under the [MIT License](./LICENSE)
+
+---
 
