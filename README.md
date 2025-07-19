@@ -37,7 +37,6 @@ A full-stack real-time chat application with user authentication, private messag
 - [Acknowledgements](#️-acknowledgements)
 - [Contact](#-contact)
 - [License](#-license)
-- 
 ---
 
 ## 🖼️ Preview
