@@ -1,17 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Box,
   Stack,
   Typography,
   TextField,
-  useTheme,
   Avatar,
   Divider,
   Tooltip,
   List,
   ListItemButton,
   ListItemText,
-  ListItemIcon
+  ListItemIcon,
+  useMediaQuery,
+  useTheme
 } from '@/MUI/MuiComponents';
 import {
   SearchIcon,
@@ -22,14 +23,29 @@ import {
   ChatIcon,
   LogoutIcon
 } from '@/MUI/MuiIcons';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import NavigateWithArrow from '@/components/private/NavigateWithArrow';
+import StyledText from '@/components/common/StyledText';
 import { logout } from '@/redux/slices/auth/authAction';
-import { useDispatch } from 'react-redux';
+import { getProfile } from '@/redux/slices/profile/profileAction';
+import { useDispatch, useSelector } from 'react-redux';
+import { keyframes } from '@emotion/react';
 
 function Settings() {
   const [searchValue, setSearchValue] = React.useState('');
   const dispatch = useDispatch();
+  const { profileData } = useSelector((state) => state.profile);
+  const navigate = useNavigate();
+
+  const theme = useTheme();
+  const isSm = useMediaQuery(theme.breakpoints.down('sm'));
+
+  // Fetch profile and settings data on component mount
+  // This will ensure that the profile and settings data are available when the component renders
+  useEffect(() => {
+    dispatch(getProfile());
+  }, [dispatch]);
+
   const settingItems = [
     {
       path: 'account',
@@ -63,20 +79,34 @@ function Settings() {
     }
   ];
 
+  const handleLogout = async () => {
+    await dispatch(logout());
+    navigate('/login');
+  };
+
+  // split bio
+  const userBio = profileData?.shortBio.split(' ');
+
+  // Get the first 6 words only for settings profile bio
+  const shortBioPreview = userBio?.slice(0, 6).join(' ') + '....'
+
+  // split useName.
+  const userFullName = (profileData?.fullName || 'User Name').split(' ')
+
+  // glow animation
+  const glowDot = keyframes`
+  0% {
+    box-shadow: 0 0 0px 0px rgba(0, 255, 0, 0.51);
+  }
+  50% {
+    box-shadow: 0 0 5px 1px rgba(0, 255, 0, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 0px 0px rgba(0, 255, 0, 0.44);
+  }
+`;
   return (
-    <Box
-      component={'dev'}
-      sx={{
-        p: 2,
-        display: 'flex',
-        flexDirection: 'column',
-        bgcolor: 'background.paper',
-        borderRight: '1px solid rgba(112, 106, 106, 0.3)',
-        minHeight: '100vh',
-        maxHeight: '100vh',
-        minWidth: 300
-      }}
-    >
+    <Box component={'section'} sx={{ minWidth: '290px' }}>
       {/* Header with arrow back icon */}
       <Stack mb={2}>
         <NavigateWithArrow redirectTo={'/connect'} text={'Settings'} />
@@ -96,25 +126,53 @@ function Settings() {
       </Box>
 
       {/* Profile avatar */}
-      <Stack component={Link} to={'profile'} my={4} flexDirection={'row'} gap={2}>
-        <Tooltip title="Profile">
-          <Avatar
-            src=""
-            alt="user profile image"
-            aria-level="user profile image"
-            sx={{
-              width: 60,
-              height: 60
-            }}
-          />
-        </Tooltip>
+      <Stack
+        component={Link}
+        to={'/connect/profile/general-info'}
+        my={4}
+        flexDirection={'row'}
+        gap={2}
+      >
+        <Stack background={'red'} alignItems={'center'} justifyContent={'center'}>
+          <Tooltip title="Profile">
+            <Avatar
+              src={profileData?.profileImage}
+              alt="user profile image"
+              aria-level="user profile image"
+              sx={{
+                width: 100,
+                height: 100,
+              }}
+            />
+          </Tooltip>
+        </Stack>
 
-        <Stack>
-          <Typography variant="body1" letterSpacing={1} color={'text.primary'}>
-            User name
+        <Stack justifyContent="center" >
+          <Typography variant="body1" color={'text.primary'}>
+            {userFullName[0]}{' '} {<StyledText text={userFullName?.[1]} />}{' '}({profileData?.age})
           </Typography>
-          <Typography variant="body2" letterSpacing={1} color={'text.secondary'}>
-            About user
+          <Stack direction='row' alignItems={'center'} gap={1}>
+            <Typography
+              variant="body2"
+              letterSpacing={1}
+              color={'success.main'}
+            >
+              Online
+            </Typography>
+            <Stack
+              sx={{
+                background: 'green',
+                width: '10px',
+                height: '10px',
+                borderRadius: '50%',
+                boxShadow: theme.shadows[8],
+                transition: 'all 0.3s ease',
+                animation: `${glowDot} 1.5s infinite ease-in-out`,
+              }}
+            />
+          </Stack>
+          <Typography variant="body2" color={'text.secondary'}>
+            {shortBioPreview || 'Empty Bio (Please add bio.)'}
           </Typography>
         </Stack>
       </Stack>
@@ -145,7 +203,7 @@ function Settings() {
           </ListItemButton>
         ))}
         <ListItemButton
-          onClick={() => dispatch(logout())}
+          onClick={handleLogout}
           sx={{
             borderRadius: 1,
             p: 2,
@@ -155,7 +213,9 @@ function Settings() {
             }
           }}
         >
-          <ListItemIcon>{<LogoutIcon sx={{ mr: 1.1, color: 'error.main' }} />}</ListItemIcon>
+          <ListItemIcon>
+            <LogoutIcon sx={{ mr: 1.1, color: 'error.main' }} />
+          </ListItemIcon>
           <ListItemText primary="Logout" sx={{ color: 'error.main' }} />
         </ListItemButton>
       </List>

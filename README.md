@@ -1,3 +1,7 @@
+<p align="right">
+  🌐 Available Languages: 
+  🇬🇧 [English](README.md) | 🇮🇩 [Bahasa Indonesia](README-ID.md)
+</p>
 
 ---
 
@@ -18,11 +22,6 @@ A full-stack real-time chat application with user authentication, private messag
 
 ---
 
-#### _Read this in other languages._
-<kbd>[<img title="Bahasa Indonesia" alt="Bahasa Indonesia" src="https://cdn.statically.io/gh/hjnilsson/country-flags/master/svg/id.svg" width="22">](docs/translations/README.id.md)</kbd>
-
----
-
 ## 📚 Table of Contents
 
 - [Preview](#️-preview)
@@ -37,13 +36,14 @@ A full-stack real-time chat application with user authentication, private messag
 - [Acknowledgements](#️-acknowledgements)
 - [Contact](#-contact)
 - [License](#-license)
+- 
 ---
 
 ## 🖼️ Preview
 
 | Login Page | Sign Up | App Page |
 |------------|---------|----------|
-| ![](docs/screenshot/Login-page.png) | ![](docs/screenshot/Signup-page.png) | ![](docs/screenshot/apps-page.png) |
+| ![](./client/public/screenshot/Login-page.png) | ![](./client/public/screenshot/Signup-page.png) | ![](./client/public/screenshot/apps-page.png) |
 
 ---
 
@@ -68,12 +68,12 @@ Make sure you have the following installed before starting:
 - [Git](https://git-scm.com/)
 - A [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) account (or use local MongoDB)
 
-**Need help setting up MongoDB Atlas?** Follow this guide: [Deploy a Free Cluster](https://www.mongodb.com/docs/atlas/tutorial/deploy-free-tier-cluster/)
-
- After deploying a cluster:
- 1. Click **Connect** → **Drivers**
- 2. Select **Node.js** as the driver
- 3. Copy the connection string and use it for `MONGO_URI` in `.env`
+> **Need help setting up MongoDB Atlas?** Follow this guide: [Deploy a Free Cluster](https://www.mongodb.com/docs/atlas/tutorial/deploy-free-tier-cluster/)
+>
+> After deploying a cluster:
+> 1. Click **Connect** → **Drivers**
+> 2. Select **Node.js** as the driver
+> 3. Copy the connection string and use it for `MONGO_URI` in `.env`
 
 Example connection string:
 ```
@@ -209,7 +209,7 @@ real-time-chat-app/
 
 ## 🚀 Deployment
 
-* **Frontend**: [Vercel](https://connect-link-three.vercel.app/)
+* **Frontend**: [[Vercel](https://connect-link-three.vercel.app/)](https://connect-link-three.vercel.app)
 * **Backend**: Render
 
 ---
@@ -256,7 +256,7 @@ This project wouldn't be possible without them!
 ## 📬 Contact
 
 For questions or contributions, feel free to reach out:
-[behankrbth@outlook.com](mailto:behankrbth@outlook.com)
+[[behankrbth@outlook.com](mailto:behankrbth@outlook.com)](mailto:behankrbth@outlook.com)
 
 ---
 
@@ -265,3 +265,5 @@ For questions or contributions, feel free to reach out:
 This project is licensed under the [MIT License](./LICENSE)
 
 ---
+
+```

@@ -19,7 +19,6 @@ import PrivateRoute from '@/middleware/PrivateRoute';
 import ChatUI from '@/pages/private/chat/ChatUI';
 import ChatSidebar from '@/pages/private/chat/ChatSidebar';
 import Settings from '@/pages/private/settings/Settings';
-import Profile from '@/pages/private/Profile';
 import SettingsLayout from '@/pages/private/settings/SettingsLayout';
 
 // === Account Settings ===
@@ -44,11 +43,20 @@ import Notifications from '@/pages/private/settings/notifications/Notifications'
 // === Help Settings ===
 import HelpLayout from '@/pages/private/settings/help/HelpLayout';
 import Help from '@/pages/private/settings/help/Help';
-import HelpFAQs from '../pages/private/settings/help/HelpFAQs';
-import HelpContact from '../pages/private/settings/help/HelpContact';
-import HelpPrivacyPolicy from '../pages/private/settings/help/HelpPrivacyPolicy';
-import HelpReport from '../pages/private/settings/help/HelpReport';
-import ReportBug from '../components/common/ReportBug';
+import HelpFAQs from '@/pages/private/settings/help/HelpFAQs';
+import HelpContact from '@/pages/private/settings/help/HelpContact';
+import HelpPrivacyPolicy from '@/pages/private/settings/help/HelpPrivacyPolicy';
+import HelpReport from '@/pages/private/settings/help/HelpReport';
+import ReportBug from '@/components/common/ReportBug';
+
+// === Profile ===
+import ProfileLayout from '@/pages/private/profile/ProfileLayout';
+import Profile from '@/pages/private/profile/Profile';
+import CompletionAndActivity from '@/pages/private/profile/CompletionAndActivity';
+import GeneralInfo from '@/pages/private/profile/GeneralInfo';
+import MatchingPreferences from '@/pages/private/profile/MatchingPreferences';
+import TagsAndInterests from '@/pages/private/profile/TagsAndInterests';
+
 
 export const routes = createBrowserRouter([
   // === Public routes ===
@@ -84,8 +92,9 @@ export const routes = createBrowserRouter([
         element: <ChatUI />,
         children: [
           { index: true, element: <ChatSidebar /> },
-          { path: 'profile', element: <Profile /> },
 
+
+          //  Settings
           {
             path: 'settings',
             element: <SettingsLayout />,
@@ -138,6 +147,19 @@ export const routes = createBrowserRouter([
                   { path: 'report-problem', element: <HelpReport /> }
                 ]
               }
+            ]
+          },
+
+          // Profile
+          {
+            path: 'profile',
+            element: <ProfileLayout />,
+            children: [
+              { index: true, element: <Profile /> },
+              { path: 'activity', element: <CompletionAndActivity /> },
+              { path: 'general-info', element: <GeneralInfo /> },
+              { path: 'matching-preferences', element: <MatchingPreferences /> },
+              { path: 'interests', element: <TagsAndInterests /> },
             ]
           }
         ]

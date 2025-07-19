@@ -98,11 +98,32 @@ import LockResetIcon from '@mui/icons-material/LockReset';
 import DownloadIcon from '@mui/icons-material/Download';
 import DeleteIcon from '@mui/icons-material/Delete';
 import UploadIcon from '@mui/icons-material/Upload';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import EditIcon from '@mui/icons-material/Edit';
+import AddIcon from '@mui/icons-material/Add';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
+import QueryStatsIcon from '@mui/icons-material/QueryStats';
+import EditNoteIcon from '@mui/icons-material/EditNote';
+import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import TextFieldsIcon from '@mui/icons-material/TextFields';
+
 // ==================== Export All ====================
 export {
   // Setting Icons
   KeyIcon,
+  EditNoteIcon,
+  KeyboardReturnIcon,
+  Brightness4Icon,
+  TextFieldsIcon,
+  EditIcon,
+  PersonOutlineIcon,
+  AddIcon,
+  LocalOfferIcon,
+  QueryStatsIcon,
   NotificationsIcon,
+  FavoriteBorderIcon,
   SosIcon,
   InfoIcon,
   LockResetIcon,

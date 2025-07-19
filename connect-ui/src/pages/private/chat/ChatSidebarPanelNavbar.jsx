@@ -10,20 +10,21 @@ import {
   Divider,
   TextField,
   useTheme,
+  Avatar,
 } from '@/MUI/MuiComponents';
 import {
   ShuffleIcon,
-  ArchiveIcon,
+  FavoriteBorderIcon,
   PersonIcon,
-  MoreVertIcon,
   LogoutIcon,
   HelpOutlineIcon,
   SettingsIcon,
   SearchIcon,
+  BlockIcon,
 } from '@/MUI/MuiIcons';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import StyledText from '@/components/common/StyledText';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '@/redux/slices/auth/authAction';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -32,6 +33,7 @@ const ChatSidebarPanelNavbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { profileData } = useSelector(state => state.profile);
   const theme = useTheme();
 
   const [searchValue, setSearchValue] = React.useState('');
@@ -45,9 +47,14 @@ const ChatSidebarPanelNavbar = () => {
       label: 'Random Chat',
     },
     {
-      path: '/archive',
-      icon: <ArchiveIcon sx={{ color: theme.palette.grey[600] }} />,
-      label: 'Archived',
+      path: '/favorites',
+      icon: <FavoriteBorderIcon sx={{ color: theme.palette.warning.main }} />,
+      label: 'Favorites',
+    },
+    {
+      path: '/blocked',
+      icon: <BlockIcon sx={{ color: theme.palette.error.main }} />,
+      label: 'Blocked Users',
     },
   ];
 
@@ -83,7 +90,7 @@ const ChatSidebarPanelNavbar = () => {
         </Typography>
 
         {/* Action Icons */}
-        <Stack direction="row" alignItems="center" gap={1}>
+        <Stack direction="row" alignItems="center" gap={0.5}>
           {navItems.map(({ path, icon, label }) => (
             <Tooltip key={label} title={label} arrow>
               <IconButton component={NavLink} to={path}>
@@ -93,7 +100,11 @@ const ChatSidebarPanelNavbar = () => {
           ))}
           <Tooltip title="Menu" arrow>
             <IconButton onClick={(e) => setMenuAnchorEl(e.currentTarget)}>
-              <MoreVertIcon />
+              <Avatar
+                src={profileData?.profileImage}
+                alt='user profile with dropdown menu'
+                sx={{ width: 40, height: 40, p: 0 }}
+              />
             </IconButton>
           </Tooltip>
         </Stack>

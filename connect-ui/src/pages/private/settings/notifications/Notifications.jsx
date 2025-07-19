@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import {
   Box,
   Stack,
@@ -17,22 +17,59 @@ import {
   BlockIcon,
 } from '@/MUI/MuiIcons';
 
+import BlurWrapper from '@/components/common/BlurWrapper';
 import NavigateWithArrow from '@/components/private/NavigateWithArrow';
+import { useSelector, useDispatch } from 'react-redux';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import {
+  getSettingsNotification,
+  updateSettingsNotification,
+} from '@/redux/slices/settings/settingsAction';
 
 function Notifications() {
   const theme = useTheme();
+  const dispatch = useDispatch();
+  const { settingsData } = useSelector((state) => state.settings);
+  const notificationSettings = settingsData?.notificationSettings;
 
-  const [notifSettings, setNotifSettings] = React.useState({
-    newMatch: true,
-    newMessage: true,
-    warningAlerts: true,
+  const [notifSettings, setNotifSettings] = useState({
+    newMatch: false,
+    newMessage: false,
+    warningAlerts: false,
     friendRequest: false,
     blockNotification: false,
   });
 
-  const handleToggle = (key) => {
-    setNotifSettings((prev) => ({ ...prev, [key]: !prev[key] }));
-  };
+  // 1. Fetch settings from backend on mount
+  useEffect(() => {
+    dispatch(getSettingsNotification());
+  }, [dispatch]);
+
+  // 2. When Redux store updates, sync to local state
+  useEffect(() => {
+    if (notificationSettings) {
+      setNotifSettings(notificationSettings);
+    }
+  }, [notificationSettings]);
+
+  // 3. Toggle handler
+  const handleToggle = useCallback(
+    async (key) => {
+      const updated = { ...notifSettings, [key]: !notifSettings[key] };
+      setNotifSettings(updated);
+
+      const response = await dispatch(updateSettingsNotification(updated));
+
+      if (response?.success) {
+        toast.success(response.message || 'Notification settings updated');
+      } else {
+        toast.error(response.error || 'Failed to update settings');
+      }
+    },
+    [notifSettings, dispatch]
+  );
 
   const Section = ({ icon, title, description, children }) => (
     <Box>
@@ -51,29 +88,13 @@ function Notifications() {
 
   return (
     <Box>
-      {/* Back Navigation */}
+      <ToastContainer position="top-right" autoClose={1000} theme="colored" />
+
       <Stack mb={2}>
         <NavigateWithArrow redirectTo="/connect/settings" text="Notifications" />
       </Stack>
 
-      <Box
-        mt={4}
-        display="flex"
-        flexDirection="column"
-        gap={4}
-        maxWidth={800}
-        minWidth={300}
-        mx="auto"
-        px={2}
-        py={3}
-        borderRadius={2}
-        sx={{
-          backdropFilter: 'blur(14px)',
-          backgroundColor: 'background.paper',
-          boxShadow: `inset 1px 1px 0.2rem ${theme.palette.divider}`
-        }}
-      >
-        {/* New Match Notification */}
+      <BlurWrapper>
         <Section
           icon={<NotificationsActiveIcon sx={{ color: theme.palette.success.main }} />}
           title="New Match"
@@ -92,7 +113,6 @@ function Notifications() {
 
         <Divider />
 
-        {/* Message Notification */}
         <Section
           icon={<MessageIcon sx={{ color: theme.palette.info.main }} />}
           title="New Message"
@@ -111,7 +131,6 @@ function Notifications() {
 
         <Divider />
 
-        {/* Warning Alerts */}
         <Section
           icon={<ReportIcon sx={{ color: theme.palette.warning.main }} />}
           title="Warning & Alerts"
@@ -130,7 +149,6 @@ function Notifications() {
 
         <Divider />
 
-        {/* Friend Request */}
         <Section
           icon={<PersonAddIcon sx={{ color: theme.palette.primary.main }} />}
           title="Friend Requests"
@@ -149,7 +167,6 @@ function Notifications() {
 
         <Divider />
 
-        {/* Block Notifications */}
         <Section
           icon={<BlockIcon sx={{ color: theme.palette.error.main }} />}
           title="Block Activity"
@@ -165,7 +182,7 @@ function Notifications() {
             label="Enable block notifications"
           />
         </Section>
-      </Box>
+      </BlurWrapper>
     </Box>
   );
 }

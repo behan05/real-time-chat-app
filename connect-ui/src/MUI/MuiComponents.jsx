@@ -26,6 +26,8 @@ import {
   useMediaQuery, // Breakpoints
   useTheme, // Mui theme access or centralized styling
   Grid,
+  FormGroup,
+  Slider,
   Accordion,
   Switch,
   AccordionDetails,
@@ -44,21 +46,27 @@ import {
   DialogTitle,
   DialogContent,
   DialogContentText,
-  DialogActions
+  DialogActions,
+  FormLabel,
+  Chip,
 } from '@mui/material';
 
 export {
   AppBar,
   Avatar,
+  Chip,
   Dialog,
+  Slider,
   DialogTitle,
   DialogContent,
   DialogContentText,
   DialogActions,
+  FormLabel,
   Badge,
   FormHelperText,
   Box,
   Button,
+  FormGroup,
   FormControl,
   InputLabel,
   Select,

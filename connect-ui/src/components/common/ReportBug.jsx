@@ -14,6 +14,7 @@ import {
 } from '@/MUI/MuiComponents';
 import { SendIcon, UploadIcon } from '@/MUI/MuiIcons';
 import StyledText from '../common/StyledText';
+import BlurWrapper from '../common/BlurWrapper';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import StyledActionButton from '../common/StyledActionButton';
@@ -124,21 +125,9 @@ function ReportBug() {
     <Box flexDirection="column">
       <ToastContainer position="top-right" autoClose={2000} theme="colored" />
 
-      <Box
+      <BlurWrapper
         component="form"
         onSubmit={handleSubmit}
-        minWidth={300}
-        sx={{
-          mt: 6,
-          py: 4,
-          px: 1,
-          borderRadius: 1,
-          maxWidth: 800,
-          mx: 'auto',
-          backdropFilter: 'blur(14px)',
-          backgroundColor: 'transparent',
-          boxShadow: `inset 1px 1px 0.2rem ${theme.palette.divider}`
-        }}
       >
         <Stack direction={'column'} textAlign="center">
           <Typography variant="h4" fontWeight={600} mb={1}>
@@ -272,7 +261,7 @@ function ReportBug() {
             {isDisabled ? 'Sending...' : 'Report Issue'}
           </StyledActionButton>
         </Stack>
-      </Box>
+      </BlurWrapper>
     </Box>
   );
 }

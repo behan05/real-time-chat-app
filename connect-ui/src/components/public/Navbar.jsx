@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   AppBar,
   Box,
@@ -13,8 +12,6 @@ import {
   MenuIcon,
   LockOpenIcon,
   LockIcon,
-  CheckCircleOutlineIcon,
-  SwapHorizIcon
 } from '@/MUI/MuiIcons';
 import StyledButton from '../common/StyledButton';
 import { useSidebar } from '@/context/SidebarContext';
@@ -30,15 +27,6 @@ function Navbar() {
   const theme = useTheme();
   const isSm = useMediaQuery(theme.breakpoints.down('sm'));
   const { toggleSidebar } = useSidebar();
-
-  // const [videoChanged, setVideoChanged] = React.useState(false);
-
-  // const handleChangeVideo = () => {
-  //   const next = !videoChanged;
-  //   setVideoChanged(next);
-  //   localStorage.setItem('currentVideo', next.toString());
-  //   window.dispatchEvent(new Event('storage')); // force other components to re-read
-  // };
 
   return (
     <AppBar
@@ -86,6 +74,7 @@ function Navbar() {
           </Stack>
         ) : (
           <Box sx={{ display: 'flex', gap: 1 }}>
+            
             {/* === Bg Toggle Component === */}
             <BgToggle />
 

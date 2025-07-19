@@ -3,17 +3,25 @@ const Routers = require('express').Router();
 const settingsController = require('../controllers/settingsController');
 const authMiddleware = require('../middlewares/authMiddleware');
 
+// Bug Reports & Help
+Routers.post('/report-problem', settingsController.bugReport);
+Routers.post('/contact-support', settingsController.contactHelp);
+
 // Account Management
-Routers.post('/change-credentials', authMiddleware, settingsController.changeCredentials);
+Routers.patch('/change-credentials', authMiddleware, settingsController.changeCredentials);
 Routers.get('/request-info', authMiddleware, settingsController.requestInfo);
 Routers.delete('/delete-account', authMiddleware, settingsController.deleteAccount);
 
 // Privacy / User Preferences
-Routers.patch('/privacy', authMiddleware, settingsController.updatePrivacy);
-Routers.get('/privacy', authMiddleware, settingsController.getPrivacy);
+Routers.patch('/privacy-settings', authMiddleware, settingsController.updatePrivacy);
+Routers.get('/privacy-settings', authMiddleware, settingsController.getPrivacy);
 
-// Bug Reports & Help
-Routers.post('/report-problem', settingsController.bugReport);
-Routers.post('/contact-support', settingsController.contactHelp);
+// Notification Settings
+Routers.patch('/notification-settings', authMiddleware, settingsController.updateNotificationSettings);
+Routers.get('/notification-settings', authMiddleware, settingsController.getNotificationSettings);
+
+// Chat Settings
+Routers.patch('/chat-settings', authMiddleware, settingsController.updateChatSettings);
+Routers.get('/chat-settings', authMiddleware, settingsController.getChatSettings);
 
 module.exports = Routers;

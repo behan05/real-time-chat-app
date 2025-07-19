@@ -13,6 +13,7 @@ import { SendIcon, VisibilityIcon, VisibilityOffIcon } from '@/MUI/MuiIcons';
 import NavigateWithArrow from '@/components/private/NavigateWithArrow';
 import StyledText from '@/components/common/StyledText';
 import StyledActionButton from '@/components/common/StyledActionButton';
+import BlurWrapper from '@/components/common/BlurWrapper';
 import { SETTINGS_API } from '@/api/config';
 import axios from 'axios';
 
@@ -89,7 +90,7 @@ function ChangeCredentials() {
     try {
       const token = localStorage.getItem('token');
 
-      const response = await axios.post(`${SETTINGS_API}/change-credentials`, formData, {
+      const response = await axios.patch(`${SETTINGS_API}/change-credentials`, formData, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -132,21 +133,7 @@ function ChangeCredentials() {
       </Stack>
 
       {/* Form */}
-      <Box
-        component={'form'}
-        onSubmit={handleSubmit}
-        minWidth={300}
-        sx={{
-          mt: 6,
-          py: 4,
-          px: 1,
-          borderRadius: 1,
-          maxWidth: 800,
-          mx: 'auto',
-          backdropFilter: 'blur(14px)',
-          backgroundColor: 'transparent',
-          boxShadow: `inset 1px 1px 0.2rem ${theme.palette.text.secondary}`
-        }}
+      <BlurWrapper component={'form'} onSubmit={handleSubmit}
       >
         <Stack direction="column" textAlign="center">
           <Typography variant="h5" fontWeight={600} mb={1}>
@@ -238,7 +225,7 @@ function ChangeCredentials() {
             {isDisabled ? 'Updating...' : 'Update Credentials'}
           </StyledActionButton>
         </Stack>
-      </Box>
+      </BlurWrapper>
     </Box>
   );
 }
