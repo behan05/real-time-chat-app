@@ -68,12 +68,12 @@ Make sure you have the following installed before starting:
 - [Git](https://git-scm.com/)
 - A [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) account (or use local MongoDB)
 
-> **Need help setting up MongoDB Atlas?** Follow this guide: [Deploy a Free Cluster](https://www.mongodb.com/docs/atlas/tutorial/deploy-free-tier-cluster/)
->
-> After deploying a cluster:
-> 1. Click **Connect** → **Drivers**
-> 2. Select **Node.js** as the driver
-> 3. Copy the connection string and use it for `MONGO_URI` in `.env`
+**Need help setting up MongoDB Atlas?** Follow this guide: [Deploy a Free Cluster](https://www.mongodb.com/docs/atlas/tutorial/deploy-free-tier-cluster/)
+
+ After deploying a cluster:
+ 1. Click **Connect** → **Drivers**
+ 2. Select **Node.js** as the driver
+ 3. Copy the connection string and use it for `MONGO_URI` in `.env`
 
 Example connection string:
 ```
@@ -209,7 +209,7 @@ real-time-chat-app/
 
 ## 🚀 Deployment
 
-* **Frontend**: [[Vercel](https://connect-link-three.vercel.app/)](https://connect-link-three.vercel.app)
+* **Frontend**: [Vercel](https://connect-link-three.vercel.app/)
 * **Backend**: Render
 
 ---
@@ -256,7 +256,7 @@ This project wouldn't be possible without them!
 ## 📬 Contact
 
 For questions or contributions, feel free to reach out:
-[[behankrbth@outlook.com](mailto:behankrbth@outlook.com)](mailto:behankrbth@outlook.com)
+[behankrbth@outlook.com](mailto:behankrbth@outlook.com)
 
 ---
 
