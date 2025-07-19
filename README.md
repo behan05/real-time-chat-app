@@ -1,7 +1,3 @@
-<p align="right">
-  🌐 Available Languages: 
-  🇬🇧 [English](./docs/translations/README.en.md) | 🇮🇩 [Bahasa Indonesia](./docs/translations/README.id.md)
-</p>
 
 ---
 
@@ -19,6 +15,11 @@
 
 
 A full-stack real-time chat application with user authentication, private messaging, and instant communication using **React**, **Node.js**, **Express**, **Socket.IO**, and **MongoDB**.
+
+---
+
+#### _Read this in other languages._
+<kbd>[<img title="Bahasa Indonesia" alt="Bahasa Indonesia" src="https://cdn.statically.io/gh/hjnilsson/country-flags/master/svg/id.svg" width="22">](docs/translations/README.id.md)</kbd>
 
 ---
 
@@ -43,7 +44,7 @@ A full-stack real-time chat application with user authentication, private messag
 
 | Login Page | Sign Up | App Page |
 |------------|---------|----------|
-| ![](./client/public/screenshot/Login-page.png) | ![](./client/public/screenshot/Signup-page.png) | ![](./client/public/screenshot/apps-page.png) |
+| ![](docs/screenshot/Login-page.png) | ![](docs/screenshot/Signup-page.png) | ![](docs/screenshot/apps-page.png) |
 
 ---
 
