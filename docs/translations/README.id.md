@@ -28,7 +28,7 @@ Aplikasi chat full-stack waktu nyata dengan autentikasi pengguna, pesan privat, 
 * [Deployment](#-deployment)
 * [Kontribusi](#-kontribusi)
 * [Dibuat oleh Kontributor](#️-dibuat-oleh-kontributor)
-* [Penghargaan](#️-penghargaan)
+* [Penghargaan](#️-🙏-Penghargaan)
 * [Kontak](#-kontak)
 * [Lisensi](#-lisensi)
 
@@ -38,7 +38,7 @@ Aplikasi chat full-stack waktu nyata dengan autentikasi pengguna, pesan privat, 
 
 | Halaman Login                                  | Daftar Akun                                     | Halaman Aplikasi                              |
 | ---------------------------------------------- | ----------------------------------------------- | --------------------------------------------- |
-| ![](./client/public/screenshot/Login-page.png) | ![](./client/public/screenshot/Signup-page.png) | ![](./client/public/screenshot/apps-page.png) |
+| ![](../screenshot/Login-page.png) | ![](../screenshot/Signup-page.png) | ![](../screenshot/apps-page.png) |
 
 ---
 
