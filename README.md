@@ -1,6 +1,6 @@
 <p align="right">
   🌐 Available Languages: 
-  🇬🇧 [English](docs/translations/README.en.md) | 🇮🇩 [Bahasa Indonesia](docs/translations/README.id.md)
+  🇬🇧 [English](./docs/translations/README.en.md) | 🇮🇩 [Bahasa Indonesia](./docs/translations/README.id.md)
 </p>
 
 ---
